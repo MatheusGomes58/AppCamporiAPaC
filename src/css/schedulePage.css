@@ -1,0 +1,70 @@
+.SchedulePage {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    color: black;
+}
+
+.eventCard {
+    background-color: rgba(255, 255, 255, 0.822);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80vw; 
+    height: 80vh; 
+}
+
+.eventImage {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.eventsSection {
+    padding: 5px;
+    height: 50vh; 
+    margin: 2%;
+    overflow: auto;    
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: rgba(0,0,0,0.5) transparent; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
+}
+
+.eventTitle {
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: left;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.363); /* Inset shadow */
+    background-color: rgba(255, 255, 255, 0.693);
+}
+
+.eventTitle {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.eventTitle::-webkit-details-marker {
+    display: none;
+}
+
+.eventDescription {
+    margin-top: 10px;
+    text-align: left;
+    padding: 1%; 
+    border: 1px solid #0000004c;
+}
+
+.eventData {
+    background-color: rgba(0, 0, 0, 0.047);
+    padding: 10px;
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.104); /* Inset shadow */
+    border-radius: 5px; /* Optional: to give rounded corners */
+    margin: 10px;
+}
+
+

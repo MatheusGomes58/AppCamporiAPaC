@@ -1,0 +1,18 @@
+.mapaCampori {
+    width: 100vw;
+    height: 80vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto; 
+}
+
+
+.mapaCampori::-webkit-scrollbar {
+    display: none; 
+}
+
+.mapaCampori {
+    scrollbar-width: none; 
+}

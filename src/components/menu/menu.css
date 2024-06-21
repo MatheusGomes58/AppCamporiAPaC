@@ -1,0 +1,78 @@
+.navbar{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+.addEvent {
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    background-color: rgba(225, 225, 225, 0.847);  
+    border-radius: 10px;
+    border: 1px solid #4a4a4a;
+    margin: 10px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.516);
+}
+
+.btnCircle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffd50000;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin: 2%;
+    font-size: 14px;
+    position: relative;
+}
+
+.menuCicle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffd50000;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin: 2%;
+    font-size: 14px;
+    position: relative;
+}
+
+.btnText{
+    font-size: 12px;
+}
+
+
+.btnCircle.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; 
+    height: 2px;
+    background-color: #000000;
+    border-radius: 30px; 
+    width: 10px;
+    height: 5px;
+}
+
+.navbar.minimized .addEvent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
+.navbar.minimized .btnCircle{
+    display: none;
+}
+
+.navbar.minimized{
+    width: auto;
+}

@@ -1,0 +1,62 @@
+/* CSS para o modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000073;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* z-index alto para garantir que fique sobre os outros elementos */
+}
+
+.modal-content {
+  position: relative;
+  border: none;
+  padding: 20px;
+  width: 90vw; 
+  height: 90vh;
+  overflow: auto; /* permite rolagem se o conteúdo for maior que o modal */
+  scrollbar-width: none;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none; /* Esconder barra de rolagem no Chrome, Safari e Edge */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.video-frame {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 10px;
+  }
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow: auto;
+  width: 90vw;
+  height: 80vh; 
+  scrollbar-width: none;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none; /* Esconder barra de rolagem no Chrome, Safari e Edge */
+}

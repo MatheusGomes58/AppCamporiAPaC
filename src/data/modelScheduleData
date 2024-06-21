@@ -1,0 +1,77 @@
+[
+    {
+        "title": "Sexta-Feira, 05 de Julho",
+        "atividades": [
+            {
+                "horário": "08:00",
+                "atividade": "Credenciamento e Check-in",
+                "descrição": "Durante o processo de credenciamento dos clubes, o diretor irá identificar qual é o clube e retirar as pulseiras de circulação no evento, APENAS PARA OS MEMBROS QUE FORAM PREVIAMENTE INSCRITOS!",
+                "responsável": "Diretor do Clube e Equipe de segurança",
+                "local": "Estacionamento"
+            },
+            {
+                "horário": "18:00 - 19:30",
+                "atividade": "Banho",
+                "local": "Vestiarios/Banheiros",
+                "descrição": "Durante esse periodo, os membros do clube poderão realizar a sua higiene pessoal, lembrando que desbravador cuidam de seu corpo, então devem ficar todos limpinhos para o inicio do sábado e a cerimônia de abertura.",
+                "responsável": "Diretor do Clube e Conselheiros"
+            },
+            {
+                "horário": "20:00",
+                "atividade": "Abertura do Evento",
+                "local": "Mega Igreja do Campori",
+                "descrição": "Abertura do XXI Campori Missão ao Extremo",
+                "responsável": "Equipe organizadora do Evento"
+            },
+            {
+                "horário": "23:00",
+                "atividade": "Retorno para Área de Acampamento",
+                "local": "Área de Acampamento",
+                "descrição": "Retorno para área de acampamento após a abertura do evento na mega igreja do campori.",
+                "responsável": "Diretor do Clube e Conselheiros"
+            },
+            {
+                "horário": "24:00",
+                "atividade": "Silêncio Total",
+                "local": "Área de Acampamento",
+                "descrição": "Lembrando que no dia seguinte teremos muitas atividades, então Desbravador tenha uma boa noite e durma com Deus e caso tenha dificuldade para dormir por causa da ansiedade, faça silêncio a pessoa do seu lado já deve estar roncando!",
+                "responsável": "Diretor do Clube e Conselheiros"
+            }
+        ]
+    },
+    {
+        "title": "Sábado, 06 de Julho",
+        "atividades": [
+            {
+                "horário": "06:00 - 07:30",
+                "atividade": "Desejum",
+                "descrição": "Agora é a hora meu caro desbravador de você levantar, ir com a sua unidade ao banheiro fazer a sua higiene pessoal e comer bem na cozinha, não se equeça que nossa manhã será cheia, então coma bem e se arrume para a nossa programação em a seguir!",
+                "responsável": "Diretor do Clube e Conselheiros",
+                "local": "Vestiarios/Banheiros e Cozinha"
+            },
+            {
+                "horário": "07:30 - 08:00",
+                "atividade": "Inspeção de Uniforme",
+                "descrição": "Será feita a inspeção de uniforme antes da programação da manhã na frente da Mega igreja, não se esqueça desbravador de estar com o uniforme impecável!",
+                "responsável": "Diretor do Clube e Associados",
+                "local": "Frente da Mega igreja"
+            },
+            {
+                "horário": "08:30 - 12:00",
+                "atividade": "Programação da Manhã",
+                "descrição": "A programação da manhã será na Mega igreja do nosso campori, venha preparado para louvar muito e presenciar momentos marcantes.",
+                "responsável": "Equipe organizadora do Evento",
+                "local": "Mega igreja"
+            }
+        ]
+    },
+    {
+        "title": "Domingo, 07 de Julho"
+    },
+    {
+        "title": "Segunda-Feira, 08 de Julho"
+    },
+    {
+        "title": "Terça-Feira, 09 de Julho"
+    }
+]

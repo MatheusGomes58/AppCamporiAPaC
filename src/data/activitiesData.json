@@ -1,0 +1,181 @@
+[
+    {
+      "text": "Ranking Geral",
+      "items": [
+        {
+          "type": "title",
+          "content": "Em breve o ranking geral estará disponível. Por favor, aguarde."
+        }
+      ]
+    },
+    {
+      "text": "Regiões",
+      "items": [
+        {
+          "type": "title",
+          "content": "Em breve a seção de regiões estará disponível. Por favor, aguarde."
+        }
+      ]
+    },
+    {
+      "text": "Boletins",
+      "items": [
+        {
+          "type": "text",
+          "content": "Por favor, acompanhem os boletins abaixo para se manterem atualizados, quem avisa amigo é!"
+        },
+        {
+          "type": "button",
+          "content": "1º informativo-campori",
+          "url": "https://drive.google.com/file/d/1D4f2yCLaJTKwdFzJ-m8_M_8Wav3p08k1/view?usp=drive_link"
+        },
+        {
+          "type": "button",
+          "content": "2º informativo-campori",
+          "url": "https://drive.google.com/file/d/1JpajvjPUNLvsT8jJOD0fyRnOGDKuZZyk/view?usp=sharing"
+        },
+        {
+          "type": "button",
+          "content": "3º informativo-campori",
+          "url": "https://drive.google.com/file/d/1S5LJzZllDY42MSm5rbqU7W2hZ-j0lYmN/view?usp=sharing"
+        }
+      ]
+    },
+    {
+      "text": "No Paredão - A história do apedrejamento de Estevão",
+      "items": [
+        {
+          "type": "text",
+          "content": "O desbravador irá carregar uma parte de Estevão correndo por um circuito. Quando ele colocar a primeira peça, outro desbravador avança para a próxima peça, e assim por diante, montando-o. Quando o personagem estiver completo, os desbravadores poderão derrubar Estevão jogando bolinhas que estarão disponíveis. Obs: O diretor ficará ao lado de Estevão segurando os lenços dos desbravadores participantes."
+        }
+      ]
+    },
+    {
+      "text": "Blackout - A viagem de Saulo para Damasco",
+      "items": [
+        {
+            "type": "text",
+            "content": "Nesta prova, comum labirinto à frente, o desbravador estará vendado, e seu instrutor/conselheiro estará ao lado, dando os comandos. Ele precisará fazer o percurso do labirinto, saindo do outro lado apenas com os comandos de ordem unida. Obs: Nesta prova, poderão mostrar várias pessoas participando ao mesmo tempo."
+        }
+      ]
+    },
+    {
+      "text": "Idolatria - Considerados os Deuses",
+      "items": [
+        {
+          "type": "text",
+          "content": "A atividade consiste em construir um altar para o Deus Desconhecido. Eles terão o material para construir um altar idêntico ao que estará na entrada da prova, utilizando nós e amarras."
+        }
+      ]
+    },
+    {
+      "text": "Minha Vida é Uma Viagem - A Maior Viagem de Paulo",
+      "items": [
+        {
+          "type": "text",
+          "content": "Um membro da diretoria irá puxar um tapete que percorrerá cinco cidades por onde Paulo passou. Em cada cidade, um desbravador irá embarcar na aventura com Paulo em cima do tapete. Para que o tapete se mova, todos os desbravadores devem empurrar juntos para frente, enquanto o instrutor puxa o tapete, fazendo assim percorrer cada cidade e pregando para que cada cidade se converta."
+        }
+      ]
+    },
+    {
+      "text": "The Voice - Cantando na Prisão",
+      "items": [
+        {
+          "type": "text",
+          "content": "Um membro do clube ficará preso em uma cela comcadeado. O primeiro desbravador a participar terá os pés e as mãos amarrados com um cinto e colocará uma espécie de gancho na cabeça. Ele terá a opção de escolher (pescar) 6 chaves, sendo que apenas uma abrirá o cadeado. Após escolher, terá que tentar libertar um membro do clube preso, permanecendo amarrado. Se a chave estiver errada, o próximo desbravador tentará até conseguirem abrir a prisão. Quando conseguirem, todos devem cantar o grito de guerra do clube em uníssono."
+        }
+      ]
+    },
+    {
+      "text": "CorridaMaluca - Classificatórias",
+      "items": [
+        {
+          "type": "text",
+          "content": "O clube deverá construir um carrinho feito de madeira e/ou bambu, totalmente fixado com amarras; não será permitido usar pregos ou arames, apenas encaixes e amarras. O carrinho será guiado por um desbravador ou desbravadora de 10 a 15 anos e deverá ser auxiliado, puxado e/ou empurrado por outros três desbravadores de 10 a 15 anos também, auxiliados por seu conselheiro ou conselheira. Cada equipe deve ser composta por participantes da mesma faixa etária, homens e mulheres, do mesmo valor."
+        },
+        {
+          "type": "text",
+          "content": "Todo o carrinho deverá ser de madeira e/ou bambu, com exceção dos dois eixos, da direção e das rodas, que poderão ser de metal ou ferro. Não será permitida participação de carrinhos com apenas um eixo (tipo carrinho de mão). Além disso, o carrinho não poderá ter motor ou ser elétrico."
+        }
+      ]
+    },
+    {
+      "text": "Animais Peçonhentos - Mordido por uma Cobra",
+      "items": [
+        {
+          "type": "text",
+          "content": "Faremos um pêndulo com várias cobras penduradas. O desbravador irá pegar uma lenha da fogueira e terá que desviar das cobras para começar a montar a fogueira. Cada desbravador irá levar uma lenha e, quando terminar, o próximo levará um fósforo e tentará acender a fogueira. Se não conseguir, o próximo tentará até conseguir acender a fogueira."
+        }
+      ]
+    },
+    {
+      "text": "Perdendo a Cabeça - Condenado à Morte",
+      "items": [
+        {
+          "type": "text",
+          "content": "Faremos uma guilhotina na qual os desbravadores irão encher um balde. Assim que o balde estiver com o número necessário de bolinhas, automaticamente a guilhotina será acionada e descerá."
+        }
+      ]
+    },
+    {
+      "text": "Check-in - Indo a Antioquia",
+      "items": [
+        {
+          "type": "text",
+          "content": "O clube irá montar, com bambu e amarras, uma espécie de biga ou carruagem, seguindo o modelo disponível no local. Eles levarão um membro do clube para um passeio entre as provas e/ou cozinhas, já pré-eterminadas."
+        }
+      ]
+    },
+    {
+      "text": "Perseguidor - Saulo Persegue os Cristãos",
+      "items": [
+        {
+          "type": "text",
+          "content": "Nesta prova, teremos uma espécie de cordas, onde duas equipes do mesmo clube disputarão entre si para chegar primeiro ao meio. Lá, teremos espaguetes de piscina; a equipe que chegar primeiro poderá pegar os espaguetes e correr atrás da equipe perdendo."
+        }
+      ]
+    },
+    {
+      "text": "Titanic - A história do Naufrágio",
+      "items": [
+        {
+          "type": "text",
+          "content": "Faremos uma jangada com nós e amarras para que alguns desbravadores possam subir em cima. Então, empurrando a jangada porta por porta, os desbravadores devem fazer o percurso, removendo a tora que ficou para trás e colocando-a na frente para que sejam usadas como rodas."
+        }
+      ]
+    },
+    {
+      "text": "Cross - O Caminho Nunca é Fácil",
+      "items": [
+        {
+          "type": "text",
+          "content": "Os clubes passarão por uma bateria de atividades (ralo), dentro de um circuito que envolverá: barro, atividades físicas em massa concentrando o máximo de energia e competitividade."
+        }
+      ]
+    },
+    {
+      "text": "Climas",
+      "items": [
+        {
+          "type": "text",
+          "content": "Texto sobre climas"
+        },
+        {
+          "type": "title",
+          "content": "Descrição dos climas"
+        },
+        {
+          "type": "details",
+          "content": "Detalhes dos climas"
+        },
+        {
+          "type": "image",
+          "content": "https://via.placeholder.com/150"
+        },
+        {
+          "type": "image",
+          "content": "https://via.placeholder.com/150"
+        }
+      ]
+    }
+  ]
