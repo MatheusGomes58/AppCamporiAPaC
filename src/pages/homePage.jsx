@@ -100,7 +100,7 @@ const App = () => {
           <Card
             key="countdown"
             image={LogoCampori}
-            text="ENQUANTO FAZEMOS A CONTAGEM REGRESSIVA DO NOSSO CAMPORI, QUE TAL APRENDER A NOVA MÚSICA?"
+            text="ENQUANTO FAZEMOS A CONTAGEM REGRESSIVA DO NOSSO CAMPORI, QUE TAL APRENDER A NOVA MÚSICA? CLIQUE AQUI E SAIBA MAIS!"
             size="header"
             htmlContent={<Countdown />}
             onClick={() => handleClick("Musica tema do campori", LogoCampori)}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import data from '../data/activitiesData.json';
 import '../css/activitiesPage.css';
 
@@ -41,11 +41,20 @@ const imageMap = {
 
 const useActivity = (text) => {
   const [activity, setActivity] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const selectedActivity = data.find(item => item.text === text);
-    setActivity(selectedActivity);
-  }, [text]);
+    if (selectedActivity) {
+      // Verifica se o tipo de item é "link" e redireciona
+      const linkItem = selectedActivity.items.find(item => item.type === 'link');
+      if (linkItem) {
+        navigate(linkItem.content);
+      } else {
+        setActivity(selectedActivity);
+      }
+    }
+  }, [text, navigate]);
 
   return activity;
 };

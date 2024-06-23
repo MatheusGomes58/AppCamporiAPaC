@@ -1,5 +1,4 @@
 import React, { useEffect, useState, memo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../css/guidePage.css';
 import imageGuidePage from '../img/imageGuidePage.jpg';
 import guideData from '../data/guideData.json';
@@ -28,7 +27,6 @@ const Guide = memo(({ guide }) => (
 ));
 
 function GuidePage() {
-    const navigate = useNavigate();
     const guides = useGuides();
 
     return (

@@ -1,0 +1,9 @@
+.ScorePage {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+iframe {
+    background-color: white;
+}

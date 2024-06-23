@@ -7,8 +7,8 @@
     padding: 5px;
     width: 90vw; /* Reduzido de 90vw */
     border-radius: 30px;
-    height: 5vh;
-    background: #20232a;
+    height: auto;
+    background: #20232ac8;
     margin: 20px auto;
     color: #FFF; /* White text for better contrast */
     position: relative;

@@ -17,13 +17,12 @@ function MenuOptions() {
     }
 
     function acessPage(path) {
-        setCurrentPage(path);
-        history(path);
-    }
-
-    function logout() {
-        localStorage.clear();
-        history('/');
+        if (path === '/score') {
+            window.location.href = 'https://apac.campori.app/login';
+        } else {
+            setCurrentPage(path);
+            history(path);
+        }
     }
 
     return (
@@ -41,9 +40,9 @@ function MenuOptions() {
                     <i className="fas fa-home"></i>
                     <p className='btnText'>Home</p>
                 </button>
-                <button className={`btnCircle ${currentPage === '/guide' ? 'active' : ''}`} onClick={() => acessPage('/guide')}>
-                    <i className="fas fa-book"></i>
-                    <p className='btnText'>Guia</p>
+                <button className={`btnCircle ${currentPage === '/score' ? 'active' : ''}`} onClick={() => acessPage('/score')}>
+                    <i className="fas fa-user"></i>
+                    <p className='btnText'>Perfil</p>
                 </button>
                 <button className={`menuCicle ${isMenuMinimized ? 'active' : ''}`} onClick={toggleMenu}>
                     <i className="fas fa-bars"></i>
@@ -51,7 +50,16 @@ function MenuOptions() {
                 </button>
             </div>
         </div>
+
+        
     );
 }
 
 export default MenuOptions;
+
+/*
+<button className={`btnCircle ${currentPage === '/guide' ? 'active' : ''}`} onClick={() => acessPage('/guide')}>
+                    <i className="fas fa-book"></i>
+                    <p className='btnText'>Guia</p>
+                </button>
+ */

@@ -9,11 +9,11 @@
       ]
     },
     {
-      "text": "Regiões",
+      "text": "Guia de Orietações Gerais",
       "items": [
         {
-          "type": "title",
-          "content": "Em breve a seção de regiões estará disponível. Por favor, aguarde."
+          "type": "link",
+          "content": "/guide"
         }
       ]
     },
