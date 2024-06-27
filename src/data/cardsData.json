@@ -1,7 +1,10 @@
 [
-    { "image": "image15", "text": "Ranking Geral", "size": "small" },
-    { "image": "image14", "text": "Guia de Orietações Gerais", "size": "small" },
-    { "image": "image13", "text": "Boletins", "size": "small" },
+    { "image": "image14", "text": "GOG - Orientações", "size": "small" },
+    { "image": "image13", "text": "Boletins Informativos", "size": "small" },
+    { "image": "image16", "text": "Musica Tema - Pronto Estarei", "size": "small" },
+    { "image": "image15", "text": "Mapa Detalhado", "size": "medium" },
+    { "image": "image17", "text": "Coletânea", "size": "small" },
+    { "image": "image18", "text": "Pontuação do Clube", "size": "small" },
     { "image": "image1", "text": "No Paredão - A história do apedrejamento de Estevão", "size": "large" },
     { "image": "image2", "text": "Blackout - A viagem de Saulo para Damasco", "size": "medium" },
     { "image": "image3", "text": "Idolatria - Considerados os Deuses", "size": "small" },
@@ -14,5 +17,5 @@
     { "image": "image10", "text": "Perseguidor - Saulo Persegue os Cristãos", "size": "large" },
     { "image": "image11", "text": "Titanic - A história do Naufrágio", "size": "small" },
     { "image": "image12", "text": "Cross - O Caminho Nunca é Fácil", "size": "small" }
-  ]
+]
   

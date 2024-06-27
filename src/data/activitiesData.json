@@ -1,15 +1,30 @@
 [
     {
-      "text": "Ranking Geral",
+      "text": "Mapa Detalhado",
       "items": [
         {
-          "type": "title",
-          "content": "Em breve o ranking geral estará disponível. Por favor, aguarde."
+          "type": "text",
+          "content": "Esse mapa detalhado foi criado para que os clubes possam ter as medidas exatas das áreas no Campori. A medida é essencial para que os clubes possam planejar e se organizar de forma precisa. Para entender o mapa, é necessário visualizar o código e a legenda. O mapa geral em breve ira contar com o nomes dos clubes também, para facilitar a localização"
+        },
+        {
+          "type": "button",
+          "content": "Mapa detalhado do campori",
+          "url": "https://drive.google.com/file/d/1JbYhfQHeGjpZGQedbT4vwwD3N3R4B59t/view?usp=sharing"
+        },
+        {
+          "type": "button",
+          "content": "Legenda do MAPA",
+          "url": "https://docs.google.com/spreadsheets/d/1RdZOLh8YlA3poGAODRI-AbGuXYK3EnSN/edit?usp=sharing&ouid=104488353397334159375&rtpof=true&sd=true"
+        },
+        {
+          "type": "button",
+          "content": "Mapa Interativo do campori",
+          "url": "/map"
         }
       ]
     },
     {
-      "text": "Guia de Orietações Gerais",
+      "text": "GOG - Orientações",
       "items": [
         {
           "type": "link",
@@ -18,7 +33,25 @@
       ]
     },
     {
-      "text": "Boletins",
+      "text": "Pontuação do Clube",
+      "items": [
+        {
+          "type": "text",
+          "content": "Se você for diretor ou secretária do clube e deseja visualizar a pontuação do seu clube, faça o login no nosso app de pontuações."
+        },
+        {
+          "type": "text",
+          "content": "Clique no botão abaixo para ser redirecionado."
+        },
+        {
+          "type": "button",
+          "content": "APP de Pontuações",
+          "url": "https://apac.campori.app/login"
+        }
+      ]
+    },
+    {
+      "text": "Boletins Informativos",
       "items": [
         {
           "type": "text",
@@ -42,8 +75,81 @@
       ]
     },
     {
-      "text": "No Paredão - A história do apedrejamento de Estevão",
+      "text": "Coletânea",
       "items": [
+        {
+          "type": "title",
+          "content": "Musica tema - Pronto estarei"
+        },
+        {
+          "type": "details",
+          "content": "1º Parte:"
+        },
+        {
+          "type": "text",
+          "content": "Um chamado recebi do senhor, uma missão a cumprir com amor."
+        },
+        {
+          "type": "text",
+          "content": "Pregando eu vou, construindo eu vou,"
+        },
+        {
+          "type": "text",
+          "content": "com a Igreja no coração, avançando na missão."
+        },
+        {
+          "type": "text",
+          "content": "Pregando eu vou, construindo eu vou,"
+        },
+        {
+          "type": "details",
+          "content": "Coro:"
+        },
+        {
+          "type": "text",
+          "content": "Quando for chamado eu irei,"
+        },
+        {
+          "type": "text",
+          "content": "a missão eu cumprirei,"
+        },
+        {
+          "type": "text",
+          "content": "Pronto estarei, Pronto estarei, Eu irei."
+        },
+        {
+          "type": "details",
+          "content": "2º Parte:"
+        },
+        {
+          "type": "text",
+          "content": "Ao extremo quero ir, levando esperança,"
+        },
+        {
+          "type": "text",
+          "content": "vou seguir,"
+        },
+        {
+          "type": "text",
+          "content": "Pregando eu vou, Construindo eu vou."
+        },
+        {
+          "type": "text",
+          "content": "Por favor, Deus, flores plantarei,"
+        },
+        {
+          "type": "text",
+          "content": "e igrejas levantarei,"
+        },
+        {
+          "type": "text",
+          "content": "Pregando eu vou, Construindo eu vou."
+        }
+      ]
+    },
+    {
+      "text": "No Paredão - A história do apedrejamento de Estevão",
+       "items": [
         {
           "type": "text",
           "content": "O desbravador irá carregar uma parte de Estevão correndo por um circuito. Quando ele colocar a primeira peça, outro desbravador avança para a próxima peça, e assim por diante, montando-o. Quando o personagem estiver completo, os desbravadores poderão derrubar Estevão jogando bolinhas que estarão disponíveis. Obs: O diretor ficará ao lado de Estevão segurando os lenços dos desbravadores participantes."

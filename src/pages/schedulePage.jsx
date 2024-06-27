@@ -33,8 +33,8 @@ const Event = memo(({ event, eventIndex, activeEventIndex, activeActivityIndex, 
                     </summary>
                     <div>
                         {atividade.descrição && <p>{atividade.descrição}</p>}
-                        {atividade.responsável && <p><strong>Responsável:</strong> {atividade.responsável}</p>}
-                        {atividade.local && <p><strong>Local:</strong> <span className='location' onClick={() => handleLocationClick(atividade.local)}>{atividade.local}</span></p>}
+                        {atividade.responsável && <p><strong>{atividade.responsável}</strong></p>}
+                        {atividade.local && <p><strong><span className='location' onClick={() => handleLocationClick(atividade.local)}>{atividade.local}</span></strong></p>}
                     </div>
                 </details>
             )) : ""}

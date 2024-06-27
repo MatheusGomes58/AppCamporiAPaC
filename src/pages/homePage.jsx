@@ -21,6 +21,9 @@ import image12 from '../img/activities/12.jpg';
 import image13 from '../img/activities/13.jpg';
 import image14 from '../img/activities/14.jpg';
 import image15 from '../img/activities/15.jpg';
+import image16 from '../img/activities/16.jpg';
+import image17 from '../img/activities/17.jpg';
+import image18 from '../img/activities/18.jpg';
 
 // Mapeia identificadores para imagens importadas
 const imageMap = {
@@ -39,6 +42,9 @@ const imageMap = {
   image13: image13,
   image14: image14,
   image15: image15,
+  image16: image16,
+  image17: image17,
+  image18: image18,
 };
 
 // Lazy load Card component
@@ -81,7 +87,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleClick = useCallback((text, image) => {
-    if (text === "Musica tema do campori") {
+    if (text.includes("Musica Tema")) {
       setModalOpen(true);
     } else {
       const imageKey = Object.keys(imageMap).find(key => imageMap[key] === image);
@@ -103,7 +109,7 @@ const App = () => {
             text="ENQUANTO FAZEMOS A CONTAGEM REGRESSIVA DO NOSSO CAMPORI, QUE TAL APRENDER A NOVA MÚSICA? CLIQUE AQUI E SAIBA MAIS!"
             size="header"
             htmlContent={<Countdown />}
-            onClick={() => handleClick("Musica tema do campori", LogoCampori)}
+            onClick={() => handleClick("Musica Tema do campori", LogoCampori)}
           />
           {cards.map((card, index) => (
             <Card

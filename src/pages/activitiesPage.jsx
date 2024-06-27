@@ -19,6 +19,9 @@ import image12 from '../img/activities/12.jpg';
 import image13 from '../img/activities/13.jpg';
 import image14 from '../img/activities/14.jpg';
 import image15 from '../img/activities/15.jpg';
+import image16 from '../img/activities/16.jpg';
+import image17 from '../img/activities/17.jpg';
+import image18 from '../img/activities/18.jpg';
 
 // Mapeia identificadores para imagens importadas
 const imageMap = {
@@ -37,6 +40,9 @@ const imageMap = {
   image13: image13,
   image14: image14,
   image15: image15,
+  image16: image16,
+  image17: image17,
+  image18: image18,
 };
 
 const useActivity = (text) => {
@@ -55,6 +61,7 @@ const useActivity = (text) => {
       }
     }
   }, [text, navigate]);
+
 
   return activity;
 };
