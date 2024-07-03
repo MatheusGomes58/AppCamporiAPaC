@@ -23,7 +23,7 @@
 }
 
 .card-container::-webkit-scrollbar {
-  display: none; /* Esconder barra de rolagem no Chrome, Safari e Edge */
+  display: none; 
 }
 
 .close-button {
@@ -59,4 +59,12 @@
 
 .card-container::-webkit-scrollbar {
   display: none; /* Esconder barra de rolagem no Chrome, Safari e Edge */
+}
+
+.centered{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
 }

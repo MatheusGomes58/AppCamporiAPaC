@@ -16,9 +16,9 @@ const useEvents = () => {
 };
 
 // Memoized Event component for better performance
-const Event = memo(({ event, eventIndex, activeEventIndex, activeActivityIndex, handleEventClick, handleActivityClick, handleLocationClick }) => (
-    <details key={eventIndex} className='event' open={activeEventIndex === eventIndex}>
-        <summary className='eventTitle' onClick={() => handleEventClick(eventIndex)}>
+const Event = memo(({ event, eventIndex, activeEventIndex, activeActivityIndex, handleEventToggle, handleActivityToggle, handleLocationClick }) => (
+    <details key={eventIndex} className='event' open={activeEventIndex === eventIndex} onToggle={(e) => handleEventToggle(eventIndex, e.target.open)}>
+        <summary className='eventTitle'>
             {event.title}
         </summary>
         <div className='eventData'>
@@ -26,9 +26,10 @@ const Event = memo(({ event, eventIndex, activeEventIndex, activeActivityIndex, 
                 <details 
                     key={activityIndex} 
                     className='eventDescription' 
-                    open={activeEventIndex === eventIndex && activeActivityIndex === activityIndex}
+                    open={activeEventIndex === eventIndex && activeActivityIndex === activityIndex} 
+                    onToggle={(e) => handleActivityToggle(eventIndex, activityIndex, e.target.open)}
                 >
-                    <summary onClick={() => handleActivityClick(activityIndex)}>
+                    <summary>
                         {atividade.horário} - {atividade.atividade}
                     </summary>
                     <div>
@@ -48,14 +49,23 @@ function SchedulePage() {
     const [activeEventIndex, setActiveEventIndex] = useState(null);
     const [activeActivityIndex, setActiveActivityIndex] = useState(null);
 
-    const handleEventClick = useCallback((eventIndex) => {
-        setActiveEventIndex(eventIndex === activeEventIndex ? null : eventIndex);
-        setActiveActivityIndex(null); // Reseta a atividade ativa ao trocar de evento
-    }, [activeEventIndex]);
+    const handleEventToggle = useCallback((eventIndex, isOpen) => {
+        if (isOpen) {
+            setActiveEventIndex(eventIndex);
+            setActiveActivityIndex(null);
+        } else {
+            setActiveEventIndex(null);
+        }
+    }, []);
 
-    const handleActivityClick = useCallback((activityIndex) => {
-        setActiveActivityIndex(activityIndex === activeActivityIndex ? null : activityIndex);
-    }, [activeActivityIndex]);
+    const handleActivityToggle = useCallback((eventIndex, activityIndex, isOpen) => {
+        if (isOpen) {
+            setActiveEventIndex(eventIndex);
+            setActiveActivityIndex(activityIndex);
+        } else {
+            setActiveActivityIndex(null);
+        }
+    }, []);
 
     const handleLocationClick = useCallback((location) => {
         navigate(`/map?location=${encodeURIComponent(location)}`);
@@ -74,8 +84,8 @@ function SchedulePage() {
                             eventIndex={eventIndex} 
                             activeEventIndex={activeEventIndex} 
                             activeActivityIndex={activeActivityIndex} 
-                            handleEventClick={handleEventClick} 
-                            handleActivityClick={handleActivityClick} 
+                            handleEventToggle={handleEventToggle} 
+                            handleActivityToggle={handleActivityToggle} 
                             handleLocationClick={handleLocationClick} 
                         />
                     ))}

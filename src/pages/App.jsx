@@ -9,6 +9,7 @@ import MapPage from './mapPage';
 import HomePage from './homePage';
 import ScorePage from './scorePage';
 import ActivitiesPage from './activitiesPage';
+import CountPage from './countPage';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -36,7 +37,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const shouldHideMenu = ["/autentication", "/forgotPassword", "/score"].includes(location.pathname);
+  const shouldHideMenu = ["/autentication", "/forgotPassword", "/score", "/count"].includes(location.pathname);
 
   return (
     <>
@@ -54,8 +55,9 @@ function AppContent() {
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/score" element={<ScorePage />} />
+          <Route path="/count" element={<CountPage />} />
         </Routes>
-        <MenuOptions />
+        {!shouldHideMenu && (<MenuOptions />)}
       </main>
       <Footer />
     </>

@@ -17,7 +17,7 @@ const Card = ({ image, text, size, onClick, htmlContent }) => {
           </div>
         )}
       </div>
-      <div className="card-text">{text}</div>
+      {text?<div className="card-text">{text}</div>:""}
     </div>
   );
 };
