@@ -41,11 +41,6 @@ function AppContent() {
 
   return (
     <>
-      {!shouldHideMenu && (
-        <header className="header">
-          <img src={logo} alt="Logo" className="logo" />
-        </header>
-      )}
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />

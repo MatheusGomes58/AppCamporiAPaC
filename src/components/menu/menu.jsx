@@ -26,32 +26,27 @@ function MenuOptions() {
     }
 
     return (
-        <div className={`navbar ${isMenuMinimized ? 'minimized' : ''}`}>
+        <div className="navbar">
             <div className='addEvent'>
-                <button className={`btnCircle ${currentPage === '/schedule' ? 'active' : ''}`} onClick={() => acessPage('/schedule')}>
-                    <i className="fas fa-calendar-alt"></i>
-                    <p className='btnText'>Programa</p>
+                <button className={`btnCircle ${currentPage === '/home' || currentPage === '/' ? 'active' : ''}`} onClick={() => acessPage('/home')}>
+                    <i className="fas fa-home"></i>
                 </button>
                 <button className={`btnCircle ${currentPage === '/map' ? 'active' : ''}`} onClick={() => acessPage('/map')}>
-                    <i className="fas fa-map"></i>
-                    <p className='btnText'>Mapa</p>
+                    <i className="fas fa-map-marker-alt"></i>
                 </button>
-                <button className={`btnCircle ${currentPage === '/home' ? 'active' : ''}`} onClick={() => acessPage('/home')}>
-                    <i className="fas fa-home"></i>
-                    <p className='btnText'>Home</p>
+                <button className={`btnCircleAdd ${currentPage === '/schedule' ? 'active' : ''}`} onClick={() => acessPage('/schedule')}>
+                    <i className="fas fa-plus"></i>
                 </button>
                 <button className={`btnCircle ${currentPage === '/guide' ? 'active' : ''}`} onClick={() => acessPage('/guide')}>
                     <i className="fas fa-book"></i>
-                    <p className='btnText'>Guia</p>
                 </button>
-                <button className={`menuCicle ${isMenuMinimized ? 'active' : ''}`} onClick={toggleMenu}>
+                <button className={`btnCircle ${currentPage === '/menu' ? 'active' : ''}`} onClick={() => acessPage('/menu')}>
                     <i className="fas fa-bars"></i>
-                    <p className='btnText'>Menu</p>
                 </button>
             </div>
         </div>
 
-        
+
     );
 }
 
