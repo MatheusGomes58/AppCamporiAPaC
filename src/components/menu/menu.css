@@ -50,14 +50,32 @@
     position: relative;
 }
 
-.btnCircleAdd {
-    border-radius: 50%;
-    border: 5px solid gray;
-    color: gray;
-    font-size: 25px;
-    padding: 10px;
+.btnCircleAddSpace{
+    width: 100%;
 }
 
+.btnCircleAdd {
+    position: relative;
+    border-radius: 50%;
+    border: 3px solid gray;
+    color: gray;
+    font-size: 20px;
+    padding: 7px;
+    transition: transform 0.3s ease-in-out;
+    animation: pulseEffect 1.5s infinite;
+}
+
+@keyframes pulseEffect {
+    0% {
+        box-shadow: 0px 0px 5px 5px rgba(0, 123, 255, 0.1); /* Sombra menor e mais opaca */
+    }
+    50% {
+        box-shadow: 0px 0px 10px 15px rgba(0, 123, 255, 0.5); /* Sombra expandida e mais visível */
+    }
+    100% {
+        box-shadow: 0px 0px 5px 5px rgba(0, 123, 255, 0.3); /* Volta ao estado inicial */
+    }
+}
 
 .btnText {
     font-size: 12px;

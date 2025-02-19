@@ -27,8 +27,9 @@
 
 .card.header {
   width: 100vw; /* Reduzido de 90vw */
-  height: 30vh; /* Reduzido de 20vh */
-  margin: 1vh;
+  height: 40vh; /* Reduzido de 20vh */
+  margin: 0px;
+  border-radius: 0px;
 }
 
 .card.header > .card-text {

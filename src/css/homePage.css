@@ -52,7 +52,7 @@
   flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
-  width: 90vw;
+  width: 100vw;
   height: 80vh; 
   scrollbar-width: none;
 }
