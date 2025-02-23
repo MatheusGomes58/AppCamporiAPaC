@@ -54,28 +54,9 @@ function AppContent() {
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>
-      <Footer />
     </>
   );
 }
 
-function Footer() {
-  const location = useLocation();
-  const handleRedirect = () => {
-    if (location.pathname === '/score') {
-      window.location.href = 'https://www.instagram.com/pedroalpha/';
-    } else {
-      window.location.href = 'https://www.instagram.com/matheusgome58/';
-    }
-  };
-
-  return (
-    <footer className="footer" onClick={handleRedirect}>
-      <p className="footer-text">
-        {location.pathname === '/score' ? 'Desenvolvido por PedroAlpha' : 'Desenvolvido por MatheusGomes58'}
-      </p>
-    </footer>
-  );
-}
 
 export default App;

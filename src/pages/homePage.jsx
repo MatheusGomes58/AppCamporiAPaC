@@ -90,7 +90,7 @@ const App = () => {
 
   const handleClick = useCallback((text, image) => {
     if (text.includes("Musica Tema")) {
-      setModalOpen(true);
+      //setModalOpen(true);
     } else {
       const imageKey = Object.keys(imageMap).find(key => imageMap[key] === image);
       navigate(`/activities?text=${encodeURIComponent(text)}&headerImage=${encodeURIComponent(imageKey)}`);

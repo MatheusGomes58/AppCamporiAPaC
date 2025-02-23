@@ -22,9 +22,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 
@@ -34,7 +31,7 @@
 }
 
 body {
-  background-image: url('../img/wallpaper.jpeg');
+  background: lightgray;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
