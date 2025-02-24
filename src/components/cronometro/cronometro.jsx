@@ -43,13 +43,13 @@ const calculateTimeLeft = () => {
   }
 
   if (now > FINAL_EVENT_DATE) {
-    return { eventIndex: -2, countdown: null, progress: 0 };
+    return { eventIndex: -2, countdown: null, progress: PERIMETER }; // Barra cheia quando evento acabou
   }
 
-  // Progresso baseado no tempo restante
+  // Cálculo de progresso invertido
   const totalYearTime = FINAL_EVENT_DATE - REFERENCE_DATE;
   const remainingTime = FINAL_EVENT_DATE - now;
-  const progress = (remainingTime / totalYearTime) * PERIMETER; // Começa cheio e diminui
+  const progress = ((totalYearTime - remainingTime) / totalYearTime) * PERIMETER; // Progresso aumenta conforme o tempo passa
 
   return { eventIndex, countdown, progress };
 };
@@ -64,36 +64,8 @@ const Countdown = () => {
 
   if (timeLeft.eventIndex === -2) return null;
 
-  const getStrokeColor = () => {
-    if (!timeLeft.countdown) return "#ff0000"; // Vermelho quando acabar
-    const percent = timeLeft.progress / PERIMETER;
-    if (percent > 0.66) return "#ff0000"; // Vermelho (início do ano)
-    if (percent > 0.33) return "#ffcc00"; // Amarelo (meio do caminho)
-    return "#00ff00"; // Verde (próximo do evento)
-  };
-
   return (
     <div className="countdown-container">
-      <svg width="100%" height="120" viewBox={`0 0 ${RECT_WIDTH + 20} ${RECT_HEIGHT + 20}`}>
-        <rect
-          className="rect-bg"
-          x="10"
-          y="10"
-          width={RECT_WIDTH}
-          height={RECT_HEIGHT}
-        />
-        <rect
-          className="rect-progress"
-          x="10"
-          y="10"
-          width={RECT_WIDTH}
-          height={RECT_HEIGHT}
-          strokeDasharray={PERIMETER}
-          strokeDashoffset={PERIMETER - timeLeft.progress}
-          stroke={getStrokeColor()}
-        />
-      </svg>
-
       <div className="countdown-text">
         {timeLeft.eventIndex === -1 ? (
           <div className="time-values">
@@ -105,6 +77,16 @@ const Countdown = () => {
         ) : (
           <span className="event-message">{eventMessages[timeLeft.eventIndex]}</span>
         )}
+      </div>
+
+      <div className="progress-bar">
+        <div className="progress-container">
+          <div
+            className="progress-filled"
+            style={{ width: `${(timeLeft.progress / PERIMETER) * 100}%` }}
+          />
+          <div className="moving-object"></div>
+        </div>
       </div>
     </div>
   );

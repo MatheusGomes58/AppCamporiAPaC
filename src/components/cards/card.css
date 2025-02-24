@@ -1,139 +1,158 @@
-
+/* Estilo base do card */
 .card {
   position: relative;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s;
   box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.562);
-  border-radius: 10px;
-  margin: 10px;
-}
-
-
-.card.small {
-  flex: 1 1 20%; /* Reduzido de 120px */
-  height: 30%; /* Reduzido de 180px */
-}
-
-.card.medium {
-  flex: 1 1 40%; /* Reduzido de 240px */
-  height: 30%; /* Reduzido de 180px */
-}
-
-.card.large {
-  flex: 1 1 65%; /* Reduzido de 100% */
-  height: 30%; /* Reduzido de 180px */
-}
-
-.card.header {
-  width: 100vw; /* Reduzido de 90vw */
-  height: 40vh; /* Reduzido de 20vh */
-  margin: 0px;
-  border-radius: 0px;
-}
-
-.card.header > .card-text {
-  z-index: 10;
-  background-color: #051556;
-  font-size: 14px;
-  box-shadow: 0px 5px 5px rgba(67, 67, 67, 0.275);
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  width: 97%;
+  height: auto;
   padding: 1%;
 }
 
-.card-image-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.card-image-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com 50% de transparência */
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-.card-html-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  z-index: 10;
-}
-
-.card-html-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.822);
-}
-
-.card-text {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px;
-  border-radius: 5px;
-}
-
-/* Estilo adicional para ajustar o tamanho do texto dentro do conteúdo HTML */
-.card-html-content p {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-
-.card {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-text {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.App{
+/* Exceção: imagem preenchendo todo o card */
+.card.full-image {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card.full-image .card-image-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.card.full-image .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Grid de 2 colunas */
+.card-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Cada coluna ocupa 50% do card */
+.card-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Configuração dinâmica da imagem */
+.card.image-top .card-image-container,
+.card.image-bottom .card-image-container {
+  grid-column: span 2;
+  width: 80%;
+  height: 30vh;
+  margin: 0 auto;
+}
+
+.card.image-left .card-image-container,
+.card.image-right .card-image-container {
+  width: 100%;
+  height: 40vh;
+}
+
+/* Ajustes de posição */
+.card.image-top {
+  flex-direction: column;
+}
+
+.card.image-bottom {
+  flex-direction: column-reverse;
+}
+
+.card.image-left {
+  flex-direction: row;
+}
+
+.card.image-right {
+  flex-direction: row-reverse;
+}
+
+/* Estilo da imagem */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Conteúdo do card */
+.card-html-content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Texto */
+.card-text {
+  color: black;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* O header continua inalterado */
+.card.header {
+  width: 100vw;
+  height: 40vh;
+  margin: 0;
+  border-radius: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  text-align: center;
+  padding: 0%;
+  position: relative; /* Necessário para a camada sobreposta */
+}
+
+.card.header::before {
+  content: ''; /* Cria a camada de sobreposição */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.836); /* Cor preta com 50% de transparência */
+  z-index: 1; /* Coloca a camada acima da imagem, mas abaixo do conteúdo */
+}
+
+.card.header > * {
+  z-index: 2; /* Garantir que o conteúdo fique acima da camada preta */
+}
+
+
+.card.header .card-image-container {
+  display: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .card.image-left .card-image-container,
+  .card.image-right .card-image-container {
+    width: 100%;
+    height: 30vh;
+  }
 }
