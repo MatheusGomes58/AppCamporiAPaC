@@ -4,6 +4,7 @@ import data from '../data/activitiesData.json';
 import '../css/activitiesPage.css';
 
 // Importa todas as imagens
+import LogoCampori from '../img/logoCampori.jpg';
 import image1 from '../img/activities/1.jpg';
 import image2 from '../img/activities/2.jpg';
 import image3 from '../img/activities/3.jpg';
@@ -45,6 +46,7 @@ const imageMap = {
   image17: image17,
   image18: image18,
   image19: image19,
+  LogoCampori: LogoCampori,
 };
 
 const useActivity = (text) => {

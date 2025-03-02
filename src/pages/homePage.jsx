@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/homePage.css';
+import TrunfoCampori from '../img/trunfo.png';
 import LogoCampori from '../img/logoCampori.jpg';
+import ChurchCampori from '../img/Church.png';
 import Countdown from '../components/cronometro/cronometro';
 import cardsData from '../data/cardsData.json';
 
@@ -106,6 +108,40 @@ const App = () => {
       <div className="card-container">
         <Suspense fallback={<div>Loading...</div>}>
           <Card
+            key="header"
+            image={ChurchCampori}
+            text=""
+            size="header"
+            htmlContent={
+              <div className="card header">
+                <div className="card-image-container">
+                  <img src={TrunfoCampori} alt="Header" className="imageHeader" />
+                </div>
+              </div>}
+          />
+          <Card
+            title="Campori Experience"
+            text="Acesse o Campori Experience para agendar atividades, acompanhar pontuações e gerenciar seu clube com facilidade."
+            size="small"
+            columns={false}
+            onClick={(response) => handleClick(response?.title, response?.image)}
+            buttons={[
+              { name: "Log In", onclick: { title: "Campori Experience Login", image: LogoCampori } },
+              { name: "Criar conta", onclick: { title: "Campori Experience Sing In", image: LogoCampori } }
+            ]}
+          />
+          <Card
+            size="medium"
+            columns={false}
+            buttonHeaders={true}
+            buttons={[
+              { name: 'FaCalendarAlt', Title: 'Programações', Text: 'Fique por dentro da nossa programação completa clicando no botão abaixo' },
+              { name: 'FaTasks', Title: 'Atividades', Text: 'Conheça agora as atividades do nosso campori clicando no botão abaixo' },
+              { name: 'FaBullhorn', Title: 'Anúncios', Text: 'Fique por dentro de todas as noticias de nosso campori clicando no botão abaixo' },
+              { name: 'FaAddressBook', Title: 'Contatos', Text: 'Aqui esta uma lista completa de contatos importantes para a organização do nosso campori'}
+            ]}            
+          />
+          <Card
             key="countdown"
             image={LogoCampori}
             text=""
@@ -120,6 +156,7 @@ const App = () => {
               text={card.text}
               size={card.size}
               onClick={() => handleClick(card.text, card.image)}
+              columns={true}
             />
           ))}
         </Suspense>

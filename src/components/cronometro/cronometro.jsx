@@ -14,7 +14,7 @@ const eventDays = [
   new Date("2025-06-22T00:00:00"),
 ];
 
-const eventMessages = ["1º DIA", "2º DIA", "3º DIA", "4º DIA", "DIA DO ENCERRAMENTO"];
+const eventMessages = ["1º DIA", "2º DIA", "3º DIA", "DIA DO ENCERRAMENTO"];
 
 const calculateTimeLeft = () => {
   const now = new Date();
@@ -58,9 +58,11 @@ const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => setTimeLeft(calculateTimeLeft()), 1000);
-    return () => clearTimeout(timer);
-  }, [timeLeft]);
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer); // Limpar o intervalo quando o componente for desmontado
+  }, []); // Dependência vazia para rodar apenas uma vez
 
   if (timeLeft.eventIndex === -2) return null;
 
@@ -75,10 +77,12 @@ const Countdown = () => {
             <span>{timeLeft.countdown?.seconds}S</span>
           </div>
         ) : (
-          <span className="event-message">{eventMessages[timeLeft.eventIndex]}</span>
+          <span className="event-message">
+            {eventMessages[timeLeft.eventIndex]}
+          </span>
         )}
-      </div>
 
+      </div>
       <div className="progress-bar">
         <div className="progress-container">
           <div

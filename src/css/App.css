@@ -50,13 +50,6 @@ body {
   background-color: rgba(0, 0, 0, 0.655); /* Mantendo a cor de fundo original */
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.379);
-}
-
 .logo {
   height: 100px; 
   margin-left: 30px;
