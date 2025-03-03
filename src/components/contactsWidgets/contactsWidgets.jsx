@@ -48,6 +48,7 @@ const ContactsWidget = () => {
         <div className="contacts-widget">
             <div className="contacts-widget-data">
                 <ul className="contacts-list">
+                    <p className='title'>Lista de Contatos oficiais do campori</p>
                     {currentContacts.map((contato, index) => (
                         <li
                             key={index}
