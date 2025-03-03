@@ -22,3 +22,37 @@
     text-align: justify;
     text-align-last: left;
 }
+
+.eventData .title{
+    color: #0300a3a1;
+    padding: 0%;
+    margin: 0%;
+    font-size: 16px;
+}
+
+.locationButton {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: white; /* Cor do botão */
+    color: #0300a3a1;
+    border: 3px solid #0300a3a1;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.responsavel {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 8px;
+    color: #0300a3a1; /* Cor do texto */
+}
+
+.responsavel svg {
+    font-size: 20px; /* Tamanho do ícone */
+    color: #0300a3a1; /* Cor do ícone */
+}
+

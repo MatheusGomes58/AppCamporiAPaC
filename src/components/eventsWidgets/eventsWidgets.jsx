@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import eventsData from '../../data/scheduleData.json';
+import * as Icons from 'react-icons/fa';
+import eventsData from './scheduleData.json';
 import './eventsWidgets.css';
 
 const convertTimeStringTo24h = (timeString) => {
@@ -15,49 +16,60 @@ const convertTimeStringTo24h = (timeString) => {
 
 const getNextAndFollowingEventAndActivity = (events) => {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // Zera as horas para comparar apenas a data
+
+    // Subtraímos um dia para considerar a data de hoje como ontem
+    now.setDate(now.getDate() - 1);
+
+    // Ordenar eventos por data
+    const sortedEvents = events
+        .map((event, eventIndex) => ({
+            ...event,
+            eventIndex,
+            dateObj: new Date(event.date),
+        }))
+        .sort((a, b) => a.dateObj - b.dateObj);
 
     let nextEvent = null;
     let followingEvent = null;
 
-    // Itera sobre os eventos e encontra o próximo evento e o evento seguinte
-    for (const [eventIndex, event] of events.entries()) {
-        // Comparando a data diretamente em formato ISO
-        const eventDate = new Date(event.date);
+    for (const event of sortedEvents) {
+        const eventDate = event.dateObj;
 
-        if (eventDate >= today) {
-            const sortedActivities = event.atividades
-                ?.map((atividade, index) => {
-                    const time24h = convertTimeStringTo24h(atividade.horário);
-                    if (!time24h) return null;
+        // Ordena atividades dentro do evento
+        const sortedActivities = event.atividades
+            ?.map((atividade, index) => {
+                const time24h = convertTimeStringTo24h(atividade.horário);
+                if (!time24h) return null;
 
-                    // Criando um objeto de hora baseado na data do evento e hora da atividade
-                    const activityTime = new Date(eventDate);
-                    const [hours, minutes] = time24h.split(":").map(Number);
-                    activityTime.setHours(hours, minutes, 0, 0);
+                const activityTime = new Date(eventDate);
+                const [hours, minutes] = time24h.split(":").map(Number);
+                activityTime.setHours(hours, minutes, 0, 0);
 
-                    return { ...atividade, index, time: activityTime };
-                })
-                .filter(atividade => atividade && atividade.time >= now)
-                .sort((a, b) => a.time - b.time);
+                return { ...atividade, index, time: activityTime };
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.time - b.time);
 
-            if (sortedActivities.length > 0) {
-                const eventWithActivity = { event, eventIndex, nextActivity: sortedActivities[0] };
+        if (sortedActivities.length > 0) {
+            // Pega a primeira atividade futura ou a primeira do evento
+            let upcomingActivity = sortedActivities.find(atividade => atividade.time > now) || sortedActivities[0];
 
-                // Se o próximo evento ainda não foi encontrado, define-o
-                if (!nextEvent) {
-                    nextEvent = eventWithActivity;
-                } else if (!followingEvent && eventWithActivity.event.date !== nextEvent.event.date) {
-                    // Se o evento seguinte ainda não foi encontrado, define-o
-                    followingEvent = eventWithActivity;
-                }
+            if (!nextEvent && upcomingActivity.time > now) {
+                // Se o evento ainda não ocorreu, é o próximo
+                nextEvent = { event, nextActivity: upcomingActivity };
+            } else if (nextEvent && !followingEvent) {
+                // O evento seguinte ao próximo
+                followingEvent = { event, nextActivity: upcomingActivity };
+                break; // Encontramos os dois eventos, podemos parar
             }
         }
     }
 
+    console.log("Next Event:", nextEvent);
+    console.log("Following Event:", followingEvent);
+
     return { nextEvent, followingEvent };
 };
-
 
 
 const Event = memo(({ event, nextActivity, handleLocationClick }) => (
@@ -67,19 +79,26 @@ const Event = memo(({ event, nextActivity, handleLocationClick }) => (
             {nextActivity && (
                 <div>
                     {nextActivity.horário && nextActivity.atividade && (
-                        <p>
+                        <p className='title'>
                             {nextActivity.horário} - {nextActivity.atividade}
                         </p>
                     )}
                     {nextActivity.descrição && <p>{nextActivity.descrição}</p>}
-                    {nextActivity.responsável && <p><strong>{nextActivity.responsável}</strong></p>}
+                    {nextActivity.responsável && (
+                        <p className='responsavel'>
+                            <Icons.FaUserAlt style={{ marginRight: '8px' }} />
+                            <strong>Responsável: {nextActivity.responsável}</strong>
+                        </p>
+                    )}
                     {nextActivity.local && (
                         <p>
-                            <strong>
-                                <span className='location' onClick={() => handleLocationClick(nextActivity.local)}>
-                                    {nextActivity.local}
-                                </span>
-                            </strong>
+                            <button
+                                className='locationButton'
+                                onClick={() => handleLocationClick(nextActivity.local)}
+                            >
+                                <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} /> {/* Ícone de localização */}
+                                {nextActivity.local}
+                            </button>
                         </p>
                     )}
                 </div>
