@@ -1,0 +1,24 @@
+.eventWidget{
+    color: black;
+}
+
+.eventWidget .title{
+    font-size: 20px;
+    border: none;
+    box-shadow: none;
+}
+
+.eventWidget .eventData{
+    background-color: white;
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    margin: none;
+}
+
+.eventWidget .eventData p {
+    text-align: justify;
+    text-align-last: left;
+}

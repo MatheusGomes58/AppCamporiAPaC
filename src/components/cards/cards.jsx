@@ -5,7 +5,7 @@ import './card.css';
 const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons, response, buttonHeaders }) => {
   const [cardTitle, setCardTitle] = useState(title);
   const [cardText, setCardText] = useState(text);
-  const [buttonActive, setButtonActive] = useState(buttons?.[0]?.name || ''); // Define o primeiro botão como ativo
+  const [buttonActive, setButtonActive] = useState(0); // Define o primeiro botão como ativo
   const isHeader = size === "header";
 
   const alternateButtons = (button) => {
@@ -13,13 +13,13 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
     setCardText(button.Text);
   };
 
-  const handleButtonClick = (button) => {
-    setButtonActive(button.name); // Atualiza o botão ativo
+  const handleButtonClick = (button, index) => {
+    setButtonActive(index); // Atualiza o botão ativo
     alternateButtons(button); // Atualiza o título e o texto
   };
 
   useEffect(() => {
-    if (buttons && buttons.length > 0) {
+    if (buttonHeaders && buttons && buttons.length > 0) {
       alternateButtons(buttons[0]); // Aciona o primeiro botão ao carregar
     }
   }, [buttons]);
@@ -52,8 +52,8 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
                   return (
                     <div className="card-column" key={index}>
                       <button
-                        className={`card-button-header ${button.name === buttonActive ? 'active' : ''}`}
-                        onClick={() => handleButtonClick(button)} // Atualiza o botão ativo
+                        className={`card-button-header ${index === buttonActive ? 'active' : ''}`}
+                        onClick={() => handleButtonClick(button, index)} // Atualiza o botão ativo
                       >
                         {IconComponent ? <IconComponent size={20} /> : null}
                       </button>
@@ -62,8 +62,9 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
                 })}
               </div>
             )}
-            {(buttonHeaders || cardTitle) && <div className="card-title">{cardTitle}</div>}
-            {(buttonHeaders || cardText) && <div className="card-text">{cardText}</div>}
+            {cardTitle && <div className="card-title">{cardTitle}</div>}
+            {cardText && <div className="card-text">{cardText}</div>}
+            {htmlContent && <div className="card-html-content">{htmlContent[buttonActive]}</div>}
             {!buttonHeaders && buttons && (
               <div className="card-columns">
                 {buttons.map((button, index) => (
@@ -72,7 +73,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
                       className={`card-button ${button.name === buttonActive ? 'active' : ''}`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        onClick && onClick(button.onclick); // Passa o objeto correto
+                        onClick && onClick(button.onclick);
                       }}
                     >
                       {button.name}

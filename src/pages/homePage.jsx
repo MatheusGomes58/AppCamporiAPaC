@@ -5,6 +5,8 @@ import TrunfoCampori from '../img/trunfo.png';
 import LogoCampori from '../img/logoCampori.jpg';
 import ChurchCampori from '../img/Church.png';
 import Countdown from '../components/cronometro/cronometro';
+import EventsWidgets from '../components/eventsWidgets/eventsWidgets';
+
 import cardsData from '../data/cardsData.json';
 
 // Importa todas as imagens
@@ -134,8 +136,9 @@ const App = () => {
             size="medium"
             columns={false}
             buttonHeaders={true}
+            htmlContent={[<EventsWidgets/>]}
             buttons={[
-              { name: 'FaCalendarAlt', Title: 'Programações', Text: 'Fique por dentro da nossa programação completa clicando no botão abaixo' },
+              { name: 'FaCalendarAlt', Title: 'Programações'},
               { name: 'FaTasks', Title: 'Atividades', Text: 'Conheça agora as atividades do nosso campori clicando no botão abaixo' },
               { name: 'FaBullhorn', Title: 'Anúncios', Text: 'Fique por dentro de todas as noticias de nosso campori clicando no botão abaixo' },
               { name: 'FaAddressBook', Title: 'Contatos', Text: 'Aqui esta uma lista completa de contatos importantes para a organização do nosso campori'}
