@@ -128,6 +128,7 @@ const App = () => {
             image={ChurchCampori}
             text=""
             size="header"
+            columns={false}
             htmlContent={
               <div className="card header">
                 <div className="card-image-container">
@@ -152,7 +153,7 @@ const App = () => {
             buttonHeaders={true}
             htmlContent={[<EventsWidgets/>,<div/>,<div/>, <ContactsWidgets/>]}
             buttons={[
-              { name: 'FaCalendarAlt', Title: 'Programações'},
+              { name: 'FaCalendarAlt', Title: 'Programações', onclick: { title: "Campori Experience Login", image: LogoCampori } },
               { name: 'FaTasks', Title: 'Atividades', Text: 'Conheça agora as atividades do nosso campori clicando no botão abaixo' },
               { name: 'FaBullhorn', Title: 'Anúncios', Text: 'Fique por dentro de todas as noticias de nosso campori clicando no botão abaixo' },
               { name: 'FaAddressBook', Title: 'Contatos'}
@@ -163,6 +164,7 @@ const App = () => {
             image={LogoCampori}
             text=""
             size="header"
+            columns={false}
             htmlContent={<Countdown />}
             onClick={() => handleClick("Musica Tema do campori", LogoCampori)}
           />

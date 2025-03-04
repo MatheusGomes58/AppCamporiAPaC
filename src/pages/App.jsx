@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import MenuOptions from '../components/menu/menu';
 import '../css/App.css';
 import SchedulePage from './schedulePage';
@@ -11,8 +11,9 @@ import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import SplashScreen from '../components/splashScreen/splashScreen';
 
-// Your web app's Firebase configuration
+// Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBjrgMpj2zCsrV90Yb7tJaFbXBbA29L9c0",
   authDomain: "camporiapac.firebaseapp.com",
@@ -27,9 +28,11 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
     <Router>
-      <AppContent />
+      {showSplash ? <SplashScreen onFinish={() => setShowSplash(false)} /> : <AppContent />}
     </Router>
   );
 }
@@ -55,6 +58,5 @@ function AppContent() {
     </>
   );
 }
-
 
 export default App;

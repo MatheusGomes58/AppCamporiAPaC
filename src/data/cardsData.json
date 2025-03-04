@@ -1,20 +1,5 @@
 [
-    {
-        "image": "image13",
-        "title": "Boletins Informativos",
-        "text": "Os Informativos do Campori 2025 guiam os Desbravadores para o evento 'A Promessa', com detalhes sobre data, local, regras e atividades, garantindo uma experiência segura e completa.",
-        "buttons": [
-            {
-                "name": "Saiba Mais",
-                "onclick": {
-                    "title": "Boletins Informativos",
-                    "image": "image13"
-                }
-            }
-        ],
-        "size": "small",
-        "columns": false
-    },
+
     {
         "image": "image17",
         "title": "Coletânea",
@@ -41,6 +26,22 @@
                 "name": "Controle de Pontos",
                 "onclick": {
                     "title": "Campori Experience Score",
+                    "image": "image13"
+                }
+            }
+        ],
+        "size": "small",
+        "columns": false
+    },
+    {
+        "image": "image13",
+        "title": "Boletins Informativos",
+        "text": "Os Informativos do Campori 2025 guiam os Desbravadores para o evento 'A Promessa', com detalhes sobre data, local, regras e atividades, garantindo uma experiência segura e completa.",
+        "buttons": [
+            {
+                "name": "Saiba Mais",
+                "onclick": {
+                    "title": "Boletins Informativos",
                     "image": "image13"
                 }
             }

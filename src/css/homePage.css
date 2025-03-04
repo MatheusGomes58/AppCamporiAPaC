@@ -53,8 +53,9 @@
   gap: 10px;
   overflow: auto;
   width: 100vw;
-  height: 87vh; 
+  height: 83vh; 
   scrollbar-width: none;
+  
 }
 
 .card-container::-webkit-scrollbar {

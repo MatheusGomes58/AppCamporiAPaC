@@ -64,10 +64,6 @@ const getNextAndFollowingEventAndActivity = (events) => {
             }
         }
     }
-
-    console.log("Next Event:", nextEvent);
-    console.log("Following Event:", followingEvent);
-
     return { nextEvent, followingEvent };
 };
 

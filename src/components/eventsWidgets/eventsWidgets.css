@@ -5,9 +5,11 @@
 }
 
 .eventWidget .title{
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     box-shadow: none;
+    padding: 0px;
+    margin: 0px;
 }
 
 .eventWidget .eventData{
@@ -18,7 +20,7 @@
     justify-content: start;
     align-items: start;
     margin: 0%;
-    border: 3px solid #0300a3a1;
+    border: 0.5px solid #0300a3a1;
     padding: 5px;
 }
 

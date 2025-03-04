@@ -110,7 +110,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
             }
             {cardTitle && <div className="card-title">{cardTitle}</div>}
             {cardText && <div className="card-text">{cardText}</div>}
-            {htmlContent && <div >{htmlContent[buttonActive]}</div>}
+            {htmlContent && <div>{htmlContent[buttonActive]}</div>}
             {!buttonHeaders && buttons && (
               <div className="card-columns-buttons">
                 {buttons.map((button, index) => (
@@ -132,7 +132,15 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
         </>
         )
       )}
-      {isHeader && htmlContent && <div className="card-html-content">{htmlContent}</div>}
+      {isHeader && (
+        <div
+          className={`card ${size}`}
+          onClick={!buttons ? () => onClick && onClick({ title: text, image: image }) : undefined}
+          style={isHeader ? { backgroundImage: `url(${image})` } : {}}
+        >
+          {htmlContent && <div className="card-html-content">{htmlContent}</div>}
+        </div>
+      )}
     </>
   );
 };
