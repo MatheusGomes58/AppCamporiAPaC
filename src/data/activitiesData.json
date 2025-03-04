@@ -42,6 +42,15 @@
     ]
   },
   {
+    "text": "Programação",
+    "items": [
+      {
+        "type": "link",
+        "content": "/schedule"
+      }
+    ]
+  },
+  {
     "text": "Campori Experience Score",
     "items": [
       {

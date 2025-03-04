@@ -1,5 +1,19 @@
 [
-
+    {
+        "title": "Programação Completa",
+        "text": "Para garantir que você aproveite ao máximo cada momento, convidamos você a explorar nosso guia de programação detalhado. Nele, você encontrará todas as informações essenciais sobre horários de atividades, eventos especiais e encontros importantes. Prepare-se para uma jornada de crescimento espiritual e companheirismo!",
+        "buttons": [
+            {
+                "name": "Programação Completa",
+                "onclick": {
+                    "title": "Programação",
+                    "image": "image13"
+                }
+            }
+        ],
+        "size": "tiny",
+        "columns": false
+    },
     {
         "image": "image17",
         "title": "Coletânea",

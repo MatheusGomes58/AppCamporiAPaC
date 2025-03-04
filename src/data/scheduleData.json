@@ -1,1 +1,105 @@
-[]
+[
+    {
+        "title": "Quarta-Feira, 30 de Abril",
+        "date": "2025-04-30",
+        "atividades": [
+            {
+                "horário": "23h59",
+                "atividade": "ÚLTIMO PRAZO PARA PAGAMENTO DAS INSCRIÇÕES",
+                "responsável": "Diretoria do Clube",
+                "descrição": "Não perca! Este é o último dia para efetuar o pagamento das inscrições. Garanta sua participação!"
+            }
+        ]
+    },
+    {
+        "title": "Quinta-Feira, 15 de Maio",
+        "date": "2025-05-15",
+        "atividades": [
+            {
+                "horário": "23h59",
+                "atividade": "Prazo final para envio da documentação da investidura",
+                "descrição": "Prazo final para envio da documentação da investidura nas classes de liderança, contatar o cordenador Thiago Forato.",
+                "responsável": "Clubes"
+            }
+        ]
+    },
+    {
+        "title": "Terça-Feira, 10 de Junho",
+        "date": "2025-06-10",
+        "atividades": [
+            {
+                "horário": "23h59",
+                "atividade": "Prazo final para informar candidatos ao batismo",
+                "descrição": "Prazo final para os clubes informarem candidatos ao batismo.",
+                "responsável": "Clubes"
+            }
+        ]
+    },
+    {
+        "title": "Quinta-Feira, 19 de Junho",
+        "date": "2025-06-19",
+        "atividades": [
+            {
+                "horário": "6h",
+                "atividade": "Chegada dos clubes",
+                "local": "UNASP-EC",
+                "descrição": "Chegada dos clubes no local do evento.",
+                "responsável": "Clubes"
+            },
+            {
+                "horário": "8h",
+                "atividade": "Pré-Abertura",
+                "local": "UNASP-EC",
+                "descrição": "Atividades da Pré-Abertura.",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "11h",
+                "atividade": "Áreas de acampamento e cozinha prontas",
+                "local": "Áreas de acampamento e cozinha",
+                "descrição": "Áreas de acampamento e cozinha prontas para uso.",
+                "responsável": "Clubes"
+            },
+            {
+                "horário": "15h às 18h",
+                "atividade": "Entrega da caixa de primeiros socorros",
+                "local": "Posto médico",
+                "descrição": "Entrega da caixa de primeiros socorros para avaliação.",
+                "responsável": "Clubes"
+            },
+            {
+                "horário": "19h",
+                "atividade": "Reunião com coordenadores e regionais",
+                "local": "Local a definir",
+                "descrição": "Reunião com coordenadores e regionais.",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "19h",
+                "atividade": "Reunião com pastores",
+                "local": "Local a definir",
+                "descrição": "Reunião com pastores.",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "19h30",
+                "atividade": "Abertura oficial",
+                "local": "UNASP-EC",
+                "descrição": "Cerimônia de abertura oficial do Campori.",
+                "responsável": "Organização"
+            }
+        ]
+    },
+    {
+        "title": "Domingo, 22 de Junho",
+        "date": "2025-06-22",
+        "atividades": [
+            {
+                "horário": "8h",
+                "atividade": "Encerramento e premiação",
+                "descrição": "Cerimônia de encerramento e premiação do Campori.",
+                "responsável": "Organização"
+            }
+        ]
+    }
+]
