@@ -1,5 +1,7 @@
 .eventWidget{
     color: black;
+    margin: 5px;
+    padding: 5px;
 }
 
 .eventWidget .title{
@@ -16,6 +18,8 @@
     justify-content: start;
     align-items: start;
     margin: 0%;
+    border: 3px solid #0300a3a1;
+    padding: 5px;
 }
 
 .eventWidget .eventData p {

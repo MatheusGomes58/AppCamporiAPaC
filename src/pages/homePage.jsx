@@ -7,8 +7,6 @@ import ChurchCampori from '../img/Church.png';
 import Countdown from '../components/cronometro/cronometro';
 import EventsWidgets from '../components/eventsWidgets/eventsWidgets';
 import ContactsWidgets from '../components/contactsWidgets/contactsWidgets'
-
-
 import cardsData from '../data/cardsData.json';
 
 // Importa todas as imagens
@@ -98,10 +96,24 @@ const App = () => {
     if (text.includes("Musica Tema")) {
       //setModalOpen(true);
     } else {
+      image = setImage(image); 
+      console.log(image)
       const imageKey = Object.keys(imageMap).find(key => imageMap[key] === image);
       navigate(`/activities?text=${encodeURIComponent(text)}&headerImage=${encodeURIComponent(imageKey)}`);
     }
   }, [navigate]);
+
+  const setImage = useCallback((image) => {
+    if(image == 'image13'){
+      return image13
+    }else if(image == 'image17'){
+      return image17
+    }else if(image == 'image18'){
+      return image18
+    }else {
+      return image
+    }
+  }, []);
 
   const closeModal = useCallback(() => {
     setModalOpen(false);
@@ -126,7 +138,7 @@ const App = () => {
           <Card
             title="Campori Experience"
             text="Acesse o Campori Experience para agendar atividades, acompanhar pontuações e gerenciar seu clube com facilidade."
-            size="small"
+            size="tiny"
             columns={false}
             onClick={(response) => handleClick(response?.title, response?.image)}
             buttons={[
@@ -158,10 +170,14 @@ const App = () => {
             <Card
               key={index}
               image={card.image}
+              title={card.title}
               text={card.text}
               size={card.size}
-              onClick={() => handleClick(card.text, card.image)}
-              columns={true}
+              onClick={(response) => handleClick(response?.title, response?.image)}
+              //onClick={() => handleClick(card.text, card.image)}
+              columns={card.columns}
+              buttons={card.buttons}
+              buttonPositions={card.buttonPos}
             />
           ))}
         </Suspense>

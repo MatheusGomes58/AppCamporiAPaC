@@ -1,14 +1,20 @@
 [
     {
+        "Setor": "Departamental MDA APAC",
+        "Responsável": "Pr. Hélio Bochnie",
+        "Email": "",
+        "Telefone": "(019) 99785-6976"
+    },
+    {
         "Setor": "Secretária APAC",
         "Responsável": "Elaine Teixeira",
         "Email": "elaine.teixeira@adventistas.org",
-        "Telefone": "(019) 99796 4401"
+        "Telefone": "(019) 99796-4401"
     },
     {
         "Setor": "Cerimônia de Investidura",
         "Responsável": "Thiago Foratto (Coordenador)",
-        "Telefone": "019 98891-6090"
+        "Telefone": "(019) 98891-6090"
     },
     {
         "Setor": "Tenda para Cozinha",
@@ -18,7 +24,7 @@
     {
         "Setor": "Tenda para Cozinha",
         "Responsável": "Varuska",
-        "Telefone": "(19) 99784 2651"
+        "Telefone": "(19) 99784-2651"
     },
     {
         "Setor": "Restaurante Campori",

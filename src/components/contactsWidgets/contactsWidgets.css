@@ -75,16 +75,17 @@
 .contacts-list-item {
   background-color: #fff;
   border-radius: 3px;
-  margin: 5px 0;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding: 5px;
+  margin: 5px;
+  border: 3px solid #0300a3a1;
+
 }
 
 .contacts-list .title {
   font-weight: bold;
   text-align: left;
   margin: 5px;
-  padding: 0%;
+  padding: 5px;
   border-radius: 10px;
   font-size: 20px;
   border: none;

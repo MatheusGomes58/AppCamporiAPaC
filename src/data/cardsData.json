@@ -1,21 +1,51 @@
 [
-    { "image": "image13", "text": "Boletins Informativos", "size": "small" },
-    { "image": "image16", "text": "Musica Tema - Pronto Estarei", "size": "small" },
-    { "image": "image15", "text": "Mapa Detalhado", "size": "medium" },
-    { "image": "image17", "text": "Coletânea", "size": "small" },
-    { "image": "image19", "text": "Artes do Campori para POSTS", "size": "small" },
-    { "image": "image18", "text": "Pontuação do Clube", "size": "small" },
-    { "image": "image1", "text": "No Paredão - A história do apedrejamento de Estevão", "size": "medium" },
-    { "image": "image2", "text": "Blackout - A viagem de Saulo para Damasco", "size": "medium" },
-    { "image": "image3", "text": "Idolatria - Considerados os Deuses", "size": "small" },
-    { "image": "image4", "text": "Minha Vida é Uma Viagem - A Maior Viagem de Paulo", "size": "large" },
-    { "image": "image5", "text": "The Voice - Cantando na Prisão", "size": "small" },
-    { "image": "image6", "text": "CorridaMaluca - Classificatórias", "size": "medium" },
-    { "image": "image7", "text": "Animais Peçonhentos - Mordido por uma Cobra", "size": "large" },
-    { "image": "image8", "text": "Perdendo a Cabeça - Condenado à Morte", "size": "medium" },
-    { "image": "image9", "text": "Check-in - Indo a Antioquia", "size": "small" },
-    { "image": "image10", "text": "Perseguidor - Saulo Persegue os Cristãos", "size": "large" },
-    { "image": "image11", "text": "Titanic - A história do Naufrágio", "size": "small" },
-    { "image": "image12", "text": "Cross - O Caminho Nunca é Fácil", "size": "small" }
+    {
+        "image": "image13",
+        "title": "Boletins Informativos",
+        "text": "Os Informativos do Campori 2025 guiam os Desbravadores para o evento 'A Promessa', com detalhes sobre data, local, regras e atividades, garantindo uma experiência segura e completa.",
+        "buttons": [
+            {
+                "name": "Saiba Mais",
+                "onclick": {
+                    "title": "Boletins Informativos",
+                    "image": "image13"
+                }
+            }
+        ],
+        "size": "small",
+        "columns": false
+    },
+    {
+        "image": "image17",
+        "title": "Coletânea",
+        "text": "Ter um cântico no coração é mais do que um simples verso na Lei dos Desbravadores; é um estilo de vida. Significa cultivar uma atitude de alegria, esperança e gratidão, independentemente das circunstâncias. Assim como um cântico pode elevar o espírito e transformar um ambiente, um coração cheio de música pode iluminar os momentos mais sombrios da vida.",
+        "buttons": [
+            {
+                "name": "Saiba Mais",
+                "onclick": {
+                    "title": "Coletânea",
+                    "image": "image17"
+                }
+            }
+        ],
+        "size": "medium",
+        "columns": true,
+        "buttonPos": true
+    },
+    {
+        "image": "image18",
+        "title": "Pontuação do Clube",
+        "text": "O Campori 2025 da APaC apresenta um sistema digital inovador, permitindo agendamento de eventos, controle de pontos e visualização do tempo de espera, tudo na tela do seu dispositivo.",
+        "buttons": [
+            {
+                "name": "Controle de Pontos",
+                "onclick": {
+                    "title": "Campori Experience Score",
+                    "image": "image13"
+                }
+            }
+        ],
+        "size": "small",
+        "columns": false
+    }
 ]
-  

@@ -7,7 +7,6 @@ import GuidePage from './guidePage';
 import logo from '../img/Nome.png';
 import MapPage from './mapPage';
 import HomePage from './homePage';
-import ScorePage from './scorePage';
 import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
 import { initializeApp } from "firebase/app";
@@ -49,7 +48,6 @@ function AppContent() {
           <Route path="/guide" element={<GuidePage />} />
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/map" element={<MapPage />} />
-          <Route path="/score" element={<ScorePage />} />
           <Route path="/count" element={<CountPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}

@@ -39,7 +39,7 @@ function MenuOptions() {
                     <button className={`btnCircle ${currentPage === '/home' || currentPage === '/' ? 'active' : ''}`} onClick={() => acessPage('/home')}>
                         <i className="fas fa-home"></i>
                     </button>
-                    <button className={`btnCircle ${currentPage === '/map' ? 'active' : ''}`} onClick={() => acessPage('/map')}>
+                    <button className={`btnCircle ${currentPage === '/map' ? 'active' : ''}`} onClick={() => acessPage('/map')} disabled={true}>
                         <i className="fas fa-map-marker-alt"></i>
                     </button>
                     <div className='btnCircleAddSpace'>

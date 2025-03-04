@@ -42,6 +42,15 @@
     ]
   },
   {
+    "text": "Campori Experience Score",
+    "items": [
+      {
+        "type": "link",
+        "content": "/score"
+      }
+    ]
+  },
+  {
     "text": "Artes do Campori para POSTS",
     "items": [
       {
@@ -88,22 +97,16 @@
     "items": [
       {
         "type": "text",
-        "content": "Por favor, acompanhem os boletins abaixo para se manterem atualizados, quem avisa amigo é!"
+        "content": "Os Informativos do Campori 2025 são um guia completo e essencial para o XXII Campori da APaC, com o tema inspirador 'A Promessa'. Eles foram cuidadosamente elaborados para fornecer todas as informações cruciais que os participantes precisam para se preparar e aproveitar ao máximo essa experiência única. Detalhes sobre o evento:"
+      },
+      {
+        "type": "text",
+        "content": "Este guia completo e detalhado é uma ferramenta indispensável para os clubes de Desbravadores se prepararem adequadamente para o Campori, garantindo que todos os participantes tenham uma experiência enriquecedora, segura e inesquecível."
       },
       {
         "type": "button",
         "content": "1º informativo-campori",
-        "url": "https://drive.google.com/file/d/1D4f2yCLaJTKwdFzJ-m8_M_8Wav3p08k1/view?usp=drive_link"
-      },
-      {
-        "type": "button",
-        "content": "2º informativo-campori",
-        "url": "https://drive.google.com/file/d/1JpajvjPUNLvsT8jJOD0fyRnOGDKuZZyk/view?usp=sharing"
-      },
-      {
-        "type": "button",
-        "content": "3º informativo-campori",
-        "url": "https://drive.google.com/file/d/1S5LJzZllDY42MSm5rbqU7W2hZ-j0lYmN/view?usp=sharing"
+        "url": "https://drive.google.com/file/d/1xqtqeNFQUf4fI7AWBCSGUq39LNbnmaKo/view?usp=sharing"
       }
     ]
   },
@@ -111,184 +114,27 @@
     "text": "Coletânea",
     "items": [
       {
-        "type": "title",
-        "content": "Musica tema - Pronto estarei"
-      },
-      {
-        "type": "details",
-        "content": "1º Parte:"
+        "type": "text",
+        "content": "Para os Desbravadores, a música é uma forma de expressar a fé e a alegria de viver. Seja em um acampamento sob as estrelas, em uma caminhada pela natureza ou em um momento de serviço à comunidade, um cântico no coração é a trilha sonora que acompanha cada aventura e desafio."
       },
       {
         "type": "text",
-        "content": "Um chamado recebi do senhor, uma missão a cumprir com amor."
+        "content": "Abaixo estão alguns cantores que você poderá ouvir no campori."
       },
       {
-        "type": "text",
-        "content": "Pregando eu vou, construindo eu vou,"
+        "type": "button",
+        "content": "Canal do Coral Unasp",
+        "url": "https://www.youtube.com/@coralunasp/videos"
       },
       {
-        "type": "text",
-        "content": "com a Igreja no coração, avançando na missão."
+        "type": "button",
+        "content": "Canal da Michely Manuely",
+        "url": "https://www.youtube.com/@MichelyManuelyOficial"
       },
       {
-        "type": "text",
-        "content": "Pregando eu vou, construindo eu vou,"
-      },
-      {
-        "type": "details",
-        "content": "Coro:"
-      },
-      {
-        "type": "text",
-        "content": "Quando for chamado eu irei,"
-      },
-      {
-        "type": "text",
-        "content": "a missão eu cumprirei,"
-      },
-      {
-        "type": "text",
-        "content": "Pronto estarei, Pronto estarei, Eu irei."
-      },
-      {
-        "type": "details",
-        "content": "2º Parte:"
-      },
-      {
-        "type": "text",
-        "content": "Ao extremo quero ir, levando esperança,"
-      },
-      {
-        "type": "text",
-        "content": "vou seguir,"
-      },
-      {
-        "type": "text",
-        "content": "Pregando eu vou, Construindo eu vou."
-      },
-      {
-        "type": "text",
-        "content": "Por favor, Deus, flores plantarei,"
-      },
-      {
-        "type": "text",
-        "content": "e igrejas levantarei,"
-      },
-      {
-        "type": "text",
-        "content": "Pregando eu vou, Construindo eu vou."
-      }
-    ]
-  },
-  {
-    "text": "No Paredão - A história do apedrejamento de Estevão",
-    "items": [
-      {
-        "type": "text",
-        "content": "O desbravador irá carregar uma parte de Estevão correndo por um circuito. Quando ele colocar a primeira peça, outro desbravador avança para a próxima peça, e assim por diante, montando-o. Quando o personagem estiver completo, os desbravadores poderão derrubar Estevão jogando bolinhas que estarão disponíveis. Obs: O diretor ficará ao lado de Estevão segurando os lenços dos desbravadores participantes."
-      }
-    ]
-  },
-  {
-    "text": "Blackout - A viagem de Saulo para Damasco",
-    "items": [
-      {
-        "type": "text",
-        "content": "Nesta prova, comum labirinto à frente, o desbravador estará vendado, e seu instrutor/conselheiro estará ao lado, dando os comandos. Ele precisará fazer o percurso do labirinto, saindo do outro lado apenas com os comandos de ordem unida. Obs: Nesta prova, poderão mostrar várias pessoas participando ao mesmo tempo."
-      }
-    ]
-  },
-  {
-    "text": "Idolatria - Considerados os Deuses",
-    "items": [
-      {
-        "type": "text",
-        "content": "A atividade consiste em construir um altar para o Deus Desconhecido. Eles terão o material para construir um altar idêntico ao que estará na entrada da prova, utilizando nós e amarras."
-      }
-    ]
-  },
-  {
-    "text": "Minha Vida é Uma Viagem - A Maior Viagem de Paulo",
-    "items": [
-      {
-        "type": "text",
-        "content": "Um membro da diretoria irá puxar um tapete que percorrerá cinco cidades por onde Paulo passou. Em cada cidade, um desbravador irá embarcar na aventura com Paulo em cima do tapete. Para que o tapete se mova, todos os desbravadores devem empurrar juntos para frente, enquanto o instrutor puxa o tapete, fazendo assim percorrer cada cidade e pregando para que cada cidade se converta."
-      }
-    ]
-  },
-  {
-    "text": "The Voice - Cantando na Prisão",
-    "items": [
-      {
-        "type": "text",
-        "content": "Um membro do clube ficará preso em uma cela comcadeado. O primeiro desbravador a participar terá os pés e as mãos amarrados com um cinto e colocará uma espécie de gancho na cabeça. Ele terá a opção de escolher (pescar) 6 chaves, sendo que apenas uma abrirá o cadeado. Após escolher, terá que tentar libertar um membro do clube preso, permanecendo amarrado. Se a chave estiver errada, o próximo desbravador tentará até conseguirem abrir a prisão. Quando conseguirem, todos devem cantar o grito de guerra do clube em uníssono."
-      }
-    ]
-  },
-  {
-    "text": "CorridaMaluca - Classificatórias",
-    "items": [
-      {
-        "type": "text",
-        "content": "O clube deverá construir um carrinho feito de madeira e/ou bambu, totalmente fixado com amarras; não será permitido usar pregos ou arames, apenas encaixes e amarras. O carrinho será guiado por um desbravador ou desbravadora de 10 a 15 anos e deverá ser auxiliado, puxado e/ou empurrado por outros três desbravadores de 10 a 15 anos também, auxiliados por seu conselheiro ou conselheira. Cada equipe deve ser composta por participantes da mesma faixa etária, homens e mulheres, do mesmo valor."
-      },
-      {
-        "type": "text",
-        "content": "Todo o carrinho deverá ser de madeira e/ou bambu, com exceção dos dois eixos, da direção e das rodas, que poderão ser de metal ou ferro. Não será permitida participação de carrinhos com apenas um eixo (tipo carrinho de mão). Além disso, o carrinho não poderá ter motor ou ser elétrico."
-      }
-    ]
-  },
-  {
-    "text": "Animais Peçonhentos - Mordido por uma Cobra",
-    "items": [
-      {
-        "type": "text",
-        "content": "Faremos um pêndulo com várias cobras penduradas. O desbravador irá pegar uma lenha da fogueira e terá que desviar das cobras para começar a montar a fogueira. Cada desbravador irá levar uma lenha e, quando terminar, o próximo levará um fósforo e tentará acender a fogueira. Se não conseguir, o próximo tentará até conseguir acender a fogueira."
-      }
-    ]
-  },
-  {
-    "text": "Perdendo a Cabeça - Condenado à Morte",
-    "items": [
-      {
-        "type": "text",
-        "content": "Faremos uma guilhotina na qual os desbravadores irão encher um balde. Assim que o balde estiver com o número necessário de bolinhas, automaticamente a guilhotina será acionada e descerá."
-      }
-    ]
-  },
-  {
-    "text": "Check-in - Indo a Antioquia",
-    "items": [
-      {
-        "type": "text",
-        "content": "O clube irá montar, com bambu e amarras, uma espécie de biga ou carruagem, seguindo o modelo disponível no local. Eles levarão um membro do clube para um passeio entre as provas e/ou cozinhas, já pré-eterminadas."
-      }
-    ]
-  },
-  {
-    "text": "Perseguidor - Saulo Persegue os Cristãos",
-    "items": [
-      {
-        "type": "text",
-        "content": "Nesta prova, teremos uma espécie de cordas, onde duas equipes do mesmo clube disputarão entre si para chegar primeiro ao meio. Lá, teremos espaguetes de piscina; a equipe que chegar primeiro poderá pegar os espaguetes e correr atrás da equipe perdendo."
-      }
-    ]
-  },
-  {
-    "text": "Titanic - A história do Naufrágio",
-    "items": [
-      {
-        "type": "text",
-        "content": "Faremos uma jangada com nós e amarras para que alguns desbravadores possam subir em cima. Então, empurrando a jangada porta por porta, os desbravadores devem fazer o percurso, removendo a tora que ficou para trás e colocando-a na frente para que sejam usadas como rodas."
-      }
-    ]
-  },
-  {
-    "text": "Cross - O Caminho Nunca é Fácil",
-    "items": [
-      {
-        "type": "text",
-        "content": "Os clubes passarão por uma bateria de atividades (ralo), dentro de um circuito que envolverá: barro, atividades físicas em massa concentrando o máximo de energia e competitividade."
+        "type": "button",
+        "content": "Canal do Menos Um (CD Jovem)",
+        "url": "https://www.youtube.com/@MENOSUM7/featured"
       }
     ]
   },

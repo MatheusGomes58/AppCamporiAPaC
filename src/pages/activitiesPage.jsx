@@ -111,14 +111,14 @@ const Activities = () => {
 
   return (
     <div className="ActivitiesPage">
-      <div className="activitieCard">
-        {headerImageSrc && <img className="headerImage" src={headerImageSrc} alt={`Header de ${activity.text}`} />}
-        <h2>{activity.text}</h2>
-        <div className='activitieSection'>
-          {activity.items.map((item, index) => (
+      {headerImageSrc && <img className="headerImage" src={headerImageSrc} alt={`Header de ${activity.text}`} />}
+      <h2>{activity.text}</h2>
+      <div className='activitieSection'>
+        {activity.items.map((item, index) => (
+          <div className='activityItem'>
             <ActivityItem key={index} item={item} activityText={activity.text} />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
