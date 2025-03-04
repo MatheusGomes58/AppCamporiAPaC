@@ -5,7 +5,6 @@ import '../css/mapPage.css';
 const App = () => {
   return (
     <div className='mapaCampori'>
-      <GoogleMapEmbed />
     </div>
   );
 };

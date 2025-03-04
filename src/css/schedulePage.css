@@ -69,14 +69,13 @@
 .event-item-details p {
     text-align: left;
     margin: 5px 0;
-    font-size: clamp(12px, 3vw, 14px);
 }
 
 .activity-title {
     color: #0300a3a1;
     padding: 5px;
     margin: 5px 0;
-    font-size: clamp(12px, 3vw, 16px);
+    font-size: 16px;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -99,7 +98,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(10px, 2.5vw, 14px);
+    font-size: 14px;
     margin-top: 8px;
     color: #0300a3a1;
 }

@@ -139,7 +139,7 @@ const App = () => {
           <Card
             title="Campori Experience"
             text="Acesse o Campori Experience para agendar atividades, acompanhar pontuações e gerenciar seu clube com facilidade."
-            size="tiny"
+            size="mili"
             columns={false}
             onClick={(response) => handleClick(response?.title, response?.image)}
             buttons={[
