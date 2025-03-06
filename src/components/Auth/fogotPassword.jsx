@@ -19,6 +19,7 @@ function ForgotPasswordForm() {
 
     return (
         <div id="ForgotPasswordForm">
+            <h2>Recuperar Acesso</h2>
             <a className='resetPass'>Para recuperar a senha através do Email de Redefinição de Senha, informe o email cadastrado e pressione o botão</a>
             <input
                 className="inputLogin"
