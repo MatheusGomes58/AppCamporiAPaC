@@ -3,17 +3,19 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 100vw;
     height: 85vh;
     background: linear-gradient(135deg, #0300a3a1, darkblue);
     color: black;
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box; /* Include padding in width/height */
 }
-
-
 
 .auth-container .auth-form {
     max-width: 400px;
+    width: 90%; /* Adjust width for responsiveness */
     background: white;
     padding: 3rem;
     border-radius: 10px;
@@ -21,12 +23,13 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 20px;
+    margin: 20px 0; /* Adjust vertical margins */
+    box-sizing: border-box; /* Include padding in width/height */
 }
 
 .auth-container .auth-image {
-    width: 200px;
-    height: 200px;
+    width: 150px; /* Reduce image size for smaller screens */
+    height: 150px; /* Reduce image size for smaller screens */
     object-fit: cover;
     margin-bottom: 15px;
 }
@@ -72,6 +75,7 @@
     width: 100%;
     font-size: 16px;
     background-color: lightgray;
+    box-sizing: border-box; /* Include padding in width/height */
 }
 
 .auth-container .auth-form .card-content {
@@ -90,6 +94,7 @@
     background-color: transparent;
     border: 3px solid #0300a3a1;
     width: 100%;
+    box-sizing: border-box; /* Include padding in width/height */
 }
 
 .auth-container .toggle-link {
@@ -107,11 +112,11 @@
 /* Responsividade */
 @media (max-width: 480px) {
     .auth-container .auth-form {
-        max-width: 90%;
+        padding: 2rem; /* Reduce padding for smaller screens */
     }
 
-    .auth-container .auth-form input,
-    .auth-container .auth-form button {
-        font-size: 14px;
+    .auth-container .auth-image {
+        width: 120px; /* Further reduce image size for very small screens */
+        height: 120px;
     }
 }

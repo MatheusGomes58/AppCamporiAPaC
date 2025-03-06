@@ -16,21 +16,24 @@
     border: none;
     border-bottom: 2px solid #005028;
     outline: none;
-    min-width: 300px;
-    margin-top: 10%;
+    width: 100%; /* Torna o input flexível */
+    max-width: 300px; /* Limita o tamanho máximo */
+    margin-top: 5%; /* Ajusta a margem superior */
     background: none;
+    box-sizing: border-box; /* Garante que padding e bordas não afetem o tamanho */
 }
 
-.resetPass{
+.resetPass {
     display: flex;
     width: 100%;
     align-items: end;
     justify-content: end;
-    margin-top: 5%;
+    margin-top: 5%; /* Ajusta a margem superior */
 }
 
 .password-container {
     position: relative;
+    width: 100%; /* Garante que o container ocupe toda a largura disponível */
 }
 
 .toggle-password {
@@ -41,25 +44,32 @@
     cursor: pointer;
 }
 
-.boxButton{
+.boxButton {
     margin-top: 30px;
     min-height: 50px;
     display: flex;
     justify-content: center;
     align-items: end;
+    width: 100%; /* Garante que o boxButton ocupe toda a largura */
 }
 
-#loginForm{
+#loginForm {
     margin-top: 40px;
+    width: 100%; /* Garante que o formulário ocupe toda a largura */
+    box-sizing: border-box; /* Garante que padding e bordas não afetem o tamanho */
 }
 
-#RegisterForm{
+#RegisterForm {
     display: flex;
     flex-direction: column;
+    width: 100%; /* Garante que o formulário ocupe toda a largura */
+    box-sizing: border-box; /* Garante que padding e bordas não afetem o tamanho */
 }
 
-#ForgotPasswordForm{
+#ForgotPasswordForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    width: 100%; /* Garante que o formulário ocupe toda a largura */
+    box-sizing: border-box; /* Garante que padding e bordas não afetem o tamanho */
 }

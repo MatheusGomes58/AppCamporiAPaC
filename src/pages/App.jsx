@@ -9,10 +9,10 @@ import MapPage from './mapPage';
 import HomePage from './homePage';
 import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
-import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
 import LoginPage from './loginPage';
+import ForgotPage from './forgotPage';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -26,7 +26,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const shouldHideMenu = ["/autentication", "/forgotPassword", "/score", "/count"].includes(location.pathname);
+  const shouldHideMenu = ["/count"].includes(location.pathname);
 
   return (
     <>
@@ -42,6 +42,7 @@ function AppContent() {
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
+          <Route path="/forgotPassword" element={<ForgotPage/>}/>
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>
