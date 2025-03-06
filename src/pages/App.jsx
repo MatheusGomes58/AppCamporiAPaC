@@ -14,20 +14,6 @@ import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
 import LoginPage from './loginPage';
 
-// Configuração do Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyBjrgMpj2zCsrV90Yb7tJaFbXBbA29L9c0",
-  authDomain: "camporiapac.firebaseapp.com",
-  projectId: "camporiapac",
-  storageBucket: "camporiapac.appspot.com",
-  messagingSenderId: "1083996220137",
-  appId: "1:1083996220137:web:0412310e181143d5865e78",
-  measurementId: "G-2QDNZ589BZ"
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -55,6 +41,7 @@ function AppContent() {
           <Route path="/count" element={<CountPage />} />
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
           <Route path="/login" element={<LoginPage />}/>
+          <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>

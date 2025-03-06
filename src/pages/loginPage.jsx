@@ -1,47 +1,59 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LogoCampori from '../img/trunfo.png'
-import "../css/loginPage.css"; // Arquivo CSS separado
+import "../css/loginPage.css";
+import LoginForm from '../components/Auth/login'
+import RegisterForm from '../components/Auth/register'
 
-const AuthForm = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert("Login realizado!");
+const AuthForm = ({menuEnabled}) => {
+    const [activeTab, setActiveTab] = useState(menuEnabled);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        userValidation();
+    }, []);
+
+
+    async function userValidation() {
+        const authTime = localStorage.getItem('authTime');
+        if (!authTime) {
+            return;
+        }
+
+        const currentTime = new Date().getTime();
+        const timeElapsed = currentTime - parseInt(authTime, 10);
+
+        const threeHoursInMs = 3 * 60 * 60 * 1000;
+        if (timeElapsed > threeHoursInMs) {
+            return;
+        }
+    }
+
+    const handleTabSwitch = (tab) => {
+        setActiveTab(tab);
     };
 
     return (
         <div className="auth-container">
-            <form className="auth-form" onSubmit={handleSubmit}>
-                <div className="card-content">
-                    <img className="auth-image" src={LogoCampori} />
+            <img src={LogoCampori} className='auth-image' />
+            <div className="auth-form">
+                <div className="sliderLogin">
+                    <div
+                        className={`switch ${!activeTab ? 'active' : ''}`}
+                        onClick={() => handleTabSwitch(false)}
+                    >
+                        Logar
+                    </div>
+                    <div
+                        className={`switch ${activeTab ? 'active' : ''}`}
+                        onClick={() => handleTabSwitch(true)}
+                    >
+                        Registrar
+                    </div>
                 </div>
-                <h2>Faça o login para continuar</h2>
-                <label>E-mail</label>
-                <div className="card-content">
-                    <input
-                        type="email"
-                        placeholder="E-mail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <label>Senha</label>
-                <div className="card-content">
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="card-content">
-                    <button type="submit">Entrar</button>
-                </div>
-            </form>
+                {!activeTab ? <LoginForm /> : <RegisterForm />}
+            </div>
         </div>
     );
 };
