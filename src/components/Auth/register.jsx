@@ -22,7 +22,7 @@ function RegisterForm() {
             const user = userCredential.user; // Obtém o objeto User
     
             await addDoc(collection(db, 'users'), {
-                uid: user.uid, // Adiciona o UID do usuário ao documento
+                uid: user.uid,
                 email: email,
                 name: name,
                 status: false
