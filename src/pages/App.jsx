@@ -12,6 +12,7 @@ import CountPage from './countPage';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
+import LoginPage from './loginPage';
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      {showSplash ? <SplashScreen onFinish={() => setShowSplash(false)} /> : <AppContent />}
+      {showSplash ? <SplashScreen onFinish={() => setShowSplash(false)}/> : <AppContent />}
     </Router>
   );
 }
@@ -52,6 +53,8 @@ function AppContent() {
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/count" element={<CountPage />} />
+          <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
+          <Route path="/login" element={<LoginPage />}/>
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>

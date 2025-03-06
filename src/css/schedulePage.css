@@ -159,7 +159,7 @@
     background-color: #f0f0f0;
     cursor: pointer;
     min-width: 80px;
-    font-size: clamp(10px, 2.5vw, 14px);
+    font-size: 12px;
     text-align: center;
     white-space: normal;
     word-wrap: break-word;

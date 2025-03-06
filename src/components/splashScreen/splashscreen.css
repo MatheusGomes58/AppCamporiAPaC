@@ -1,127 +1,146 @@
 .splash-container {
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle, #0300a3a1 20%, darkblue 80%);
+    background: linear-gradient(135deg, #0300a3a1, darkblue);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Organiza logo e texto na vertical */
+    flex-direction: column;
     z-index: 9999;
     overflow: hidden;
+}
+
+.splash-container.animate {
     animation: fadeOut 1s ease-in-out 3s forwards;
 }
 
-/* Fundo estrelado dinâmico */
+.splash-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+}
+
 .splash-background {
     position: absolute;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 60%),
-                radial-gradient(circle, rgba(255, 255, 255, 0.15) 15%, transparent 65%),
-                radial-gradient(circle, rgba(255, 255, 255, 0.1) 5%, transparent 70%);
+        radial-gradient(circle, rgba(255, 255, 255, 0.15) 15%, transparent 65%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.1) 5%, transparent 70%);
     background-size: 150px 150px, 300px 300px, 450px 450px;
     animation: starsTwinkle 3s linear infinite alternate, moveUp 3s ease-in-out;
 }
 
-/* Logo animado */
 .splash-logo {
-    width: 40vw;
-    max-width: 250px;
-    opacity: 1;
-    animation: fadeIn 1.5s ease-in-out, floatEffect 2s infinite alternate;
+    width: 80vw;
+    max-width: 400px;
+    opacity: 0;
+    /* Começa invisível */
+    transform: scale(0.8) rotate(10deg);
+    /* Escala menor e rotação inicial */
+    animation: fadeInScale 3.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatEffect 2s infinite alternate;
+    will-change: transform, opacity;
 }
 
-/* Texto animado */
+.splash-logo-maker {
+    width: 40vw;
+    max-width: 100px;
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+    animation: fadeInScale 3.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatEffect 2s infinite alternate;
+    will-change: transform, opacity;
+}
+
 .splash-text {
     font-size: 1.2rem;
     font-weight: bold;
     color: white;
     margin-top: 15px;
     opacity: 0;
-    animation: textAppear 1.5s ease-in-out 1.2s forwards, floatEffect 2s infinite alternate;
+    animation: fadeIn 1.5s ease-in-out 0.5s forwards;
+    /* Atraso para aparecer após o logo */
+    will-change: opacity;
 }
 
-/* Fade-in do texto e subida */
-@keyframes textAppear {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+.splash-content .small {
+    font-size: 0.8rem;
+}
+
+/* Animações */
+@keyframes fadeInScale {
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1) rotate(0);
     }
 }
 
-/* Efeito de fade-in */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Efeito de flutuação do logo e texto */
 @keyframes floatEffect {
     0% {
         transform: translateY(0);
     }
+
     100% {
         transform: translateY(-10px);
     }
 }
 
-/* Efeito de cintilação das estrelas */
-@keyframes starsTwinkle {
-    0% {
-        opacity: 0.7;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Movimento do fundo para cima */
-@keyframes moveUp {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-20vh);
-    }
-}
-
-/* Fade-out da tela de splash */
 @keyframes fadeOut {
     100% {
         opacity: 0;
         visibility: hidden;
+        transform: scale(0.8);
+        filter: blur(5px);
+    }
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
     }
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     .splash-logo {
-        width: 60vw;
-        max-width: 200px;
+        width: 70vw;
+        max-width: 350px;
+    }
+
+    .splash-logo-maker {
+        width: 30vw;
+        max-width: 75px;
     }
 
     .splash-text {
         font-size: 1rem;
+    }
+
+
+    .splash-content .small {
+        font-size: 0.7rem;
     }
 }
 
 @media (max-width: 480px) {
     .splash-logo {
         width: 70vw;
-        max-width: 180px;
+        max-width: 400px;
+    }
+
+    .splash-logo-maker {
+        width: 50vw;
+        max-width: 75px;
     }
 
     .splash-text {
         font-size: 0.9rem;
+    }
+
+
+    .splash-content .small {
+        font-size: 0.6rem;
     }
 }

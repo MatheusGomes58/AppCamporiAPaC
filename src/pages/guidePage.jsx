@@ -31,14 +31,11 @@ function GuidePage() {
 
     return (
         <div className="GuidePage">
-            <div className='guideCard'>
-                <img alt="Imagem do guia" className='guideImage' width="100%" height="200px" src={imageGuidePage} />
-                <h2>GUIA DE ORIENTAÇÕES GERAIS DO EVENTO</h2>
-                <div className='guidesSection'>
-                    {guides.map((guide, index) => (
-                        <Guide key={index} guide={guide} />
-                    ))}
-                </div>
+            <h2>GUIA DE ORIENTAÇÕES GERAIS DO EVENTO</h2>
+            <div className='guidesSection'>
+                {guides.map((guide, index) => (
+                    <Guide key={index} guide={guide} />
+                ))}
             </div>
         </div>
     );

@@ -16,3 +16,11 @@
 .mapaCampori {
     scrollbar-width: none; 
 }
+
+.mapCard{
+    background-color: white;
+    color: black;
+    margin: 16px;
+    padding: 20px;
+    border-radius: 10px;
+}
