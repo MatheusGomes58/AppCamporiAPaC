@@ -23,6 +23,12 @@
     box-sizing: border-box; /* Garante que padding e bordas não afetem o tamanho */
 }
 
+.selectLogin {
+    border: none;
+    border: none;
+}
+
+
 .resetPass {
     display: flex;
     width: 100%;

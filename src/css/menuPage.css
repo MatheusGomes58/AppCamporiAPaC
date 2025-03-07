@@ -1,0 +1,98 @@
+.menu-container {
+    width: 100vw;
+    height: 85vh;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0300a3a1, darkblue);
+    color: black;
+}
+
+.menu-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Cards */
+.menu-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.menu-card {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: #0300a3a1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.menu-card-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Listas */
+.menu-lists {
+    margin-top: 24px;
+}
+
+.menu-image {
+    width: 150px; /* Reduce image size for smaller screens */
+    height: 150px; /* Reduce image size for smaller screens */
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.menu-list {
+    margin: 20px;
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.menu-list-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.menu-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-list-item {
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu-list-item:hover {
+    background: #007bff;
+    color: #fff;
+}

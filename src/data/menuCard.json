@@ -1,0 +1,42 @@
+{
+    "menuCards": [
+      {
+        "title": "Início",
+        "link": "/home",
+        "icon": "FaHome"
+      },
+      {
+        "title": "Guia",
+        "link": "/guide",
+        "icon": "FaBook"
+      },
+      {
+        "title": "Perfil",
+        "link": "/profile",
+        "icon": "FaMap"
+      },
+      {
+        "title": "Perfil",
+        "link": "/profile",
+        "icon": "FaUser"
+      }
+    ],
+    "menuLists": [
+      {
+        "title": "Configurações",
+        "items": [
+          { "title": "Conta", "link": "/settings/account" },
+          { "title": "Notificações", "link": "/settings/notifications" },
+          { "title": "Documentos", "link": "/settings/documents" }
+        ]
+      },
+      {
+        "title": "Ajuda",
+        "items": [
+          { "title": "FAQ", "link": "/help/faq" },
+          { "title": "Contato", "link": "/help/contact" }
+        ]
+      }
+    ]
+  }
+  

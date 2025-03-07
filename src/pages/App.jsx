@@ -13,6 +13,7 @@ import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
 import LoginPage from './loginPage';
 import ForgotPage from './forgotPage';
+import MenuPage from './menuPage';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -39,6 +40,7 @@ function AppContent() {
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/count" element={<CountPage />} />
+          <Route path="/menu" element={<MenuPage />} />
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
