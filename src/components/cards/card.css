@@ -17,6 +17,11 @@
   box-shadow: none;
 }
 
+.card .card-html-content{
+  height: 100%;
+  width: 100%;
+}
+
 /* Ajuste específico para o card header */
 .card.header {
   width: 100vw;
@@ -120,6 +125,7 @@
   font-size: 18px;
   padding: 8px;
   border-radius: 5px;
+  height: 40px;
 }
 
 .card-text {

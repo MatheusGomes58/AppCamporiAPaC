@@ -110,7 +110,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
             }
             {cardTitle && <div className="card-title">{cardTitle}</div>}
             {cardText && <div className="card-text">{cardText}</div>}
-            {htmlContent && <div>{htmlContent[buttonActive]}</div>}
+            {htmlContent && <div className='card-html-content'>{htmlContent[buttonActive]}</div>}
             {!buttonHeaders && buttons && (
               <div className="card-columns-buttons">
                 {buttons.map((button, index) => (
