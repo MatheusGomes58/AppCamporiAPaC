@@ -148,6 +148,47 @@
     ]
   },
   {
+    "text": "Elenco",
+    "items": [
+      {
+        "type": "slider",
+        "content": "elenco1"
+      },
+      {
+        "type": "slider",
+        "content": "elenco2"
+      },
+      {
+        "type": "slider",
+        "content": "elenco3"
+      },
+      {
+        "type": "slider",
+        "content": "elenco4"
+      },
+      {
+        "type": "slider",
+        "content": "elenco5"
+      },
+      {
+        "type": "slider",
+        "content": "elenco6"
+      },
+      {
+        "type": "slider",
+        "content": "elenco7"
+      },
+      {
+        "type": "slider",
+        "content": "elenco8"
+      },
+      {
+        "type": "slider",
+        "content": "elenco9"
+      }
+    ]
+  },
+  {
     "text": "Climas",
     "items": [
       {

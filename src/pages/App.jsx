@@ -27,7 +27,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const shouldHideMenu = ["/count"].includes(location.pathname);
+  const shouldHideMenu = ["/count", "/menu"].includes(location.pathname);
 
   return (
     <>

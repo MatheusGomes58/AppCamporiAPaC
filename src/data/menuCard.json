@@ -11,9 +11,18 @@
         "icon": "FaBook"
       },
       {
-        "title": "Perfil",
-        "link": "/profile",
-        "icon": "FaMap"
+        "title": "Mapa",
+        "link": "/map",
+        "icon": "FaMapMarkerAlt"
+      },
+      {
+        "title": "Programação",
+        "link": "/schedule",
+        "icon": "FaClock"
+      },{
+        "title": "Pontuação",
+        "link": "/score",
+        "icon": "FaStar"
       },
       {
         "title": "Perfil",
@@ -31,9 +40,9 @@
         ]
       },
       {
-        "title": "Ajuda",
+        "title": "Administrativo",
         "items": [
-          { "title": "FAQ", "link": "/help/faq" },
+          { "title": "Notificações", "link": "/help/faq" },
           { "title": "Contato", "link": "/help/contact" }
         ]
       }

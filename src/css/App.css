@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -38,6 +39,7 @@ body {
   background-attachment: fixed;
   overflow: hidden;
   font-size: 13px;
+  overflow: hidden;
 }
 
 .shaders {

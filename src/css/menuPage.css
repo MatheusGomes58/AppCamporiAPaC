@@ -1,22 +1,29 @@
+/* ======== Container Principal ======== */
 .menu-container {
     width: 100vw;
-    height: 85vh;
-    padding: 20px;
+    height: 100vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #0300a3a1, darkblue);
-    color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
+/* ======== Título ======== */
 .menu-title {
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-/* Cards */
+/* ======== Cards ======== */
 .menu-cards {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
 }
@@ -27,9 +34,9 @@
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 120px;
+    width: 140px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     text-decoration: none;
     color: #0300a3a1;
     display: flex;
@@ -39,11 +46,11 @@
 
 .menu-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .menu-card-icon {
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 8px;
 }
 
@@ -52,29 +59,24 @@
     font-weight: 600;
 }
 
-/* Listas */
+/* ======== Listas ======== */
 .menu-lists {
+    width: 100%;
+    max-width: 600px;
     margin-top: 24px;
 }
 
-.menu-image {
-    width: 150px; /* Reduce image size for smaller screens */
-    height: 150px; /* Reduce image size for smaller screens */
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
 .menu-list {
-    margin: 20px;
-    background: #f9f9f9;
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
     border-radius: 8px;
+    backdrop-filter: blur(5px);
 }
 
 .menu-list-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .menu-list ul {
@@ -84,15 +86,84 @@
 
 .menu-list-item {
     display: block;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     text-decoration: none;
-    color: #333;
+    color: white;
     font-weight: 500;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .menu-list-item:hover {
-    background: #007bff;
-    color: #fff;
+    background: #0300a3a1;
+    color: white;
+}
+
+/* ======== Imagens ======== */
+.menu-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* ======== Responsividade ======== */
+@media (max-width: 768px) {
+    .menu-title {
+        font-size: 1.5rem;
+    }
+
+    .menu-cards {
+        gap: 12px;
+    }
+
+    .menu-card {
+        width: 120px;
+        padding: 12px;
+    }
+
+    .menu-card-icon {
+        font-size: 28px;
+    }
+
+    .menu-card-title {
+        font-size: 12px;
+    }
+
+    .menu-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu-list {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-title {
+        font-size: 1.3rem;
+    }
+
+    .menu-cards {
+        gap: 8px;
+    }
+
+    .menu-card {
+        width: 100px;
+        padding: 10px;
+    }
+
+    .menu-card-icon {
+        font-size: 24px;
+    }
+
+    .menu-card-title {
+        font-size: 11px;
+    }
+
+    .menu-list {
+        padding: 10px;
+    }
 }

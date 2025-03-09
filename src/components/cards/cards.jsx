@@ -30,7 +30,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
         columns ? (
           <div
             className={`card ${size}`}
-            onClick={!buttons ? () => onClick && onClick({ title: text, image: image }) : undefined}
+            onClick={!buttons ? () => onClick && onClick({ title: title, image: image }) : undefined}
             style={isHeader ? { backgroundImage: `url(${image})` } : {}}
           >
             <div className="card-row">
@@ -100,7 +100,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
           )}
           <div
             className={`card ${size}`}
-            onClick={!buttons ? () => onClick && onClick({ title: text, image: image }) : undefined}
+            onClick={!buttons ? () => onClick && onClick({ title: title, image: image }) : undefined}
             style={isHeader ? { backgroundImage: `url(${image})` } : {}}
           >
             {image &&

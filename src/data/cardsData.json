@@ -7,7 +7,7 @@
                 "name": "Programação Completa",
                 "onclick": {
                     "title": "Programação",
-                    "image": "image13"
+                    "image": "image1"
                 }
             }
         ],
@@ -15,7 +15,22 @@
         "columns": false
     },
     {
-        "image": "image17",
+        "image": "image4",
+        "title": "Elenco",
+        "text": "O Campori APAC XXII contará com um elenco diversificado e talentoso, composto por oradores inspiradores, músicos renomados e artistas criativos. O evento reunirá líderes espirituais experientes, que compartilharão mensagens relevantes e edificantes para o público presente. Além disso, o campori contará com apresentações musicais emocionantes, com cantores e bandas que trarão louvores e canções especiais para o evento.",
+        "buttons": [
+            {
+                "name": "Conheça o nosso elenco",
+                "onclick": {
+                    "title": "Elenco",
+                    "image": "image4"
+                }
+            }
+        ],
+        "size": "medium"
+    },
+    {
+        "image": "image2",
         "title": "Coletânea",
         "text": "Ter um cântico no coração é mais do que um simples verso na Lei dos Desbravadores; é um estilo de vida. Significa cultivar uma atitude de alegria, esperança e gratidão, independentemente das circunstâncias. Assim como um cântico pode elevar o espírito e transformar um ambiente, um coração cheio de música pode iluminar os momentos mais sombrios da vida.",
         "buttons": [
@@ -23,7 +38,7 @@
                 "name": "Saiba Mais",
                 "onclick": {
                     "title": "Coletânea",
-                    "image": "image17"
+                    "image": "image2"
                 }
             }
         ],
@@ -32,7 +47,7 @@
         "buttonPos": true
     },
     {
-        "image": "image18",
+        "image": "image3",
         "title": "Pontuação do Clube",
         "text": "O Campori 2025 da APaC apresenta um sistema digital inovador, permitindo agendamento de eventos, controle de pontos e visualização do tempo de espera, tudo na tela do seu dispositivo.",
         "buttons": [
@@ -40,7 +55,7 @@
                 "name": "Controle de Pontos",
                 "onclick": {
                     "title": "Campori Experience Score",
-                    "image": "image13"
+                    "image": "image3"
                 }
             }
         ],
@@ -48,7 +63,7 @@
         "columns": false
     },
     {
-        "image": "image13",
+        "image": "image1",
         "title": "Boletins Informativos",
         "text": "Os Informativos do Campori 2025 guiam os Desbravadores para o evento 'A Promessa', com detalhes sobre data, local, regras e atividades, garantindo uma experiência segura e completa.",
         "buttons": [
@@ -56,7 +71,7 @@
                 "name": "Saiba Mais",
                 "onclick": {
                     "title": "Boletins Informativos",
-                    "image": "image13"
+                    "image": "image1"
                 }
             }
         ],
