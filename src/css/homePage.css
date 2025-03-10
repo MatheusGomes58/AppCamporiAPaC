@@ -14,6 +14,9 @@
 
 .modal-content {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   padding: 20px;
   width: 90vw; 

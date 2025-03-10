@@ -32,18 +32,11 @@
     ],
     "menuLists": [
       {
-        "title": "Configurações",
+        "title": "Acesso Administrativo",
         "items": [
-          { "title": "Conta", "link": "/settings/account" },
-          { "title": "Notificações", "link": "/settings/notifications" },
-          { "title": "Documentos", "link": "/settings/documents" }
-        ]
-      },
-      {
-        "title": "Administrativo",
-        "items": [
-          { "title": "Notificações", "link": "/help/faq" },
-          { "title": "Contato", "link": "/help/contact" }
+          { "title": "Cadastrar Avisos", "link": "/adm/notification" },
+          { "title": "Agendar Atividades", "link": "/adm/schedules" },
+          { "title": "Registrar Pontuação", "link":"/adm/scores"}
         ]
       }
     ]

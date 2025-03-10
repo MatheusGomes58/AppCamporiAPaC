@@ -63,14 +63,15 @@
 .menu-lists {
     width: 100%;
     max-width: 600px;
-    margin-top: 24px;
 }
 
 .menu-list {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
+    background: white;
+    padding: 10px;
     border-radius: 8px;
     backdrop-filter: blur(5px);
+    color: #0300a3a1;
+    margin: 30px;
 }
 
 .menu-list-title {
@@ -89,7 +90,6 @@
     padding: 12px;
     border-radius: 8px;
     text-decoration: none;
-    color: white;
     font-weight: 500;
     transition: background 0.3s ease, color 0.3s ease;
 }

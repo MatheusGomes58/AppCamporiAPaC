@@ -1,60 +1,171 @@
-.GuidePage {
+/* Estilo base */
+.guide {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.822);
+    width: 100vw;
+    height: 85vh;
+    overflow: auto;
+}
+
+/* Estrutura dos cards */
+.guide-card {
+    width: 96%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5%;
+    color: black;
+    margin: 10px;
+}
+
+.guide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Header do card */
+.guide-card-header {
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(to right, #0056b3, #003d80);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.guide-card-header>* {
+    z-index: 2;
+}
+
+/* Imagem no Header */
+.guide-card-header .guide-image-container {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    color: black;
-    background-color: white;
-    width: 100vw;
-    height: 85vh; 
-}
-
-.guideImage {
+    align-items: center;
     width: 100%;
-    height: 100px;
-    object-fit: cover;
+    height: 90%;
 }
 
-.guidesSection {
-    height: 60vh; 
-    overflow: auto;    
-    scrollbar-width: thin; /* Para Firefox */
-    scrollbar-color: rgba(0,0,0,0.5) transparent; /* Para Firefox */
-    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
-    padding: 20px;
+.guide-card-header .guide-image {
+    width: auto;
+    height: 100%;
+    max-height: 85%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
-.guideTitle {
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: left;
-    margin: 5px;
-    padding: 5px;
+/* Conteúdo do card */
+.guide-card-content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #333;
+}
+
+.guide-card-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.guide-card-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
     border-radius: 10px;
+}
+
+.guide-card-content::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 10px;
+}
+
+.guide-card-content::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Títulos e Textos */
+.guide-title {
     color: #0300a3a1;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.guide-text {
+    color: #222;
+    font-size: 16px;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+/* Botões */
+.guide-button {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 25px;
     border: 3px solid #0300a3a1;
-    background-color: rgba(255, 255, 255, 0.693);
+    background-color: white;
+    color: #0300a3a1;
+    transition: background 0.3s ease-in-out;
 }
 
-.guideTitle {
-    list-style-type: none;
-    cursor: pointer;
+/* Layout de Grid */
+.guide-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-.guideTitle::-webkit-details-marker {
-    display: none;
+.guide-columns-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-.guideDescription {
-    margin-top: 10px;
-    text-align: left;
-    padding-left: 1%;
-    padding-right: 1%;
+/* Responsividade */
+@media (max-width: 768px) {
+    .guide-card {
+        width: 100%;
+        padding: 3%;
+    }
+
+    .guide-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-title {
+        font-size: 18px;
+    }
+
+    .guide-button {
+        font-size: 14px;
+    }
 }
-
-.guideData {
-    margin: 20px;
-}
-
-
-
