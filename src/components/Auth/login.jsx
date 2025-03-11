@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { auth } from '../firebase/firebase';
+import React, { useState, useEffect } from 'react';
+import { db, auth } from '../firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
@@ -10,6 +10,13 @@ function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      navigate('/menu'); 
+    }
+  }, [navigate]);
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -18,17 +25,22 @@ function LoginForm() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      localStorage.setItem('authTime', new Date().getTime().toString());
-      localStorage.setItem('email', email);
-      localStorage.setItem('uid', user.uid); 
-      console.log('Usuário logado:', user);
+
+      const userDoc = await db.collection('users').doc(user.uid).get();
+      const userData = userDoc.data();
+
+      localStorage.setItem('user', JSON.stringify({
+        email: email,
+        uid: user.uid,
+        authTime: new Date().getTime().toString(),
+        admin: userData?.admin || false,
+        clube: userData?.clube || '',
+        name: userData?.name || ''
+      }));
+
       navigate('/menu');
     } catch (error) {
-      // Tratar erros de login
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error('Erro no login:', errorCode, errorMessage);
-      // Adicione aqui a manipulação de erros
+      console.error('Erro no login:', error.code, error.message);
     }
   };
 

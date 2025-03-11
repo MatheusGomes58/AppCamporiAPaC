@@ -44,6 +44,7 @@ function AppContent() {
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
           <Route path="/login" element={<LoginPage />}/>
           <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
+          <Route path="/profile" element={<LoginPage menuEnabled={true}/>}/>
           <Route path="/forgotPassword" element={<ForgotPage/>}/>
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}

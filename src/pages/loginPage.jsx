@@ -8,27 +8,15 @@ import RegisterForm from '../components/Auth/register'
 
 const AuthForm = ({ menuEnabled }) => {
     const [activeTab, setActiveTab] = useState(menuEnabled);
+    const [isAutentication, setAutentication] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
-        userValidation();
-    }, []);
-
-
-    async function userValidation() {
-        const authTime = localStorage.getItem('authTime');
-        if (!authTime) {
-            return;
+        const auth = localStorage.getItem('user');
+        if (auth) {
+            setAutentication(true);
         }
-
-        const currentTime = new Date().getTime();
-        const timeElapsed = currentTime - parseInt(authTime, 10);
-
-        const threeHoursInMs = 3 * 60 * 60 * 1000;
-        if (timeElapsed > threeHoursInMs) {
-            return;
-        }
-    }
+    }, [setAutentication]);
 
     const handleTabSwitch = (tab) => {
         setActiveTab(tab);
@@ -39,9 +27,9 @@ const AuthForm = ({ menuEnabled }) => {
             <img src={LogoCampori} className='auth-image' />
             <div className="auth-form">
                 <h2>
-                    {!activeTab ? 'Logar' : 'Registrar'}
+                    {!activeTab ? 'Logar' : isAutentication? 'Atualizar Dados' :'Registrar'}
                 </h2>
-                {!activeTab ? <LoginForm /> : <RegisterForm />}
+                {activeTab ? <RegisterForm /> : <LoginForm />}
             </div>
         </div>
     );

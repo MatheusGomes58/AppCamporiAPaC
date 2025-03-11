@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import {
+    createUserWithEmailAndPassword, updatePassword, updateEmail, deleteUser, reauthenticateWithCredential, EmailAuthProvider
+} from 'firebase/auth';
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 import clubs from '../../data/clubes.json';
 
@@ -10,9 +13,28 @@ function RegisterForm() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [club, setClub] = useState('');
+    const [clube, setClub] = useState('');
+    const [admin, setAdmin] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [search, setSearch] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            setName(userData.name || '');
+            setEmail(userData.email || '');
+            setClub(userData.clube || '');
+            setAdmin(userData.admin || false);
+            setIsEditing(true);
+        } else if (window.location.pathname === '/profile') {
+            alert('Faça o login para visualizar e alterar seus dados!')
+            navigate('/');
+        }
+    }, [navigate]);
+
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -20,33 +42,71 @@ function RegisterForm() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-    
-        // Verifica se algum campo está vazio ou se o campo "clube" não foi selecionado
-        if (!name || !email || !password || !club) {
-            alert('Por favor, preencha todos os campos e selecione um clube.');
-            return; // Não prossegue com o cadastro se algum campo estiver vazio
+
+        if (!name || !email || (!isEditing && !password) || !clube) {
+            alert('Por favor, preencha todos os campos.');
+            return;
         }
-    
+
         try {
-            // Cria o usuário no Firebase Auth
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-    
-            // Salva os dados do usuário no Firestore
-            await addDoc(collection(db, 'users'), {
-                uid: user.uid,
-                email,
-                name,
-                club,
-                status: false,
-            });
-    
-            alert('Usuário cadastrado com sucesso!');
+            const user = auth.currentUser;
+            if (isEditing && user) {
+                if (password) {
+                    const credential = EmailAuthProvider.credential(user.email, password);
+                    await reauthenticateWithCredential(user, credential);
+                }
+
+                if (email !== user.email) {
+                    await updateEmail(user, email);
+                }
+
+                await setDoc(doc(db, 'users', user.uid), { email, name, clube, admin }, { merge: true });
+
+                alert('Dados atualizados com sucesso!');
+                localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), email, name, clube, admin }));
+            } else {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await setDoc(doc(db, 'users', userCredential.user.uid), { email, name, clube, admin });
+
+                alert('Usuário cadastrado com sucesso!');
+            }
         } catch (error) {
-            alert(`Erro no cadastro: ${error.message}`);
+            alert(`Erro: ${error.message}`);
+        } finally {
+            window.location.href = '/menu';
         }
     };
-    
+
+    const handleDeleteAccount = async () => {
+        if (!window.confirm('Tem certeza que deseja excluir sua conta? Esta ação é irreversível!')) {
+            return;
+        }
+
+        if (!password) {
+            alert('Por favor, insira sua senha para confirmar a exclusão.');
+            return;
+        }
+
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Usuário não autenticado.');
+                return;
+            }
+
+            const credential = EmailAuthProvider.credential(user.email, password);
+            await reauthenticateWithCredential(user, credential);
+
+            await deleteDoc(doc(db, 'users', user.uid));
+            await deleteUser(user);
+
+            localStorage.removeItem('user');
+            alert('Conta excluída com sucesso!');
+            window.location.href = '/';
+        } catch (error) {
+            alert(`Erro ao excluir conta: ${error.message}`);
+        }
+    };
 
     const handleSelectClub = (clube) => {
         setClub(clube);
@@ -70,12 +130,13 @@ function RegisterForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isEditing}
             />}
             {!isDropdownOpen && <div className="password-container">
                 <input
                     className="inputLogin"
                     type={passwordVisible ? 'text' : 'password'}
-                    placeholder="Crie uma Senha"
+                    placeholder={isEditing ? "Digite sua senha" : "Crie uma senha"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -88,12 +149,12 @@ function RegisterForm() {
                 className="inputLogin"
                 type="text"
                 placeholder="Selecione o seu clube"
-                value={club}
+                value={clube}
                 onChange={(e) => setSearch(e.target.value)}
-                onFocus={() => setIsDropdownOpen(true)} // Abre o dropdown ao focar no campo
+                onFocus={() => !isEditing && setIsDropdownOpen(true)}
+                disabled={isEditing}
             />}
 
-            {/* Dropdown de clubes */}
             {isDropdownOpen && (
                 <div className="customSelect">
                     <input
@@ -117,7 +178,15 @@ function RegisterForm() {
                 </div>
             )}
 
-            {!isDropdownOpen && <button className="btnAuth" onClick={handleRegister}>Cadastrar</button>}
+            {!isDropdownOpen && <button className="btnAuth" onClick={handleRegister}>
+                {isEditing ? 'Salvar Alterações' : 'Cadastrar'}
+            </button>}
+
+            {!isDropdownOpen && isEditing && (
+                <button className="btnDelete" onClick={handleDeleteAccount}>
+                    Excluir Conta
+                </button>
+            )}
         </div>
     );
 }
