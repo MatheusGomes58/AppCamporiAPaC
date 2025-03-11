@@ -43,6 +43,7 @@ function AppContent() {
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
           <Route path="/login" element={<LoginPage />}/>
+          <Route path="/logout" element={<LoginPage />}/>
           <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
           <Route path="/profile" element={<LoginPage menuEnabled={true}/>}/>
           <Route path="/forgotPassword" element={<ForgotPage/>}/>

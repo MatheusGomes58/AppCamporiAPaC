@@ -33,10 +33,19 @@
     "menuLists": [
       {
         "title": "Acesso Administrativo",
+        "admin": true,
         "items": [
           { "title": "Cadastrar Avisos", "link": "/adm/notification" },
           { "title": "Agendar Atividades", "link": "/adm/schedules" },
           { "title": "Registrar Pontuação", "link":"/adm/scores"}
+        ]
+      },{
+        "title": "Controle de Acesso",
+        "user": true,
+        "items": [
+          { "title": "Cadastrar Avisos", "link": "/adm/notification" },
+          { "title": "Agendar Atividades", "link": "/adm/schedules" },
+          { "title": "SAIR", "link":"/logout"}
         ]
       }
     ]

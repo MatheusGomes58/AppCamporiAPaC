@@ -7,10 +7,23 @@ import { useNavigate } from 'react-router-dom';
 
 const MenuComponent = () => {
     const [menu, setMenu] = useState(menuData);
+    const [admin, setAdmin] = useState(false);
+    const [isAutenticated, setAutenticated] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         setMenu(menuData);
+    }, []);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            setAdmin(userData.admin || false);
+            setAutenticated(true);
+        } else{
+            setAutenticated(false);
+        }
     }, []);
 
     return (
@@ -38,7 +51,7 @@ const MenuComponent = () => {
             {/* Renderiza os menus em lista */}
             <div className="menu-lists">
                 {menu.menuLists.map((list, index) => (
-                    <div key={index} className="menu-list">
+                    (((list.admin == admin) || (list.user == isAutenticated)) && <div key={index} className="menu-list">
                         <h3 className="menu-list-title">{list.title}</h3>
                         <ul>
                             {list.items.map((item, subIndex) => (
@@ -52,7 +65,7 @@ const MenuComponent = () => {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </div>)
                 ))}
             </div>
         </div>

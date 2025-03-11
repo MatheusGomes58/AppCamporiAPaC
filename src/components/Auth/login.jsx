@@ -13,6 +13,9 @@ function LoginForm() {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
+      if(window.location.pathname === '/logout'){
+        localStorage.removeItem('user');
+      }
       navigate('/menu'); 
     }
   }, [navigate]);
