@@ -4,8 +4,6 @@ import MenuOptions from '../components/menu/menu';
 import '../css/App.css';
 import SchedulePage from './schedulePage';
 import GuidePage from './guidePage'; 
-import logo from '../img/Nome.png';
-import MapPage from './mapPage';
 import HomePage from './homePage';
 import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
@@ -13,6 +11,7 @@ import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
 import LoginPage from './loginPage';
 import ForgotPage from './forgotPage';
+import UnknowPage from './unknowPage';
 import MenuPage from './menuPage';
 
 function App() {
@@ -38,7 +37,7 @@ function AppContent() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/guide" element={<GuidePage />} />
           <Route path="/schedule" element={<SchedulePage />} />
-          <Route path="/map" element={<MapPage />} />
+          <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
@@ -47,6 +46,7 @@ function AppContent() {
           <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
           <Route path="/profile" element={<LoginPage menuEnabled={true}/>}/>
           <Route path="/forgotPassword" element={<ForgotPage/>}/>
+          <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>
