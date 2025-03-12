@@ -9,12 +9,16 @@ import RegisterForm from '../components/Auth/register'
 const AuthForm = ({ menuEnabled }) => {
     const [activeTab, setActiveTab] = useState(menuEnabled);
     const [isAutentication, setAutentication] = useState(false)
+    const [isDeleteProfile, setDelete] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
         const auth = localStorage.getItem('user');
         if (auth) {
             setAutentication(true);
+        }
+        if(window.location.pathname === '/deleteprofile'){
+            setDelete(true);
         }
     }, [setAutentication]);
 
@@ -27,9 +31,9 @@ const AuthForm = ({ menuEnabled }) => {
             <img src={LogoCampori} className='auth-image' />
             <div className="auth-form">
                 <h2>
-                    {!activeTab ? 'Logar' : isAutentication? 'Atualizar Dados' :'Registrar'}
+                    {!activeTab ? 'Logar' : !isDeleteProfile? isAutentication? 'Atualizar Dados' :'Registrar' : 'Remover Usuário'}
                 </h2>
-                {activeTab ? <RegisterForm /> : <LoginForm />}
+                {activeTab ? <RegisterForm remove={isDeleteProfile} /> : <LoginForm />}
             </div>
         </div>
     );

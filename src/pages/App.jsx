@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import MenuOptions from '../components/menu/menu';
 import '../css/App.css';
 import SchedulePage from './schedulePage';
-import GuidePage from './guidePage'; 
+import GuidePage from './guidePage';
 import HomePage from './homePage';
 import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
@@ -13,13 +13,23 @@ import LoginPage from './loginPage';
 import ForgotPage from './forgotPage';
 import UnknowPage from './unknowPage';
 import MenuPage from './menuPage';
+import NotificationPage from './noticesPage';
+
+const RedirectToHelp = () => {
+  useEffect(() => {
+    window.location.href = "https://chat.whatsapp.com/LnPviuzOehtBrXiTlgSbLb";
+  }, []);
+
+  return null;
+};
+
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
     <Router>
-      {showSplash ? <SplashScreen onFinish={() => setShowSplash(false)}/> : <AppContent />}
+      {showSplash ? <SplashScreen onFinish={() => setShowSplash(false)} /> : <AppContent />}
     </Router>
   );
 }
@@ -40,12 +50,15 @@ function AppContent() {
           <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
           <Route path="/menu" element={<MenuPage />} />
-          <Route path="/show" element={<SplashScreen animateStop={true}/>}/>
-          <Route path="/login" element={<LoginPage />}/>
-          <Route path="/logout" element={<LoginPage />}/>
-          <Route path="/singin" element={<LoginPage menuEnabled={true}/>}/>
-          <Route path="/profile" element={<LoginPage menuEnabled={true}/>}/>
-          <Route path="/forgotPassword" element={<ForgotPage/>}/>
+          <Route path="/show" element={<SplashScreen animateStop={true} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LoginPage />} />
+          <Route path='/deleteprofile' element={<LoginPage menuEnabled={true} />} />
+          <Route path="/singin" element={<LoginPage menuEnabled={true} />} />
+          <Route path="/profile" element={<LoginPage menuEnabled={true} />} />
+          <Route path="/forgotPassword" element={<ForgotPage />} />
+          <Route path="/notifier" element={<NotificationPage />} />
+          <Route path="/help" element={<RedirectToHelp />} />
           <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}

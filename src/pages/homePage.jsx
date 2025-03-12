@@ -6,7 +6,8 @@ import LogoCampori from '../img/logoCampori.jpg';
 import ChurchCampori from '../img/Church.png';
 import Countdown from '../components/cronometro/cronometro';
 import EventsWidgets from '../components/eventsWidgets/eventsWidgets';
-import ContactsWidgets from '../components/contactsWidgets/contactsWidgets'
+import ContactsWidgets from '../components/contactsWidgets/contactsWidgets';
+import NoticeWidgets from '../components/notices/notices'
 import cardsData from '../data/cardsData.json';
 
 // Importa todas as imagens
@@ -59,14 +60,22 @@ const useCardsData = () => {
 
 const App = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [isAutentication, setAutentication] = useState(false);
   const cards = useCardsData();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem('user');
+    if (auth) {
+      setAutentication(true);
+    }
+  }, [setAutentication]);
 
   const handleClick = useCallback((text, image) => {
     if (text.includes("Musica Tema")) {
       //setModalOpen(true);
     } else {
-      image = setImage(image); 
+      image = setImage(image);
       console.log(image)
       const imageKey = Object.keys(imageMap).find(key => imageMap[key] === image);
       navigate(`/activities?text=${encodeURIComponent(text)}&headerImage=${encodeURIComponent(imageKey)}`);
@@ -74,15 +83,15 @@ const App = () => {
   }, [navigate]);
 
   const setImage = useCallback((image) => {
-    if(image == 'image1'){
+    if (image == 'image1') {
       return image1
-    }else if(image == 'image2'){
+    } else if (image == 'image2') {
       return image2
-    }else if(image == 'image3'){
+    } else if (image == 'image3') {
       return image3
-    }else if(image == 'image4'){
+    } else if (image == 'image4') {
       return image4
-    }else {
+    } else {
       return image
     }
   }, []);
@@ -108,7 +117,7 @@ const App = () => {
                 </div>
               </div>}
           />
-          <Card
+          {!isAutentication ? <Card
             title="Campori Experience"
             text="Acesse o Campori Experience para agendar atividades, acompanhar pontuações e gerenciar seu clube com facilidade."
             size="mili"
@@ -118,18 +127,25 @@ const App = () => {
               { name: "Log In", onclick: { title: "Campori Experience Login", image: LogoCampori } },
               { name: "Criar conta", onclick: { title: "Campori Experience Sing In", image: LogoCampori } }
             ]}
-          />
+          /> :
+            <Card
+              title="Campori Experience"
+              text="Você já está logado no Campori Experience! Aproveite para agendar atividades, acompanhar pontuações e gerenciar os dados do seu clube com mais facilidade."
+              size="mili"
+              columns={false}
+            />
+          }
           <Card
             size="medium"
             columns={false}
             buttonHeaders={true}
-            htmlContent={[<EventsWidgets/>,<div/>,<div/>, <ContactsWidgets/>]}
+            htmlContent={[<EventsWidgets />, <div />, <NoticeWidgets isSlider={true} />, <ContactsWidgets />]}
             buttons={[
               { name: 'FaCalendarAlt', Title: 'Programações', onclick: { title: "Campori Experience Login", image: LogoCampori } },
               { name: 'FaTasks', Title: 'Atividades', Text: 'Em breve você poderá ver as atividades do campori!' },
               { name: 'FaBullhorn', Title: 'Anúncios' },
-              { name: 'FaAddressBook', Title: 'Contatos'}
-            ]}            
+              { name: 'FaAddressBook', Title: 'Contatos' }
+            ]}
           />
           <Card
             key="countdown"

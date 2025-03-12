@@ -29,7 +29,6 @@ const SplashScreen = ({ onFinish, animateStop }) => {
       </div>
       <div className="splash-content">
         <img src={logomgw} alt="Logo" className="splash-logo-maker" />
-        <p className="splash-text small">MatheusGomes58</p>
       </div>
     </div>
   );

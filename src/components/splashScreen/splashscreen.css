@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: end;
     flex-direction: column;
+    margin: 30px;
 }
 
 .splash-background {

@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
   width: 97%;
-  height: auto;
-  padding: 5%;
+  height:fit-content;
+  padding: 1%;
 }
 
 .card .card{
@@ -185,7 +185,6 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 100%;
   padding: 10px;
 }
 
@@ -228,18 +227,15 @@
   object-fit: cover;
 }
 
-.medium{
-  height: auto;
+
+@media (max-width: 768px) {
+  .card{
+    padding: 5%;
+  }
 }
 
-.small{
-  height: auto;
-}
-
-.tiny{
-  height: auto;
-}
-
-.mili{
-  height: auto;
+@media (max-width: 368px) {
+  .card{
+    padding: 10%;
+  }
 }

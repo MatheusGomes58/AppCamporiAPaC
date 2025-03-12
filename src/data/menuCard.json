@@ -3,49 +3,65 @@
       {
         "title": "Início",
         "link": "/home",
-        "icon": "FaHome"
+        "icon": "FaHome",
+        "default": true
       },
       {
         "title": "Guia",
         "link": "/guide",
-        "icon": "FaBook"
+        "icon": "FaBook",
+        "default": true
       },
       {
         "title": "Mapa",
         "link": "/map",
-        "icon": "FaMapMarkerAlt"
+        "icon": "FaMapMarkerAlt",
+        "default": true
       },
       {
         "title": "Programação",
         "link": "/schedule",
-        "icon": "FaClock"
+        "icon": "FaClock",
+        "default": true
       },{
         "title": "Pontuação",
         "link": "/score",
-        "icon": "FaStar"
+        "icon": "FaStar",
+        "default": true
       },
       {
-        "title": "Perfil",
-        "link": "/profile",
-        "icon": "FaUser"
+        "title": "Avisos",
+        "link": "/notifier",
+        "icon": "FaBullhorn",
+        "default": true
       }
     ],
     "menuLists": [
       {
-        "title": "Acesso Administrativo",
-        "admin": true,
+        "user": false,
         "items": [
-          { "title": "Cadastrar Avisos", "link": "/adm/notification" },
-          { "title": "Agendar Atividades", "link": "/adm/schedules" },
-          { "title": "Registrar Pontuação", "link":"/adm/scores"}
+          { "title": "CADASTRAR USUÁRIO", "link":"/singin"},
+          { "title": "FAZER LOGIN", "link":"/login"},
+          { "title": "RECUPERAR A SENHA", "link":"/forgotPassword"},
+          { "title": "AJUDA E SUPORTE", "link":"/help"}
         ]
-      },{
-        "title": "Controle de Acesso",
+      },
+      {
         "user": true,
         "items": [
-          { "title": "Cadastrar Avisos", "link": "/adm/notification" },
-          { "title": "Agendar Atividades", "link": "/adm/schedules" },
+          { "title": "ATUALIZAR DADOS", "link":"/profile"},
+          { "title": "DELETAR USUÁRIO", "link":"/deleteprofile"},
+          { "title": "AJUDA E SUPORTE", "link":"/help"},
           { "title": "SAIR", "link":"/logout"}
+        ]
+      },
+      {
+        "title": "Acesso Administrativo",
+        "admin": true,
+        "clube": "APAC",
+        "items": [
+          { "title": "Criar Agenda de Atividades", "link": "/schedules" },
+          { "title": "Registrar Pontuação", "link":"/adm/scores"}
         ]
       }
     ]

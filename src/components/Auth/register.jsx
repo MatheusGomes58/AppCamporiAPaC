@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import clubs from '../../data/clubes.json';
 
-function RegisterForm() {
+const RegisterForm = ({ remove }) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -115,7 +115,11 @@ function RegisterForm() {
 
     return (
         <div id="RegisterForm">
-            {!isDropdownOpen && <input
+            {!isDropdownOpen && remove && <>
+                <p>Olá {name}!</p>
+                <p>Se você deseja realmente deletar insira sua senha abaixo e pressione o botão para confirmar!</p>
+            </>}
+            {!isDropdownOpen && !remove && <input
                 className="inputLogin"
                 type="text"
                 placeholder="Nome do Usuário"
@@ -123,7 +127,7 @@ function RegisterForm() {
                 onChange={(e) => setName(e.target.value)}
                 required
             />}
-            {!isDropdownOpen && <input
+            {!isDropdownOpen && !remove && <input
                 className="inputLogin"
                 type="email"
                 placeholder="E-mail"
@@ -132,7 +136,7 @@ function RegisterForm() {
                 required
                 disabled={isEditing}
             />}
-            {!isDropdownOpen && <div className="password-container">
+            {!isDropdownOpen && (isEditing && remove ? true : !isEditing) && <div className="password-container">
                 <input
                     className="inputLogin"
                     type={passwordVisible ? 'text' : 'password'}
@@ -145,7 +149,7 @@ function RegisterForm() {
                     {passwordVisible ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
                 </span>
             </div>}
-            {!isDropdownOpen && <input
+            {!isDropdownOpen && !remove && <input
                 className="inputLogin"
                 type="text"
                 placeholder="Selecione o seu clube"
@@ -155,7 +159,7 @@ function RegisterForm() {
                 disabled={isEditing}
             />}
 
-            {isDropdownOpen && (
+            {isDropdownOpen && !remove && (
                 <div className="customSelect">
                     <input
                         className="inputLogin"
@@ -178,11 +182,11 @@ function RegisterForm() {
                 </div>
             )}
 
-            {!isDropdownOpen && <button className="btnAuth" onClick={handleRegister}>
+            {!isDropdownOpen && !remove && <button className="btnAuth" onClick={handleRegister}>
                 {isEditing ? 'Salvar Alterações' : 'Cadastrar'}
             </button>}
 
-            {!isDropdownOpen && isEditing && (
+            {!isDropdownOpen && remove && isEditing && (
                 <button className="btnDelete" onClick={handleDeleteAccount}>
                     Excluir Conta
                 </button>

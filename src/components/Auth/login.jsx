@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db, auth } from '../firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -8,17 +8,27 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const isHandlingLogout = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (isHandlingLogout.current) return; // Impede reexecuções inesperadas
+    isHandlingLogout.current = true;
+
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      if(window.location.pathname === '/logout'){
+      if (window.location.pathname === '/logout') {
+        const confirmLogout = window.confirm('Deseja realmente sair?');
+        if (!confirmLogout) {
+          navigate('/menu');
+          return;
+        }
         localStorage.removeItem('user');
       }
-      navigate('/menu'); 
+      navigate('/menu');
     }
   }, [navigate]);
+
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -40,10 +50,11 @@ function LoginForm() {
         clube: userData?.clube || '',
         name: userData?.name || ''
       }));
-
+      alert('Usuário autenticado!');
       navigate('/menu');
     } catch (error) {
       console.error('Erro no login:', error.code, error.message);
+      alert('Houve uma falha na autenticação!');
     }
   };
 
