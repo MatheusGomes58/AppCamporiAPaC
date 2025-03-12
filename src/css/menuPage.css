@@ -1,7 +1,7 @@
 /* ======== Container Principal ======== */
 .menu-container {
     width: 100vw;
-    height: 100vh;
+    height: 82vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #0300a3a1, darkblue);
     color: white;
@@ -9,8 +9,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
     overflow: auto;
-    padding: 20px;
 }
 
 .menuCardList {

@@ -40,14 +40,14 @@
         "date": "2025-06-19",
         "atividades": [
             {
-                "horário": "6h",
+                "horário": "06h",
                 "atividade": "Chegada dos clubes",
                 "local": "UNASP-EC",
                 "descrição": "Chegada dos clubes no local do evento.",
                 "responsável": "Clubes"
             },
             {
-                "horário": "8h",
+                "horário": "08h",
                 "atividade": "Pré-Abertura",
                 "local": "UNASP-EC",
                 "descrição": "Atividades da Pré-Abertura.",
@@ -95,7 +95,7 @@
         "date": "2025-06-22",
         "atividades": [
             {
-                "horário": "8h",
+                "horário": "08h",
                 "atividade": "Encerramento e premiação",
                 "descrição": "Cerimônia de encerramento e premiação do Campori.",
                 "responsável": "Organização"

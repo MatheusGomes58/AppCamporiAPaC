@@ -119,6 +119,10 @@
     word-wrap: break-word;
 }
 
+.atividades{
+    background-color: #0300a317;
+}
+
 .date-panel-container {
     display: flex;
     justify-content: flex-start;

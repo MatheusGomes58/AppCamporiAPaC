@@ -60,7 +60,7 @@
         "admin": true,
         "clube": "APAC",
         "items": [
-          { "title": "Criar Agenda de Atividades", "link": "/schedules" },
+          { "title": "Agenda de Atividades", "link": "/schedulesactivity" },
           { "title": "Registrar Pontuação", "link":"/adm/scores"}
         ]
       }

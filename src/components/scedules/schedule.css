@@ -1,0 +1,84 @@
+.event-scheduler {
+    font-family: Arial, sans-serif;
+    color: black;
+}
+
+.event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border: 1px solid #0300a3a1;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form input[type="time"],
+.event-form input[type="number"] {
+    padding: 10px;
+    border: 0.5px solid #0300a3a1;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.event-form button {
+    padding: 10px 16px;
+    background-color: white;
+    color: #0300a3a1;
+    border: 2px solid #0300a3a1;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.event-form button:hover {
+    background-color: #0300a3a1;
+    color: white;
+}
+
+.events-list {
+    margin-top: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0.5px solid #0300a3a1;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 0.5px solid #0300a3a1;
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 2%;
+}
+
+.event-item span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0300a3a1;
+}
+
+.event-item button {
+    background-color: white;
+    color: #f44336;
+    border: 2px solid #f44336;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 5px 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.event-item button:hover {
+    background-color: #f44336;
+    color: white;
+}

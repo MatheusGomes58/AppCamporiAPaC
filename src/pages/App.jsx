@@ -14,6 +14,7 @@ import ForgotPage from './forgotPage';
 import UnknowPage from './unknowPage';
 import MenuPage from './menuPage';
 import NotificationPage from './noticesPage';
+import ScheduleActivity from './scheduleActivitiesPage';
 
 const RedirectToHelp = () => {
   useEffect(() => {
@@ -36,7 +37,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const shouldHideMenu = ["/count", "/menu"].includes(location.pathname);
+  const shouldHideMenu = ["/count"].includes(location.pathname);
 
   return (
     <>
@@ -59,6 +60,7 @@ function AppContent() {
           <Route path="/forgotPassword" element={<ForgotPage />} />
           <Route path="/notifier" element={<NotificationPage />} />
           <Route path="/help" element={<RedirectToHelp />} />
+          <Route path="/schedulesactivity" element={<ScheduleActivity />} />
           <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
