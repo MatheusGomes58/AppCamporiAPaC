@@ -12,7 +12,7 @@ const Event = memo(({ event, handleLocationClick }) => (
         {event.atividades ? event.atividades.map((atividade, activityIndex) => (
             <div
                 key={activityIndex}
-                className={`activity-description ${atividade.atividades}`}
+                className={`activity-description ${atividade.classe}`}
             >
                 <div className='activity-title'>
                     {atividade.horário} - {atividade.atividade}
@@ -28,23 +28,14 @@ const Event = memo(({ event, handleLocationClick }) => (
     </>
 ));
 
-function SchedulePage() {
+function SchedulePage({ isAutenticated, clube }) {
     const navigate = useNavigate();
     const [activeDate, setActiveDate] = useState(getInitialActiveDate(eventsData));
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [clube, setClube] = useState('');
-    const [isAutenticated, setAutenticated] = useState(false);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-            setClube(userData.clube || '');
-            setAutenticated(true);
-        } else {
-            setAutenticated(false);
-        }
+        loadEvents();
     }, []);
 
     const handleLocationClick = useCallback((location) => {
@@ -57,18 +48,29 @@ function SchedulePage() {
 
     const fetchMicroEvents = async (clube) => {
         try {
-            const db = getFirestore(app); // Obtendo a instância do Firestore
-            console.log(clube);
-
-            // Criando a query corretamente
+            const db = getFirestore(app);
             const microEventsRef = collection(db, "microevents");
-            const q = query(microEventsRef, where("club", "==", clube));
-
-            // Buscando os documentos que correspondem à query
+            const q = query(microEventsRef, where("clube", "==", clube));
             const snapshot = await getDocs(q);
 
-            // Mapeando os documentos para um array de objetos
-            const microEventsList = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+            const microEventsList = snapshot.docs.map(doc => {
+                const eventData = doc.data();
+                const object = {
+                    title: eventData.title || "Evento sem título",
+                    date: eventData.date || "0000-00-00",
+                    atividades: [{
+                        horário: eventData.hora,
+                        atividade: eventData.title,
+                        local: eventData.local,
+                        descrição: eventData.descrição,
+                        clube: eventData.clube,
+                        responsável: eventData.responsável,
+                        classe: eventData.classe
+                    }]
+                };
+                console.log(object)
+                return object
+            });
 
             return microEventsList;
         } catch (error) {
@@ -78,73 +80,53 @@ function SchedulePage() {
     };
 
 
+
     const loadEvents = async () => {
-        var finalEvents = [];
+        let finalEvents = [];
 
         if (isAutenticated) {
             const microEvents = await fetchMicroEvents(clube);
-
-            // Combinar eventos locais com eventos micro
             const combinedEvents = [...eventsData, ...microEvents];
 
-            // Agrupar os eventos por título e data
             const groupedEvents = combinedEvents.reduce((acc, event) => {
-                const key = `${event.date}`; // Usamos uma chave única baseada no título e data do evento
+                const key = event.date;
 
                 if (!acc[key]) {
-                    acc[key] = { ...event, atividades: [] };
+                    acc[key] = { title: event.title, date: event.date, atividades: [] };
                 }
 
-                event.atividades.forEach(activity => {
-                    const activityExists = acc[key].atividades.some(existingActivity =>
-                        existingActivity.horário === activity.horário &&
-                        existingActivity.atividade === activity.atividade
-                    );
+                if (event.atividades) {
+                    event.atividades.forEach(activity => {
+                        const activityExists = acc[key].atividades.some(existingActivity =>
+                            existingActivity.horário === activity.horário &&
+                            existingActivity.atividade === activity.atividade
+                        );
 
-                    if (!activityExists) {
-                        acc[key].atividades.push(activity);
-                    }
-                });
+                        if (!activityExists) {
+                            acc[key].atividades.push(activity);
+                        }
+                    });
+                }
 
                 return acc;
             }, {});
 
-            // Transformar o objeto agrupado de volta para um array
-            finalEvents = Object.values(groupedEvents);
-
-
-            // Ordenar os eventos pela data
-            finalEvents.sort((a, b) => {
-                const dateA = new Date(a.date);
-                const dateB = new Date(b.date);
-                return dateA - dateB; // Ordena pela data
-            });
+            finalEvents = Object.values(groupedEvents).sort((a, b) => new Date(a.date) - new Date(b.date));
 
             finalEvents.forEach(event => {
-                if (event.atividades) {
-                    event.atividades.sort((a, b) => {
-                        const timeA = convertToMinutes(a.horário);
-                        const timeB = convertToMinutes(b.horário);
-                        return timeA - timeB; // Ordena as atividades por horário
-                    });
+                if (event.atividades.length > 0) {
+                    event.atividades.sort((a, b) => convertToMinutes(a.horário) - convertToMinutes(b.horário));
                 }
             });
         } else {
             finalEvents = eventsData;
         }
 
-        console.log(finalEvents);
-        // Remover duplicatas de datas
-        const uniqueDates = Array.from(new Set(finalEvents.map(event => event.date)));
         setEvents(finalEvents);
-        setActiveDate(uniqueDates.length > 0 ? uniqueDates[0] : null);
+        setActiveDate(finalEvents.length > 0 ? finalEvents[0].date : null);
         setLoading(false);
     };
 
-    // Carregar eventos do Firestore e combinar com os eventos locais
-    useEffect(() => {
-        loadEvents();
-    }, []);
 
     function convertToMinutes(timeString) {
         const [hour, minute] = timeString.includes('h')

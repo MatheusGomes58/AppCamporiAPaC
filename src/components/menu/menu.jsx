@@ -7,6 +7,7 @@ function MenuOptions() {
     const location = useLocation();
     const [currentPage, setCurrentPage] = useState(location.pathname);
     const [isMenuMinimized, setIsMenuMinimized] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setCurrentPage(location.pathname);
@@ -18,7 +19,7 @@ function MenuOptions() {
 
     function acessPage(path) {
         if (path === '/score') {
-            window.location.href = 'https://apac.campori.app/login';
+            navigate('/score');
         } else {
             setCurrentPage(path);
             history(path);

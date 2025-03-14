@@ -56,3 +56,21 @@ body {
   padding-right: 30px;
 }
 
+
+button {
+  align-items: center;
+  padding: 8px 16px;
+  background-color: white;
+  color: #0300a3a1;
+  border: 3px solid #0300a3a1;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  margin: 2%;
+}
+
+button.delete {
+  color: #f44336;
+  border: 3px solid #f44336;
+}

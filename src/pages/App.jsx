@@ -38,6 +38,31 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const shouldHideMenu = ["/count"].includes(location.pathname);
+  const [admin, setAdmin] = useState(false);
+  const [clube, setClube] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [uid, setUid] = useState('');
+  const [isAutenticated, setAutenticated] = useState(false);
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setAdmin(userData.admin || false);
+      setClube(userData.clube || '');
+      setUsername(userData.name || '');
+      setEmail(userData.email || '');
+      setUid(userData.uid || "");
+      setAutenticated(userData.name ? true : false);
+    } else {
+      setAutenticated(false);
+    }
+  }
 
   return (
     <>
@@ -47,16 +72,50 @@ function AppContent() {
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/guide" element={<GuidePage />} />
-          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/schedule" element={
+            <SchedulePage
+              isAutenticated={isAutenticated}
+              clube={clube}
+            />
+          } />
           <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
-          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/menu" element={
+            <MenuPage
+              useradmin={admin}
+              userusername={username}
+              userclube={clube}
+              userAutenticated={isAutenticated} />
+          } />
           <Route path="/show" element={<SplashScreen animateStop={true} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/logout" element={<LoginPage />} />
-          <Route path='/deleteprofile' element={<LoginPage menuEnabled={true} />} />
-          <Route path="/singin" element={<LoginPage menuEnabled={true} />} />
-          <Route path="/profile" element={<LoginPage menuEnabled={true} />} />
+          <Route path="/login" element={
+            <LoginPage
+              isAutenticated={isAutenticated}
+              setLogin={getUser}
+            />
+          } />
+          <Route path="/logout" element={
+            <LoginPage setLogin={getUser} />
+          } />
+          <Route path='/deleteprofile' element={
+            <LoginPage
+              menuEnabled={true}
+              name={username}
+            />
+          } />
+          <Route path="/singin" element={
+            <LoginPage menuEnabled={true}
+            />} />
+          <Route path="/profile" element={
+            <LoginPage menuEnabled={true}
+              admin={admin}
+              name={username}
+              email={email}
+              clube={clube}
+              isAutenticated={isAutenticated}
+              setLogin={getUser}
+            />
+          } />
           <Route path="/forgotPassword" element={<ForgotPage />} />
           <Route path="/notifier" element={<NotificationPage />} />
           <Route path="/help" element={<RedirectToHelp />} />

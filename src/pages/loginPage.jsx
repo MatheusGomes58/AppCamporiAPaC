@@ -6,21 +6,26 @@ import LoginForm from '../components/Auth/login'
 import RegisterForm from '../components/Auth/register'
 
 
-const AuthForm = ({ menuEnabled }) => {
+
+const AuthForm = ({ menuEnabled, name, email, clube, admin, isAutenticated, setLogin }) => {
     const [activeTab, setActiveTab] = useState(menuEnabled);
-    const [isAutentication, setAutentication] = useState(false)
-    const [isDeleteProfile, setDelete] = useState(false)
+    const [isDeleteProfile, setDelete] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const auth = localStorage.getItem('user');
-        if (auth) {
-            setAutentication(true);
-        }
-        if(window.location.pathname === '/deleteprofile'){
+        if (window.location.pathname === '/logout') {
+            const confirmLogout = window.confirm('Deseja realmente sair?');
+            if (!confirmLogout) {
+                navigate('/menu');
+                return;
+            }
+            localStorage.removeItem('user'); // Remove o usuário do localStorage
+            setLogin(false); // Chama a função setLogin, passando false para indicar que o usuário não está autenticado
+            window.location.href = "/menu";
+        } else if (window.location.pathname === '/deleteprofile') {
             setDelete(true);
         }
-    }, [setAutentication]);
+    }, [navigate, setLogin]); // A dependência de setLogin garante que a função seja chamada novamente se ela mudar
 
     const handleTabSwitch = (tab) => {
         setActiveTab(tab);
@@ -31,9 +36,21 @@ const AuthForm = ({ menuEnabled }) => {
             <img src={LogoCampori} className='auth-image' />
             <div className="auth-form">
                 <h2>
-                    {!activeTab ? 'Logar' : !isDeleteProfile? isAutentication? 'Atualizar Dados' :'Registrar' : 'Remover Usuário'}
+                    {!activeTab ? 'Logar' : !isDeleteProfile ? isAutenticated ? 'Atualizar Dados' : 'Registrar' : 'Remover Usuário'}
                 </h2>
-                {activeTab ? <RegisterForm remove={isDeleteProfile} /> : <LoginForm />}
+                {activeTab ?
+                    <RegisterForm remove={isDeleteProfile}
+                        useradmin={admin}
+                        userclube={clube}
+                        useremail={email}
+                        username={name}
+                        userisAutenticated={isAutenticated}
+                        setLogin={setLogin}
+                    /> :
+                    <LoginForm
+                        setLogin={setLogin}
+                        isAutenticated={isAutenticated}
+                    />}
             </div>
         </div>
     );

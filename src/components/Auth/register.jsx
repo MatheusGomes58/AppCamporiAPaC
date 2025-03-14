@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import clubs from '../../data/clubes.json';
 
-const RegisterForm = ({ remove }) => {
+const RegisterForm = ({ remove, username, useremail, userclube, useradmin, userisAutenticated, setLogin }) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -21,15 +21,14 @@ const RegisterForm = ({ remove }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-            setName(userData.name || '');
-            setEmail(userData.email || '');
-            setClub(userData.clube || '');
-            setAdmin(userData.admin || false);
-            setIsEditing(true);
-        } else if (window.location.pathname === '/profile') {
+        if (userisAutenticated) {
+            setName(username);
+            setEmail(useremail);
+            setClub(userclube);
+            setAdmin(useradmin);
+            setIsEditing(userisAutenticated);
+        } 
+        if (window.location.pathname === '/profile' && !userisAutenticated) {
             alert('Faça o login para visualizar e alterar seus dados!')
             navigate('/');
         }
@@ -64,6 +63,7 @@ const RegisterForm = ({ remove }) => {
 
                 alert('Dados atualizados com sucesso!');
                 localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), email, name, clube, admin }));
+                setLogin(false);
             } else {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 await setDoc(doc(db, 'users', userCredential.user.uid), { email, name, clube, admin });
@@ -73,7 +73,7 @@ const RegisterForm = ({ remove }) => {
         } catch (error) {
             alert(`Erro: ${error.message}`);
         } finally {
-            window.location.href = '/menu';
+            navigate('/menu');
         }
     };
 
@@ -102,7 +102,7 @@ const RegisterForm = ({ remove }) => {
 
             localStorage.removeItem('user');
             alert('Conta excluída com sucesso!');
-            window.location.href = '/';
+            navigate('/menu');
         } catch (error) {
             alert(`Erro ao excluir conta: ${error.message}`);
         }

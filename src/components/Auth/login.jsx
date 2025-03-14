@@ -4,30 +4,11 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 
-function LoginForm() {
+function LoginForm({ isAutenticated, setLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const isHandlingLogout = useRef(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isHandlingLogout.current) return; // Impede reexecuções inesperadas
-    isHandlingLogout.current = true;
-
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      if (window.location.pathname === '/logout') {
-        const confirmLogout = window.confirm('Deseja realmente sair?');
-        if (!confirmLogout) {
-          navigate('/menu');
-          return;
-        }
-        localStorage.removeItem('user');
-      }
-      navigate('/menu');
-    }
-  }, [navigate]);
 
 
   const togglePasswordVisibility = () => {
@@ -35,27 +16,28 @@ function LoginForm() {
   };
 
   const handleLogin = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-      const userDoc = await db.collection('users').doc(user.uid).get();
-      const userData = userDoc.data();
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        const userData = userDoc.data();
 
-      localStorage.setItem('user', JSON.stringify({
-        email: email,
-        uid: user.uid,
-        authTime: new Date().getTime().toString(),
-        admin: userData?.admin || false,
-        clube: userData?.clube || '',
-        name: userData?.name || ''
-      }));
-      alert('Usuário autenticado!');
-      navigate('/menu');
-    } catch (error) {
-      console.error('Erro no login:', error.code, error.message);
-      alert('Houve uma falha na autenticação!');
-    }
+        localStorage.setItem('user', JSON.stringify({
+          email: email,
+          uid: user.uid,
+          authTime: new Date().getTime().toString(),
+          admin: userData?.admin || false,
+          clube: userData?.clube || '',
+          name: userData?.name || ''
+        }));
+        alert('Usuário autenticado!');
+        setLogin(true);
+        navigate('/menu');
+      } catch (error) {
+        console.error('Erro no login:', error.code, error.message);
+        alert('Houve uma falha na autenticação!');
+      }
   };
 
   const handleForgotPassword = () => {
