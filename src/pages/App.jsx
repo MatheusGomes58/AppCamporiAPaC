@@ -119,7 +119,18 @@ function AppContent() {
           <Route path="/forgotPassword" element={<ForgotPage />} />
           <Route path="/notifier" element={<NotificationPage />} />
           <Route path="/help" element={<RedirectToHelp />} />
-          <Route path="/schedulesactivity" element={<ScheduleActivity />} />
+          <Route path="/schedulesactivity" element={
+            <ScheduleActivity
+              clube={clube}
+              admin={admin}
+            />
+          } />
+          <Route path="/schedulesclub" element={
+            <ScheduleActivity
+              clube={clube}
+              admin={admin}
+            />
+          } />
           <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}

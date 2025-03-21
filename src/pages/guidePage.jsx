@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../css/guidePage.css';
 import guideData from '../data/guideData.json';
 import Card from '../components/cards/cards';
+import ChurchCampori from '../img/Church.png';
+import TrunfoCampori from '../img/trunfo.png';
 
 function GuidePage() {
     const [guides, setGuides] = useState([]);
@@ -40,7 +42,19 @@ function GuidePage() {
 
     return (
         <div className="guide">
-            <h2 className="guide-title">Guia de Orientações Gerais do Evento</h2>
+            <Card
+                key="header"
+                image={ChurchCampori}
+                text=""
+                size="header"
+                columns={false}
+                htmlContent={
+                    <div className="card header">
+                        <div className="card-image-container">
+                            <img src={TrunfoCampori} alt="Header" className="imageHeader" />
+                        </div>
+                    </div>}
+            />
 
             {/* Lista de guias no formato de cards */}
             <div className="guide-columns">
