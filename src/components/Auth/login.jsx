@@ -23,6 +23,8 @@ function LoginForm({ isAutenticated, setLogin }) {
         const userDoc = await db.collection('users').doc(user.uid).get();
         const userData = userDoc.data();
 
+        localStorage.removeItem('logoutProcessed'); // Marcar que o logout foi processado
+
         localStorage.setItem('user', JSON.stringify({
           email: email,
           uid: user.uid,

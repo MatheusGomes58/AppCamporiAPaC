@@ -5,7 +5,7 @@ import * as Icons from "react-icons/fa";
 import LogoCampori from '../img/trunfo.png'
 import { useNavigate } from 'react-router-dom';
 
-const MenuComponent = ({useradmin, userclube, userusername, userAutenticated}) => {
+const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated }) => {
     const [menu, setMenu] = useState(menuData);
     const [admin, setAdmin] = useState();
     const [clube, setClube] = useState();
@@ -22,9 +22,19 @@ const MenuComponent = ({useradmin, userclube, userusername, userAutenticated}) =
         setAutenticated(userAutenticated);
     }, []);
 
+    function selectTitle(title) {
+        if (title == 'user') {
+            return username
+        } else if (title == 'clube') {
+            return clube
+
+        } else {
+            return title
+        }
+    }
+
     return (
         <div className="menu-container">
-            <img src={LogoCampori} className='menu-image' />
             <div className="menuCardList">
                 {/* Renderiza os menus em cards */}
                 <div className="menu-cards">
@@ -47,8 +57,8 @@ const MenuComponent = ({useradmin, userclube, userusername, userAutenticated}) =
                 {/* Renderiza os menus em lista */}
                 <div className="menu-lists">
                     {menu.menuLists.map((list, index) => (
-                        (((list.admin? (list.admin == admin && list.clube == clube) : false) || (list.user == isAutenticated) || (list.default)) && <div key={index} className="menu-list">
-                            <h3 className="menu-list-title">{list.title || username}</h3>
+                        (((list.clube == 'APAC' ? (list.clube == clube) : false) || (list.admin == admin) || (list.user == isAutenticated) || (list.default)) && <div key={index} className="menu-list">
+                            <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                             <ul>
                                 {list.items.map((item, subIndex) => (
                                     <li key={subIndex}>

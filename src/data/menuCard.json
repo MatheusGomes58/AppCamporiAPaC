@@ -47,6 +47,7 @@
         ]
       },
       {
+        "title": "user",
         "user": true,
         "items": [
           { "title": "ATUALIZAR DADOS", "link":"/profile"},
@@ -56,12 +57,20 @@
         ]
       },
       {
+        "title": "clube",
+        "admin": true,
+        "items": [
+          { "title": "Reservar Atividades", "link": "/schedulesclub" },
+          { "title": "Verificar Pontuação", "link":"/scoresclubs"}
+        ]
+      },
+      {
         "title": "Acesso Administrativo",
         "admin": true,
         "clube": "APAC",
         "items": [
           { "title": "Agenda de Atividades", "link": "/schedulesactivity" },
-          { "title": "Registrar Pontuação", "link":"/adm/scores"}
+          { "title": "Registrar Pontuação", "link":"/scores"}
         ]
       }
     ]

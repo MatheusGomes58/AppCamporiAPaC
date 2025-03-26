@@ -15,6 +15,7 @@ import UnknowPage from './unknowPage';
 import MenuPage from './menuPage';
 import NotificationPage from './noticesPage';
 import ScheduleActivity from './scheduleActivitiesPage';
+import ScoresPage from './scorePage';
 
 const RedirectToHelp = () => {
   useEffect(() => {
@@ -80,6 +81,7 @@ function AppContent() {
           } />
           <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
+          <Route path="/scoresclubs" element={<ScoresPage/>}/>
           <Route path="/menu" element={
             <MenuPage
               useradmin={admin}
@@ -129,6 +131,8 @@ function AppContent() {
             <ScheduleActivity
               clube={clube}
               admin={admin}
+              username={username}
+              reserved={true}
             />
           } />
           <Route path="*" element={<UnknowPage />} />

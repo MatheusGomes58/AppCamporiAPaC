@@ -13,19 +13,25 @@ const AuthForm = ({ menuEnabled, name, email, clube, admin, isAutenticated, setL
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (window.location.pathname === '/logout') {
+        const path = window.location.pathname;
+    
+        // Verifique se já foi processado antes
+        if (path === '/logout' && !localStorage.getItem('logoutProcessed')) {
             const confirmLogout = window.confirm('Deseja realmente sair?');
             if (!confirmLogout) {
                 navigate('/menu');
                 return;
             }
-            localStorage.removeItem('user'); // Remove o usuário do localStorage
-            setLogin(false); // Chama a função setLogin, passando false para indicar que o usuário não está autenticado
+            localStorage.removeItem('user');
+            setLogin(false);
             window.location.href = "/menu";
-        } else if (window.location.pathname === '/deleteprofile') {
+            localStorage.setItem('logoutProcessed', 'true'); // Marcar que o logout foi processado
+        } else if (path === '/deleteprofile' && !localStorage.getItem('profileDeleteProcessed')) {
             setDelete(true);
+            localStorage.setItem('profileDeleteProcessed', 'true'); // Marcar que o delete foi processado
         }
-    }, [navigate, setLogin]); // A dependência de setLogin garante que a função seja chamada novamente se ela mudar
+    }, []); // Array de dependências vazio
+    
 
     const handleTabSwitch = (tab) => {
         setActiveTab(tab);

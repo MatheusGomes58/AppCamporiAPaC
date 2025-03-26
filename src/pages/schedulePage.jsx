@@ -86,6 +86,7 @@ function SchedulePage({ isAutenticated, clube }) {
 
         if (isAutenticated) {
             const microEvents = await fetchMicroEvents(clube);
+            console.log(microEvents)
             const combinedEvents = [...eventsData, ...microEvents];
 
             const groupedEvents = combinedEvents.reduce((acc, event) => {

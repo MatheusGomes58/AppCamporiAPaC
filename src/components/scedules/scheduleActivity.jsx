@@ -4,7 +4,7 @@ import { collection, addDoc, deleteDoc, query, orderBy, doc, updateDoc, onSnapsh
 import "./schedule.css";
 import clubs from '../../data/clubes.json';
 
-const EventScheduler = ({ clube, admin }) => {
+const EventScheduler = ({ clube, admin, reserved, username }) => {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -76,10 +76,10 @@ const EventScheduler = ({ clube, admin }) => {
       }
       setSelectedMicroEvents([]);
       setSelectAll(false);
-      alert("Microeventos selecionados excluídos com sucesso!");
+      alert("Atividades selecionadas excluídas com sucesso!");
     } catch (error) {
-      console.error("Erro ao excluir microeventos", error);
-      alert("Erro ao excluir microeventos.");
+      console.error("Erro ao excluir atividades", error);
+      alert("Erro ao excluir atividades.");
     }
   };
 
@@ -93,13 +93,13 @@ const EventScheduler = ({ clube, admin }) => {
     try {
       console.log(editingMicroEvent);
       const microEventRef = doc(db, "microevents", editingMicroEvent.id);
-      await updateDoc(microEventRef, {...editingMicroEvent, clube: club});
+      await updateDoc(microEventRef, (clube == 'APAC')? {...editingMicroEvent, clube: club} : {...editingMicroEvent, clube: clube});
 
       setEditingMicroEvent(null);
-      alert("Microevento atualizado com sucesso!");
+      alert("Atividade atualizado com sucesso!");
     } catch (error) {
-      console.error("Erro ao atualizar microevento", error);
-      alert("Erro ao atualizar microevento.");
+      console.error("Erro ao atualizar Atividade", error);
+      alert("Erro ao atualizar Atividade.");
     }
   };
 
@@ -151,20 +151,21 @@ const EventScheduler = ({ clube, admin }) => {
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="event-form">
-              <h3>{(clube == 'APAC' && admin) ? 'Editar Atividade' : 'Reservar Atividade'}</h3>
+              <h3>{(reserved && admin) ? 'Editar Atividade' : `${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}</h3>
               {(clube == 'APAC' && admin) ? <input
                 type="text"
                 value={editingMicroEvent.title}
                 onChange={(e) => setEditingMicroEvent({ ...editingMicroEvent, title: e.target.value })}
-              /> : `${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}
-              {(clube != 'APAC' && admin && !isDropdownOpen) && <input
+              /> : ''}
+            <br/>
+              {(clube == 'APAC' && admin && !isDropdownOpen)? <input
                 className="inputLogin"
                 type="text"
                 placeholder="Selecione o seu clube"
                 value={club}
                 onChange={(e) => setSearch(e.target.value)}
                 onFocus={() => setIsDropdownOpen(true)}
-              />}
+              /> : `Olá ${username}, representante do clube ${clube}, Você deseja realmente reservar essa data para seu clube`}
 
               {isDropdownOpen && (
                 <div className="customSelect">
@@ -188,14 +189,14 @@ const EventScheduler = ({ clube, admin }) => {
                     ))}
                 </div>
               )}
-              <button onClick={handleUpdateMicroEvent}>Salvar</button>
+              <button onClick={handleUpdateMicroEvent}>{!reserved ? 'Editar' : 'Reservar'}</button>
               <button onClick={() => setEditingMicroEvent(null)}>Cancelar</button>
             </div>
           </div>
         </div>
       )}
 
-      {(clube == 'APAC' && admin && microEvents.length > 0) && (
+      {(!reserved && admin && microEvents.length > 0) && (
         <div>
           <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
           <label>Selecionar Todos</label>
@@ -208,11 +209,11 @@ const EventScheduler = ({ clube, admin }) => {
           <span>
             {event.title} - {event.timestamp?.seconds ? new Date(event.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}
           </span>
-          {!event.clube && <button onClick={() => handleEditMicroEvent(event)}>{(clube == 'APAC' && admin) ? 'Editar' : 'Reservar'}</button>}
+          {!event.clube && <button onClick={() => handleEditMicroEvent(event)}>{(!reserved) ? 'Editar' : 'Reservar'}</button>}
         </div>
       ))}
 
-      {(clube == 'APAC' && admin && microEvents.length > 0) && (
+      {(!reserved && admin && microEvents.length > 0) && (
         <button onClick={handleDeleteSelectedMicroEvents}>Excluir Selecionados</button>
       )}
     </div>

@@ -1,7 +1,7 @@
 /* ======== Container Principal ======== */
 .menu-container {
     width: 100vw;
-    height: 94vh;
+    height: 87vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #0300a3a1, darkblue);
     color: white;
@@ -14,7 +14,8 @@
 }
 
 .menuCardList {
-    height: 60vh;
+    margin: 5vh;
+    padding: 5px;
     overflow: auto;
     scrollbar-width: none;  /* Para Firefox */
     -ms-overflow-style: none;  /* Para Internet Explorer e Edge */
