@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
-    height: 84vh;
+    height: 80vh;
     overflow-y: auto;
     color: black;
 }
