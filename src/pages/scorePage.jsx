@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../components/firebase/firebase";
 import { collection, addDoc, updateDoc, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "../css/ScoreDashboard.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell, Label } from "recharts";
 import clubs from '../data/clubes.json';
 
-export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
+export default function ScoreDashboard({ isMaster, isclub, register, admin, uid }) {
     const [scores, setScores] = useState([]);
     const [club, setClub] = useState('');
     const [points, setPoints] = useState("");
@@ -15,7 +15,10 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isDropdownSelectOpen, setIsDropdownSelectOpen] = useState(false);
     const [search, setSearch] = useState('');
-    const rowsPerPage = 5;
+    const [selectedPointIndex, setSelectedPointIndex] = useState(null);
+    const [selectedPoint, setSelectedPoint] = useState(null);
+    const [filterMyRecords, setFilterMyRecords] = useState(false);
+    const rowsPerPage = 10;
 
     const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d0ed57", "#a4de6c"];
 
@@ -44,19 +47,21 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
                     });
                 } else {
                     await updateDoc(doc(db, "scores", existingClub.id), {
-                        activities: [...existingClub.activities, { name: activity, points: Number(points) }]
+                        activities: [...existingClub.activities, { name: activity, points: Number(points), uid }]
                     });
                 }
             } else {
                 await addDoc(collection(db, "scores"), {
                     club,
-                    activities: [{ name: activity, points: Number(points) }]
+                    activities: [{ name: activity, points: Number(points), uid }]
                 });
             }
 
             setClub("");
             setPoints("");
             setActivity("");
+        } else {
+            alert("Preencha todos os campos para cadastrar a pontuação!");
         }
     };
 
@@ -81,12 +86,17 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
         ? scores.filter((s) => s.club.toLowerCase().includes(filterClub.toLowerCase()))
         : scores;
 
-    const totalScore = filteredScores.reduce(
+    const myRecordsFilteredScores = filterMyRecords ? filteredScores.map(club => ({
+        ...club,
+        activities: club.activities.filter(activity => activity.uid === uid)
+    })).filter(club => club.activities.length > 0) : filteredScores
+
+    const totalScore = myRecordsFilteredScores.reduce(
         (sum, s) => sum + s.activities.reduce((actSum, act) => actSum + act.points, 0),
         0
     );
 
-    const dataForBarChart = filteredScores.flatMap(s =>
+    const dataForBarChart = myRecordsFilteredScores.flatMap(s =>
         s.activities.map((act, index) => ({
             club: s.club,
             activity: act.name,
@@ -95,7 +105,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
         }))
     );
 
-    const activityScores = filteredScores.flatMap(s =>
+    const activityScores = myRecordsFilteredScores.flatMap(s =>
         s.activities.map(act => ({
             name: act.name,
             points: act.points
@@ -112,13 +122,14 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
         return acc;
     }, []);
 
-    const totalRows = filteredScores.reduce((sum, s) => sum + s.activities.length, 0);
+    const totalRows = myRecordsFilteredScores.reduce((sum, s) => sum + s.activities.length, 0);
     const totalPages = Math.ceil(totalRows / rowsPerPage);
-    const paginatedData = filteredScores.flatMap(s => s.activities.map(act => ({
+    const paginatedData = myRecordsFilteredScores.flatMap(s => s.activities.map(act => ({
         club: s.club,
         activity: act.name,
         points: act.points,
-        clubId: s.id // Adiciona o ID do clube para a função deleteScore
+        clubId: s.id,
+        uid: act.uid
     }))).slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
     const handleSelectClub = (clube) => {
@@ -129,6 +140,51 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
     const handleRegisterClub = (clube) => {
         setClub(clube);
         setIsDropdownSelectOpen(false); // Fecha o dropdown após selecionar o clube
+    };
+
+    const handlePointClick = (index, score) => {
+        if (score.uid === uid) {
+            if (selectedPointIndex === index) {
+                setSelectedPointIndex(null);
+                setSelectedPoint(null);
+            } else {
+                setSelectedPointIndex(index);
+                setSelectedPoint(score);
+            }
+        }
+    };
+
+    const handleEditScore = () => {
+        if (selectedPoint) {
+            const newPoints = prompt("Digite a nova pontuação:", selectedPoint.points);
+            if (newPoints !== null) {
+                updateScore(selectedPoint.clubId, selectedPoint.activity, newPoints);
+            }
+        }
+    };
+
+    const updateScore = async (clubId, activityName, newPoints) => {
+        if (selectedPoint && selectedPoint.uid === uid) {
+            const clubDoc = scores.find(s => s.id === clubId);
+            if (clubDoc) {
+                await updateDoc(doc(db, "scores", clubId), {
+                    activities: clubDoc.activities.map(act =>
+                        act.name === activityName ? { ...act, points: Number(newPoints) } : act
+                    )
+                });
+            }
+            setSelectedPoint(null);
+        } else {
+            alert("Você só pode editar seus próprios pontos!");
+        }
+    };
+
+    const handleConfirmDelete = () => {
+        if (selectedPoint) {
+            deleteScore(selectedPoint.clubId, selectedPoint.activity);
+        }
+        setSelectedPointIndex(null);
+        setSelectedPoint(null);
     };
 
     return (
@@ -153,7 +209,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
                                 placeholder="Pesquise seu clube"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                onFocus={() => setIsDropdownSelectOpen(true)}
+                                onFocus={() => setIsDropdownOpen(true)} // Abre o dropdown ao focar no campo
                             />
                             <div className="selectTitle" onClick={() => handleRegisterClub('')}>Selecione seu clube</div>
                             {clubs
@@ -221,6 +277,15 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
                             ))}
                     </div>
                 )}
+                <div className="filter-my-records">
+                    <input
+                        type="checkbox"
+                        id="filterMyRecords"
+                        checked={filterMyRecords}
+                        onChange={() => setFilterMyRecords(!filterMyRecords)}
+                    />
+                    <label htmlFor="filterMyRecords">Filtrar meus registros</label>
+                </div>
             </div>}
 
             {/* Card de pontuação total */}
@@ -279,17 +344,26 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
                             <th>Clube</th>
                             <th>Atividade</th>
                             <th>Pontos</th>
-                            {register && admin && <th>Ações</th>}
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedData.map((row, index) => (
-                            <tr key={index}>
-                                <td>{row.club}</td>
-                                <td>{row.activity}</td>
-                                <td>{row.points}</td>
-                                {register && admin && <td><button onClick={() => deleteScore(row.clubId, row.activity)}>excluir</button></td>}
-                            </tr>
+                        {paginatedData.map((score, index) => (
+                            <React.Fragment key={index}>
+                                <tr onClick={() => handlePointClick(index, score)}>
+                                    <td>{score.club}</td>
+                                    <td>{score.activity}</td>
+                                    <td>{score.points}</td>
+                                </tr>
+                                {selectedPointIndex === index && (
+                                    <tr>
+                                        <td colSpan="3" style={{ textAlign: 'center' }}>
+                                            <button onClick={() => handleEditScore(selectedPoint)}>Editar</button>
+                                            <button onClick={() => handleConfirmDelete(selectedPoint)}>Deletar</button>
+                                            <button onClick={() => setSelectedPointIndex(null)}>Cancelar</button>
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
                         ))}
                     </tbody>
                 </table>
@@ -297,15 +371,15 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin }) {
                 {/* Controles de Paginação */}
                 <div className="paginacao">
                     <button
-                        disabled={currentPage === 1}
+                        disabled={currentPage == 1}
                         onClick={() => setCurrentPage(currentPage - 1)}
                     >
                         Anterior
                     </button>
                     <span>Página {currentPage} de {totalPages}</span>
                     <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage == totalPages}
+                        onClick={() => setCurrentPage( currentPage + 1)}
                     >
                         Próxima
                     </button>

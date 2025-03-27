@@ -56,11 +56,11 @@ function AppContent() {
           const userDoc = doc.data();
           const userData = userDoc;
 
+          setUid(storedUser);
           setAdmin(userData.admin || false);
           setClube(userData.clube || '');
           setUsername(userData.name || '');
           setEmail(userData.email || '');
-          setUid(userData.uid || "");
           setAutenticated(userData.name ? true : false);
           setMaster(userData.clube == 'APAC' ? true : false);
         } else {
@@ -92,6 +92,7 @@ function AppContent() {
             <ScoresPage
               isclub={clube}
               isMaster={isMaster}
+              uid={uid}
             />}
           />
           <Route path="/scores" element={
@@ -100,6 +101,7 @@ function AppContent() {
               isMaster={isMaster}
               register={true}
               admin={admin}
+              uid={uid}
             />
           } />
           <Route path="/menu" element={
