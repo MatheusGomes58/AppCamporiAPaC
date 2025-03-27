@@ -59,14 +59,25 @@
       {
         "title": "clube",
         "admin": true,
+        "user": true,
         "items": [
           { "title": "Reservar Atividades", "link": "/schedulesclub" },
           { "title": "Verificar Pontuação", "link":"/scoresclubs"}
         ]
       },
       {
+        "title": "clube",
+        "admin": false,
+        "user": true,
+        "items": [
+          { "title": "Verificar Pontuação", "link":"/scoresclubs"}
+        ]
+      },
+      {
         "title": "Acesso Administrativo",
         "clube": "APAC",
+        "admin": true,
+        "user": true,
         "items": [
           { "title": "Agenda de Atividades", "link": "/schedulesactivity" },
           { "title": "Registrar Pontuação", "link":"/scores"}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { db } from '../components/firebase/firebase';
 import MenuOptions from '../components/menu/menu';
 import '../css/App.css';
 import SchedulePage from './schedulePage';
@@ -48,24 +49,28 @@ function AppContent() {
   const [isMaster, setMaster] = useState(false);
 
   useEffect(() => {
-    getUser();
-  }, []);
-
-  const getUser = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setAdmin(userData.admin || false);
-      setClube(userData.clube || '');
-      setUsername(userData.name || '');
-      setEmail(userData.email || '');
-      setUid(userData.uid || "");
-      setAutenticated(userData.name ? true : false);
-      setMaster(userData.clube == 'APAC' ? true : false);
+      db.collection('users').doc(storedUser).onSnapshot((doc) => {
+        if (doc.exists) {
+          const userDoc = doc.data();
+          const userData = userDoc;
+
+          setAdmin(userData.admin || false);
+          setClube(userData.clube || '');
+          setUsername(userData.name || '');
+          setEmail(userData.email || '');
+          setUid(userData.uid || "");
+          setAutenticated(userData.name ? true : false);
+          setMaster(userData.clube == 'APAC' ? true : false);
+        } else {
+          console.log("Nenhum documento encontrado!");
+        }
+      });
     } else {
       setAutenticated(false);
     }
-  }
+  }, []);
 
   return (
     <>
@@ -102,17 +107,18 @@ function AppContent() {
               useradmin={admin}
               userusername={username}
               userclube={clube}
-              userAutenticated={isAutenticated} />
+              userAutenticated={isAutenticated}
+              isMaster={isMaster}
+            />
           } />
           <Route path="/show" element={<SplashScreen animateStop={true} />} />
           <Route path="/login" element={
             <LoginPage
               isAutenticated={isAutenticated}
-              setLogin={getUser}
             />
           } />
           <Route path="/logout" element={
-            <LoginPage setLogin={getUser} />
+            <LoginPage />
           } />
           <Route path='/deleteprofile' element={
             <LoginPage
@@ -130,7 +136,6 @@ function AppContent() {
               email={email}
               clube={clube}
               isAutenticated={isAutenticated}
-              setLogin={getUser}
             />
           } />
           <Route path="/forgotPassword" element={<ForgotPage />} />

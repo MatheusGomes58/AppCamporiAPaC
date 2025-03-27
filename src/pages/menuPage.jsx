@@ -5,7 +5,7 @@ import * as Icons from "react-icons/fa";
 import LogoCampori from '../img/trunfo.png'
 import { useNavigate } from 'react-router-dom';
 
-const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated }) => {
+const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, isMaster }) => {
     const navigate = useNavigate();
 
     function selectTitle(title) {
@@ -15,6 +15,27 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated })
             return userclube
         } else {
             return title
+        }
+    }
+
+    function renderMenu(list) {
+        if (userAutenticated) {
+            if (list.clube == 'APAC') {
+                return isMaster && list.admin == useradmin;
+            } else {
+                if (list.title == 'clube'){
+                    return list.admin == useradmin;
+                }
+                if (list.user == userAutenticated)
+                    return true;
+                if (list.admin == useradmin)
+                    return true;
+            }
+        } else {
+            if (list.user == userAutenticated)
+                return true;
+            if (list.default)
+                return true;
         }
     }
 
@@ -42,7 +63,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated })
                 {/* Renderiza os menus em lista */}
                 <div className="menu-lists">
                     {menuData.menuLists.map((list, index) => (
-                        (((list.clube == 'APAC' ? (list.clube == userclube) : false) || (list.admin == useradmin) || (list.user == userAutenticated) || (list.default)) && <div key={index} className="menu-list">
+                        (renderMenu(list) && <div key={index} className="menu-list">
                             <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                             <ul>
                                 {list.items.map((item, subIndex) => (

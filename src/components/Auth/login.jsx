@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { db, auth } from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
@@ -20,19 +20,9 @@ function LoginForm({ isAutenticated, setLogin }) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        const userDoc = await db.collection('users').doc(user.uid).get();
-        const userData = userDoc.data();
-
         localStorage.removeItem('logoutProcessed'); // Marcar que o logout foi processado
 
-        localStorage.setItem('user', JSON.stringify({
-          email: email,
-          uid: user.uid,
-          authTime: new Date().getTime().toString(),
-          admin: userData?.admin || false,
-          clube: userData?.clube || '',
-          name: userData?.name || ''
-        }));
+        localStorage.setItem('user', user.uid);
         alert('Usuário autenticado!');
         setLogin(true);
         navigate('/menu');
