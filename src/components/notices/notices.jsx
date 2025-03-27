@@ -3,33 +3,16 @@ import { collection, addDoc, deleteDoc, doc, query, orderBy, onSnapshot } from "
 import { db } from "../firebase/firebase";
 import './notice.css';
 
-const ChatComponent = ({ isSlider = false }) => {
+const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [uid, setUid] = useState('');
-    const [admin, setAdmin] = useState(false);
-    const [club, setClub] = useState(false);
 
     // Carregar mensagens do LocalStorage primeiro
     useEffect(() => {
         const storedMessages = localStorage.getItem("chatMessages");
         if (storedMessages) {
             setMessages(JSON.parse(storedMessages));
-        }
-    }, []);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-            setName(userData.name || "Anônimo");
-            setEmail(userData.email || "");
-            setUid(userData.uid || "");
-            setClub(userData.clube || "");
-            setAdmin(userData.admin || "");
         }
     }, []);
 
@@ -105,7 +88,7 @@ const ChatComponent = ({ isSlider = false }) => {
                             </div>
                         ))}
                     </div>
-                    {(admin && (club == 'APAC')) && <div className="chat-input-container">
+                    {(admin && isMaster) && <div className="chat-input-container">
                         <textarea
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}

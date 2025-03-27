@@ -27,7 +27,7 @@ const RegisterForm = ({ remove, username, useremail, userclube, useradmin, useri
             setClub(userclube);
             setAdmin(useradmin);
             setIsEditing(userisAutenticated);
-        } 
+        }
         if (window.location.pathname === '/profile' && !userisAutenticated) {
             alert('Faça o login para visualizar e alterar seus dados!')
             navigate('/');

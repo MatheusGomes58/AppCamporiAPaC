@@ -45,6 +45,7 @@ function AppContent() {
   const [username, setUsername] = useState('');
   const [uid, setUid] = useState('');
   const [isAutenticated, setAutenticated] = useState(false);
+  const [isMaster, setMaster] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -60,6 +61,7 @@ function AppContent() {
       setEmail(userData.email || '');
       setUid(userData.uid || "");
       setAutenticated(userData.name ? true : false);
+      setMaster(userData.clube == 'APAC' ? true : false);
     } else {
       setAutenticated(false);
     }
@@ -81,7 +83,20 @@ function AppContent() {
           } />
           <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
-          <Route path="/scoresclubs" element={<ScoresPage/>}/>
+          <Route path="/scoresclubs" element={
+            <ScoresPage
+              isclub={clube}
+              isMaster={isMaster}
+            />}
+          />
+          <Route path="/scores" element={
+            <ScoresPage
+              isclub={clube}
+              isMaster={isMaster}
+              register={true}
+              admin={admin}
+            />
+          } />
           <Route path="/menu" element={
             <MenuPage
               useradmin={admin}
@@ -119,12 +134,21 @@ function AppContent() {
             />
           } />
           <Route path="/forgotPassword" element={<ForgotPage />} />
-          <Route path="/notifier" element={<NotificationPage />} />
+          <Route path="/notifier" element={
+            <NotificationPage
+              email={email}
+              name={username}
+              admin={admin}
+              uid={uid}
+              isMaster={isMaster}
+            />
+          } />
           <Route path="/help" element={<RedirectToHelp />} />
           <Route path="/schedulesactivity" element={
             <ScheduleActivity
               clube={clube}
               admin={admin}
+              isMaster={isMaster}
             />
           } />
           <Route path="/schedulesclub" element={
