@@ -6,28 +6,13 @@ import LogoCampori from '../img/trunfo.png'
 import { useNavigate } from 'react-router-dom';
 
 const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated }) => {
-    const [menu, setMenu] = useState(menuData);
-    const [admin, setAdmin] = useState();
-    const [clube, setClube] = useState();
-    const [username, setUsername] = useState();
-    const [isAutenticated, setAutenticated] = useState();
-
     const navigate = useNavigate();
-
-    useEffect(() => {
-        setMenu(menuData);
-        setAdmin(useradmin);
-        setClube(userclube);
-        setUsername(userusername);
-        setAutenticated(userAutenticated);
-    }, []);
 
     function selectTitle(title) {
         if (title == 'user') {
-            return username
+            return userusername
         } else if (title == 'clube') {
-            return clube
-
+            return userclube
         } else {
             return title
         }
@@ -38,11 +23,11 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated })
             <div className="menuCardList">
                 {/* Renderiza os menus em cards */}
                 <div className="menu-cards">
-                    {menu.menuCards.map((item, index) => {
+                    {menuData.menuCards.map((item, index) => {
                         const IconComponent = Icons[item.icon] || Icons.FaRegQuestionCircle; // Ícone padrão caso não encontre
 
                         return (
-                            ((item.user == isAutenticated) || (item.default)) && <a
+                            ((item.user == userAutenticated) || (item.default)) && <a
                                 key={index}
                                 onClick={() => navigate(item.link)}  // Alterado para usar uma função anônima
                                 className="menu-card"
@@ -56,8 +41,8 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated })
 
                 {/* Renderiza os menus em lista */}
                 <div className="menu-lists">
-                    {menu.menuLists.map((list, index) => (
-                        (((list.clube == 'APAC' ? (list.clube == clube) : false) || (list.admin == admin) || (list.user == isAutenticated) || (list.default)) && <div key={index} className="menu-list">
+                    {menuData.menuLists.map((list, index) => (
+                        (((list.clube == 'APAC' ? (list.clube == userclube) : false) || (list.admin == useradmin) || (list.user == userAutenticated) || (list.default)) && <div key={index} className="menu-list">
                             <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                             <ul>
                                 {list.items.map((item, subIndex) => (
