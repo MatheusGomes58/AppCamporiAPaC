@@ -42,20 +42,6 @@ function GuidePage() {
 
     return (
         <div className="guide">
-            <Card
-                key="header"
-                image={ChurchCampori}
-                text=""
-                size="header"
-                columns={false}
-                htmlContent={
-                    <div className="card header">
-                        <div className="card-image-container">
-                            <img src={TrunfoCampori} alt="Header" className="imageHeader" />
-                        </div>
-                    </div>}
-            />
-
             {/* Lista de guias no formato de cards */}
             <div className="guide-columns">
                 {guides.map((guide, index) => (
