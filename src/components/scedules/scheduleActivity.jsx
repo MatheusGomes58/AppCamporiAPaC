@@ -125,9 +125,9 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
 
   return (
     <div className="event-scheduler">
-      <h2>Microeventos</h2>
+      <h2>Eventos</h2>
       {(isMaster && admin) && <button onClick={() => setShowForm(!showForm)} disabled={showForm}>
-        Criar Microeventos
+        Criar Eventos
       </button>}
 
       {showForm && (

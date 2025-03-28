@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { db } from "../components/firebase/firebase";
 import { collection, addDoc, updateDoc, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "../css/ScoreDashboard.css";
@@ -19,17 +20,23 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [filterMyRecords, setFilterMyRecords] = useState(false);
     const [isInclude, setInclude] = useState(false);
+    const navigate = useNavigate();
     const rowsPerPage = 10;
 
     const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d0ed57", "#a4de6c"];
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "scores"), (querySnapshot) => {
-            const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            setScores(data);
-        });
+        if (isclub || isMaster) {
+            const unsubscribe = onSnapshot(collection(db, "scores"), (querySnapshot) => {
+                const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                setScores(data);
+            });
 
-        return unsubscribe;
+            return unsubscribe;
+        } else {
+            alert('Faça o login para acessar essa funcionalidade');
+            navigate('/menu');
+        }
     }, []);
 
     const addScore = async () => {
@@ -384,7 +391,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                     <span>Página {currentPage} de {totalPages}</span>
                     <button
                         disabled={currentPage == totalPages}
-                        onClick={() => setCurrentPage( currentPage + 1)}
+                        onClick={() => setCurrentPage(currentPage + 1)}
                     >
                         Próxima
                     </button>
