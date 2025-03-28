@@ -14,7 +14,7 @@
 }
 
 .menuCardList {
-    margin: 5vh;
+    margin: 1vh;
     padding: 5px;
     overflow: auto;
     scrollbar-width: none;  /* Para Firefox */

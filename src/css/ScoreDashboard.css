@@ -25,7 +25,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
     padding: 20px;
-    width: 90%;
+    width: 90vw;
     min-width: 300px;
     box-sizing: border-box;
 }
@@ -84,20 +84,25 @@
 
 .botaoSubmeter {
     padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: transparent;
+    border: 3px solid #0300a3a1;
+    color: #0300a3a1;
     cursor: pointer;
 }
 
-.botaoSubmeter:hover {
-    background-color: #0056b3;
+.botaoCancelar {
+    padding: 10px 15px;
+    background-color: transparent;
+    border: 3px solid #a3000ea1;
+    color: #a3000ea1;
+    cursor: pointer;
 }
+
 
 .tabelaPontuacao {
     width: 100%;
     border-collapse: collapse;
+    height: 250px;
 }
 
 .tabelaPontuacao th,

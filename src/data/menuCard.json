@@ -25,7 +25,7 @@
         "default": true
       },{
         "title": "Pontuação",
-        "link": "/score",
+        "link": "/scoresclubs",
         "icon": "FaStar",
         "default": true
       },

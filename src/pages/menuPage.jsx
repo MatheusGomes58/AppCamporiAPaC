@@ -22,14 +22,16 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
         if (userAutenticated) {
             if (list.clube == 'APAC') {
                 return isMaster;
-            } else {
-                if (list.title == 'clube' || useradmin){
-                    return list.admin == useradmin;
+            }
+            if (list.title == 'clube') {
+                if(isMaster && list.admin == useradmin){
+                    return true
+                }else{
+                    return list.admin == useradmin
                 }
-                if (list.user == userAutenticated)
-                    return true;
-                if (list.admin == useradmin)
-                    return true;
+            }
+            if (list.user == userAutenticated){
+                return true;
             }
         } else {
             if (list.user == userAutenticated)

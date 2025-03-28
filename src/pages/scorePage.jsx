@@ -18,6 +18,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
     const [selectedPointIndex, setSelectedPointIndex] = useState(null);
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [filterMyRecords, setFilterMyRecords] = useState(false);
+    const [isInclude, setInclude] = useState(false);
     const rowsPerPage = 10;
 
     const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d0ed57", "#a4de6c"];
@@ -189,7 +190,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
 
     return (
         <div className="painelPontuacao">
-            {isMaster && register && <div className="cartaoEntradaPontuacao">
+            {isInclude && isMaster && register && <div className="cartaoEntradaPontuacao">
                 <h2 className="tituloCartao">Registrar Pontuação</h2>
                 <div className="grupoEntrada">
                     {!isDropdownSelectOpen && <input
@@ -240,10 +241,13 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                     <button className="botaoSubmeter" onClick={addScore}>
                         Adicionar
                     </button>
+                    <button className="botaoCancelar" onClick={() => setInclude(false)}>
+                        Cancelar
+                    </button>
                 </div>
             </div>}
 
-            {isMaster && <div className="cartaoFiltro">
+            {!isInclude && isMaster && <div className="cartaoFiltro">
                 <h2 className="tituloCartao">Filtrar por Clube</h2>
 
                 {!isDropdownOpen && <input
@@ -289,7 +293,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
             </div>}
 
             {/* Card de pontuação total */}
-            {!register && <div className="cartaoPontuacaoTotal">
+            {!isInclude && !register && <div className="cartaoPontuacaoTotal">
                 <h1 className="tituloCartao">Pontuação Atual</h1>
                 <ResponsiveContainer width="100%" height={250}>
                     <PieChart
@@ -323,7 +327,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
             </div>}
 
             {/* Gráfico de Pontuação */}
-            {!register && <div className="cartaoGrafico">
+            {!isInclude && !register && <div className="cartaoGrafico">
                 <h2 className="tituloCartao">Gráfico de Pontuação</h2>
                 <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={dataForBarChart}>
@@ -336,8 +340,9 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                 </ResponsiveContainer>
             </div>}
 
-            <div className="cartaoTabelaPontuacao">
+            {!isInclude && <div className="cartaoTabelaPontuacao">
                 <h2 className="tituloCartao">Pontuação por Clube</h2>
+                {register && <button onClick={() => setInclude(true)}>Incluir Pontos</button>}
                 <table className="tabelaPontuacao">
                     <thead>
                         <tr>
@@ -384,7 +389,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                         Próxima
                     </button>
                 </div>
-            </div>
+            </div>}
         </div>
     );
 }
