@@ -23,8 +23,8 @@ const AuthForm = ({ menuEnabled, name, email, clube, admin, isAutenticated, setL
                 return;
             }
             localStorage.removeItem('user');
-            setLogin(false);
-            window.location.href = "/menu";
+            setLogin(true);
+            navigate('/menu');
             localStorage.setItem('logoutProcessed', 'true'); // Marcar que o logout foi processado
         } else if (path === '/deleteprofile' && !localStorage.getItem('profileDeleteProcessed')) {
             setDelete(true);

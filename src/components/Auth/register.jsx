@@ -62,8 +62,7 @@ const RegisterForm = ({ remove, username, useremail, userclube, useradmin, useri
                 await setDoc(doc(db, 'users', user.uid), { email, name, clube, admin }, { merge: true });
 
                 alert('Dados atualizados com sucesso!');
-                localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), email, name, clube, admin }));
-                setLogin(false);
+                setLogin(true);
             } else {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 await setDoc(doc(db, 'users', userCredential.user.uid), { email, name, clube, admin });

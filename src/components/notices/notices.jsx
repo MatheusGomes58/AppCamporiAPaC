@@ -81,7 +81,7 @@ const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) =
                                 <p className="chatListTitle" dangerouslySetInnerHTML={{ __html: msg.text.replace(/\n/g, '<br/>') }}></p>
                                 <small>{formatTimestamp(messages[currentIndex].timestamp)} - {msg.name}</small>
                                 <div>
-                                    {msg.email === email && (
+                                    {(msg.email === email && admin) && (
                                         <button className='chatActionButton' onClick={() => deleteMessage(msg.id)} >Excluir</button>
                                     )}
                                 </div>

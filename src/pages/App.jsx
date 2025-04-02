@@ -49,28 +49,34 @@ function AppContent() {
   const [isMaster, setMaster] = useState(false);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      db.collection('users').doc(storedUser).onSnapshot((doc) => {
-        if (doc.exists) {
-          const userDoc = doc.data();
-          const userData = userDoc;
-
-          setUid(storedUser);
-          setAdmin(userData.admin || false);
-          setClube(userData.clube || '');
-          setUsername(userData.name || '');
-          setEmail(userData.email || '');
-          setAutenticated(userData.name ? true : false);
-          setMaster(userData.clube == 'APAC' ? true : false);
-        } else {
-          console.log("Nenhum documento encontrado!");
-        }
-      });
-    } else {
-      setAutenticated(false);
-    }
+    setLogin(true);
   }, []);
+
+  function setLogin(value){
+    if (value) {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        db.collection('users').doc(storedUser).onSnapshot((doc) => {
+          if (doc.exists) {
+            const userDoc = doc.data();
+            const userData = userDoc;
+
+            setUid(storedUser);
+            setAdmin(userData.admin || false);
+            setClube(userData.clube || '');
+            setUsername(userData.name || '');
+            setEmail(userData.email || '');
+            setAutenticated(userData.name ? true : false);
+            setMaster(userData.clube == 'APAC' ? true : false);
+          } else {
+            console.log("Nenhum documento encontrado!");
+          }
+        });
+      } else {
+        setAutenticated(false);
+      }
+    }
+  }
 
   return (
     <>
@@ -117,10 +123,11 @@ function AppContent() {
           <Route path="/login" element={
             <LoginPage
               isAutenticated={isAutenticated}
+              setLogin={setLogin}
             />
           } />
           <Route path="/logout" element={
-            <LoginPage />
+            <LoginPage setLogin={setLogin}/>
           } />
           <Route path='/deleteprofile' element={
             <LoginPage
@@ -138,6 +145,7 @@ function AppContent() {
               email={email}
               clube={clube}
               isAutenticated={isAutenticated}
+              setLogin={setLogin}
             />
           } />
           <Route path="/forgotPassword" element={<ForgotPage />} />

@@ -21,7 +21,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
     function renderMenu(list) {
         if (userAutenticated) {
             if (list.clube == 'APAC') {
-                return isMaster;
+                return list.admin == useradmin
             }
             if (list.title == 'clube') {
                 if(isMaster && list.admin == useradmin){

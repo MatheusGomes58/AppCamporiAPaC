@@ -51,7 +51,6 @@
         "user": true,
         "items": [
           { "title": "ATUALIZAR DADOS", "link":"/profile"},
-          { "title": "DELETAR USUÁRIO", "link":"/deleteprofile"},
           { "title": "AJUDA E SUPORTE", "link":"/help"},
           { "title": "SAIR", "link":"/logout"}
         ]
