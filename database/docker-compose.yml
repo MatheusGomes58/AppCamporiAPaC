@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: MDADB_user
       POSTGRES_PASSWORD: MDADB_pwd
-      POSTGRES_DB: MDADB
+      POSTGRES_DB: MDADB_sch
     volumes:
       - ./MDADB/Database:/var/lib/postgresql/data
     ports:
