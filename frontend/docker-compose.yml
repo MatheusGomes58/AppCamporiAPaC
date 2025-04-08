@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  react-app:
+    image: frontend
+    ports:
+      - "3000:80"
+    container_name: react-app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - frontend
+    # volumes:  # útil apenas durante o desenvolvimento
+    #   - .:/app
+    #   - /app/node_modules
+
+networks:
+  frontend:
+    driver: bridge
