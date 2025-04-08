@@ -1,5 +1,5 @@
 {
-    "propsValis": "false",
+    "enviroment": "microsservice",
     "firebaseConfig": {
         "apiKey": "AIzaSyBjrgMpj2zCsrV90Yb7tJaFbXBbA29L9c0",
         "authDomain": "camporiapac.firebaseapp.com",

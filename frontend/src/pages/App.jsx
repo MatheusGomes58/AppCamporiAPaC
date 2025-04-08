@@ -55,7 +55,7 @@ function AppContent() {
   function setLogin(value){
     if (value) {
       const storedUser = localStorage.getItem('user');
-      if (storedUser) {
+      if (storedUser && db) {
         db.collection('users').doc(storedUser).onSnapshot((doc) => {
           if (doc.exists) {
             const userDoc = doc.data();

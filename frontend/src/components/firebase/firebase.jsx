@@ -6,17 +6,27 @@ import 'firebase/compat/database';
 import data from '../../data/config.json';
 
 const firebaseConfig = data.firebaseConfig;
+const isNotMicroservice = data.enviroment == 'cloud';
 
-// Inicialize o Firebase apenas se ele ainda não foi inicializado
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+let app;
+let auth;
+let db;
+let realTimeDB;
+let storage;
+
+if (isNotMicroservice) {
+  // Inicialize o Firebase apenas se ele ainda não foi inicializado
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  // Inicializa os serviços
+  app = firebase.app();
+  auth = firebase.auth();
+  db = firebase.firestore();
+  realTimeDB = firebase.database();
+  storage = firebase.storage();
 }
 
-// Exporte os serviços necessários
-const app = firebase.app();
-const auth = firebase.auth();
-const db = firebase.firestore();
-const realTimeDB = firebase.database();
-const storage = firebase.storage();
-
+// Exporta (vazio se for microsservice)
 export { app, auth, db, realTimeDB, storage };
