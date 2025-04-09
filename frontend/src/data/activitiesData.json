@@ -60,26 +60,60 @@
     ]
   },
   {
-    "text": "Artes do Campori para POSTS",
+    "text": "Coordenação do Campori",
     "items": [
       {
+        "type": "title",
+        "content": "Coordenação do Campori"
+      },
+      {
         "type": "text",
-        "content": "Essas são as artes do Campori, você pode usar as artes, mas também pode criar suas próprias! A ideia é que vocês divulguem o Campori e a A Promessa XXII em suas páginas nas redes sociais. não se esqueça de marcar o @mda.apac!"
+        "content": [
+          "Coordenação Geral: Hélio Bocnie",
+          "Prefeito: Pr. Sidney",
+          "Secretaria: Rebeca",
+          "Recepção: Capitão Matheus",
+          "Segurança: Alfredo e Marcos",
+          "Infraestrutura: Freitas",
+          "Carrossel de Atividades: Thiago Forato e José Dias",
+          "Trânsito: Uellington e João Henrique",
+          "Programação: Luiz e João Batista",
+          "Atividades Alternativas: Demison Gomes e Marcos",
+          "Especialidades: João Batista e Jonas Henrique",
+          "Pastori: Freitas, Carlos e Brandão",
+          "Área de Camping: Freitas",
+          "Comunicação: Pr. Danilo",
+          "Sanitários: Willian",
+          "Classe de Guia: Jonas e Ricardo",
+          "Pontuação: Matheus Gomes e Ricardo",
+          "Plantio de Igrejas: José Dias",
+          "Posto Médico: Eliel",
+          "Espaço da Calma: Pr. Elmir",
+          "Campori Experience: Matheus Gomes"
+        ]
       },
       {
-        "type": "button",
-        "content": "Story Para Intagram",
-        "url": "https://www.canva.com/design/DAGIhthaF6A/qoUzjKO7BEnGi4YINfEOUA/edit?utm_content=DAGIhthaF6A&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+        "type": "title",
+        "content": "Coordenação do Regional"
       },
       {
-        "type": "button",
-        "content": "Logo",
-        "url": "https://www.canva.com/design/DAGIhd5duJE/23Ph4UD1WsCbXQTcaRoynA/edit?utm_content=DAGIhd5duJE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-      },
-      {
-        "type": "button",
-        "content": "VINHETA 1",
-        "url": "https://drive.google.com/file/d/1IF1MagcDYtZtO8-leEs1TLXcq3o65avj/view?usp=sharing"
+        "type": "text",
+        "content": [
+          "Região1: João Batista",
+          "Região2: Jonas Henrique",
+          "Região3: Demison Gomes",
+          "Região4: José Dias",
+          "Região5: Matheus Gomes",
+          "Região6: Ricardo",
+          "Região7: Freitas",
+          "Região8: João Henrique",
+          "Região9: Uelington",
+          "Região10: Alfredo",
+          "Região11: Jander",
+          "Região12: Rebeca",
+          "Região13: Willian",
+          "Região14: Antônio Marcos"
+        ]
       }
     ]
   },
@@ -96,8 +130,8 @@
       },
       {
         "type": "button",
-        "content": "APP de Pontuações",
-        "url": "https://apac.campori.app/login"
+        "content": "Controle de Pontuações",
+        "url": "/scoresclubs"
       }
     ]
   },
@@ -116,6 +150,68 @@
         "type": "button",
         "content": "1º informativo-campori",
         "url": "https://drive.google.com/file/d/1xqtqeNFQUf4fI7AWBCSGUq39LNbnmaKo/view?usp=sharing"
+      }
+    ]
+  },
+  {
+    "text": "Ideais dos Desbravadores",
+    "items": [
+      {
+        "type": "title",
+        "content": "VOTO"
+      },
+      {
+        "type": "text",
+        "content": "Pela graça de Deus, serei puro, bondoso e leal; guardarei a lei do Desbravador, serei servo de Deus e amigo de todos."
+      },
+      {
+        "type": "title",
+        "content": "LEI"
+      },
+      {
+        "type": "text",
+        "content": [
+          "Observar a devoção matinal.",
+          "Cumprir fielmente a parte que me corresponde.",
+          "Cuidar do meu corpo.",
+          "Manter a consciência limpa.",
+          "Ser cortês e obediente.",
+          "Andar com reverência na casa de Deus.",
+          "Ter sempre um cântico no coração.",
+          "Ir aonde Deus mandar."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "ALVO"
+      },
+      {
+        "type": "text",
+        "content": "A mensagem do advento a todo o mundo em minha geração."
+      },
+      {
+        "type": "title",
+        "content": "LEMA"
+      },
+      {
+        "type": "text",
+        "content": "O amor de Cristo me motiva."
+      },
+      {
+        "type": "title",
+        "content": "OBJETIVO"
+      },
+      {
+        "type": "text",
+        "content": "Salvar do pecado e guiar no serviço."
+      },
+      {
+        "type": "title",
+        "content": "VOTO"
+      },
+      {
+        "type": "text",
+        "content": "Pela graça de Deus, serei puro, bondoso e leal; guardarei a lei do Desbravador, serei servo de Deus e amigo de todos."
       }
     ]
   },

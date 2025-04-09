@@ -157,7 +157,7 @@ function SchedulePage({ isAutenticated, clube }) {
     return (
         <div className="schedule-page">
             <div className='event-card'>
-                <img alt="Imagem do evento" className='event-image' src={imageSchedulePage} />
+                {/*<img alt="Imagem do evento" className='event-image' src={imageSchedulePage} />*/}
                 <div className='date-panel-container'>
                     {/* Renderiza as datas únicas */}
                     {events.length > 0 && Array.from(new Set(events.map(event => event.date))).map(date => (

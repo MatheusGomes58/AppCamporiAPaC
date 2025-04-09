@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from "firebase/auth";
 import LogoCampori from '../img/trunfo.png'
 import "../css/loginPage.css";
 import LoginForm from '../components/Auth/login'
@@ -22,10 +23,19 @@ const AuthForm = ({ menuEnabled, name, email, clube, admin, isAutenticated, setL
                 navigate('/menu');
                 return;
             }
-            localStorage.removeItem('user');
-            setLogin(true);
-            navigate('/menu');
-            localStorage.setItem('logoutProcessed', 'true'); // Marcar que o logout foi processado
+        
+            const auth = getAuth();
+            signOut(auth)
+                .then(() => {
+                    localStorage.removeItem('user');
+                    setLogin(true);
+                    navigate('/menu');
+                    localStorage.setItem('logoutProcessed', 'true'); // Marcar que o logout foi processado
+                })
+                .catch((error) => {
+                    console.error("Erro ao sair do Firebase:", error);
+                    // Aqui você pode exibir uma mensagem de erro, se quiser
+                });
         } else if (path === '/deleteprofile' && !localStorage.getItem('profileDeleteProcessed')) {
             setDelete(true);
             localStorage.setItem('profileDeleteProcessed', 'true'); // Marcar que o delete foi processado

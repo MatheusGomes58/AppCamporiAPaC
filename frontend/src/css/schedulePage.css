@@ -1,7 +1,6 @@
 .schedule-page {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     color: black;
     background-color: rgba(255, 255, 255, 0.822);
@@ -9,6 +8,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 20px;
+    height: 85vh;
 }
 
 .event-image {
@@ -21,7 +21,7 @@
     padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 50vh;
+    height: 69vh;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
     -ms-overflow-style: none;

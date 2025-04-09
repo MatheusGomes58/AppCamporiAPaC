@@ -47,6 +47,22 @@
         "buttonPos": true
     },
     {
+        "image": "image5",
+        "title": "Ideais dos Desbravadores",
+        "text": "Os ideais dos Desbravadores são como uma bússola que guia nossas atitudes. Eles ensinam a sermos leais, bondosos e dedicados a Deus e ao próximo. Mais que um clube, ser Desbravador é viver com propósito e fazer a diferença no mundo! ",
+        "buttons": [
+            {
+                "name": "Ideais dos Desbravadores",
+                "onclick": {
+                    "title": "Ideais dos Desbravadores",
+                    "image": "image5"
+                }
+            }
+        ],
+        "size": "tiny",
+        "columns": false
+    },
+    {
         "image": "image3",
         "title": "Pontuação do Clube",
         "text": "O Campori 2025 da APaC apresenta um sistema digital inovador, permitindo agendamento de eventos, controle de pontos e visualização do tempo de espera, tudo na tela do seu dispositivo.",
@@ -54,7 +70,7 @@
             {
                 "name": "Controle de Pontos",
                 "onclick": {
-                    "title": "Campori Experience Score",
+                    "title": "Pontuação do Clube",
                     "image": "image3"
                 }
             }
@@ -76,6 +92,24 @@
             }
         ],
         "size": "small",
-        "columns": false
+        "columns": true,
+        "buttonPos": false
+    },
+    {
+        "image": "image7",
+        "title": "Coordenação do Campori",
+        "text": "Cada detalhe do nosso Campori só acontece graças a uma equipe dedicada, que trabalha com amor e compromisso pra tornar essa experiência incrível. Conheça agora é hora de mostrar quem faz tudo isso acontecer nos bastidores!",
+        "buttons": [
+            {
+                "name": "Conheça a Equipe",
+                "onclick": {
+                    "title": "Coordenação do Campori",
+                    "image": "image7"
+                }
+            }
+        ],
+        "size": "small",
+        "columns": false,
+        "buttonPos": false
     }
 ]

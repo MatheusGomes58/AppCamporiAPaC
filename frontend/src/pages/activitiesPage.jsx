@@ -8,6 +8,8 @@ import image1 from '../img/activities/1.jpg';
 import image2 from '../img/activities/2.jpg';
 import image3 from '../img/activities/3.jpg';
 import image4 from '../img/activities/4.jpg';
+import image5 from '../img/activities/5.jpg';
+import image7 from '../img/activities/7.jpg';
 import elenco1 from '../img/elenco/1.jpeg';
 import elenco2 from '../img/elenco/2.jpeg';
 import elenco3 from '../img/elenco/3.jpeg';
@@ -20,7 +22,7 @@ import elenco9 from '../img/elenco/9.jpeg';
 
 // Mapeia identificadores para imagens importadas
 const imageMap = {
-  image1, image2, image3, image4,
+  image1, image2, image3, image4, image5, image7,
   elenco1, elenco2, elenco3, elenco4,
   elenco5, elenco6, elenco7, elenco8, elenco9
 };
@@ -43,7 +45,13 @@ const useActivity = (text) => {
 const ActivityItem = ({ item }) => {
   switch (item.type) {
     case 'text':
-      return <p className="activityText">{item.content}</p>;
+      return Array.isArray(item.content) ? (
+        item.content.map((text, index) => (
+          <p key={index} className="activityText">{text}</p>
+        ))
+      ) : (
+        <p className="activityText">{item.content}</p>
+      );
     case 'title':
       return <h3 className="title">{item.content}</h3>;
     case 'details':
@@ -99,7 +107,7 @@ const Activities = () => {
 
   return (
     <div className="ActivitiesPage">
-      {!hasImages && headerImageKey && <img className="headerImage" src={imageMap[headerImageKey]} alt={activity.text} />}
+      {(!hasImages && headerImageKey) && <img className="headerImage" src={imageMap[headerImageKey]} alt={activity.text} />}
       {!hasImages && <h2>{activity.text}</h2>}
       <div className="activitieSection">
         {hasImages && (

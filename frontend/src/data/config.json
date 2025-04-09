@@ -1,5 +1,6 @@
 {
-    "enviroment": "microsservice",
+    "enviroments": ["cloud","microsservice"],
+    "enviroment": "cloud",
     "firebaseConfig": {
         "apiKey": "AIzaSyBjrgMpj2zCsrV90Yb7tJaFbXBbA29L9c0",
         "authDomain": "camporiapac.firebaseapp.com",
