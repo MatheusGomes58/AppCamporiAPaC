@@ -61,7 +61,10 @@
         "user": true,
         "items": [
           { "title": "Reservar Atividades", "link": "/schedulesclub" },
-          { "title": "Verificar Pontuação", "link":"/scoresclubs"}
+          { "title": "Verificar Pontuação", "link":"/scoresclubs"},
+          { "title": "Torneio de Volei", "link":"/chaveamento"},
+          { "title": "Torneio de Futebol", "link":"/chaveamento"},
+          { "title": "Torneio de Beach Tennis", "link":"/chaveamento"}
         ]
       },
       {
@@ -69,7 +72,10 @@
         "admin": false,
         "user": true,
         "items": [
-          { "title": "Verificar Pontuação", "link":"/scoresclubs"}
+          { "title": "Verificar Pontuação", "link":"/scoresclubs"},
+          { "title": "Torneio de Volei", "link":"/chaveamento"},
+          { "title": "Torneio de Futebol", "link":"/chaveamento"},
+          { "title": "Torneio de Beach Tennis", "link":"/chaveamento"}
         ]
       },
       {

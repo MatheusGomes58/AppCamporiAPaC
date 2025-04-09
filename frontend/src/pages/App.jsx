@@ -17,6 +17,7 @@ import MenuPage from './menuPage';
 import NotificationPage from './noticesPage';
 import ScheduleActivity from './scheduleActivitiesPage';
 import ScoresPage from './scorePage';
+import ChaveamentoPage from './chaveamentoPage';
 
 const RedirectToHelp = () => {
   useEffect(() => {
@@ -83,6 +84,7 @@ function AppContent() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/chaveamento" element={<ChaveamentoPage />} />
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/guide" element={<GuidePage />} />
