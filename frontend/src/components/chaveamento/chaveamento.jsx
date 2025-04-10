@@ -1,14 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase/firebase";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 import "./chaveamento.css";
 
-const rounds = ['Oitavas', 'Quartas', 'Semifinal', 'Final'];
 
-const TournamentBracket = ({ initialTeams }) => {
-  const [bracket, setBracket] = useState([initialTeams]);
-  const [winners, setWinners] = useState([Array(initialTeams.length / 2).fill(null)]);
+const TournamentBracket = () => {
+  const { tournamentName } = useParams();
+  const [bracket, setBracket] = useState([]);
+  const [winners, setWinners] = useState([]);
 
-  const handleSelectWinner = (roundIndex, matchIndex, team) => {
-    if (roundIndex !== winners.length - 1) return; // só permite alterar na rodada atual
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const inscricoesRef = doc(collection(db, "torneios"), tournamentName);
+        const docSnap = await getDoc(inscricoesRef);
+
+        if (!docSnap.exists()) return;
+
+        const initialTeams = docSnap.data()?.inscritos || [];
+
+        const campeonatoDoc = await getDoc(doc(db, "campeonato", tournamentName));
+        const savedData = campeonatoDoc.exists() ? campeonatoDoc.data() : null;
+        const savedRoundsObj = savedData?.rounds || {};
+
+        const savedBracket = Object.keys(savedRoundsObj)
+          .sort((a, b) => Number(a) - Number(b))
+          .map((key) => savedRoundsObj[key]);
+
+        const bracketToUse = savedBracket.length > 0 ? savedBracket : [initialTeams];
+        const lastRound = bracketToUse[bracketToUse.length - 1] || [];
+        const newWinners = [...bracketToUse.slice(1), Array(Math.floor(lastRound.length / 2)).fill(null)];
+
+        setBracket(bracketToUse);
+        setWinners(newWinners);
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+      }
+    };
+
+    if (tournamentName) fetchData();
+  }, [tournamentName]);
+
+  const saveBracketToFirestore = async (updatedBracket) => {
+    try {
+      const bracketObj = {};
+      updatedBracket.forEach((round, index) => {
+        bracketObj[index] = round;
+      });
+
+      await setDoc(doc(db, "campeonato", tournamentName), {
+        rounds: bracketObj,
+      });
+    } catch (error) {
+      console.error("Erro ao salvar o chaveamento:", error);
+    }
+  };
+
+  const handleSelectWinner = async (roundIndex, matchIndex, team) => {
+    if (roundIndex !== winners.length - 1) return;
+
+    const confirm = window.confirm(`Você deseja mesmo classificar ${team} para a próxima etapa?`);
+    if (!confirm) return;
 
     const updatedRound = [...winners[roundIndex]];
     updatedRound[matchIndex] = team;
@@ -17,16 +70,20 @@ const TournamentBracket = ({ initialTeams }) => {
     updatedWinners[roundIndex] = updatedRound;
     setWinners(updatedWinners);
 
-    // Quando todos os jogos da rodada atual tiverem vencedor, avança pra próxima
     if (updatedRound.every((w) => w !== null)) {
-      const nextRoundTeams = [];
-      for (let i = 0; i < updatedRound.length; i++) {
-        nextRoundTeams.push(updatedRound[i]);
-      }
+      const nextRoundTeams = [...updatedRound];
+      const updatedBracket = [...bracket, nextRoundTeams];
+
       if (nextRoundTeams.length > 1) {
-        setBracket([...bracket, nextRoundTeams]);
+        setBracket(updatedBracket);
         setWinners([...updatedWinners, Array(nextRoundTeams.length / 2).fill(null)]);
+      } else {
+        setBracket(updatedBracket);
       }
+
+      await saveBracketToFirestore(updatedBracket);
+    } else {
+      await saveBracketToFirestore(bracket);
     }
   };
 
@@ -37,9 +94,10 @@ const TournamentBracket = ({ initialTeams }) => {
 
   return (
     <div className="bracket-container">
+      <h1>{`Torneio de ${tournamentName}`}</h1>
       {bracket.map((roundTeams, roundIndex) => (
         <div className="round" key={roundIndex}>
-          <h3 className="round-title">{rounds[roundIndex]}</h3>
+          <h3 className="round-title">{`${roundIndex + 1}° Rodada`}</h3>
           {roundTeams.map((_, i) => {
             if (i % 2 !== 0) return null;
             const matchIndex = i / 2;
@@ -49,14 +107,14 @@ const TournamentBracket = ({ initialTeams }) => {
             return (
               <div className="match" key={matchIndex}>
                 <div
-                  className={`team ${winner === teamA ? 'selected' : ''}`}
+                  className={`team ${winner === teamA ? "selected" : ""}`}
                   onClick={() => handleSelectWinner(roundIndex, matchIndex, teamA)}
                 >
                   {teamA}
                 </div>
                 <div className="vs">vs</div>
                 <div
-                  className={`team ${winner === teamB ? 'selected' : ''}`}
+                  className={`team ${winner === teamB ? "selected" : ""}`}
                   onClick={() => handleSelectWinner(roundIndex, matchIndex, teamB)}
                 >
                   {teamB}

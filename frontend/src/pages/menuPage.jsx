@@ -2,42 +2,54 @@ import { useEffect, useState } from "react";
 import "../css/menuPage.css";
 import menuData from "../data/menuCard.json";
 import * as Icons from "react-icons/fa";
-import LogoCampori from '../img/trunfo.png'
+import LogoCampori from '../img/trunfo.png';
 import { useNavigate } from 'react-router-dom';
+import { db } from "../components/firebase/firebase";
+import {
+    collection,
+    onSnapshot
+} from "firebase/firestore";
 
 const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, isMaster }) => {
     const navigate = useNavigate();
+    const [torneios, setTorneios] = useState([]);
+    const [loadingTorneios, setLoadingTorneios] = useState(true);
+
+    useEffect(() => {
+        if (!userAutenticated) return;
+
+        const unsubscribe = onSnapshot(
+            collection(db, "torneios"),
+            (snapshot) => {
+                const lista = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setTorneios(lista);
+                setLoadingTorneios(false);
+            },
+            (error) => {
+                console.error("Erro ao buscar torneios:", error);
+                setLoadingTorneios(false);
+            }
+        );
+
+        return () => unsubscribe();
+    }, [userAutenticated]);
 
     function selectTitle(title) {
-        if (title == 'user') {
-            return userusername
-        } else if (title == 'clube') {
-            return userclube
+        if (title === 'user') {
+            return userusername;
+        } else if (title === 'clube') {
+            return userclube;
         } else {
-            return title
+            return title;
         }
     }
 
     function renderMenu(list) {
-        if (userAutenticated) {
-            if (list.clube == 'APAC') {
-                return list.admin == useradmin
-            }
-            if (list.title == 'clube') {
-                if(isMaster && list.admin == useradmin){
-                    return true
-                }else{
-                    return list.admin == useradmin
-                }
-            }
-            if (list.user == userAutenticated){
-                return true;
-            }
-        } else {
-            if (list.user == userAutenticated)
-                return true;
-            if (list.default)
-                return true;
+        if (list.user === userAutenticated || list.default) {
+            return true;
         }
     }
 
@@ -47,17 +59,19 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                 {/* Renderiza os menus em cards */}
                 <div className="menu-cards">
                     {menuData.menuCards.map((item, index) => {
-                        const IconComponent = Icons[item.icon] || Icons.FaRegQuestionCircle; // Ícone padrão caso não encontre
+                        const IconComponent = Icons[item.icon] || Icons.FaRegQuestionCircle;
 
                         return (
-                            ((item.user == userAutenticated) || (item.default)) && <a
-                                key={index}
-                                onClick={() => navigate(item.link)}  // Alterado para usar uma função anônima
-                                className="menu-card"
-                            >
-                                <IconComponent className="menu-card-icon" />
-                                <span className="menu-card-title">{item.title}</span>
-                            </a>
+                            ((item.user === userAutenticated) || item.default) && (
+                                <a
+                                    key={index}
+                                    onClick={() => item.link && navigate(item.link)}
+                                    className="menu-card"
+                                >
+                                    <IconComponent className="menu-card-icon" />
+                                    <span className="menu-card-title">{item.title}</span>
+                                </a>
+                            )
                         );
                     })}
                 </div>
@@ -65,21 +79,46 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                 {/* Renderiza os menus em lista */}
                 <div className="menu-lists">
                     {menuData.menuLists.map((list, index) => (
-                        (renderMenu(list) && <div key={index} className="menu-list">
-                            <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
-                            <ul>
-                                {list.items.map((item, subIndex) => (
-                                    <li key={subIndex}>
-                                        <a
-                                            onClick={() => navigate(item.link)}
-                                            className="menu-list-item"
-                                        >
-                                            {item.title}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>)
+                        renderMenu(list) && (
+                            <div key={index} className="menu-list">
+                                <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
+                                <ul>
+                                    {list.title === 'Torneios' ? (
+                                        loadingTorneios ? (
+                                            <li>
+                                                <span className="menu-list-item">Carregando torneios...</span>
+                                            </li>
+                                        ) : torneios.length === 0 ? (
+                                            <li>
+                                                <span className="menu-list-item">Nenhum torneio encontrado.</span>
+                                            </li>
+                                        ) : (
+                                            torneios.map((item, subIndex) => (
+                                                <li key={subIndex}>
+                                                    <a
+                                                        onClick={() => navigate(`/chaveamento/${item.nome}`)}
+                                                        className="menu-list-item"
+                                                    >
+                                                        {item.nome}
+                                                    </a>
+                                                </li>
+                                            ))
+                                        )
+                                    ) : (
+                                        list.items.map((item, subIndex) => (
+                                            <li key={subIndex}>
+                                                <a
+                                                    onClick={() => item.link && navigate(item.link)}
+                                                    className="menu-list-item"
+                                                >
+                                                    {item.title}
+                                                </a>
+                                            </li>
+                                        ))
+                                    )}
+                                </ul>
+                            </div>
+                        )
                     ))}
                 </div>
             </div>

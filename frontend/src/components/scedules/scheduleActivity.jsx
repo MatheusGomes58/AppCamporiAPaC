@@ -93,7 +93,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
     try {
       console.log(editingMicroEvent);
       const microEventRef = doc(db, "microevents", editingMicroEvent.id);
-      await updateDoc(microEventRef, isMaster? {...editingMicroEvent, clube: club} : {...editingMicroEvent, clube: clube});
+      await updateDoc(microEventRef, isMaster ? { ...editingMicroEvent, clube: club } : { ...editingMicroEvent, clube: clube });
 
       setEditingMicroEvent(null);
       alert("Atividade atualizado com sucesso!");
@@ -151,21 +151,8 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="event-form">
-              <h3>{(reserved && admin) ? 'Editar Atividade' : `${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}</h3>
-              {(isMaster && admin) ? <input
-                type="text"
-                value={editingMicroEvent.title}
-                onChange={(e) => setEditingMicroEvent({ ...editingMicroEvent, title: e.target.value })}
-              /> : ''}
-            <br/>
-              {(isMaster && admin && !isDropdownOpen)? <input
-                className="inputLogin"
-                type="text"
-                placeholder="Selecione o seu clube"
-                value={club}
-                onChange={(e) => setSearch(e.target.value)}
-                onFocus={() => setIsDropdownOpen(true)}
-              /> : `Olá ${username}, representante do clube ${clube}, Você deseja realmente reservar essa data para seu clube`}
+              <h3>{`${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}</h3>
+              {`Olá ${username}, representante do clube ${clube}, Você deseja realmente reservar essa data para seu clube`}
 
               {isDropdownOpen && (
                 <div className="customSelect">
@@ -196,7 +183,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
         </div>
       )}
 
-      {(!reserved && admin && microEvents.length > 0) && (
+      {(admin && microEvents.length > 0) && (
         <div>
           <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
           <label>Selecionar Todos</label>
@@ -213,7 +200,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
         </div>
       ))}
 
-      {(!reserved && admin && microEvents.length > 0) && (
+      {(admin && microEvents.length > 0) && (
         <button onClick={handleDeleteSelectedMicroEvents}>Excluir Selecionados</button>
       )}
     </div>

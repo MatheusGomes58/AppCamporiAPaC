@@ -18,6 +18,7 @@ import NotificationPage from './noticesPage';
 import ScheduleActivity from './scheduleActivitiesPage';
 import ScoresPage from './scorePage';
 import ChaveamentoPage from './chaveamentoPage';
+import InscricaoPage from './inscricaoPage';
 
 const RedirectToHelp = () => {
   useEffect(() => {
@@ -84,7 +85,8 @@ function AppContent() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/chaveamento" element={<ChaveamentoPage />} />
+          <Route path="/chaveamento/:tournamentName"  element={<ChaveamentoPage />} />
+          <Route path="/inscricao" element={<InscricaoPage clube={clube}/>} />
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/guide" element={<GuidePage />} />
@@ -161,19 +163,13 @@ function AppContent() {
             />
           } />
           <Route path="/help" element={<RedirectToHelp />} />
-          <Route path="/schedulesactivity" element={
-            <ScheduleActivity
-              clube={clube}
-              admin={admin}
-              isMaster={isMaster}
-            />
-          } />
           <Route path="/schedulesclub" element={
             <ScheduleActivity
               clube={clube}
               admin={admin}
+              isMaster={isMaster}
               username={username}
-              reserved={true}
+              reserved={isMaster}
             />
           } />
           <Route path="*" element={<UnknowPage />} />

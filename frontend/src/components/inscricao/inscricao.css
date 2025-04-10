@@ -1,0 +1,105 @@
+/* Container principal da inscrição */
+.inscricao-container {
+    width: calc(95% - 20px);
+    height: 75vh;
+    margin: 20px auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Título centralizado */
+.inscricao-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Formulário de inscrição */
+.inscricao-container form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.inscricao-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Botão de envio */
+.inscricao-container button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.inscricao-container button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.inscricao-container button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Mensagem de sucesso */
+.mensagem {
+    text-align: center;
+    font-weight: bold;
+    color: green;
+}
+
+/* Opções de radio para tipo de inscrição ou torneio */
+.opcao-radio {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+.opcao-radio input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Lista de torneios */
+.torneios-lista {
+    margin: 1rem 0;
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Item de torneio */
+.torneio-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 10px;
+}
+
+.torneio-item:hover {
+    background-color: #eef5ff;
+}
+
+.torneio-item input[type="radio"] {
+    margin-right: 10px;
+}

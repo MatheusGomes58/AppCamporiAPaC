@@ -38,6 +38,7 @@
     ],
     "menuLists": [
       {
+        "title": "Controle de Acesso",
         "user": false,
         "items": [
           { "title": "CADASTRAR USUÁRIO", "link":"/singin"},
@@ -57,35 +58,20 @@
       },
       {
         "title": "clube",
-        "admin": true,
         "user": true,
         "items": [
           { "title": "Reservar Atividades", "link": "/schedulesclub" },
           { "title": "Verificar Pontuação", "link":"/scoresclubs"},
-          { "title": "Torneio de Volei", "link":"/chaveamento"},
-          { "title": "Torneio de Futebol", "link":"/chaveamento"},
-          { "title": "Torneio de Beach Tennis", "link":"/chaveamento"}
-        ]
-      },
-      {
-        "title": "clube",
-        "admin": false,
-        "user": true,
-        "items": [
-          { "title": "Verificar Pontuação", "link":"/scoresclubs"},
-          { "title": "Torneio de Volei", "link":"/chaveamento"},
-          { "title": "Torneio de Futebol", "link":"/chaveamento"},
-          { "title": "Torneio de Beach Tennis", "link":"/chaveamento"}
-        ]
-      },
-      {
-        "title": "Acesso Administrativo",
-        "clube": "APAC",
-        "admin": true,
-        "user": true,
-        "items": [
           { "title": "Agenda de Atividades", "link": "/schedulesactivity" },
-          { "title": "Registrar Pontuação", "link":"/scores"}
+          { "title": "Registrar Pontuação", "link":"/scores"},
+          { "title": "Inscrições", "link":"/inscricao"}
+        ]
+      },
+      {
+        "title": "Torneios",
+        "user": true,
+        "external": true,
+        "items": [
         ]
       }
     ]
