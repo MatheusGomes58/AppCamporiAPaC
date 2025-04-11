@@ -54,7 +54,7 @@ function AppContent() {
     setLogin(true);
   }, []);
 
-  function setLogin(value){
+  function setLogin(value) {
     if (value) {
       const storedUser = localStorage.getItem('user');
       if (storedUser && db) {
@@ -85,8 +85,13 @@ function AppContent() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/chaveamento/:tournamentName"  element={<ChaveamentoPage />} />
-          <Route path="/inscricao" element={<InscricaoPage clube={clube}/>} />
+          <Route path="/chaveamento/:tournamentName" element={<ChaveamentoPage />} />
+          <Route path="/inscricao" element={
+            <InscricaoPage
+              clube={clube}
+              admin={admin}
+              ismaster={isMaster}
+            />} />
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/guide" element={<GuidePage />} />
@@ -131,7 +136,7 @@ function AppContent() {
             />
           } />
           <Route path="/logout" element={
-            <LoginPage setLogin={setLogin}/>
+            <LoginPage setLogin={setLogin} />
           } />
           <Route path='/deleteprofile' element={
             <LoginPage

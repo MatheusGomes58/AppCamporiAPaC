@@ -1,11 +1,13 @@
 import { app } from "../components/firebase/firebase";
 import InscricaoForm from "../components/inscricao/inscricao";
 
-function App({clube}) {
+function App({ clube, admin, ismaster }) {
   return (
     <div>
       <InscricaoForm
         clube={clube}
+        admin={admin}
+        ismaster={ismaster}
       />
     </div>
   );

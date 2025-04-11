@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import "./inscricao.css";
 
-const InscricaoForm = ({ clube }) => {
+const InscricaoForm = ({ clube, admin, ismaster }) => {
     const [torneios, setTorneios] = useState([]);
     const [torneioSelecionado, setTorneioSelecionado] = useState("");
     const [nomeClube, setNomeClube] = useState("");
@@ -126,7 +126,8 @@ const InscricaoForm = ({ clube }) => {
                 - Cada clube deve se inscrever apenas em uma categoria, caso sobre vagas reabriremos para os clubes já inscritos.<br />
                 - Poderão participar apenas uma dupla, sendo composta apenas por desbravadores de 10 a 15 anos. O clube deve realizar uma eliminatória para selecionar a dupla.<br />
                 - As eliminatórias serão simples pois cada rodada é única, assim sendo não haverá repescagens.<br />
-                - As finais serão realizadas ao sábado a noite.
+                - Apenas os usuários com acesso master de clube podem realizar a inscrição.<br />
+                - As finais serão realizadas ao sábado a noite.<br />
             </p>
             <p>Essas regras são as mesmas para todos os torneios, em breve os clubes inscritos receberão mais informações</p>
 
@@ -145,27 +146,27 @@ const InscricaoForm = ({ clube }) => {
                     <div className="torneios-lista">
                         {torneios.map((t) => (
                             <label key={t.id} className="torneio-item">
-                                <input
+                                {admin && !ismaster && <input
                                     type="radio"
                                     name="torneioSelecionado"
                                     value={t.id}
                                     checked={torneioSelecionado === t.id}
                                     onChange={(e) => setTorneioSelecionado(e.target.value)}
-                                />
+                                />}
                                 <strong>{t.nome}</strong> ({t.categoria}) — {t.inscritos?.length || 0}/{t.maxVagas} inscritos
                             </label>
                         ))}
                     </div>
 
                     <form onSubmit={handleInscricao}>
-                        <button type="submit" disabled={!torneioSelecionado}>
+                        {admin && !ismaster && <button type="submit" disabled={!torneioSelecionado}>
                             Confirmar inscrição do clube <strong>{nomeClube}</strong> no torneio {torneioSelecionado}
-                        </button>
+                        </button>} 
                     </form>
                 </>
             )}
 
-            {clubeJaInscrito && (
+            {clubeJaInscrito && admin && !ismaster && (
                 <button className="cancelar-btn" onClick={handleCancelarInscricao}>
                     Cancelar inscrição
                 </button>

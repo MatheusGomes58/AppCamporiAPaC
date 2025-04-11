@@ -1,0 +1,36 @@
+[debug] [2025-04-11T16:17:18.355Z] ----------------------------------------------------------------------
+[debug] [2025-04-11T16:17:18.358Z] Command:       /l/disk0/mwillian/.nvm/versions/node/v23.6.1/bin/node /l/disk0/mwillian/.nvm/versions/node/v23.6.1/bin/firebase deploy
+[debug] [2025-04-11T16:17:18.358Z] CLI Version:   13.29.2
+[debug] [2025-04-11T16:17:18.359Z] Platform:      linux
+[debug] [2025-04-11T16:17:18.359Z] Node Version:  v23.6.1
+[debug] [2025-04-11T16:17:18.359Z] Time:          Fri Apr 11 2025 13:17:18 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-04-11T16:17:18.359Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-11T16:17:18.466Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-11T16:17:18.466Z] > authorizing via signed-in user (matheus.wl.gomes@gmail.com)
+[debug] [2025-04-11T16:17:18.466Z] [iam] checking project camporiapac for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-04-11T16:17:18.467Z] Checked if tokens are valid: false, expires at: 1744320804379
+[debug] [2025-04-11T16:17:18.467Z] Checked if tokens are valid: false, expires at: 1744320804379
+[debug] [2025-04-11T16:17:18.467Z] > refreshing access token with scopes: []
+[debug] [2025-04-11T16:17:18.468Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-04-11T16:17:18.468Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-11T16:17:19.005Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-04-11T16:17:19.006Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-11T16:17:19.010Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/camporiapac:testIamPermissions [none]
+[debug] [2025-04-11T16:17:19.011Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/camporiapac:testIamPermissions x-goog-quota-user=projects/camporiapac
+[debug] [2025-04-11T16:17:19.011Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/camporiapac:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-11T16:17:20.536Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/camporiapac:testIamPermissions 200
+[debug] [2025-04-11T16:17:20.536Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/camporiapac:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-11T16:17:20.537Z] Checked if tokens are valid: true, expires at: 1744391838006
+[debug] [2025-04-11T16:17:20.537Z] Checked if tokens are valid: true, expires at: 1744391838006
+[debug] [2025-04-11T16:17:20.537Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/camporiapac [none]
+[debug] [2025-04-11T16:17:21.370Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/camporiapac 200
+[debug] [2025-04-11T16:17:21.371Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/camporiapac {"projectId":"camporiapac","projectNumber":"1083996220137","displayName":"CamporiAPaC","name":"projects/camporiapac","resources":{"hostingSite":"camporiapac"},"state":"ACTIVE","etag":"1_e0dc6c11-99cd-4ce6-856d-408fd1b90a70"}
+[info] 
+[info] === Deploying to 'camporiapac'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-04-11T16:17:21.373Z] Checked if tokens are valid: true, expires at: 1744391838006
+[debug] [2025-04-11T16:17:21.373Z] Checked if tokens are valid: true, expires at: 1744391838006
+[debug] [2025-04-11T16:17:21.373Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/camporiapac/versions [none]
+[debug] [2025-04-11T16:17:21.373Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/camporiapac/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}

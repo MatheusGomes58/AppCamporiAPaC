@@ -53,6 +53,17 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
         }
     }
 
+    function renderItem(list) {
+        if (list.clube && list.admin) {
+            return useradmin && isMaster
+        }
+        if (list.admin && !list.clube )
+            return useradmin
+        if (!list.admin && !list.clube )
+            return true;
+    }
+
+
     return (
         <div className="menu-container">
             <div className="menuCardList">
@@ -106,7 +117,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                                         )
                                     ) : (
                                         list.items.map((item, subIndex) => (
-                                            <li key={subIndex}>
+                                            renderItem(item) && <li key={subIndex}>
                                                 <a
                                                     onClick={() => item.link && navigate(item.link)}
                                                     className="menu-list-item"
