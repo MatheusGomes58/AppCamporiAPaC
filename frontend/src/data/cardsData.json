@@ -1,20 +1,5 @@
 [
     {
-        "title": "Programação Completa",
-        "text": "Para garantir que você aproveite ao máximo cada momento, convidamos você a explorar nosso guia de programação detalhado. Nele, você encontrará todas as informações essenciais sobre horários de atividades, eventos especiais e encontros importantes. Prepare-se para uma jornada de crescimento espiritual e companheirismo!",
-        "buttons": [
-            {
-                "name": "Programação Completa",
-                "onclick": {
-                    "title": "Programação",
-                    "image": "image1"
-                }
-            }
-        ],
-        "size": "tiny",
-        "columns": false
-    },
-    {
         "image": "image4",
         "title": "Elenco",
         "text": "O Campori APAC XXII contará com um elenco diversificado e talentoso, composto por oradores inspiradores, músicos renomados e artistas criativos. O evento reunirá líderes espirituais experientes, que compartilharão mensagens relevantes e edificantes para o público presente. Além disso, o campori contará com apresentações musicais emocionantes, com cantores e bandas que trarão louvores e canções especiais para o evento.",
@@ -28,6 +13,21 @@
             }
         ],
         "size": "medium"
+    },
+    {
+        "title": "Programação Completa",
+        "text": "Para garantir que você aproveite ao máximo cada momento, convidamos você a explorar nosso guia de programação detalhado. Nele, você encontrará todas as informações essenciais sobre horários de atividades, eventos especiais e encontros importantes. Prepare-se para uma jornada de crescimento espiritual e companheirismo!",
+        "buttons": [
+            {
+                "name": "Programação Completa",
+                "onclick": {
+                    "title": "Programação",
+                    "image": "image1"
+                }
+            }
+        ],
+        "size": "tiny",
+        "columns": false
     },
     {
         "image": "image2",

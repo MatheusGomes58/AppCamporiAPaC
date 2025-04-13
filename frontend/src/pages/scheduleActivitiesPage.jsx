@@ -1,14 +1,18 @@
 import React from 'react';
 import '../css/scheduleActivityPage.css';
-import Schedule from '../components/scedules/scheduleActivity'
+import Schedule from '../components/scedules/scheduleActivity';
+import especialidades from '../data/especialidades.json';
 
-const App = ({clube, admin, username, reserved, isMaster}) => {
+const App = ({ clube, admin, username, reserved, isMaster }) => {
   return (
-    <div className='ScheduleActivityPage'>
-      <div className='ScheduleActivityCard'>
-        <Schedule clube={clube} admin={admin} reserved={reserved} username={username} isMaster={isMaster}/>
-      </div>
-    </div>
+    <Schedule
+      clube={clube}
+      admin={admin}
+      reserved={reserved}
+      username={username}
+      isMaster={isMaster}
+      atividades={especialidades}
+    />
   );
 };
 

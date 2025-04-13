@@ -60,11 +60,10 @@
         "title": "clube",
         "user": true,
         "items": [
-          { "title": "Reservar Atividades", "link": "/schedulesclub", "admin": true },
           { "title": "Verificar Pontuação", "link":"/scoresclubs" },
-          { "title": "Agenda de Atividades", "link": "/schedules", "admin": true },
-          { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"},
-          { "title": "Inscrições", "link":"/inscricao" }
+          { "title": "Inscrições dos Torneios", "link":"/inscricao" },
+          { "title": "Inscrições das Especialidades", "link": "/schedulesclub", "admin": true },
+          { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"}
         ]
       },
       {

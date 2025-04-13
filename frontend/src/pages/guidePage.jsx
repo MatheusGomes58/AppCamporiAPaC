@@ -48,7 +48,6 @@ function GuidePage() {
                     <Card
                         key={index}
                         title={guide.title}
-                        text={guide.description[0].slice(0, 50)}
                         size={'small'}
                         onClick={() => openGuide(index)}
                     />
