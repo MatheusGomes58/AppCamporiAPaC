@@ -154,6 +154,76 @@
     ]
   },
   {
+    "text": "Atividades Especiais",
+    "items": [
+      {
+        "type": "text",
+        "content": [
+          "O Campori 2025 da APaC está chegando com uma programação imperdível e cheia de aventuras para todos os clubes! Este grande evento contará com uma variedade de atividades especiais pensadas para proporcionar aprendizado, diversão e integração entre os participantes.",
+          "Prepare-se para competir nos emocionantes torneios que desafiarão as habilidades e o trabalho em equipe do seu clube. Explore novas áreas do conhecimento com as especialidades oferecidas, participe de visitações que vão ampliar sua visão e enriquecer sua experiência, e sinta a adrenalina das corridas e desafios físicos que prometem agitar o evento!",
+          "Mais do que uma simples programação, o Campori será uma jornada inesquecível de crescimento, amizade e espiritualidade. Não perca tempo e conheça agora mesmo todos os detalhes de como o seu clube pode participar e fazer parte dessa grande celebração!"
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Torneios"
+      },
+      {
+        "type": "text",
+        "content": [
+          "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência.",
+          "Por isso, convidamos todos os clubes a conhecerem atentamente as regras a seguir e se prepararem para participar ativamente dos torneios. Afinal, quanto mais engajamento, mais memorável será essa experiência no Campori 2025 da APaC!",
+          "- Inscrições por Torneio: Cada clube poderá se inscrever em apenas um torneio. Caso restem vagas após o encerramento das inscrições, será aberta uma nova oportunidade para os clubes já inscritos ampliarem sua participação.",
+          "- Participação por dupla: Cada clube poderá inscrever apenas uma dupla, formada exclusivamente por desbravadores com idades entre 10 e 15 anos. A seleção dessa dupla deverá ser feita por meio de uma eliminatória interna organizada pelo próprio clube.",
+          "- Formato das eliminatórias: As disputas seguirão o formato de eliminatória simples, ou seja, cada confronto será decisivo. Não haverá repescagem, reforçando a importância de cada rodada.",
+          "- Responsável pela inscrição: Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
+          "- Finais dos torneios: As finais serão realizadas no sábado à noite, durante a programação oficial do Campori."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Especialidades"
+      },
+      {
+        "type": "text",
+        "content": [
+          "Durante o Campori 2025, os desbravadores terão a oportunidade de participar de diversas especialidades práticas e educativas. Cada atividade possui vagas limitadas e será realizada em horários pré-definidos, conforme a programação oficial do evento.",
+          "No momento da inscrição, o diretor do clube deverá selecionar os horários disponíveis para cada especialidade, respeitando os limites máximos de participação estabelecidos para cada clube e cada aula.",
+          "Confira as especialidades disponíveis:",
+          "Especialidade de Torno Mecânico: Duração de 1 hora, com até 30 participantes por aula. Cada clube poderá inscrever no máximo 10 desbravadores.",
+          "Especialidade de Ferreomodelismo: Aula de 1 hora, com capacidade para 50 participantes. Limite de 10 inscritos por clube.",
+          "Especialidade de Eletricidade: Especialidade com duração de 1 hora, para até 50 participantes. Cada clube poderá inscrever até 10 desbravadores.",
+          "Especialidade de Criacionismo: Aula de 1 hora, com até 50 participantes. Limite de 10 por clube.",
+          "Especialidade de Fósseis: Duração de 1 hora, com capacidade para 50 participantes por aula. Máximo de 10 por clube.",
+          "Especialidade de Patins: Especialidade com duração de 1 hora, voltada para grupos menores, com até 20 participantes por aula e limite de 5 desbravadores por clube.",
+          "Especialidade de Arco e Flecha: Aula de 1 hora, com até 50 participantes. Cada clube poderá inscrever até 10 desbravadores.",
+          "Regras Gerais para Participação nas Especialidades:",
+          "- As vagas são limitadas e preenchidas por ordem de inscrição, portanto, é importante se inscrever o quanto antes.",
+          "- Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
+          "- A participação nas especialidades será validada apenas mediante presença no horário agendado. Acompanhe os Horários pela tela de programação no APP do campori",
+          "- Para garantir a organização e uma distribuição equilibrada de vagas, cada clube poderá se inscrever em apenas uma especialidade por dia. Caso deseje participar de mais especialidades, o clube deverá realizar a inscrição em dias diferentes."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Visitações"
+      },
+      {
+        "type": "text",
+        "content": [
+          "Durante o Campori 2025, os desbravadores também poderão participar de duas visitações especiais, pensadas para enriquecer a experiência espiritual e cultural dos clubes:",
+          "- Visitação ao Museu de Arqueologia Bíblica: Duração de 30 minutos por aula, com até 60 participantes. Cada clube poderá inscrever até 20 participantes.",
+          "- Visitação ao Centro Ellen G. White: Aula de 1 hora, com capacidade para 50 participantes por turma. Limite de 10 por clube.",
+          "Garanta a participação do seu clube nessas experiências enriquecedoras!"
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Corridas"
+      }
+    ]
+  },
+  {
     "text": "Ideais dos Desbravadores",
     "items": [
       {

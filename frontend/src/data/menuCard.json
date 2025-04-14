@@ -61,8 +61,7 @@
         "user": true,
         "items": [
           { "title": "Verificar Pontuação", "link":"/scoresclubs" },
-          { "title": "Inscrições dos Torneios", "link":"/inscricao" },
-          { "title": "Inscrições das Especialidades", "link": "/schedulesclub", "admin": true },
+          { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true },
           { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"}
         ]
       },

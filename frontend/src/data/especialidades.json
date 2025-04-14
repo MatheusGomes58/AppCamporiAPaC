@@ -1,29 +1,47 @@
 [
     {
-        "atividade": "Torno"
+        "atividade": "Especialidade de Torno Mecânico"
     },
     {
-        "atividade": "Ferromodelismo"
+        "atividade": "Especialidade de Ferreomodelismo"
     },
     {
-        "atividade": "MAB - Museu"
+        "atividade": "MAB - Museu de Arqueologia Bíblica"
     },
     {
-        "atividade": "Centro White"
+        "atividade": "Visitação ao Centro White"
     },
     {
-        "atividade": "Eletricidade"
+        "atividade": "Especialidade de Eletricidade"
     },
     {
-        "atividade": "Criacionismo"
+        "atividade": "Especialidade de Criacionismo"
     },
     {
-        "atividade": "Fósseis"
+        "atividade": "Especialidade de Fósseis"
     },
     {
-        "atividade": "Patins"
+        "atividade": "Especialidade de Patins"
     },
     {
-        "atividade": "Arco e Flecha"
+        "atividade": "Especialidade de Arco e Flecha"
+    },
+    {
+        "atividade": "Torneio de Beach Tennis Feminino"
+    },
+    {
+        "atividade": "Torneio de Beach Tennis Masculino"
+    },
+    {
+        "atividade": "Torneio de Futevôlei Masculino"
+    },
+    {
+        "atividade": "Torneio de Vôlei Feminino"
+    },
+    {
+        "atividade": "Corrida de 10k"
+    },
+    {
+        "atividade": "Ciclismo de 10k"
     }
 ]

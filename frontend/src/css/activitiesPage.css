@@ -71,9 +71,9 @@ h1 {
 }
 
 .activityText, .details {
-  font-size: 1rem;
+  font-size: .8rem;
   color: #555;
-  text-align: center;
+  text-align: start;
   margin-bottom: 10px;
 }
 
