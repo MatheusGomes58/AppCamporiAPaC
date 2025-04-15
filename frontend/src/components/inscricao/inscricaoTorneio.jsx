@@ -3,6 +3,8 @@ import { db } from "../firebase/firebase";
 import {
     collection,
     doc,
+    query,
+    where,
     getDoc,
     updateDoc,
     setDoc,
@@ -16,14 +18,23 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
     const [nomeClube, setNomeClube] = useState("");
     const [novoTorneio, setNovoTorneio] = useState({ nome: "", categoria: "", maxVagas: 16 });
 
+
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "torneios"), (snapshot) => {
-            const lista = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setTorneios(lista);
-        });
+        const q = query(
+            collection(db, "eventos"),
+            where("isTorneio", "==", true)
+        );
+
+        const unsubscribe = onSnapshot(
+            q,
+            (snapshot) => {
+                const lista = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setTorneios(lista);
+            }
+        );
 
         setNomeClube(clube);
 
@@ -49,7 +60,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
         const confirmar = window.confirm(`Deseja realmente inscrever o clube "${nomeClube}" no torneio selecionado?`);
         if (!confirmar) return;
 
-        const torneioRef = doc(db, "torneios", torneioSelecionado);
+        const torneioRef = doc(db, "eventos", torneioSelecionado);
         const torneioDoc = await getDoc(torneioRef);
 
         if (!torneioDoc.exists()) {
@@ -82,7 +93,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
         const confirmar = window.confirm("Deseja realmente cancelar sua inscrição?");
         if (!confirmar) return;
 
-        const torneioRef = doc(db, "torneios", inscricaoAtual);
+        const torneioRef = doc(db, "eventos", inscricaoAtual);
         const torneioDoc = await getDoc(torneioRef);
 
         if (!torneioDoc.exists()) return;
@@ -106,7 +117,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
             return;
         }
 
-        await setDoc(doc(db, "torneios", novoTorneio.nome.trim()), {
+        await setDoc(doc(db, "eventos", novoTorneio.nome.trim()), {
             ...novoTorneio,
             inscritos: [],
         });
@@ -117,20 +128,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
 
     return (
         <div className="inscricao-container">
-            <h2>Inscrição no Campeonato</h2>
-
-            <p style={{ marginTop: "1rem" }}>
-                Olá! Administrador do clube <strong>{nomeClube}</strong>, se você deseja se inscrever para algum torneio leia as regras abaixo:
-            </p>
-            <p style={{ textAlign: "left" }}>
-                - Cada clube deve se inscrever apenas em uma categoria, caso sobre vagas reabriremos para os clubes já inscritos.<br />
-                - Poderão participar apenas uma dupla, sendo composta apenas por desbravadores de 10 a 15 anos. O clube deve realizar uma eliminatória para selecionar a dupla.<br />
-                - As eliminatórias serão simples pois cada rodada é única, assim sendo não haverá repescagens.<br />
-                - Apenas os usuários com acesso master de clube podem realizar a inscrição.<br />
-                - As finais serão realizadas ao sábado a noite.<br />
-            </p>
-            <p>Essas regras são as mesmas para todos os torneios, em breve os clubes inscritos receberão mais informações</p>
-
+            <h2>Torneios Disponíveis</h2>
             {clubeJaInscrito && (
                 <div className="torneios-lista">
                     <label className="torneio-item">

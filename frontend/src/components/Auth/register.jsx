@@ -175,7 +175,7 @@ const RegisterForm = ({ remove, username, useremail, userclube, useradmin, useri
                             <div key={index} className="optionItem" onClick={() => handleSelectClub(c.CLUBE)}>
                                 <div>{`Clube: ${c.CLUBE}`}</div>
                                 <div>{`Igreja: ${c.IGREJA}`}</div>
-                                <div>{`Igreja: ${c.DISTRITO}`}</div>
+                                <div>{`Distrito: ${c.DISTRITO}`}</div>
                             </div>
                         ))}
                 </div>

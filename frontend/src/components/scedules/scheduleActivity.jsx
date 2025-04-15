@@ -1,39 +1,37 @@
-import React, { useState, useEffect } from "react";
 import { db } from "../firebase/firebase";
+import clubs from "../../data/clubes.json";
+import React, { useState, useEffect } from "react";
 import {
   collection,
   addDoc,
   deleteDoc,
-  query,
+  query, where,
   orderBy,
   doc,
   updateDoc,
   onSnapshot,
-  where,
 } from "firebase/firestore";
-import '../../css/schedulePage.css';
-import clubs from "../../data/clubes.json";
 
-const EventScheduler = ({ clube, admin, reserved, username, isMaster, atividades }) => {
+const EventScheduler = ({ clube, admin, reserved, username, isMaster, activeTab }) => {
+  const [showForm, setShowForm] = useState(false);
   const [eventName, setEventName] = useState("");
-  const [atividadeSelecionada, setAtividadeSelecionada] = useState("");
+  const [atividadeSelecionada, setAtividadeSelecionada] = useState(activeTab);
   const [eventDate, setEventDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [interval, setInterval] = useState(30);
+  const [interval, setInterval] = useState(0);
   const [microEvents, setMicroEvents] = useState([]);
-  const [showForm, setShowForm] = useState(false);
   const [editingMicroEvent, setEditingMicroEvent] = useState(null);
   const [selectedMicroEvents, setSelectedMicroEvents] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [activeTab, setActiveTab] = useState(atividades[0]?.atividade || "");
   const [club, setClub] = useState(clube);
   const [search, setSearch] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  var atividades = []
   useEffect(() => {
     const q = query(
-      collection(db, "microevents"),
+      collection(db, "eventos"),
       where("atividade", "==", activeTab),
       orderBy("timestamp", "asc")
     );
@@ -76,7 +74,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, atividades
         const minutes = current.getMinutes();
         const formattedTime = minutes === 0 ? `${hours}h` : `${hours}h${minutes}`;
 
-        await addDoc(collection(db, "microevents"), {
+        await addDoc(collection(db, "eventos"), {
           title: eventName,
           date: eventDate,
           timestamp: current,
@@ -97,7 +95,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, atividades
   const handleDeleteSelectedMicroEvents = async () => {
     try {
       for (const microEventId of selectedMicroEvents) {
-        await deleteDoc(doc(db, "microevents", microEventId));
+        await deleteDoc(doc(db, "eventos", microEventId));
       }
       setSelectedMicroEvents([]);
       setSelectAll(false);
@@ -115,8 +113,8 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, atividades
     if (!editingMicroEvent) return;
 
     try {
-      const microEventRef = doc(db, "microevents", editingMicroEvent.id);
-      await updateDoc(microEventRef, isMaster ? { ...editingMicroEvent, clube: club } : { ...editingMicroEvent, clube });
+      const microEventRef = doc(db, "eventos", editingMicroEvent.id);
+      await updateDoc(microEventRef, isMaster ? { ...editingMicroEvent, clube: clube } : { ...editingMicroEvent, clube });
 
       setEditingMicroEvent(null);
       alert("Atividade atualizada com sucesso!");
@@ -146,113 +144,90 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, atividades
   };
 
   return (
-    <div className="schedule-page">
-      <div className='event-card'>
-        <div className="date-panel-container">
-          {atividades.map((atv, i) => (
-            <button
-              key={i}
-              className={atv.atividade === activeTab ? "date-panel active" : "date-panel"}
-              onClick={() => setActiveTab(atv.atividade)}
-            >
-              {atv.atividade}
-            </button>
-          ))}
+    <div>
+      {(isMaster && admin) && (
+        <button onClick={() => setShowForm(!showForm)} disabled={showForm}>
+          Criar Eventos
+        </button>
+      )}
+
+      {showForm && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="event-form">
+              <input type="text" placeholder="Atividade do Evento" value={activeTab} onChange={(e) => setAtividadeSelecionada(e.target.value)} />
+              <input type="text" placeholder="Nome do Evento" value={eventName} onChange={(e) => setEventName(e.target.value)} />
+              <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
+              <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+              <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+              <input type="number" value={interval} onChange={(e) => setInterval(e.target.value)} />
+              <button onClick={handleCreateMicroEvents}>Criar Microeventos</button>
+              <button className="delete" onClick={() => setShowForm(false)}>Fechar</button>
+            </div>
+          </div>
         </div>
+      )}
 
-        {(isMaster && admin) && (
-          <button onClick={() => setShowForm(!showForm)} disabled={showForm}>
-            Criar Eventos
-          </button>
-        )}
+      {editingMicroEvent && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="event-form">
+              <h3>{`${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}</h3>
+              {`Olá ${username}, representante do clube ${clube}, você deseja realmente reservar essa data para seu clube?`}
 
-        {showForm && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <div className="event-form">
-                <select value={atividadeSelecionada} onChange={(e) => setAtividadeSelecionada(e.target.value)}>
-                  <option value="">Selecione uma atividade</option>
-                  {atividades.map((atv, i) => (
-                    <option key={i} value={atv.atividade}>{atv.atividade}</option>
-                  ))}
-                </select>
-                <input type="text" placeholder="Nome do Evento" value={eventName} onChange={(e) => setEventName(e.target.value)} />
-                <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
-                <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-                <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
-                <button onClick={handleCreateMicroEvents}>Criar Microeventos</button>
-                <button className="delete" onClick={() => setShowForm(false)}>Fechar</button>
-              </div>
+              {isDropdownOpen && (
+                <div className="customSelect">
+                  <input
+                    className="inputLogin"
+                    type="text"
+                    placeholder="Pesquise seu clube"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    onFocus={() => setIsDropdownOpen(true)}
+                  />
+                  <div className="selectTitle" onClick={() => handleSelectClub("")}>Selecione seu clube</div>
+                  {clubs
+                    .filter((c) => c.CLUBE.toLowerCase().includes(search.toLowerCase()))
+                    .map((c, index) => (
+                      <div key={index} className="optionItem" onClick={() => handleSelectClub(c.CLUBE)}>
+                        <div>{`Clube: ${c.CLUBE}`}</div>
+                        <div>{`Igreja: ${c.IGREJA}`}</div>
+                        <div>{`Distrito: ${c.DISTRITO}`}</div>
+                      </div>
+                    ))}
+                </div>
+              )}
+
+              <button onClick={handleUpdateMicroEvent}>{!reserved ? "Editar" : "Reservar"}</button>
+              <button onClick={() => setEditingMicroEvent(null)}>Cancelar</button>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {editingMicroEvent && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <div className="event-form">
-                <h3>{`${editingMicroEvent.title} - ${editingMicroEvent.timestamp?.seconds ? new Date(editingMicroEvent.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}`}</h3>
-                {`Olá ${username}, representante do clube ${clube}, você deseja realmente reservar essa data para seu clube?`}
+      {microEvents.map((event) => (
+        <div key={event.id} className="event-item">
+          {(isMaster && admin && !event.clube) && (
+            <input
+              type="checkbox"
+              onChange={() => toggleMicroEventSelection(event.id)}
+              checked={selectedMicroEvents.includes(event.id)}
+            />
+          )}
+          <span>
+            {event.title} - {event.timestamp?.seconds ? new Date(event.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}
+          </span>
+          {!event.clube && <button onClick={() => handleEditMicroEvent(event)}>{!reserved ? "Editar" : "Reservar"}</button>}
+        </div>
+      ))}
 
-                {isDropdownOpen && (
-                  <div className="customSelect">
-                    <input
-                      className="inputLogin"
-                      type="text"
-                      placeholder="Pesquise seu clube"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      onFocus={() => setIsDropdownOpen(true)}
-                    />
-                    <div className="selectTitle" onClick={() => handleSelectClub("")}>Selecione seu clube</div>
-                    {clubs
-                      .filter((c) => c.CLUBE.toLowerCase().includes(search.toLowerCase()))
-                      .map((c, index) => (
-                        <div key={index} className="optionItem" onClick={() => handleSelectClub(c.CLUBE)}>
-                          <div>{`Clube: ${c.CLUBE}`}</div>
-                          <div>{`Igreja: ${c.IGREJA}`}</div>
-                          <div>{`Distrito: ${c.DISTRITO}`}</div>
-                        </div>
-                      ))}
-                  </div>
-                )}
+      {(admin && microEvents.length > 0) && (
+        <button onClick={handleDeleteSelectedMicroEvents}>Excluir Selecionados</button>
+      )}
 
-                <button onClick={handleUpdateMicroEvent}>{!reserved ? "Editar" : "Reservar"}</button>
-                <button onClick={() => setEditingMicroEvent(null)}>Cancelar</button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {(admin && microEvents.length > 0) && (
-          <div>
-            <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
-            <label>Selecionar Todos</label>
-          </div>
-        )}
-
-        {microEvents.map((event) => (
-          <div key={event.id} className="event-item">
-            {(isMaster && admin && !event.clube) && (
-              <input
-                type="checkbox"
-                onChange={() => toggleMicroEventSelection(event.id)}
-                checked={selectedMicroEvents.includes(event.id)}
-              />
-            )}
-            <span>
-              {event.title} - {event.timestamp?.seconds ? new Date(event.timestamp.seconds * 1000).toLocaleTimeString() : "Horário não disponível"}
-            </span>
-            {!event.clube && <button onClick={() => handleEditMicroEvent(event)}>{!reserved ? "Editar" : "Reservar"}</button>}
-          </div>
-        ))}
-
-        {(admin && microEvents.length > 0) && (
-          <button onClick={handleDeleteSelectedMicroEvents}>Excluir Selecionados</button>
-        )}
-      </div>
     </div>
   );
+
 };
 
 export default EventScheduler;

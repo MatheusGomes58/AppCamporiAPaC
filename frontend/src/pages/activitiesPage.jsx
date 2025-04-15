@@ -107,7 +107,7 @@ const Activities = () => {
 
   return (
     <div className="ActivitiesPage">
-      {(!hasImages && headerImageKey != 'undefined') && <img className="headerImage" src={imageMap[headerImageKey]} alt={activity.text} />}
+      {(!hasImages && headerImageKey && headerImageKey != 'undefined') && <img className="headerImage" src={imageMap[headerImageKey]} alt={activity.text} />}
       {!hasImages && <h2>{activity.text}</h2>}
       <div className="activitieSection">
         {hasImages && (

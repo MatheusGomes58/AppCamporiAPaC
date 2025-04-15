@@ -6,12 +6,6 @@
         "atividade": "Especialidade de Ferreomodelismo"
     },
     {
-        "atividade": "MAB - Museu de Arqueologia Bíblica"
-    },
-    {
-        "atividade": "Visitação ao Centro White"
-    },
-    {
         "atividade": "Especialidade de Eletricidade"
     },
     {
@@ -27,21 +21,12 @@
         "atividade": "Especialidade de Arco e Flecha"
     },
     {
-        "atividade": "Torneio de Beach Tennis Feminino"
+        "atividade": "Torneios"
     },
     {
-        "atividade": "Torneio de Beach Tennis Masculino"
+        "atividade": "Corridas"
     },
     {
-        "atividade": "Torneio de Futevôlei Masculino"
-    },
-    {
-        "atividade": "Torneio de Vôlei Feminino"
-    },
-    {
-        "atividade": "Corrida de 10k"
-    },
-    {
-        "atividade": "Ciclismo de 10k"
+        "atividade": "Visitações"
     }
 ]

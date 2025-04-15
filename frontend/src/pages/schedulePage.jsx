@@ -49,8 +49,8 @@ function SchedulePage({ isAutenticated, clube }) {
     const fetchMicroEvents = async (clube) => {
         try {
             const db = getFirestore(app);
-            const microEventsRef = collection(db, "microevents");
-            const q = query(microEventsRef, where("clube", "==", clube));
+            const microEventsRef = collection(db, "eventos");
+            const q = query(microEventsRef, where("inscritos", "array-contains", clube));
             const snapshot = await getDocs(q);
 
             const microEventsList = snapshot.docs.map(doc => {

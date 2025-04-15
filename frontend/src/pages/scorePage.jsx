@@ -226,7 +226,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                                     <div key={index} className="optionItem" onClick={() => handleRegisterClub(c.CLUBE)}>
                                         <div>{`Clube: ${c.CLUBE}`}</div>
                                         <div>{`Igreja: ${c.IGREJA}`}</div>
-                                        <div>{`Igreja: ${c.DISTRITO}`}</div>
+                                        <div>{`Distrito: ${c.DISTRITO}`}</div>
                                     </div>
                                 ))}
                         </div>
@@ -283,7 +283,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                                 <div key={index} className="optionItem" onClick={() => handleSelectClub(c.CLUBE)}>
                                     <div>{`Clube: ${c.CLUBE}`}</div>
                                     <div>{`Igreja: ${c.IGREJA}`}</div>
-                                    <div>{`Igreja: ${c.DISTRITO}`}</div>
+                                    <div>{`Distrito: ${c.DISTRITO}`}</div>
                                 </div>
                             ))}
                     </div>

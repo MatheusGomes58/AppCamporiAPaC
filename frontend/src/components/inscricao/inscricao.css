@@ -3,13 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
     color: black;
     width: 100vw;
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 20px;
-    height: 85vh;
 }
 
 /* Título centralizado */
@@ -85,6 +83,7 @@
 /* Item de torneio */
 .torneio-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     background-color: #fff;
     padding: 10px 12px;
@@ -101,4 +100,25 @@
 
 .torneio-item input[type="radio"] {
     margin-right: 10px;
+}
+
+.membro-item {
+    margin: 5px 0;
+}
+
+.remover-membro-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancelar-btn {
+    margin-top: 10px;
+    background-color: #ccc;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
 }

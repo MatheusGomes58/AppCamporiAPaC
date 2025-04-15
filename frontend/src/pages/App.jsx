@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { db } from '../components/firebase/firebase';
+import { getAnalytics, logEvent } from "firebase/analytics";
 import MenuOptions from '../components/menu/menu';
 import '../css/App.css';
 import SchedulePage from './schedulePage';
@@ -8,7 +9,6 @@ import GuidePage from './guidePage';
 import HomePage from './homePage';
 import ActivitiesPage from './activitiesPage';
 import CountPage from './countPage';
-import { getAnalytics } from "firebase/analytics";
 import SplashScreen from '../components/splashScreen/splashScreen';
 import LoginPage from './loginPage';
 import ForgotPage from './forgotPage';
@@ -20,17 +20,23 @@ import ScoresPage from './scorePage';
 import ChaveamentoPage from './chaveamentoPage';
 import InscricaoPage from './inscricaoPage';
 
+const analytics = getAnalytics(); // Instancia global
+
 const RedirectToHelp = () => {
   useEffect(() => {
+    logEvent(analytics, 'redirect_to_help'); // Evento de clique no link do WhatsApp
     window.location.href = "https://chat.whatsapp.com/LnPviuzOehtBrXiTlgSbLb";
   }, []);
 
   return null;
 };
 
-
 function App() {
   const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    logEvent(analytics, 'app_loaded'); // Evento ao carregar o app
+  }, []);
 
   return (
     <Router>
@@ -42,6 +48,7 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const shouldHideMenu = ["/count"].includes(location.pathname);
+
   const [admin, setAdmin] = useState(false);
   const [clube, setClube] = useState('');
   const [email, setEmail] = useState('');
@@ -54,6 +61,13 @@ function AppContent() {
     setLogin(true);
   }, []);
 
+  useEffect(() => {
+    // Evento de navegação
+    logEvent(analytics, 'screen_view', {
+      screen_name: location.pathname
+    });
+  }, [location]);
+
   function setLogin(value) {
     if (value) {
       const storedUser = localStorage.getItem('user');
@@ -61,15 +75,21 @@ function AppContent() {
         db.collection('users').doc(storedUser).onSnapshot((doc) => {
           if (doc.exists) {
             const userDoc = doc.data();
-            const userData = userDoc;
 
             setUid(storedUser);
-            setAdmin(userData.admin || false);
-            setClube(userData.clube || '');
-            setUsername(userData.name || '');
-            setEmail(userData.email || '');
-            setAutenticated(userData.name ? true : false);
-            setMaster(userData.clube == 'APAC' ? true : false);
+            setAdmin(userDoc.admin || false);
+            setClube(userDoc.clube || '');
+            setUsername(userDoc.name || '');
+            setEmail(userDoc.email || '');
+            setAutenticated(!!userDoc.name);
+            setMaster(userDoc.clube === 'APAC');
+
+            logEvent(analytics, 'user_login', {
+              user_id: storedUser,
+              clube: userDoc.clube || 'desconhecido',
+              admin: !!userDoc.admin,
+            });
+
           } else {
             console.log("Nenhum documento encontrado!");
           }

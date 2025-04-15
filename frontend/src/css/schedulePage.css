@@ -38,6 +38,8 @@
     background-color: #f9f9f9;
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .event-item-title {

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from "../components/firebase/firebase";
 import {
     collection,
+    query, where,
     onSnapshot
 } from "firebase/firestore";
 
@@ -18,8 +19,13 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
     useEffect(() => {
         if (!userAutenticated) return;
 
+        const q = query(
+            collection(db, "eventos"),
+            where("isTorneio", "==", true)
+        );
+
         const unsubscribe = onSnapshot(
-            collection(db, "torneios"),
+            q,
             (snapshot) => {
                 const lista = snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -36,6 +42,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
 
         return () => unsubscribe();
     }, [userAutenticated]);
+
 
     function selectTitle(title) {
         if (title === 'user') {
@@ -57,9 +64,9 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
         if (list.clube && list.admin) {
             return useradmin && isMaster
         }
-        if (list.admin && !list.clube )
+        if (list.admin && !list.clube)
             return useradmin
-        if (!list.admin && !list.clube )
+        if (!list.admin && !list.clube)
             return true;
     }
 

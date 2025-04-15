@@ -13,7 +13,7 @@ const TournamentBracket = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const inscricoesRef = doc(collection(db, "torneios"), tournamentName);
+        const inscricoesRef = doc(collection(db, "eventos"), tournamentName);
         const docSnap = await getDoc(inscricoesRef);
 
         if (!docSnap.exists()) return;
