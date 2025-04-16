@@ -14,6 +14,7 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
         clube={clube}
         admin={admin}
         ismaster={isMaster}
+        activeTab={activeTab}
       />
     } else if (activeTab == 'Corridas') {
       return <InscricaoCorrida

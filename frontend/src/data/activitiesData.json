@@ -171,7 +171,11 @@
       {
         "type": "text",
         "content": [
-          "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência.",
+          "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência. Conheça agora mesmo as modalidades do nosso torneio:",
+          "- Beach Tennis Feminino",
+          "- Beach Tennis Masculino",
+          "- Futvolei Masculino",
+          "- Volei Dupla Feminina",
           "Por isso, convidamos todos os clubes a conhecerem atentamente as regras a seguir e se prepararem para participar ativamente dos torneios. Afinal, quanto mais engajamento, mais memorável será essa experiência no Campori 2025 da APaC!",
           "- Inscrições por Torneio: Cada clube poderá se inscrever em apenas um torneio. Caso restem vagas após o encerramento das inscrições, será aberta uma nova oportunidade para os clubes já inscritos ampliarem sua participação.",
           "- Participação por dupla: Cada clube poderá inscrever apenas uma dupla, formada exclusivamente por desbravadores com idades entre 10 e 15 anos. A seleção dessa dupla deverá ser feita por meio de uma eliminatória interna organizada pelo próprio clube.",
@@ -212,15 +216,26 @@
         "type": "text",
         "content": [
           "Durante o Campori 2025, os desbravadores também poderão participar de duas visitações especiais, pensadas para enriquecer a experiência espiritual e cultural dos clubes:",
-          "- Visitação ao Museu de Arqueologia Bíblica: Duração de 30 minutos por aula, com até 60 participantes. Cada clube poderá inscrever até 20 participantes.",
-          "- Visitação ao Centro Ellen G. White: Aula de 1 hora, com capacidade para 50 participantes por turma. Limite de 10 por clube.",
+          "- Visitação ao Museu de Arqueologia Bíblica: Duração de 30 minutos por aula, com até 64 participantes. Cada clube poderá inscrever até 16 participantes.",
+          "- Visitação ao Centro Ellen G. White: Aula de 1 hora, com capacidade para 50 participantes por turma. Limite de 16 por clube.",
           "Garanta a participação do seu clube nessas experiências enriquecedoras!"
         ]
       },
       {
         "type": "title",
         "content": "Corridas"
+      },
+      {
+        "type": "text",
+        "content": [
+          "O Campori 2025 também contará com emocionantes desafios esportivos! Os clubes poderão participar das corridas em duas modalidades diferentes:",
+          "- Corrida 10K a Pé: Um percurso desafiador para os desbravadores que gostam de correr.",
+          "- Corrida 40K de Bike: Ideal para os que preferem adrenalina sobre duas rodas.",
+          "Não há limite de inscrições por modalidade. Para confirmar a inscrição, será necessário informar os nomes dos participantes.",
+          "Prepare seu clube e participe dessa experiência esportiva única!"
+        ]
       }
+      
     ]
   },
   {

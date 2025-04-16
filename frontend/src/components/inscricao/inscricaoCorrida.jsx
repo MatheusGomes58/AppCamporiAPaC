@@ -166,57 +166,82 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
         alert("Inscrição cancelada com sucesso.");
     };
 
+    function formatarDataCompleta(dataString) {
+        const data = new Date(dataString + 'T00:00:00');
+        const opcoes = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        const formatada = data.toLocaleDateString('pt-BR', opcoes);
+
+        // Capitaliza a primeira letra de cada palavra relevante
+        return formatada.replace(/\b\p{L}/gu, letra => letra.toUpperCase());
+    }
+
     return (
         <div className="inscricao-container">
-            <h2>Corridas disponíveis</h2>
+            <h2>Reservar Vagas de Corridas</h2>
             <div className="torneios-lista">
                 {torneios.map((t) => {
                     const inscrito = inscritosMap[t.id];
                     return (
-                        <div key={t.id} className="torneio-item">
-                            <strong>{t.nome}</strong> ({t.categoria}) — {t.inscritos?.length || 0} Clube(s) Inscrito(s)
-
+                        <div className="activity-description atividades">
+                            <div key={t.id}>
+                                <div className="activity-title">
+                                    {formatarDataCompleta(t.date)}
+                                </div>
+                                <div className="activity-title">
+                                    <strong>{t.nome}</strong>
+                                </div>
+                                <p>
+                                    {t.inscritos?.length || 0} Inscritos
+                                </p>
+                                {/*
                             {!inscrito && admin && !ismaster && (
                                 <button onClick={() => handleInscricaoDireta(t.id)}>
                                     Inscrever clube
                                 </button>
                             )}
+*/}
 
-                            {inscrito && (
-                                <div className="membros-area">
-                                    <p>
-                                        Olá! Administrador do clube <strong>{nomeClube}</strong>, o seu clube já está inscrito nessa corrida.
-                                    </p>
+                                {inscrito && (
+                                    <div className="membros-area">
+                                        <p>
+                                            Olá! Administrador do clube <strong>{nomeClube}</strong>, o seu clube já está inscrito nessa corrida.
+                                        </p>
 
-                                    <div>
-                                        {(membros[t.id] || []).map((m, i) => (
-                                            <div key={i} className="membro-item">
-                                                <span>{m}</span>
-                                                <button
-                                                    className="remover-membro-btn"
-                                                    onClick={() => handleRemoverMembro(t.id, m)}
-                                                >
-                                                    Remover
-                                                </button>
-                                            </div>
-                                        ))}
+                                        <div>
+                                            {(membros[t.id] || []).map((m, i) => (
+                                                <div key={i} className="membro-item">
+                                                    <span>{m}</span>
+                                                    <button
+                                                        className="remover-membro-btn"
+                                                        onClick={() => handleRemoverMembro(t.id, m)}
+                                                    >
+                                                        Remover
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <input
+                                            type="text"
+                                            placeholder="Nome do membro"
+                                            value={novoMembro}
+                                            onChange={(e) => setNovoMembro(e.target.value)}
+                                        />
+                                        <button onClick={() => handleAdicionarMembro(t.id)}>
+                                            Adicionar membro
+                                        </button>
+
+                                        <button className="cancelar-btn" onClick={() => handleCancelarInscricao(t.id)}>
+                                            Cancelar inscrição
+                                        </button>
                                     </div>
-
-                                    <input
-                                        type="text"
-                                        placeholder="Nome do membro"
-                                        value={novoMembro}
-                                        onChange={(e) => setNovoMembro(e.target.value)}
-                                    />
-                                    <button onClick={() => handleAdicionarMembro(t.id)}>
-                                        Adicionar membro
-                                    </button>
-
-                                    <button className="cancelar-btn" onClick={() => handleCancelarInscricao(t.id)}>
-                                        Cancelar inscrição
-                                    </button>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     );
                 })}

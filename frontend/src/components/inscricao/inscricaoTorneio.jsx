@@ -12,12 +12,11 @@ import {
 } from "firebase/firestore";
 import "./inscricao.css";
 
-const InscricaoForm = ({ clube, admin, ismaster }) => {
+const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
     const [torneios, setTorneios] = useState([]);
     const [torneioSelecionado, setTorneioSelecionado] = useState("");
     const [nomeClube, setNomeClube] = useState("");
-    const [novoTorneio, setNovoTorneio] = useState({ nome: "", categoria: "", maxVagas: 16 });
-
+    const [novosTorneios, setNovosTorneios] = useState([{ nome: "", date: "", hora: "", atividade: "", maxVagas: 60, maxClubVagas: 16 }]);
 
     useEffect(() => {
         const q = query(
@@ -25,16 +24,13 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
             where("isTorneio", "==", true)
         );
 
-        const unsubscribe = onSnapshot(
-            q,
-            (snapshot) => {
-                const lista = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setTorneios(lista);
-            }
-        );
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const lista = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setTorneios(lista);
+        });
 
         setNomeClube(clube);
 
@@ -43,6 +39,20 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
 
     const clubeJaInscrito = torneios.find((t) => t.inscritos?.includes(nomeClube));
     const inscricaoAtual = clubeJaInscrito ? clubeJaInscrito.id : null;
+
+    function formatarDataCompleta(dataString) {
+        const data = new Date(dataString + 'T00:00:00');
+        const opcoes = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        const formatada = data.toLocaleDateString('pt-BR', opcoes);
+
+        // Capitaliza a primeira letra de cada palavra relevante
+        return formatada.replace(/\b\p{L}/gu, letra => letra.toUpperCase());
+    }
 
     const handleInscricao = async (e) => {
         e.preventDefault();
@@ -109,26 +119,37 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
         alert("Inscrição cancelada com sucesso.");
     };
 
-    const handleCriarTorneio = async (e) => {
-        e.preventDefault();
+    const handleCriarTorneios = async () => {
+        const criados = [];
 
-        if (!novoTorneio.nome.trim() || !novoTorneio.categoria.trim()) {
-            alert("Preencha o nome e a categoria do novo torneio.");
-            return;
+        for (const torneio of novosTorneios) {
+            if (!torneio.nome.trim()) continue;
+
+            const ref = doc(db, "eventos", torneio.nome.trim());
+
+            await setDoc(ref, {
+                ...torneio,
+                classe: "atividades",
+                title: torneio.nome.trim(),
+                timestamp: "",
+                inscritos: []
+            });
+
+            criados.push(torneio.nome.trim());
         }
 
-        await setDoc(doc(db, "eventos", novoTorneio.nome.trim()), {
-            ...novoTorneio,
-            inscritos: [],
-        });
+        if (criados.length > 0) {
+            alert(`Torneio(s) criado(s): ${criados.join(", ")}`);
+        } else {
+            alert("Nenhum torneio válido para criar.");
+        }
 
-        setNovoTorneio({ nome: "", categoria: "", maxVagas: 16 });
-        alert("Torneio criado com sucesso!");
+        setNovosTorneios([{ nome: "", maxVagas: 16 }]);
     };
 
     return (
         <div className="inscricao-container">
-            <h2>Torneios Disponíveis</h2>
+            <h2>Reservar Vagas de Torneios</h2>
             {clubeJaInscrito && (
                 <div className="torneios-lista">
                     <label className="torneio-item">
@@ -143,24 +164,42 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                 <>
                     <div className="torneios-lista">
                         {torneios.map((t) => (
-                            <label key={t.id} className="torneio-item">
-                                {admin && !ismaster && <input
-                                    type="radio"
-                                    name="torneioSelecionado"
-                                    value={t.id}
-                                    checked={torneioSelecionado === t.id}
-                                    onChange={(e) => setTorneioSelecionado(e.target.value)}
-                                />}
-                                <strong>{t.nome}</strong> ({t.categoria}) — {t.inscritos?.length || 0}/{t.maxVagas} inscritos
-                            </label>
+                            <div className="activity-description atividades">
+                                <label key={t.id}>
+                                    <div className="activity-title">
+                                        {formatarDataCompleta(t.date)}
+                                    </div>
+
+                                    {/*
+                                    {admin && !ismaster && (
+                                        <input
+                                            type="radio"
+                                            name="torneioSelecionado"
+                                            value={t.id}
+                                            checked={torneioSelecionado === t.id}
+                                            onChange={(e) => setTorneioSelecionado(e.target.value)}
+                                        />
+                                    )}
+                        */}
+                                    <div className="activity-title">
+                                        {t.hora} - {t.nome}
+                                    </div>
+                                    <p>
+                                        {t.inscritos?.length || 0}/{t.maxVagas} inscritos
+                                    </p>
+                                </label>
+                            </div>
                         ))}
                     </div>
-
+                    {/*
                     <form onSubmit={handleInscricao}>
-                        {admin && !ismaster && <button type="submit" disabled={!torneioSelecionado}>
-                            Confirmar inscrição do clube <strong>{nomeClube}</strong> no torneio {torneioSelecionado}
-                        </button>} 
+                        {admin && !ismaster && (
+                            <button type="submit" disabled={!torneioSelecionado}>
+                                Confirmar inscrição do clube <strong>{nomeClube}</strong> no torneio {torneioSelecionado}
+                            </button>
+                        )}
                     </form>
+*/}
                 </>
             )}
 
@@ -170,34 +209,94 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                 </button>
             )}
 
-            {/* Área de criação de torneios */}
+            {/* Área de criação de múltiplos torneios */}
+
             {/*
-            <h3>Criar novo torneio</h3>
-            <form onSubmit={handleCriarTorneio}>
-                <input
-                    type="text"
-                    placeholder="Nome do torneio"
-                    value={novoTorneio.nome}
-                    onChange={(e) => setNovoTorneio({ ...novoTorneio, nome: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Categoria"
-                    value={novoTorneio.categoria}
-                    onChange={(e) => setNovoTorneio({ ...novoTorneio, categoria: e.target.value })}
-                />
-                <input
-                    type="number"
-                    placeholder="Máximo de inscritos"
-                    value={novoTorneio.maxVagas}
-                    min={2}
-                    max={64}
-                    onChange={(e) =>
-                        setNovoTorneio({ ...novoTorneio, maxVagas: parseInt(e.target.value) })
-                    }
-                />
-                <button type="submit">Criar Torneio</button>
-            </form>
+            <h3>Criar novos torneios</h3>
+            {novosTorneios.map((torneio, index) => (
+                <div key={index} className="novo-torneio-bloco">
+                    <input
+                        type="text"
+                        placeholder="Categoria do torneio"
+                        value={torneio.atividade}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].atividade = e.target.value;
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Nome do torneio"
+                        value={torneio.nome}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].nome = e.target.value;
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                    <input
+                        type="text"
+                        placeholder="data do torneio"
+                        value={torneio.date}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].date = e.target.value;
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                    <input
+                        type="text"
+                        placeholder="hora do torneio"
+                        value={torneio.hora}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].hora = e.target.value;
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Máximo de inscritos"
+                        value={torneio.maxVagas}
+                        min={2}
+                        max={64}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].maxVagas = parseInt(e.target.value);
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Máximo de vagas por clube"
+                        value={torneio.maxClubVagas}
+                        min={2}
+                        max={64}
+                        onChange={(e) => {
+                            const atualizados = [...novosTorneios];
+                            atualizados[index].maxClubVagas = parseInt(e.target.value);
+                            setNovosTorneios(atualizados);
+                        }}
+                    />
+                </div>
+            ))}
+
+            <div className="botoes-torneio">
+                <button
+                    type="button"
+                    onClick={() => {
+                        const ultimo = novosTorneios[novosTorneios.length - 1];
+                        const novo = { ...ultimo }; // Faz uma cópia do último
+                        setNovosTorneios([...novosTorneios, novo]);
+                    }}
+                >
+                    Adicionar mais
+                </button>
+                <button type="button" onClick={handleCriarTorneios}>
+                    Criar Todos
+                </button>
+            </div>
             */}
         </div>
     );

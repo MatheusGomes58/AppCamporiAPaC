@@ -1467,6 +1467,15 @@
         "E-MAIL": "RENANROBSONCAROLINA@GMAIL.COM"
     },
     {
+        "NOME": "JOSE DOS REIS",
+        "CLUBE": "LEÕES DO REI",
+        "IGREJA": "VILLA MOLLON IV",
+        "DISTRITO": "",
+        "DATA DE NASCIMENTO": "",
+        "CELULAR": "",
+        "E-MAIL": "crisejunior_reis@hotmail.com"
+    },
+    {
         "NOME": "PEDRO GABRIEL DE SOUSA BUENO",
         "CLUBE": "VITÓRIA RÉGIA",
         "IGREJA": "HOLAMBRA",
@@ -1681,6 +1690,15 @@
         "DATA DE NASCIMENTO": "1974-11-01",
         "CELULAR": "19.996.105.505",
         "E-MAIL": "SUSAN.GUERRERO@HOTMAIL.COM"
+    },
+    {
+        "NOME": "MARIA VITÓRIA",
+        "CLUBE": "MENSAGEIROS DO YEDA",
+        "IGREJA": "YEDA",
+        "DISTRITO": "YEDA",
+        "DATA DE NASCIMENTO": "2025-11-01",
+        "CELULAR": "",
+        "E-MAIL": ""
     },
     {
         "NOME": "NERISNETO CARVALHO DA SILVA",
