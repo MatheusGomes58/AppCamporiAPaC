@@ -143,7 +143,7 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
           {clubes.clube} - {clubes.valueVagas} Inscrito(s)
         </div>
       ))}
-      {isClubeInscrito && isSameAtividade && (
+      {admin && !isMaster && isClubeInscrito && isSameAtividade && (
         <p>
           <button
             className="cancel-button"
