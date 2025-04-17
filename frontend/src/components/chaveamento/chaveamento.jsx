@@ -58,6 +58,7 @@ const TournamentBracket = () => {
   };
 
   const handleSelectWinner = async (roundIndex, matchIndex, team) => {
+    /*
     if (roundIndex !== winners.length - 1) return;
 
     const confirm = window.confirm(`Você deseja mesmo classificar ${team} para a próxima etapa?`);
@@ -84,7 +85,7 @@ const TournamentBracket = () => {
       await saveBracketToFirestore(updatedBracket);
     } else {
       await saveBracketToFirestore(bracket);
-    }
+    }*/
   };
 
   const getMatchTeams = (roundIndex, matchIndex) => {

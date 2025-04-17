@@ -31,7 +31,7 @@ function MenuOptions() {
     };
 
     return (
-        <>
+        <div>
             <div className="navbar">
                 <div className='addEvent'>
                     <button className={`btnCircle ${currentPage === '/home' || currentPage === '/' ? 'active' : ''}`} onClick={() => acessPage('/home')}>
@@ -51,7 +51,7 @@ function MenuOptions() {
             <footer className="footer" onClick={handleRedirect}>
                 <p className="footer-text">Desenvolvido por MatheusGomes58</p>
             </footer>
-        </>
+        </div>
 
     );
 }

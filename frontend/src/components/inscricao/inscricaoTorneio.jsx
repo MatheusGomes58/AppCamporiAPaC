@@ -151,26 +151,28 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
         <div className="inscricao-container">
             <h2>Reservar Vagas de Torneios</h2>
             {clubeJaInscrito && (
-                <div className="torneios-lista">
-                    <label className="torneio-item">
+                <div className="activity-description atividades">
+                    <label key={clubeJaInscrito.id}>
+                        <div className="activity-title">
+                            {formatarDataCompleta(clubeJaInscrito.date)}
+                        </div>
+                        <div className="activity-title">
+                            {clubeJaInscrito.hora} - {clubeJaInscrito.nome}
+                        </div>
                         <p className="aviso">
-                            Olá! Administrador do clube <strong>{nomeClube}</strong>, o seu clube já está inscrito no torneio <strong>{clubeJaInscrito.nome}</strong>.
+                            Olá! Administrador do clube <strong>{nomeClube}</strong>, o seu clube já está inscrito no torneio <strong>{clubeJaInscrito.nome}</strong>.<br />
+                            {clubeJaInscrito.inscritos?.length || 0}/{clubeJaInscrito.maxVagas} inscritos
                         </p>
                     </label>
                 </div>
             )}
 
             {!clubeJaInscrito && (
-                <>
+                <div className="teste">
                     <div className="torneios-lista">
                         {torneios.map((t) => (
                             <div className="activity-description atividades">
                                 <label key={t.id}>
-                                    <div className="activity-title">
-                                        {formatarDataCompleta(t.date)}
-                                    </div>
-
-                                    {/*
                                     {admin && !ismaster && (
                                         <input
                                             type="radio"
@@ -180,7 +182,9 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
                                             onChange={(e) => setTorneioSelecionado(e.target.value)}
                                         />
                                     )}
-                        */}
+                                    <div className="activity-title">
+                                        {formatarDataCompleta(t.date)}
+                                    </div>
                                     <div className="activity-title">
                                         {t.hora} - {t.nome}
                                     </div>
@@ -191,16 +195,12 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
                             </div>
                         ))}
                     </div>
-                    {/*
-                    <form onSubmit={handleInscricao}>
-                        {admin && !ismaster && (
-                            <button type="submit" disabled={!torneioSelecionado}>
-                                Confirmar inscrição do clube <strong>{nomeClube}</strong> no torneio {torneioSelecionado}
-                            </button>
-                        )}
-                    </form>
-*/}
-                </>
+                    {admin && !ismaster && (
+                        <button className="cancelar-btn" type="submit" disabled={!torneioSelecionado} onClick={handleInscricao}>
+                            Confirmar inscrição do clube <strong>{nomeClube}</strong> no torneio {torneioSelecionado}
+                        </button>
+                    )}
+                </div>
             )}
 
             {clubeJaInscrito && admin && !ismaster && (

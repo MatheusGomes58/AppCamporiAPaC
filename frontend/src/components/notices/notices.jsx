@@ -74,7 +74,7 @@ const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) =
                     </div>}
                 </div>
             ) : (
-                <>
+                <div>
                     <div className="chatList">
                         {messages.map(msg => (
                             <div key={msg.id} className="chatListItem">
@@ -100,7 +100,7 @@ const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) =
                         <span className="char-count">{newMessage.length}/240</span>
                         <button onClick={sendMessage} className="chatActionButton" disabled={newMessage.length > 240}>Enviar</button>
                     </div>}
-                </>
+                </div>
             )}
         </div>
     );

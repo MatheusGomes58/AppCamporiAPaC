@@ -102,7 +102,7 @@
 }
 
 .membro-item {
-    margin: 5px 0;
+    border: 1px solid #ccc;
 }
 
 .remover-membro-btn {

@@ -114,10 +114,10 @@ const RegisterForm = ({ remove, username, useremail, userclube, useradmin, useri
 
     return (
         <div id="RegisterForm">
-            {!isDropdownOpen && remove && <>
+            {!isDropdownOpen && remove && <div>
                 <p>Olá {name}!</p>
                 <p>Se você deseja realmente deletar insira sua senha abaixo e pressione o botão para confirmar!</p>
-            </>}
+            </div>}
             {!isDropdownOpen && !remove && <input
                 className="inputLogin"
                 type="text"

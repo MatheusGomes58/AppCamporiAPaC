@@ -8,7 +8,7 @@ import { getFirestore, collection, query, where, getDocs } from "firebase/firest
 import { app } from '../components/firebase/firebase'; // Assumindo que você tenha a configuração do Firebase em firebaseConfig.js
 
 const Event = memo(({ event, handleLocationClick }) => (
-    <>
+    <div>
         {event.atividades ? event.atividades.map((atividade, activityIndex) => (
             <div
                 key={activityIndex}
@@ -25,7 +25,7 @@ const Event = memo(({ event, handleLocationClick }) => (
                 </div>
             </div>
         )) : ""}
-    </>
+    </div>
 ));
 
 function SchedulePage({ isAutenticated, clube }) {

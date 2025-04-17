@@ -101,7 +101,7 @@ function AppContent() {
   }
 
   return (
-    <>
+    <div>
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -200,7 +200,7 @@ function AppContent() {
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
       </main>
-    </>
+    </div>
   );
 }
 
