@@ -12,6 +12,13 @@
   z-index: 1000; /* z-index alto para garantir que fique sobre os outros elementos */
 }
 
+.modal-content input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
 .modal-content {
   position: relative;
   display: flex;

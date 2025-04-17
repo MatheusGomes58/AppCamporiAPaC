@@ -193,7 +193,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                     {formatarDataCompleta(t.date)}
                                 </div>
                                 <div className="activity-title">
-                                    <strong>{t.nome}</strong>
+                                    {t.hora} - {t.nome}
                                 </div>
                                 <p>
                                     {t.inscritos?.length || 0} Inscritos

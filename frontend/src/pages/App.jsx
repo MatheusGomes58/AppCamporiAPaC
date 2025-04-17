@@ -82,7 +82,7 @@ function AppContent() {
             setUsername(userDoc.name || '');
             setEmail(userDoc.email || '');
             setAutenticated(!!userDoc.name);
-            setMaster(userDoc.clube === 'APAC');
+            setMaster(userDoc.clube === 'APAC' || userDoc.clube === 'ORGANIZAÇÃO');
 
             logEvent(analytics, 'user_login', {
               user_id: storedUser,
@@ -194,7 +194,6 @@ function AppContent() {
               admin={admin}
               isMaster={isMaster}
               username={username}
-              reserved={isMaster}
             />
           } />
           <Route path="*" element={<UnknowPage />} />
