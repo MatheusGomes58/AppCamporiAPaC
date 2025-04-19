@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from "../components/firebase/firebase";
 import {
     collection,
-    query, where,
+    query, or, where,
     onSnapshot
 } from "firebase/firestore";
 
@@ -21,8 +21,12 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
 
         const q = query(
             collection(db, "eventos"),
-            where("isTorneio", "==", true)
+            or(
+                where("isTorneio", "==", true),
+                where("isCorrida", "==", true)
+            )
         );
+
 
         const unsubscribe = onSnapshot(
             q,
@@ -61,9 +65,10 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
     }
 
     function renderItem(list) {
-        if (list.clube && list.admin) {
+        if (list.orMaster && isMaster)
+            return list.orMaster && isMaster
+        if (list.clube && list.admin)
             return useradmin && isMaster
-        }
         if (list.admin && !list.clube)
             return useradmin
         if (!list.admin && !list.clube)
@@ -101,7 +106,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                             <div key={index} className="menu-list">
                                 <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                                 <ul>
-                                    {list.title === 'Torneios' ? (
+                                    {list.title === 'Torneios e Corridas' ? (
                                         loadingTorneios ? (
                                             <li>
                                                 <span className="menu-list-item">Carregando torneios...</span>

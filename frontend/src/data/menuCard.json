@@ -61,12 +61,12 @@
         "user": true,
         "items": [
           { "title": "Verificar Pontuação", "link":"/scoresclubs" },
-          { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true },
+          { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true, "orMaster": true },
           { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"}
         ]
       },
       {
-        "title": "Torneios",
+        "title": "Torneios e Corridas",
         "user": true,
         "external": true,
         "items": [

@@ -25,7 +25,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
   }, [buttons]);
 
   return (
-    <div>
+    <>
       {!isHeader && (
         columns ? (
           <div
@@ -141,7 +141,7 @@ const Card = ({ image, title, text, size, onClick, htmlContent, columns, buttons
           {htmlContent && <div className="card-html-content">{htmlContent}</div>}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

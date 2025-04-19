@@ -1,17 +1,18 @@
 [
     {
-        "title": "Programação Completa",
-        "text": "Para garantir que você aproveite ao máximo cada momento, convidamos você a explorar nosso guia de programação detalhado. Nele, você encontrará todas as informações essenciais sobre horários de atividades, eventos especiais e encontros importantes. Prepare-se para uma jornada de crescimento espiritual e companheirismo!",
+        "image": "image8",
+        "title": "Super Desafio Musical",
+        "text": "A música oficial do Campori já está disponível na versão congregacional! E para celebrar, estamos lançando um desafio especial valendo um prêmio. Entre agora mesmo e descubra todos os detalhes!",
         "buttons": [
             {
-                "name": "Programação Completa",
+                "name": "Saiba Mais",
                 "onclick": {
-                    "title": "Programação",
-                    "image": "image1"
+                    "title": "Super Desafio Musical",
+                    "image": "image8"
                 }
             }
         ],
-        "size": "tiny",
+        "size": "small",
         "columns": false
     },
     {
@@ -125,5 +126,20 @@
         "size": "small",
         "columns": false,
         "buttonPos": false
+    },
+    {
+        "title": "Programação Completa",
+        "text": "Para garantir que você aproveite ao máximo cada momento, convidamos você a explorar nosso guia de programação detalhado. Nele, você encontrará todas as informações essenciais sobre horários de atividades, eventos especiais e encontros importantes. Prepare-se para uma jornada de crescimento espiritual e companheirismo!",
+        "buttons": [
+            {
+                "name": "Programação Completa",
+                "onclick": {
+                    "title": "Programação",
+                    "image": "image1"
+                }
+            }
+        ],
+        "size": "tiny",
+        "columns": false
     }
 ]

@@ -76,7 +76,7 @@ async function createReserv(clube, atividade) {
   }
 }
 
-async function cancelReserv(clube, atividade, eventoId, vagasCanceladas) {
+async function cancelReserv(clube, atividade, eventoId) {
   const dataId = getTodayDateId();
   const auditRef = doc(db, "audit", dataId);
 
@@ -87,9 +87,12 @@ async function cancelReserv(clube, atividade, eventoId, vagasCanceladas) {
     const evento = eventoSnap.data();
 
     const novosInscritos = (evento.inscritos || []).filter(c => c !== clube);
-    const novoTotal = (evento.inscritosTotal || 0) - vagasCanceladas;
-
     const novosClubes = (evento.clubes || []).filter(c => c.clube !== clube);
+
+    const clubeCancelado = (evento.clubes || []).filter(c => c.clube == clube);
+    const vagasCanceladas = (clubeCancelado[0]?.valueVagas || 0)
+
+    const novoTotal = (evento.inscritosTotal || 0) - vagasCanceladas;
 
     await updateDoc(eventoRef, {
       inscritos: novosInscritos,
@@ -150,7 +153,7 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
             onClick={async () => {
               const confirm = window.confirm("Tem certeza que deseja cancelar a reserva?");
               if (confirm) {
-                await cancelReserv(clube, event.atividade, event.id, 1);
+                await cancelReserv(clube, event.atividade, event.id);
                 alert("Reserva cancelada com sucesso!");
               }
             }}

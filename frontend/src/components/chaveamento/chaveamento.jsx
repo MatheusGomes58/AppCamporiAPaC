@@ -4,36 +4,46 @@ import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import "./chaveamento.css";
 
-
 const TournamentBracket = () => {
   const { tournamentName } = useParams();
   const [bracket, setBracket] = useState([]);
   const [winners, setWinners] = useState([]);
+  const [corridaData, setCorridaData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const inscricoesRef = doc(collection(db, "eventos"), tournamentName);
-        const docSnap = await getDoc(inscricoesRef);
+        if (tournamentName.includes("Corrida")) {
+          const docRef = doc(db, "inscricoes", tournamentName);
+          const docSnap = await getDoc(docRef);
 
-        if (!docSnap.exists()) return;
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setCorridaData(data);
+          }
+        } else {
+          const inscricoesRef = doc(collection(db, "eventos"), tournamentName);
+          const docSnap = await getDoc(inscricoesRef);
 
-        const initialTeams = docSnap.data()?.inscritos || [];
+          if (!docSnap.exists()) return;
 
-        const campeonatoDoc = await getDoc(doc(db, "campeonato", tournamentName));
-        const savedData = campeonatoDoc.exists() ? campeonatoDoc.data() : null;
-        const savedRoundsObj = savedData?.rounds || {};
+          const initialTeams = docSnap.data()?.inscritos || [];
 
-        const savedBracket = Object.keys(savedRoundsObj)
-          .sort((a, b) => Number(a) - Number(b))
-          .map((key) => savedRoundsObj[key]);
+          const campeonatoDoc = await getDoc(doc(db, "campeonato", tournamentName));
+          const savedData = campeonatoDoc.exists() ? campeonatoDoc.data() : null;
+          const savedRoundsObj = savedData?.rounds || {};
 
-        const bracketToUse = savedBracket.length > 0 ? savedBracket : [initialTeams];
-        const lastRound = bracketToUse[bracketToUse.length - 1] || [];
-        const newWinners = [...bracketToUse.slice(1), Array(Math.floor(lastRound.length / 2)).fill(null)];
+          const savedBracket = Object.keys(savedRoundsObj)
+            .sort((a, b) => Number(a) - Number(b))
+            .map((key) => savedRoundsObj[key]);
 
-        setBracket(bracketToUse);
-        setWinners(newWinners);
+          const bracketToUse = savedBracket.length > 0 ? savedBracket : [initialTeams];
+          const lastRound = bracketToUse[bracketToUse.length - 1] || [];
+          const newWinners = [...bracketToUse.slice(1), Array(Math.floor(lastRound.length / 2)).fill(null)];
+
+          setBracket(bracketToUse);
+          setWinners(newWinners);
+        }
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
@@ -58,8 +68,7 @@ const TournamentBracket = () => {
   };
 
   const handleSelectWinner = async (roundIndex, matchIndex, team) => {
-    /*
-    if (roundIndex !== winners.length - 1) return;
+    if (tournamentName.includes("corrida")) return; // Corrida não permite classificação
 
     const confirm = window.confirm(`Você deseja mesmo classificar ${team} para a próxima etapa?`);
     if (!confirm) return;
@@ -85,7 +94,7 @@ const TournamentBracket = () => {
       await saveBracketToFirestore(updatedBracket);
     } else {
       await saveBracketToFirestore(bracket);
-    }*/
+    }
   };
 
   const getMatchTeams = (roundIndex, matchIndex) => {
@@ -93,6 +102,29 @@ const TournamentBracket = () => {
     return [teams[matchIndex * 2], teams[matchIndex * 2 + 1]];
   };
 
+  // Exibição para corrida
+  if (tournamentName.includes("Corrida") && corridaData) {
+    return (
+      <div className="bracket-container">
+        <h1>{tournamentName}</h1>
+        <div className="round" >
+          {Object.entries(corridaData).map(([clube, participantes]) => (
+            <div className="match">
+              <div key={clube} className="clube">
+                <h3 className="round-title">{clube}</h3>
+                <div className="team">
+                  {Array.isArray(participantes) &&
+                    participantes.map((p, i) => <div key={i}>{p}</div>)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Exibição padrão (torneio)
   return (
     <div className="bracket-container">
       <h1>{`Torneio de ${tournamentName}`}</h1>

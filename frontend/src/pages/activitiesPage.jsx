@@ -10,6 +10,7 @@ import image3 from '../img/activities/3.jpg';
 import image4 from '../img/activities/4.jpg';
 import image5 from '../img/activities/5.jpg';
 import image7 from '../img/activities/7.jpg';
+import image8 from '../img/activities/8.jpg';
 import elenco1 from '../img/elenco/1.jpeg';
 import elenco2 from '../img/elenco/2.jpeg';
 import elenco3 from '../img/elenco/3.jpeg';
@@ -22,7 +23,7 @@ import elenco9 from '../img/elenco/9.jpeg';
 
 // Mapeia identificadores para imagens importadas
 const imageMap = {
-  image1, image2, image3, image4, image5, image7,
+  image1, image2, image3, image4, image5, image7, image8,
   elenco1, elenco2, elenco3, elenco4,
   elenco5, elenco6, elenco7, elenco8, elenco9
 };

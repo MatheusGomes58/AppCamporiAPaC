@@ -1,5 +1,36 @@
 [
   {
+    "text": "Super Desafio Musical",
+    "items": [
+      {
+        "type": "text",
+        "content": [
+          "A música oficial do Campori já está oficialmente liberada em sua versão congregacional — feita especialmente para que todos possam cantar juntos com força e entusiasmo!",
+          "E pra deixar tudo ainda mais emocionante, estamos lançando um desafio especial: queremos ver vocês dando o melhor de si!",
+          "✅ Assista ao vídeo do pastor explicando todas as regras do desafio — ele está cheio de dicas importantes que você não pode perder.",
+          "🎧 Ouça a música oficial pelo link abaixo e comece a se preparar!",
+          "🎤 E pra quem quiser gravar sua própria versão, disponibilizamos também o playback completo em outro link.",
+          "Agora é com vocês! Chamem o clube, treinem bastante e soltem a voz! 💛"
+        ]
+      },
+      {
+        "type": "button",
+        "content": "Link do vídeo do pastor com as regras",
+        "url": "https://www.youtube.com/watch?v=MxCmKLu2tWg"
+      },
+      {
+        "type": "button",
+        "content": "Link do vídeo do da música com letra",
+        "url": "https://www.youtube.com/watch?v=UzyQXWoNMFE"
+      },
+      {
+        "type": "button",
+        "content": "Link do playback da música",
+        "url": "https://drive.google.com/file/d/1WJYeozlEZMkL2EdZEmrDlzIJJwpoI3dL/view?usp=drive_link"
+      }
+    ]
+  },
+  {
     "text": "Mapa Detalhado",
     "items": [
       {
@@ -196,11 +227,11 @@
           "Confira as especialidades disponíveis:",
           "Especialidade de Torno Mecânico: Duração de 1 hora, com até 30 participantes por aula. Cada clube poderá inscrever no máximo 10 desbravadores.",
           "Especialidade de Ferreomodelismo: Aula de 1 hora, com capacidade para 50 participantes. Limite de 10 inscritos por clube.",
-          "Especialidade de Eletricidade: Especialidade com duração de 1 hora, para até 50 participantes. Cada clube poderá inscrever até 10 desbravadores.",
-          "Especialidade de Criacionismo: Aula de 1 hora, com até 50 participantes. Limite de 10 por clube.",
-          "Especialidade de Fósseis: Duração de 1 hora, com capacidade para 50 participantes por aula. Máximo de 10 por clube.",
-          "Especialidade de Patins: Especialidade com duração de 1 hora, voltada para grupos menores, com até 20 participantes por aula e limite de 5 desbravadores por clube.",
-          "Especialidade de Arco e Flecha: Aula de 1 hora, com até 50 participantes. Cada clube poderá inscrever até 10 desbravadores.",
+          "Especialidade de Eletricidade: Especialidade com duração de 1 hora, para até 50 participantes. Cada clube poderá inscrever até 20 desbravadores.",
+          "Especialidade de Criacionismo: Aula de 1 hora, com até 50 participantes. Limite de 20 por clube.",
+          "Especialidade de Fósseis: Duração de 1 hora, com capacidade para 50 participantes por aula. Máximo de 20 por clube.",
+          "Especialidade de Patins: Especialidade com duração de 1 hora, com até 100 participantes por aula e limite de 20 desbravadores por clube.",
+          "Especialidade de Arco e Flecha: Aula de 1 hora, com até 50 participantes. Cada clube poderá inscrever até 20 desbravadores.",
           "Regras Gerais para Participação nas Especialidades:",
           "- As vagas são limitadas e preenchidas por ordem de inscrição, portanto, é importante se inscrever o quanto antes.",
           "- Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
@@ -239,7 +270,6 @@
           "Prepare seu clube e participe dessa experiência esportiva única!"
         ]
       }
-      
     ]
   },
   {
@@ -309,7 +339,10 @@
     "items": [
       {
         "type": "text",
-        "content": "Para os Desbravadores, a música é uma forma de expressar a fé e a alegria de viver. Seja em um acampamento sob as estrelas, em uma caminhada pela natureza ou em um momento de serviço à comunidade, um cântico no coração é a trilha sonora que acompanha cada aventura e desafio."
+        "content": [
+          "Para os Desbravadores, a música é uma forma de expressar a fé e a alegria de viver. Seja em um acampamento sob as estrelas, em uma caminhada pela natureza ou em um momento de serviço à comunidade, um cântico no coração é a trilha sonora que acompanha cada aventura e desafio.",
+          "A música oficial do campori já esta disponível com a versão com letra, ouça agora mesmo e não perca o Desafio da Música!"
+        ]
       },
       {
         "type": "text",
@@ -329,6 +362,11 @@
         "type": "button",
         "content": "Canal do Menos Um (CD Jovem)",
         "url": "https://www.youtube.com/@MENOSUM7/featured"
+      },
+      {
+        "type": "button",
+        "content": "Musica oficial do campori",
+        "url": "https://youtu.be/UzyQXWoNMFE?si=jl1F8EFL0vw8tnVo"
       }
     ]
   },

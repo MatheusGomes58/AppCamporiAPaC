@@ -17,6 +17,7 @@ import image3 from '../img/activities/3.jpg';
 import image4 from '../img/activities/4.jpg';
 import image5 from '../img/activities/5.jpg';
 import image7 from '../img/activities/7.jpg';
+import image8 from '../img/activities/8.jpg';
 
 // Mapeia identificadores para imagens importadas
 const imageMap = {
@@ -26,6 +27,7 @@ const imageMap = {
   image4: image4,
   image5: image5,
   image7: image7,
+  image8: image8,
 };
 
 // Lazy load Card component
@@ -99,6 +101,8 @@ const App = () => {
       return image5
     }  else if (image == 'image7') {
       return image7
+    }else if (image == 'image8') {
+      return image8
     }else {
       return image
     }
