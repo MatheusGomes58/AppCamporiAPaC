@@ -4,7 +4,7 @@ import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import "./chaveamento.css";
 
-const TournamentBracket = () => {
+const TournamentBracket = ({ isMaster, admin }) => {
   const { tournamentName } = useParams();
   const [bracket, setBracket] = useState([]);
   const [winners, setWinners] = useState([]);
@@ -68,6 +68,8 @@ const TournamentBracket = () => {
   };
 
   const handleSelectWinner = async (roundIndex, matchIndex, team) => {
+    if (!isMaster || !admin) return
+
     if (tournamentName.includes("corrida")) return; // Corrida não permite classificação
 
     const confirm = window.confirm(`Você deseja mesmo classificar ${team} para a próxima etapa?`);
@@ -84,11 +86,11 @@ const TournamentBracket = () => {
       const nextRoundTeams = [...updatedRound];
       const updatedBracket = [...bracket, nextRoundTeams];
 
-      if (nextRoundTeams.length > 1) {
-        setBracket(updatedBracket);
-        setWinners([...updatedWinners, Array(nextRoundTeams.length / 2).fill(null)]);
-      } else {
-        setBracket(updatedBracket);
+      setBracket(updatedBracket);
+
+      const nextRoundSize = Math.floor(nextRoundTeams.length / 2);
+      if (nextRoundSize > 0) {
+        setWinners([...updatedWinners, Array(nextRoundSize).fill(null)]);
       }
 
       await saveBracketToFirestore(updatedBracket);
@@ -104,6 +106,7 @@ const TournamentBracket = () => {
 
   // Exibição para corrida
   if (tournamentName.includes("Corrida") && corridaData) {
+    var count = 0;
     return (
       <div className="bracket-container">
         <h1>{tournamentName}</h1>
@@ -114,7 +117,7 @@ const TournamentBracket = () => {
                 <h3 className="round-title">{clube}</h3>
                 <div className="team">
                   {Array.isArray(participantes) &&
-                    participantes.map((p, i) => <div key={i}>{p}</div>)}
+                    participantes.map((p, i) => <div key={i}>{count = count+1} - {p}</div>)}
                 </div>
               </div>
             </div>

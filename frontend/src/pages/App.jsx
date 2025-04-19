@@ -105,7 +105,12 @@ function AppContent() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/chaveamento/:tournamentName" element={<ChaveamentoPage />} />
+          <Route path="/chaveamento/:tournamentName" element={
+            <ChaveamentoPage
+              isMaster={isMaster}
+              admin={admin}
+            />
+          } />
           <Route path="/inscricao" element={
             <InscricaoPage
               clube={clube}

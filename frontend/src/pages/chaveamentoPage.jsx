@@ -1,10 +1,13 @@
 import TournamentBracket from "../components/chaveamento/chaveamento";
 
 
-function App() {
+function App({ isMaster, admin }) {
   return (
     <div>
-      <TournamentBracket />
+      <TournamentBracket
+        isMaster={isMaster}
+        admin={admin}
+      />
     </div>
   );
 }
