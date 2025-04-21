@@ -225,6 +225,11 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
   const handleUpdateMicroEvent = async () => {
     if (editingMicroEventIndex === null) return;
 
+    if (valueVagas < 1) {
+      alert("Número de vagas inválido. O mínimo permitido é 1.");
+      return;
+    }
+
     setButtonBlocked(true);
     const evento = microEvents[editingMicroEventIndex];
 
@@ -238,15 +243,19 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         ? inscritosAtuais
         : [...inscritosAtuais, clube];
 
-
       const clubesInscritos = microEventData.clubes || [];
       const novosClubesInscritos = clubesInscritos.find(c => c.clube === clube)
         ? clubesInscritos
         : [...clubesInscritos, { clube, valueVagas }];
 
-
       const totalAtual = microEventData.inscritosTotal || 0;
       const novoTotal = totalAtual + valueVagas;
+
+      if (novoTotal > microEventData.maxVagas) {
+        alert("Erro: excedeu o número máximo de vagas.");
+        setButtonBlocked(false);
+        return;
+      }
 
       await updateDoc(microEventRef, {
         inscritos: novosInscritos,
@@ -258,11 +267,13 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
 
       setButtonBlocked(false);
       setEditingMicroEventIndex(null);
-      alert("Atividade reservada com sucesso com sucesso!");
+      alert("Atividade reservada com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar atividade", error);
+      setButtonBlocked(false);
     }
   };
+
 
   function validateQuantity(value) {
     const valorDigitado = parseInt(value);
@@ -280,7 +291,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
   }
 
   return (
-    <div>
+    <div className="event-list-section">
       <h2>Reservar Vagas de {activeTab}</h2>
 
       {editingMicroEvent &&

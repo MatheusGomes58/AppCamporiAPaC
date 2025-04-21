@@ -206,7 +206,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
     }
 
     return (
-        <div className="inscricao-container">
+        <div className="event-list-section">
             <h2>Reservar Vagas de Corridas</h2>
             <div className="torneios-lista">
                 {torneios.map((t) => {

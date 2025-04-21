@@ -2,6 +2,7 @@
     {
         "title": "Quarta-Feira, 30 de Abril",
         "date": "2025-04-30",
+        "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
@@ -14,6 +15,7 @@
     {
         "title": "Quinta-Feira, 15 de Maio",
         "date": "2025-05-15",
+        "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
@@ -26,6 +28,7 @@
     {
         "title": "Terça-Feira, 10 de Junho",
         "date": "2025-06-10",
+        "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
@@ -61,11 +64,25 @@
                 "responsável": "Clubes"
             },
             {
+                "horário": "12h",
+                "atividade": "Horário de Almoço",
+                "local": "Áreas de cozinha",
+                "descrição": "Hora da pausa para o almoço",
+                "responsável": "Cozinheiras"
+            },
+            {
                 "horário": "15h às 18h",
                 "atividade": "Entrega da caixa de primeiros socorros",
                 "local": "Posto médico",
                 "descrição": "Entrega da caixa de primeiros socorros para avaliação.",
                 "responsável": "Clubes"
+            },
+            {
+                "horário": "17h",
+                "atividade": "Reunião com os diretores de clube",
+                "local": "Local a definir",
+                "descrição": "Reunião com os diretores de clube",
+                "responsável": "Organização"
             },
             {
                 "horário": "19h",
@@ -94,12 +111,68 @@
         "title": "Sexta-Feira, 20 de Junho",
         "date": "2025-06-20",
         "atividades": [
+            {
+                "horário": "07h",
+                "atividade": "Reunião com os diretores de clube",
+                "local": "Local a definir",
+                "descrição": "Reunião com os diretores de clube",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "07h45",
+                "atividade": "Programação Especial da manhã",
+                "local": "UNASP-EC",
+                "descrição": "Programação Especial da manhã",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "12h",
+                "atividade": "Horário de Almoço",
+                "local": "Áreas de cozinha",
+                "descrição": "Hora da pausa para o almoço",
+                "responsável": "Cozinheiras"
+            },
+            {
+                "horário": "19h30",
+                "atividade": "Investidura da Classe de lĩder",
+                "local": "UNASP-EC",
+                "descrição": "Investidura da Classe de lĩder.",
+                "responsável": "Organização"
+            }
         ]
     },
     {
         "title": "Sábado, 21 de Junho",
         "date": "2025-06-21",
         "atividades": [
+            {
+                "horário": "07h",
+                "atividade": "Reunião com os diretores de clube",
+                "local": "Local a definir",
+                "descrição": "Reunião com os diretores de clube",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "07h45",
+                "atividade": "Programação Especial da manhã",
+                "local": "UNASP-EC",
+                "descrição": "Programação Especial da manhã",
+                "responsável": "Organização"
+            },
+            {
+                "horário": "12h",
+                "atividade": "Horário de Almoço",
+                "local": "Áreas de cozinha",
+                "descrição": "Hora da pausa para o almoço",
+                "responsável": "Cozinheiras"
+            },
+            {
+                "horário": "17h00",
+                "atividade": "Culto de consagração do Sábado",
+                "local": "UNASP-EC",
+                "descrição": "Culto de consagração do Sábado",
+                "responsável": "Organização"
+            }
         ]
     },
     {

@@ -122,6 +122,8 @@ function AppContent() {
           <Route path="/guide" element={<GuidePage />} />
           <Route path="/schedule" element={
             <SchedulePage
+              isclub={clube}
+              isMaster={isMaster}
               isAutenticated={isAutenticated}
               clube={clube}
             />

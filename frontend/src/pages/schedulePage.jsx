@@ -5,7 +5,8 @@ import '../css/schedulePage.css';
 import imageSchedulePage from '../img/imageSchedulePage.jpg';
 import eventsData from '../data/scheduleData.json';
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
-import { app } from '../components/firebase/firebase'; // Assumindo que você tenha a configuração do Firebase em firebaseConfig.js
+import { app } from '../components/firebase/firebase';
+import clubs from '../data/clubes.json';
 
 const Event = memo(({ event, handleLocationClick }) => (
     <div>
@@ -19,24 +20,36 @@ const Event = memo(({ event, handleLocationClick }) => (
                 </div>
                 <div>
                     {atividade.descrição && <p>{atividade.descrição}</p>}
-                    {atividade.responsável && <p className='responsible-info'><strong>
-                        <Icons.FaUserAlt style={{ marginRight: '8px' }} />{atividade.responsável}</strong></p>}
-                    {atividade.local && <p><button className='location-button' onClick={() => handleLocationClick(atividade.local)}> <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} /> {atividade.local}</button></p>}
+                    {atividade.responsável && (
+                        <p className='responsible-info'>
+                            <strong>
+                                <Icons.FaUserAlt style={{ marginRight: '8px' }} />
+                                {atividade.responsável}
+                            </strong>
+                        </p>
+                    )}
+                    {atividade.local && (
+                        <p>
+                            <button className='location-button' onClick={() => handleLocationClick(atividade.local)}>
+                                <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} />
+                                {atividade.local}
+                            </button>
+                        </p>
+                    )}
                 </div>
             </div>
         )) : ""}
     </div>
 ));
 
-function SchedulePage({ isAutenticated, clube }) {
+function SchedulePage({ isAutenticated, clube, isMaster }) {
     const navigate = useNavigate();
     const [activeDate, setActiveDate] = useState(getInitialActiveDate(eventsData));
+    const [filterClub, setFilterClub] = useState(!isMaster ? clube : '');
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        loadEvents();
-    }, []);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [search, setSearch] = useState('');
 
     const handleLocationClick = useCallback((location) => {
         navigate(`/map?location=${encodeURIComponent(location)}`);
@@ -53,9 +66,9 @@ function SchedulePage({ isAutenticated, clube }) {
             const q = query(microEventsRef, where("inscritos", "array-contains", clube));
             const snapshot = await getDocs(q);
 
-            const microEventsList = snapshot.docs.map(doc => {
+            return snapshot.docs.map(doc => {
                 const eventData = doc.data();
-                const object = {
+                return {
                     title: eventData.title || "Evento sem título",
                     date: eventData.date || "0000-00-00",
                     atividades: [{
@@ -68,56 +81,52 @@ function SchedulePage({ isAutenticated, clube }) {
                         classe: eventData.classe
                     }]
                 };
-                console.log(object)
-                return object
             });
-
-            return microEventsList;
         } catch (error) {
-            console.error("Erro ao buscar microevents:", error);
+            console.error("Erro ao buscar microeventos:", error);
             return [];
         }
     };
 
-
-
     const loadEvents = async () => {
+        setLoading(true);
+
         let finalEvents = [];
 
         if (isAutenticated) {
-            const microEvents = await fetchMicroEvents(clube);
-            console.log(microEvents)
-            const combinedEvents = [...eventsData, ...microEvents];
+            const microEvents = await fetchMicroEvents(filterClub);
+            const filteredEventsData = (eventsData || []).filter(event => {
+                const eventsOnSameDate = (eventsData || []).filter(e => e.date === event.date);
+                return eventsOnSameDate.some(e => !e.isNotEnabled);
+            });
+
+            const combinedEvents = [...filteredEventsData, ...microEvents];
+
 
             const groupedEvents = combinedEvents.reduce((acc, event) => {
                 const key = event.date;
-
                 if (!acc[key]) {
                     acc[key] = { title: event.title, date: event.date, atividades: [] };
                 }
 
                 if (event.atividades) {
                     event.atividades.forEach(activity => {
-                        const activityExists = acc[key].atividades.some(existingActivity =>
-                            existingActivity.horário === activity.horário &&
-                            existingActivity.atividade === activity.atividade
+                        const exists = acc[key].atividades.some(a =>
+                            a.horário === activity.horário &&
+                            a.atividade === activity.atividade
                         );
-
-                        if (!activityExists) {
+                        if (!exists) {
                             acc[key].atividades.push(activity);
                         }
                     });
                 }
-
                 return acc;
             }, {});
 
             finalEvents = Object.values(groupedEvents).sort((a, b) => new Date(a.date) - new Date(b.date));
 
             finalEvents.forEach(event => {
-                if (event.atividades.length > 0) {
-                    event.atividades.sort((a, b) => convertToMinutes(a.horário) - convertToMinutes(b.horário));
-                }
+                event.atividades.sort((a, b) => convertToMinutes(a.horário) - convertToMinutes(b.horário));
             });
         } else {
             finalEvents = eventsData;
@@ -128,38 +137,45 @@ function SchedulePage({ isAutenticated, clube }) {
         setLoading(false);
     };
 
+    useEffect(() => {
+        if (isAutenticated) {
+            loadEvents();
+        } else {
+            setEvents(eventsData);
+            setActiveDate(getInitialActiveDate(eventsData));
+            setLoading(false);
+        }
+    }, [filterClub, isAutenticated]);
+
+    const handleSelectClub = (clubeSelecionado) => {
+        setFilterClub(clubeSelecionado);
+        setSearch(clubeSelecionado);
+        setIsDropdownOpen(false);
+    };
 
     function convertToMinutes(timeString) {
         const [hour, minute] = timeString.includes('h')
             ? timeString.split('h').map(part => parseInt(part, 10))
-            : [parseInt(timeString, 10), 0]; // Caso não tenha "h", assume 0 minutos
-
-        const minutes = isNaN(minute) ? 0 : minute;
-        return (hour * 60) + minutes;
+            : [parseInt(timeString, 10), 0];
+        return (hour * 60) + (isNaN(minute) ? 0 : minute);
     }
-
 
     function formatDate(dateString) {
         const date = new Date(dateString);
-
-        // Adiciona um dia à data
         date.setDate(date.getDate() + 1);
-
-        const options = {
-            weekday: 'long', // Dia da semana completo
-            month: 'long',   // Mês completo
-            day: 'numeric',  // Dia numérico
-        };
-
-        return date.toLocaleDateString('pt-BR', options); // Localidade brasileira
+        return date.toLocaleDateString('pt-BR', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+        });
     }
 
     return (
         <div className="schedule-page">
             <div className='event-card'>
                 {/*<img alt="Imagem do evento" className='event-image' src={imageSchedulePage} />*/}
+
                 <div className='date-panel-container'>
-                    {/* Renderiza as datas únicas */}
                     {events.length > 0 && Array.from(new Set(events.map(event => event.date))).map(date => (
                         <button
                             key={date}
@@ -170,18 +186,53 @@ function SchedulePage({ isAutenticated, clube }) {
                         </button>
                     ))}
                 </div>
+
+                {!isDropdownOpen && isMaster && (
+                    <input
+                        className="campoEntrada"
+                        type="text"
+                        placeholder="Selecione o seu clube"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        onFocus={() => setIsDropdownOpen(true)}
+                    />
+                )}
+
+                {isDropdownOpen && (
+                    <div className="customSelect">
+                        <input
+                            className="campoEntrada"
+                            type="text"
+                            placeholder="Pesquise seu clube"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <div className="selectTitle" onClick={() => handleSelectClub('')}>Selecione seu clube</div>
+                        {clubs
+                            .filter((c) => c.CLUBE.toLowerCase().includes(search.toLowerCase()))
+                            .map((c, index) => (
+                                <div key={index} className="optionItem" onClick={() => handleSelectClub(c.CLUBE)}>
+                                    <div>{`Clube: ${c.CLUBE}`}</div>
+                                    <div>{`Igreja: ${c.IGREJA}`}</div>
+                                    <div>{`Distrito: ${c.DISTRITO}`}</div>
+                                </div>
+                            ))}
+                    </div>
+                )}
+
                 <div className='event-list-section'>
                     {loading ? (
                         <p>Carregando eventos...</p>
                     ) : (
-                        events.filter(event => event.date === activeDate).map((event, eventIndex) => (
-                            <Event
-                                key={eventIndex}
-                                event={event}
-                                eventIndex={eventIndex}
-                                handleLocationClick={handleLocationClick}
-                            />
-                        ))
+                        events
+                            .filter(event => event.date === activeDate)
+                            .map((event, index) => (
+                                <Event
+                                    key={index}
+                                    event={event}
+                                    handleLocationClick={handleLocationClick}
+                                />
+                            ))
                     )}
                 </div>
             </div>
@@ -192,14 +243,7 @@ function SchedulePage({ isAutenticated, clube }) {
 function getInitialActiveDate(events) {
     const today = new Date().toISOString().split('T')[0];
     const todayEvent = events.find(event => event.date === today);
-    if (todayEvent) {
-        return todayEvent.date;
-    }
-
-    if (events.length > 0) {
-        return events[0].date;
-    }
-    return null;
+    return todayEvent ? todayEvent.date : (events[0]?.date || null);
 }
 
 export default SchedulePage;

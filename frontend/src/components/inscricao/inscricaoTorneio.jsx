@@ -148,7 +148,7 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
     };
 
     return (
-        <div className="inscricao-container">
+        <div className="event-list-section">
             <h2>Reservar Vagas de Torneios</h2>
             {clubeJaInscrito && (
                 <div className="activity-description atividades">

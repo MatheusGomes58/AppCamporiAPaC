@@ -53,10 +53,11 @@
     margin: 1%;
     font-size: 25px;
     position: relative;
+    color: #0300a354;
 }
 
 .btnCircle.active {
-    color: black;
+    color: #0300a3a1;
 }
 
 .menuCicle {

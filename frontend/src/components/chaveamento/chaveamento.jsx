@@ -148,13 +148,13 @@ const TournamentBracket = ({ isMaster, admin }) => {
                 >
                   {teamA}
                 </div>
-                <div className="vs">vs</div>
-                <div
+                {teamB && <div className="vs">vs</div>}
+                {teamB && <div
                   className={`team ${winner === teamB ? "selected" : ""}`}
                   onClick={() => handleSelectWinner(roundIndex, matchIndex, teamB)}
                 >
                   {teamB}
-                </div>
+                </div>}
               </div>
             );
           })}
