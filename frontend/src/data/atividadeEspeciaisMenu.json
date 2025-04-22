@@ -1,35 +1,47 @@
 [
     {
-        "atividade": "Especialidade de Eletricidade"
+      "atividade": "Especialidade de Eletricidade",
+      "descricao": "Descubra como a eletricidade funciona e aprenda a montar circuitos simples com segurança."
     },
     {
-        "atividade": "Especialidade de Criacionismo"
+      "atividade": "Especialidade de Criacionismo",
+      "descricao": "Estude as origens da vida segundo a perspectiva bíblica e compreenda a importância da fé e ciência."
     },
     {
-        "atividade": "Especialidade de Torno Mecânico"
+      "atividade": "Especialidade de Torno Mecânico",
+      "descricao": "Aprenda sobre essa poderosa máquina usada para moldar peças metálicas com precisão."
     },
     {
-        "atividade": "Especialidade de Ferreomodelismo"
+      "atividade": "Especialidade de Ferreomodelismo",
+      "descricao": "Mergulhe no mundo dos trens em miniatura e construa sua própria ferrovia em escala."
     },
     {
-        "atividade": "Especialidade de Fósseis"
+      "atividade": "Especialidade de Fósseis",
+      "descricao": "Explore fósseis e entenda o que eles revelam sobre a história da Terra e da criação."
     },
     {
-        "atividade": "Especialidade de Patins"
+      "atividade": "Especialidade de Patins",
+      "descricao": "Desenvolva equilíbrio, coordenação e diversão enquanto aprende a patinar com segurança."
     },
     {
-        "atividade": "Especialidade de Arco e Flecha"
+      "atividade": "Especialidade de Arco e Flecha",
+      "descricao": "Aprimore foco e precisão praticando essa arte ancestral com responsabilidade."
     },
     {
-        "atividade": "Visitação ao MAB"
+      "atividade": "Visitação ao MAB",
+      "descricao": "Conheça o Museu de Arqueologia Bíblica e explore artefatos que fortalecem a fé cristã."
     },
     {
-        "atividade": "Visitação ao Centro White"
+      "atividade": "Visitação ao Centro White",
+      "descricao": "Visite o centro de estudos sobre Ellen G. White e descubra mais sobre sua missão e legado."
     },
     {
-        "atividade": "Torneios"
+      "atividade": "Torneios",
+      "descricao": "Desafie outros desbravadores em competições saudáveis e fortaleça o espírito de equipe."
     },
     {
-        "atividade": "Corridas"
+      "atividade": "Corridas",
+      "descricao": "Corra, divirta-se e supere seus limites em provas de velocidade e resistência."
     }
-]
+  ]
+  

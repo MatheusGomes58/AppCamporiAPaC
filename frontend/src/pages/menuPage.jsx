@@ -59,7 +59,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
     }
 
     function renderMenu(list) {
-        if (list.user === userAutenticated || list.default) {
+        if ((list.user === userAutenticated) || (list.admin == (useradmin || isMaster))) {
             return true;
         }
     }

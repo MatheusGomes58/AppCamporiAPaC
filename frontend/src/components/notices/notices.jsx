@@ -59,25 +59,25 @@ const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) =
     };
 
     return (
-        <div className="chatWidget">
+        <div className="widget-container">
             {isSlider ? (
-                <div className="chat-slider">
+                <div className='atividades-grid minimal'>
                     {messages.length > 0 && (
-                        <div className="chatMessageData">
+                        <div className="atividade-card minimal">
                             <p className="chatTitle" dangerouslySetInnerHTML={{ __html: messages[currentIndex].text.replace(/\n/g, '<br/>') }}></p>
                             <span className="chatAuthor">{formatTimestamp(messages[currentIndex].timestamp)} - {messages[currentIndex].name}</span>
                         </div>
                     )}
                     {messages.length > 1 && <div className="chat-slider-controls">
-                        <button className='chatActionButton' onClick={prevSlide} >&lt;</button>
-                        <button className='chatActionButton' onClick={nextSlide} >&gt;</button>
+                        <button onClick={prevSlide} >&lt;</button>
+                        <button onClick={nextSlide} >&gt;</button>
                     </div>}
                 </div>
             ) : (
-                <div>
+                <div className='atividades-grid minimal'>
                     <div className="chatList">
                         {messages.map(msg => (
-                            <div key={msg.id} className="chatListItem">
+                            <div key={msg.id} className="atividade-card minimal">
                                 <p className="chatListTitle" dangerouslySetInnerHTML={{ __html: msg.text.replace(/\n/g, '<br/>') }}></p>
                                 <small>{formatTimestamp(messages[currentIndex].timestamp)} - {msg.name}</small>
                                 <div>
@@ -98,7 +98,7 @@ const ChatComponent = ({email, uid, admin, name, isSlider = false, isMaster }) =
                             rows={3}
                         />
                         <span className="char-count">{newMessage.length}/240</span>
-                        <button onClick={sendMessage} className="chatActionButton" disabled={newMessage.length > 240}>Enviar</button>
+                        <button onClick={sendMessage} disabled={newMessage.length > 240}>Enviar</button>
                     </div>}
                 </div>
             )}

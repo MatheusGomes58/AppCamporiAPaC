@@ -106,26 +106,31 @@ const TournamentBracket = ({ isMaster, admin }) => {
 
   // Exibição para corrida
   if (tournamentName.includes("Corrida") && corridaData) {
-    var count = 0;
+    let count = 0;
     return (
       <div className="bracket-container">
         <h1>{tournamentName}</h1>
-        <div className="round" >
-          {Object.entries(corridaData).map(([clube, participantes]) => (
-            <div className="match">
-              <div key={clube} className="clube">
-                <h3 className="round-title">{clube}</h3>
-                <div className="team">
-                  {Array.isArray(participantes) &&
-                    participantes.map((p, i) => <div key={i}>{count = count+1} - {p}</div>)}
+        <div className="round">
+          {Object.entries(corridaData).map(([clube, participantes]) => {
+            if (!Array.isArray(participantes) || participantes.length === 0) return null;
+            return (
+              <div className="match" key={clube}>
+                <div className="clube">
+                  <h3 className="round-title">{clube}</h3>
+                  <div className="team">
+                    {participantes.map((p, i) => (
+                      <div key={i}>{++count} - {p}</div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );
   }
+
 
   // Exibição padrão (torneio)
   return (

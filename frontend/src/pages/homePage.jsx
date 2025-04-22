@@ -8,6 +8,7 @@ import Countdown from '../components/cronometro/cronometro';
 import EventsWidgets from '../components/eventsWidgets/eventsWidgets';
 import ContactsWidgets from '../components/contactsWidgets/contactsWidgets';
 import NoticeWidgets from '../components/notices/notices'
+import AtividadesWidgets from '../components/atividades/atividades'
 import cardsData from '../data/cardsData.json';
 
 // Importa todas as imagens
@@ -79,7 +80,7 @@ const App = () => {
 
   const handleClick = useCallback((text, image) => {
     if (text.includes("Musica Tema")) {
-      //setModalOpen(true);
+      setModalOpen(true);
     } else {
       image = setImage(image);
       console.log(image)
@@ -97,13 +98,13 @@ const App = () => {
       return image3
     } else if (image == 'image4') {
       return image4
-    }  else if (image == 'image5') {
+    } else if (image == 'image5') {
       return image5
-    }  else if (image == 'image7') {
+    } else if (image == 'image7') {
       return image7
-    }else if (image == 'image8') {
+    } else if (image == 'image8') {
       return image8
-    }else {
+    } else {
       return image
     }
   }, []);
@@ -119,9 +120,9 @@ const App = () => {
           <Card
             key="header"
             image={ChurchCampori}
-            text=""
             size="header"
             columns={false}
+            onClick={() => handleClick("Musica Tema do campori", LogoCampori)}
             htmlContent={
               <div className="card header">
                 <div className="card-image-container">
@@ -151,10 +152,10 @@ const App = () => {
             size="medium"
             columns={false}
             buttonHeaders={true}
-            htmlContent={[<EventsWidgets />, <div />, <NoticeWidgets isSlider={true} />, <ContactsWidgets />]}
+            htmlContent={[<EventsWidgets />, <AtividadesWidgets />, <NoticeWidgets isSlider={true} />, <ContactsWidgets />]}
             buttons={[
               { name: 'FaCalendarAlt', Title: 'Programações', onclick: { title: "Campori Experience Login", image: LogoCampori } },
-              { name: 'FaTasks', Title: 'Atividades', Text: 'Em breve você poderá ver as atividades do campori!' },
+              { name: 'FaTasks', Title: 'Atividades'},
               { name: 'FaBullhorn', Title: 'Anúncios' },
               { name: 'FaAddressBook', Title: 'Contatos' }
             ]}
@@ -162,7 +163,6 @@ const App = () => {
           <Card
             key="countdown"
             image={LogoCampori}
-            text=""
             size="header"
             columns={false}
             htmlContent={<Countdown />}
@@ -184,7 +184,7 @@ const App = () => {
           ))}
         </Suspense>
       </div>
-      {modalOpen && <YouTubeModal videoId={"C-M-AAhH2o0"} onClose={closeModal} />}
+      {modalOpen && <YouTubeModal videoId={"UzyQXWoNMFE"} onClose={closeModal} />}
     </div>
   );
 };

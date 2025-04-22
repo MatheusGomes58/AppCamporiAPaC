@@ -69,17 +69,17 @@ const getNextAndFollowingEventAndActivity = (events) => {
 
 
 const Event = memo(({ event, nextActivity, handleLocationClick }) => (
-    <div className='eventWidget'>
-        <div className='title'>{event.title}</div>
+    <div className='atividade-card minimal'>
+        <div className='atividade-titulo'>{event.title}</div>
         <div className='eventData'>
             {nextActivity && (
                 <div>
                     {nextActivity.horário && nextActivity.atividade && (
-                        <p className='title'>
+                        <p className='atividade-titulo'>
                             {nextActivity.horário} - {nextActivity.atividade}
                         </p>
                     )}
-                    {nextActivity.descrição && <p>{nextActivity.descrição}</p>}
+                    {nextActivity.descrição && <p className='atividade-descricao'>{nextActivity.descrição}</p>}
                     {nextActivity.responsável && (
                         <p className='responsavel'>
                             <Icons.FaUserAlt style={{ marginRight: '8px' }} />
@@ -116,9 +116,9 @@ function SchedulePage() {
     }, [navigate]);
 
     return (
-        <div>
+        <div className='widget-container'>
             {nextEventData.nextEvent ? (
-                <div>
+                <div className='atividades-grid minimal'>
                     <Event
                         event={nextEventData.nextEvent.event}
                         nextActivity={nextEventData.nextEvent.nextActivity}

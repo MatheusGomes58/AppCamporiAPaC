@@ -58,10 +58,10 @@
       },
       {
         "title": "clube",
-        "user": true,
+        "admin": true,
         "items": [
-          { "title": "Verificar Pontuação", "link":"/scoresclubs" },
           { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true, "orMaster": true },
+          { "title": "Atividades Gerais", "link": "/schedulesactivity", "admin": true, "orMaster": true },
           { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"}
         ]
       },

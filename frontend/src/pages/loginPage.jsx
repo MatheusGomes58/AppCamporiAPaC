@@ -36,6 +36,7 @@ const AuthForm = ({ menuEnabled, name, email, clube, admin, isAutenticated, setL
                     console.error("Erro ao sair do Firebase:", error);
                     // Aqui você pode exibir uma mensagem de erro, se quiser
                 });
+            window.location.reload()
         } else if (path === '/deleteprofile' && !localStorage.getItem('profileDeleteProcessed')) {
             setDelete(true);
             localStorage.setItem('profileDeleteProcessed', 'true'); // Marcar que o delete foi processado

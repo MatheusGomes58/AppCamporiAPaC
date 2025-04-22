@@ -3,28 +3,29 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './menu.css';
 
 function MenuOptions() {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const [currentPage, setCurrentPage] = useState(location.pathname);
-    const [isMenuMinimized, setIsMenuMinimized] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         setCurrentPage(location.pathname);
     }, [location.pathname]);
 
-    function toggleMenu() {
-        setIsMenuMinimized(!isMenuMinimized);
-    }
+    // Listas de rotas para cada botão
+    const homeRoutes = ['/', '/home'];
+    const mapRoutes = ['/map'];
+    const scheduleRoutes = ['/schedule', '/schedulesclub', '/chaveamento'];
+    const menuRoutes = ['/menu', '/guide', '/scores', '/scoresclubs'];
 
-    function acessPage(path) {
-        if (path === '/score') {
-            navigate('/score');
-        } else {
-            setCurrentPage(path);
-            history(path);
-        }
-    }
+    // Função para verificar se a rota atual bate com uma das rotas ou seus subcaminhos
+    const matchRoute = (routes) => {
+        return routes.some(route => currentPage === route || currentPage.startsWith(route + '/'));
+    };
+
+    const acessPage = (path) => {
+        setCurrentPage(path);
+        navigate(path);
+    };
 
     const handleRedirect = () => {
         window.location.href = 'https://www.instagram.com/matheusgome58/';
@@ -34,16 +35,28 @@ function MenuOptions() {
         <div>
             <div className="navbar">
                 <div className='addEvent'>
-                    <button className={`btnCircle ${currentPage === '/home' || currentPage === '/' ? 'active' : ''}`} onClick={() => acessPage('/home')}>
+                    <button
+                        className={`btnCircle ${matchRoute(homeRoutes) ? 'active' : ''}`}
+                        onClick={() => acessPage('/home')}
+                    >
                         <i className="fas fa-home"></i>
                     </button>
-                    <button className={`btnCircle ${currentPage === '/map' ? 'active' : ''}`} onClick={() => acessPage('/map')}>
+                    <button
+                        className={`btnCircle ${matchRoute(mapRoutes) ? 'active' : ''}`}
+                        onClick={() => acessPage('/map')}
+                    >
                         <i className="fas fa-map-marker-alt"></i>
                     </button>
-                    <button className={`btnCircle ${currentPage === '/guide' ? 'active' : ''}`} onClick={() => acessPage('/guide')}>
-                        <i className="fas fa-book"></i>
+                    <button
+                        className={`btnCircle ${matchRoute(scheduleRoutes) ? 'active' : ''}`}
+                        onClick={() => acessPage('/schedule')}
+                    >
+                        <i className="fas fa-calendar-alt"></i>
                     </button>
-                    <button className={`btnCircle ${currentPage === '/menu' ? 'active' : ''}`} onClick={() => acessPage('/menu')}>
+                    <button
+                        className={`btnCircle ${matchRoute(menuRoutes) ? 'active' : ''}`}
+                        onClick={() => acessPage('/menu')}
+                    >
                         <i className="fas fa-bars"></i>
                     </button>
                 </div>
@@ -52,7 +65,6 @@ function MenuOptions() {
                 <p className="footer-text">Desenvolvido por MatheusGomes58</p>
             </footer>
         </div>
-
     );
 }
 

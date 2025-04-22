@@ -45,41 +45,38 @@ const ContactsWidget = () => {
     };
 
     return (
-        <div className="contacts-widget">
-            <div className="contacts-widget-data">
-                <ul className="contacts-list">
-                    <p className='title'>Lista de Contatos oficiais do campori</p>
-                    {currentContacts.map((contato, index) => (
-                        <li
-                            key={index}
-                            className="contacts-list-item"
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <p className="contacts-title">{contato.Setor}</p>
-                            <p>{contato.Responsável}</p>
-                            {contato.Telefone && (
-                                <div className="contacts-info">
-                                    <FaPhone />
-                                    <p style={{marginLeft: '5px'}}>{contato.Telefone}</p>
-                                </div>
-                            )}
-                            {contato.Email && (
-                                <div className="contacts-info">
-                                    <FaEnvelope />
-                                    <p style={{marginLeft: '5px'}}>{contato.Email}</p>
-                                </div>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+        <div className="widget-container">
+            <div className="atividades-grid minimal">
+                {currentContacts.map((contato, index) => (
+                    <div
+                        key={index}
+                        className="atividade-card minimal"
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <p className="atividade-titulo">{contato.Setor}</p>
+                        <p>{contato.Responsável}</p>
+                        {contato.Telefone && (
+                            <div className="contacts-info">
+                                <FaPhone />
+                                <p style={{ marginLeft: '5px' }}>{contato.Telefone}</p>
+                            </div>
+                        )}
+                        {contato.Email && (
+                            <div className="contacts-info">
+                                <FaEnvelope />
+                                <p style={{ marginLeft: '5px' }}>{contato.Email}</p>
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
             <div className="contacts-pagination">
                 <button onClick={goToPreviousPage} disabled={currentPage === 1} className="contacts-button">
-                    Anterior
+                    &lt;
                 </button>
                 <span>{`Página ${currentPage} de ${totalPages}`}</span>
                 <button onClick={goToNextPage} disabled={currentPage === totalPages} className="contacts-button">
-                    Próxima
+                    &gt;
                 </button>
             </div>
         </div>

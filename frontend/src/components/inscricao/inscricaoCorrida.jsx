@@ -239,32 +239,36 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                             {(membros[t.id] || []).map((m, i) => (
                                                 <div key={i} className="membro-item">
                                                     <span>{m}</span>
-                                                    <button
-                                                        className="remover-membro-btn"
-                                                        onClick={() => handleRemoverMembro(t.id, m)}
-                                                    >
-                                                        Remover
-                                                    </button>
+                                                    {inscrito && admin && (
+                                                        <button
+                                                            className="remover-membro-btn"
+                                                            onClick={() => handleRemoverMembro(t.id, m)}
+                                                        >
+                                                            Remover
+                                                        </button>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
 
-                                        <input
-                                            type="text"
-                                            placeholder="Nome do membro"
-                                            value={novoMembro}
-                                            onChange={(e) => setNovoMembro(e.target.value)}
-                                        />
-                                        <button onClick={() => handleAdicionarMembro(t.id)}>
-                                            Adicionar membro
-                                        </button>
-
-                                        <button className="cancelar-btn" onClick={() => handleCancelarInscricao(t.id)}>
-                                            Cancelar inscrição
-                                        </button>
+                                        {inscrito && admin && (<>
+                                            <input
+                                                type="text"
+                                                placeholder="Nome do membro"
+                                                value={novoMembro}
+                                                onChange={(e) => setNovoMembro(e.target.value)}
+                                            />
+                                            <button onClick={() => handleAdicionarMembro(t.id)}>
+                                                Adicionar membro
+                                            </button>
+                                            <button className="cancelar-btn" onClick={() => handleCancelarInscricao(t.id)}>
+                                                Cancelar inscrição
+                                            </button>
+                                        </>
+                                        )}
                                     </div>
                                 )}
-                                {!inscrito && admin && !ismaster && (
+                                {!inscrito && admin && (
                                     <button onClick={() => handleInscricaoDireta(t.id)}>
                                         Inscrever clube
                                     </button>
