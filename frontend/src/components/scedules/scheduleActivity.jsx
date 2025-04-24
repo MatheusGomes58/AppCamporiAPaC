@@ -121,9 +121,9 @@ async function cancelReserv(clube, atividade, eventoId) {
 }
 
 
-const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, activeTab }) => {
-  const isClubeInscrito = (event.inscritos || []).includes(clube);
+const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, activeTab, isClubeInscrito }) => {
   const isSameAtividade = event.atividade === activeTab;
+  const WhereClubeInscrito = (event.inscritos || []).includes(clube)
 
   return (
     <div className={`activity-description ${event.classe}`}>
@@ -134,34 +134,35 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
       <p>
         {event.inscritosTotal || 0}/{event.maxVagas} inscritos
       </p>
-      {admin && !isMaster && validateInscrition(event) && !hasReserved && (
-        <p>
-          <button className="location-button" onClick={handleClick}>
-            Reservar
-          </button>
-        </p>
-      )}
       {event.clubes && event.clubes.map((clubes) => (
-        <div className="membro-item" key={clubes.clube}>
+        (isMaster || clubes.clube == clube) && <div className="membro-item" key={clubes.clube}>
           {clubes.clube} - {clubes.valueVagas} Inscrito(s)
         </div>
       ))}
-      {admin && !isMaster && isClubeInscrito && isSameAtividade && (
-        <p>
-          <button
-            className="cancel-button"
-            onClick={async () => {
-              const confirm = window.confirm("Tem certeza que deseja cancelar a reserva?");
-              if (confirm) {
-                await cancelReserv(clube, event.atividade, event.id);
-                alert("Reserva cancelada com sucesso!");
-              }
-            }}
-          >
-            Cancelar reserva
-          </button>
-        </p>
+      {(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && (
+        <button className="location-button" onClick={handleClick}>
+          Reservar
+        </button>
       )}
+      {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (
+        <button
+          className="cancel-button"
+          onClick={async () => {
+            const confirm = window.confirm("Tem certeza que deseja cancelar a reserva?");
+            if (confirm) {
+              await cancelReserv(clube, event.atividade, event.id);
+              alert("Reserva cancelada com sucesso!");
+            }
+          }}
+        >
+          Cancelar reserva
+        </button>
+      )}
+      {!WhereClubeInscrito &&
+        <div className="activity-title">
+          {!isClubeInscrito && !WhereClubeInscrito ?event.maxVagas === event.inscritosTotal ? "Não há mais vagas disponíveis neste horário" : "Ainda há vagas disponíveis neste horário":"Seu clube já esta inscrito nessa atividade em outro horário"}
+        </div>
+      }
     </div>
   );
 });
@@ -172,6 +173,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
   const [valueVagas, setValueVagas] = useState(1);
   const [hasReserved, setHasReserved] = useState(false);
   const [buttonBlocked, setButtonBlocked] = useState(false);
+  const [isClubeInscrito, setIsClubeInscrito] = useState(false);
 
   const editingMicroEvent =
     editingMicroEventIndex !== null
@@ -190,10 +192,16 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         ...doc.data(),
       }));
       setMicroEvents(events);
+
+      const isInscrito = events.some(
+        (event) => (event.inscritos || []).includes(clube)
+      );
+      setIsClubeInscrito(isInscrito);
     });
 
     return () => unsubscribe();
   }, [activeTab]);
+
 
   useEffect(() => {
     const dataId = getTodayDateId();
@@ -329,7 +337,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
                     <button onClick={handleUpdateMicroEvent} disabled={buttonBlocked}>
                       {buttonBlocked ? "Reservando..." : "Reservar"}
                     </button>
-                    <button onClick={() => setEditingMicroEventIndex(null)}>
+                    <button  disabled={buttonBlocked} onClick={() => setEditingMicroEventIndex(null)}>
                       Cancelar
                     </button>
                   </div>
@@ -349,6 +357,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
           hasReserved={hasReserved}
           clube={clube}
           activeTab={activeTab}
+          isClubeInscrito={isClubeInscrito}
         />
       ))}
     </div>

@@ -197,26 +197,6 @@
       },
       {
         "type": "title",
-        "content": "Torneios"
-      },
-      {
-        "type": "text",
-        "content": [
-          "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência. Conheça agora mesmo as modalidades do nosso torneio:",
-          "- Beach Tennis Feminino",
-          "- Beach Tennis Masculino",
-          "- Futvolei Masculino",
-          "- Volei Dupla Feminina",
-          "Por isso, convidamos todos os clubes a conhecerem atentamente as regras a seguir e se prepararem para participar ativamente dos torneios. Afinal, quanto mais engajamento, mais memorável será essa experiência no Campori 2025 da APaC!",
-          "- Inscrições por Torneio: Cada clube poderá se inscrever em apenas um torneio. Caso restem vagas após o encerramento das inscrições, será aberta uma nova oportunidade para os clubes já inscritos ampliarem sua participação.",
-          "- Participação por dupla: Cada clube poderá inscrever apenas uma dupla, formada exclusivamente por desbravadores com idades entre 10 e 15 anos. A seleção dessa dupla deverá ser feita por meio de uma eliminatória interna organizada pelo próprio clube.",
-          "- Formato das eliminatórias: As disputas seguirão o formato de eliminatória simples, ou seja, cada confronto será decisivo. Não haverá repescagem, reforçando a importância de cada rodada.",
-          "- Responsável pela inscrição: Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
-          "- Finais dos torneios: As finais serão realizadas no sábado à noite, durante a programação oficial do Campori."
-        ]
-      },
-      {
-        "type": "title",
         "content": "Especialidades"
       },
       {
@@ -254,6 +234,25 @@
           "- Somente usuários com acesso master do clube poderão realizar as inscrições dos desbravadores nas visitações.",
           "- A participação nas visitações será validada apenas mediante presença no horário agendado. Acompanhe os Horários pela tela de programação no APP do campori",
           "- Para garantir a organização e uma distribuição equilibrada de vagas, cada clube poderá se inscrever em apenas uma especialidade ou visitação por dia. Caso deseje participar de mais de uma especialidade ou visitação, o clube deverá realizar a inscrição em dias diferentes."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Torneios"
+      },
+      {
+        "type": "text",
+        "content": [
+          "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência. Conheça agora mesmo as modalidades do nosso torneio:",
+          "- Volei de Time Feminino: Deve ser inscrito um time contendo 6 pessoas e usaremos as quadras de areia e poliesportivas",
+          "- Volei de Time Masculino: Deve ser inscrito um time contendo 6 pessoas e usaremos as quadras de areia e poliesportivas",
+          "- Futvolei Masculino: Deve ser inscrito uma dupla e usaremos as quadras de areia",
+          "- Volei Dupla Feminina: Deve ser inscrito uma dupla e usaremos as quadras de areia",
+          "Por isso, convidamos todos os clubes a conhecerem atentamente as regras a seguir e se prepararem para participar ativamente dos torneios. Afinal, quanto mais engajamento, mais memorável será essa experiência no Campori 2025 da APaC!",
+          "- Inscrições por Torneio: Cada clube poderá se inscrever em apenas dois torneios.",
+          "- Formato das eliminatórias: As disputas seguirão o formato de eliminatória simples, ou seja, cada confronto será decisivo.",
+          "- Responsável pela inscrição: Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
+          "- Finais dos torneios: As finais serão realizadas no sábado à noite, durante a programação oficial do Campori."
         ]
       },
       {

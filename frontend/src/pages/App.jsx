@@ -19,6 +19,7 @@ import ScheduleActivity from './scheduleActivitiesPage';
 import ScoresPage from './scorePage';
 import ChaveamentoPage from './chaveamentoPage';
 import InscricaoPage from './inscricaoPage';
+import DashboarAtividade from './activityPage';
 
 const analytics = getAnalytics(); // Instancia global
 
@@ -130,6 +131,9 @@ function AppContent() {
           } />
           <Route path="/map" element={<UnknowPage />} />
           <Route path="/count" element={<CountPage />} />
+          <Route path="/dashboard" element={
+            <DashboarAtividade />}
+          />
           <Route path="/scoresclubs" element={
             <ScoresPage
               isclub={clube}
@@ -196,6 +200,15 @@ function AppContent() {
           } />
           <Route path="/help" element={<RedirectToHelp />} />
           <Route path="/schedulesclub" element={
+            <ScheduleActivity
+              clube={clube}
+              admin={admin}
+              isMaster={isMaster}
+              username={username}
+              isEspecial={true}
+            />
+          } />
+          <Route path="/schedulesactivity" element={
             <ScheduleActivity
               clube={clube}
               admin={admin}

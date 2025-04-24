@@ -1,11 +1,13 @@
-import atividades from '../data/atividadeEspeciaisMenu.json';
+import atividadesEspeciaisJson from '../data/atividadeEspeciaisMenu.json';
+import atividadesJson from '../data/atividadeMenu.json';
 import InscricaoTorneio from "../components/inscricao/inscricaoTorneio";
 import InscricaoCorrida from "../components/inscricao/inscricaoCorrida";
 import ScheduleForm from "../components/scedules/scheduleActivity";
 import React, { useState } from "react";
 import '../css/schedulePage.css';
 
-const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
+const EventScheduler = ({ clube, admin, reserved, username, isMaster, isEspecial }) => {
+  const [atividades, setatividades] = useState(isEspecial ? atividadesEspeciaisJson : atividadesJson);
   const [activeTab, setActiveTab] = useState(atividades[0]?.atividade || "");
 
   function renderTab() {
@@ -48,8 +50,9 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster }) => {
             </button>
           ))}
         </div>
-
+        {/*
         <button onClick={() => window.location.href="/activities?text=Atividades%20Especiais"}>Leia as instruções das Atividades especiais</button>
+        */}
         {renderTab()}
       </div>
     </div>

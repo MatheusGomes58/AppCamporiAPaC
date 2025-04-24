@@ -1,0 +1,75 @@
+/* Container principal */
+.dashboard-container {
+    height: 85vh;
+    width: 100vw;
+    overflow: auto;
+    color: black;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Título principal */
+.dashboard-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+}
+
+/* Título dos cartões */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+/* Tabelas */
+.table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.table th {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+}
+
+.table td {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.table tr:hover {
+    background-color: #f9fafb;
+}
+
+.tooltip-custom {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-custom ul {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+.tooltip-custom li {
+    margin-bottom: 0.25rem;
+}
+
+.donut-center-label {
+    font-size: 1.2rem;
+    fill: #111827;
+    font-weight: bold;
+}
