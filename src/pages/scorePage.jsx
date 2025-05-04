@@ -8,6 +8,7 @@ import clubs from '../data/clubes.json';
 
 export default function ScoreDashboard({ isMaster, isclub, register, admin, uid }) {
     const [scores, setScores] = useState([]);
+    const [avaliacoes, setAvaliacoes] = useState([]);
     const [club, setClub] = useState('');
     const [points, setPoints] = useState("");
     const [activity, setActivity] = useState("");
@@ -32,7 +33,12 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                 setScores(data);
             });
 
-            return unsubscribe;
+            const unsubscribeAvaliacoes = onSnapshot(collection(db, "pontuacao"), (querySnapshot) => {
+                const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                setAvaliacoes(data);
+            });
+
+            return unsubscribe, unsubscribeAvaliacoes;
         } else {
             alert('Faça o login para acessar essa funcionalidade');
             navigate('/menu');
@@ -239,12 +245,35 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                         value={points}
                         onChange={(e) => setPoints(e.target.value)}
                     />
-                    <input
+                    <select
                         className="campoEntrada"
-                        placeholder="Nome da Atividade"
                         value={activity}
                         onChange={(e) => setActivity(e.target.value)}
-                    />
+                    >
+                        <option value="">Selecione uma atividade</option>
+                        {avaliacoes.map((data, index) => (
+                            <option key={index} value={index}>
+                                {data.avaliacao}
+                            </option>
+                        ))}
+                    </select>
+
+                    {activity !== "" && avaliacoes[activity]?.avaliations?.length > 0 && (
+                        <div className="listaSubAvaliacoes">
+                            {avaliacoes[activity].avaliations.map((data, index) => (
+                                <div key={index}>
+                                    <p>{data.title}</p>
+                                    {data.points && data.points.map((point, idx) => (
+                                        <label key={idx}>
+                                            <input type="radio" name={`avaliacao-${index}`} value={point.value? point.value: 0} />
+                                            {point.title}
+                                        </label>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     <button className="botaoSubmeter" onClick={addScore}>
                         Adicionar
                     </button>

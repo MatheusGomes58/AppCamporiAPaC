@@ -29,12 +29,10 @@ const Event = memo(({ event, handleLocationClick }) => (
                         </p>
                     )}
                     {atividade.local && (
-                        <p>
-                            <button className='location-button' onClick={() => handleLocationClick(atividade.local)}>
-                                <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} />
-                                {atividade.local}
-                            </button>
-                        </p>
+                        <button className='location-button' onClick={() => handleLocationClick(atividade.local)}>
+                            <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} />
+                            {atividade.local}
+                        </button>
                     )}
                 </div>
             </div>

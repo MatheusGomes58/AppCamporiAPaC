@@ -68,7 +68,6 @@
 }
 
 .auth-container .auth-form input, select {
-    margin: 0.5rem 0;
     height: 40px;
     border: 1px solid #ccc;
     border-radius: 5px;

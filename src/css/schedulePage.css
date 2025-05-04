@@ -129,6 +129,10 @@
     background-color: #0300a317;
 }
 
+.torneios{
+    background-color: #a3770049;
+}
+
 .date-panel-container {
     display: flex;
     justify-content: flex-start;
