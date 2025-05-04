@@ -126,11 +126,23 @@
 }
 
 .atividades{
+    background-color: rgba(33, 163, 0, 0.09);
+}
+
+.gerais{
     background-color: #0300a317;
 }
 
 .torneios{
-    background-color: #a3770049;
+    background-color: #a3000023;
+}
+
+.corridas{
+    background-color: #9000a321;
+}
+
+.visitacao{
+    background-color: #a38b0021;
 }
 
 .date-panel-container {

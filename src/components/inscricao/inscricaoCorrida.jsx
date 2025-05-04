@@ -212,7 +212,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                 {torneios.map((t) => {
                     const inscrito = inscritosMap[t.id];
                     return (
-                        <div className="activity-description atividades" key={t.id}>
+                        <div className={`activity-description ${t.classe}`} key={t.id}>
                             <div>
                                 <div className="activity-title">
                                     {formatarDataCompleta(t.date)}

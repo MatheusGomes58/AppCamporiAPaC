@@ -141,7 +141,7 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
 
             {torneiosInscritos.length > 0 && (
                 torneiosInscritos.map((t) => (
-                    <div key={t.id} className="activity-description atividades">
+                    <div key={t.id} className={`activity-description ${t.classe}`}>
                         <div className="activity-title">{formatarDataCompleta(t.date)}</div>
                         <div className="activity-title">{t.hora} - {t.nome}</div>
                         <p className="aviso">
@@ -162,7 +162,7 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
                     <div className="torneios-lista">
                         {torneios.map((t) => (
                             !t.inscritos?.includes(nomeClube) && (
-                                <div key={t.id} className="activity-description atividades">
+                                <div key={t.id} className={`activity-description ${t.classe}`}>
                                     <label>
                                         {admin && !ismaster && (
                                             <input
