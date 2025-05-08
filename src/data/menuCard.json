@@ -61,7 +61,6 @@
         "admin": true,
         "items": [
           { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true, "orMaster": true },
-          { "title": "Atividades Gerais", "link": "/schedulesactivity", "admin": true, "orMaster": true },
           { "title": "Dashboard de Atividades", "link":"/dashboard", "admin": true, "clube": "APAC"},
           { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"}
         ]

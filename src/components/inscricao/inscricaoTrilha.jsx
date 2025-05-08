@@ -21,7 +21,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
     const [inscritosMap, setInscritosMap] = useState({});
 
     useEffect(() => {
-        const q = query(collection(db, "eventos"), where("isCorrida", "==", true));
+        const q = query(collection(db, "eventos"), where("isTrilha", "==", true));
 
         const unsubscribe = onSnapshot(q, async (snapshot) => {
             const lista = snapshot.docs.map((doc) => ({
@@ -207,7 +207,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
 
     return (
         <div className="event-list-section">
-            <h2>Reservar Vagas de Corridas</h2>
+            <h2>Reservar Vagas de Trilha Noturna - Classe de Guia</h2>
             <div className="torneios-lista">
                 {torneios.map((t) => {
                     const inscrito = inscritosMap[t.id];
@@ -269,7 +269,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                         )}
                                     </div>
                                 )}
-                                {!inscrito && admin && !ismaster &&(
+                                {!inscrito && admin && (
                                     <button onClick={() => handleInscricaoDireta(t.id)}>
                                         Inscrever clube
                                     </button>

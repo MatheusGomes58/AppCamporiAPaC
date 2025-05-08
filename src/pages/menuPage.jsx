@@ -23,7 +23,8 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
             collection(db, "eventos"),
             or(
                 where("isTorneio", "==", true),
-                where("isCorrida", "==", true)
+                where("isCorrida", "==", true),
+                where("isTrilha", "==", true),
             )
         );
 

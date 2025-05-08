@@ -21,6 +21,14 @@ const TournamentBracket = ({ isMaster, admin }) => {
             const data = docSnap.data();
             setCorridaData(data);
           }
+        } else if (tournamentName.includes("Trilha")) {
+          const docRef = doc(db, "inscricoes", tournamentName);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setCorridaData(data);
+          }
         } else {
           const inscricoesRef = doc(collection(db, "eventos"), tournamentName);
           const docSnap = await getDoc(inscricoesRef);
@@ -103,6 +111,33 @@ const TournamentBracket = ({ isMaster, admin }) => {
     const teams = bracket[roundIndex];
     return [teams[matchIndex * 2], teams[matchIndex * 2 + 1]];
   };
+
+  // Exibição para Trilha
+  if (tournamentName.includes("Trilha") && corridaData) {
+    let count = 0;
+    return (
+      <div className="bracket-container">
+        <h1>{tournamentName}</h1>
+        <div className="round">
+          {Object.entries(corridaData).map(([clube, participantes]) => {
+            if (!Array.isArray(participantes) || participantes.length === 0) return null;
+            return (
+              <div className="match" key={clube}>
+                <div className="clube">
+                  <h3 className="round-title">{clube}</h3>
+                  <div className="team">
+                    {participantes.map((p, i) => (
+                      <div key={i}>{++count} - {p}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
   // Exibição para corrida
   if (tournamentName.includes("Corrida") && corridaData) {

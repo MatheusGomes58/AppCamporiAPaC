@@ -61,9 +61,11 @@ export default function ScoreDashboard() {
         });
     });
 
-    const totalVagasPorEvento = Array.from(atividadeMap.values()).sort((a, b) =>
-        a.atividade.localeCompare(b.atividade)
-    );
+    const totalVagasPorEvento = Array.from(atividadeMap.values()).sort((a, b) => {
+        const atividadeA = a?.atividade ?? '';
+        const atividadeB = b?.atividade ?? '';
+        return atividadeA.localeCompare(atividadeB);
+    });
 
     const totalVagasGeral = totalVagasPorEvento.reduce(
         (sum, item) => sum + item.vagas,

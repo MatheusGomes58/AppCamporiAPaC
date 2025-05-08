@@ -1,6 +1,7 @@
 import atividadesEspeciaisJson from '../data/atividadeEspeciaisMenu.json';
 import atividadesJson from '../data/atividadeMenu.json';
 import InscricaoTorneio from "../components/inscricao/inscricaoTorneio";
+import InscricaoTrilha from "../components/inscricao/inscricaoTrilha";
 import InscricaoCorrida from "../components/inscricao/inscricaoCorrida";
 import ScheduleForm from "../components/scedules/scheduleActivity";
 import React, { useState } from "react";
@@ -20,6 +21,12 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, isEspecial
       />
     } else if (activeTab == 'Corridas') {
       return <InscricaoCorrida
+        clube={clube}
+        admin={admin}
+        ismaster={isMaster}
+      />
+    } else if (activeTab == 'Trilha Noturna') {
+      return <InscricaoTrilha
         clube={clube}
         admin={admin}
         ismaster={isMaster}

@@ -1,189 +1,189 @@
 [
     {
-        "title": "Quarta-Feira, 30 de Abril",
+        "title": "Quarta-feira | 30 de Abril",
         "date": "2025-04-30",
         "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
-                "atividade": "ÚLTIMO PRAZO PARA PAGAMENTO DAS INSCRIÇÕES",
-                "responsável": "Diretoria do Clube",
-                "descrição": "Não perca! Este é o último dia para efetuar o pagamento das inscrições. Garanta sua participação!"
+                "atividade": "Último prazo para pagamento das inscrições",
+                "responsável": "Diretoria do clube participante",
+                "descrição": "Hoje é o último dia para garantir a participação do seu clube no Campori por meio do pagamento das inscrições. Após este prazo, novas confirmações não serão aceitas. Fique atento ao horário e não deixe para a última hora!"
             }
         ]
     },
     {
-        "title": "Quinta-Feira, 15 de Maio",
+        "title": "Quinta-feira | 15 de Maio",
         "date": "2025-05-15",
         "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
-                "atividade": "Prazo final para envio da documentação da investidura",
-                "descrição": "Prazo final para envio da documentação da investidura nas classes de liderança, contatar o cordenador Thiago Forato.",
-                "responsável": "Clubes"
+                "atividade": "Envio da documentação da investidura",
+                "responsável": "Coordenação de liderança (Thiago Forato)",
+                "descrição": "Este é o prazo final para que os clubes enviem toda a documentação necessária referente à investidura nas classes de liderança. Certifique-se de que todos os documentos estejam completos e organizados. Para dúvidas, entre em contato com o coordenador responsável."
             }
         ]
     },
     {
-        "title": "Terça-Feira, 10 de Junho",
+        "title": "Terça-feira | 10 de Junho",
         "date": "2025-06-10",
         "isNotEnabled": true,
         "atividades": [
             {
                 "horário": "23h59",
                 "atividade": "Prazo final para informar candidatos ao batismo",
-                "descrição": "Prazo final para os clubes informarem candidatos ao batismo.",
-                "responsável": "Clubes"
+                "responsável": "Diretoria dos clubes locais",
+                "descrição": "Último dia para que os clubes comuniquem à organização os nomes dos candidatos que desejam participar da cerimônia de batismo durante o evento. Garanta que todas as informações sejam enviadas corretamente para o bom andamento da programação espiritual."
             }
         ]
     },
     {
-        "title": "Quinta-Feira, 19 de Junho",
+        "title": "Quinta-feira | 19 de Junho",
         "date": "2025-06-19",
         "atividades": [
             {
                 "horário": "06h",
                 "atividade": "Chegada dos clubes",
                 "local": "UNASP-EC",
-                "descrição": "Chegada dos clubes no local do evento.",
-                "responsável": "Clubes"
+                "responsável": "Equipes de transporte e direção dos clubes",
+                "descrição": "Início oficial da recepção dos clubes participantes no campus do UNASP, em Engenheiro Coelho. Cheguem com antecedência e organizem-se para uma entrada tranquila."
             },
             {
                 "horário": "08h",
-                "atividade": "Pré-Abertura",
+                "atividade": "Pré-abertura",
                 "local": "UNASP-EC",
-                "descrição": "Atividades da Pré-Abertura.",
-                "responsável": "Organização"
+                "responsável": "Equipe de programação do evento",
+                "descrição": "Atividades iniciais de integração e orientação dos clubes. Um momento para acolher todos os participantes e alinhar os primeiros passos da programação."
             },
             {
                 "horário": "11h",
                 "atividade": "Áreas de acampamento e cozinha prontas",
                 "local": "Áreas de acampamento e cozinha",
-                "descrição": "Áreas de acampamento e cozinha prontas para uso.",
-                "responsável": "Clubes"
+                "responsável": "Clubes participantes",
+                "descrição": "Todos os clubes devem finalizar a montagem e organização das áreas de acampamento e cozinha até este horário. A organização fará visitas para verificar a estrutura."
             },
             {
                 "horário": "12h",
-                "atividade": "Horário de Almoço",
+                "atividade": "Horário de almoço",
                 "local": "Áreas de cozinha",
-                "descrição": "Hora da pausa para o almoço",
-                "responsável": "Cozinheiras"
+                "responsável": "Equipes de alimentação dos clubes",
+                "descrição": "Momento para recarregar as energias. Cada clube se organiza para preparar e servir o almoço nas áreas designadas."
             },
             {
                 "horário": "15h às 18h",
                 "atividade": "Entrega da caixa de primeiros socorros",
                 "local": "Posto médico",
-                "descrição": "Entrega da caixa de primeiros socorros para avaliação.",
-                "responsável": "Clubes"
+                "responsável": "Diretores de clube",
+                "descrição": "Todos os clubes devem entregar a caixa de primeiros socorros para conferência. Este é um item essencial para garantir a segurança e bem-estar dos participantes."
             },
             {
                 "horário": "17h",
                 "atividade": "Reunião com os diretores de clube",
                 "local": "Local a definir",
-                "descrição": "Reunião com os diretores de clube",
-                "responsável": "Organização"
+                "responsável": "Coordenação geral do evento",
+                "descrição": "Reunião com todos os diretores dos clubes para repassar orientações importantes, esclarecer dúvidas e alinhar detalhes operacionais do Campori."
             },
             {
                 "horário": "19h",
                 "atividade": "Reunião com coordenadores e regionais",
                 "local": "Local a definir",
-                "descrição": "Reunião com coordenadores e regionais.",
-                "responsável": "Organização"
+                "responsável": "Liderança regional da organização",
+                "descrição": "Momento de alinhamento com os coordenadores regionais para tratar das responsabilidades e acompanhar os preparativos da programação."
             },
             {
                 "horário": "19h",
                 "atividade": "Reunião com pastores",
                 "local": "Local a definir",
-                "descrição": "Reunião com pastores.",
-                "responsável": "Organização"
+                "responsável": "Equipe ministerial do evento",
+                "descrição": "Encontro com os pastores que atuarão no evento, com foco em planejamento das atividades espirituais e ações de apoio pastoral durante os dias do Campori."
             },
             {
                 "horário": "19h30",
                 "atividade": "Abertura oficial",
                 "local": "UNASP-EC",
-                "descrição": "Cerimônia de abertura oficial do Campori.",
-                "responsável": "Organização"
+                "responsável": "Coordenação geral do Campori",
+                "descrição": "Cerimônia solene de abertura do evento, com apresentação das regiões, momento espiritual e início simbólico das atividades do Campori."
             }
         ]
     },
     {
-        "title": "Sexta-Feira, 20 de Junho",
+        "title": "Sexta-feira | 20 de Junho",
         "date": "2025-06-20",
         "atividades": [
             {
                 "horário": "07h",
                 "atividade": "Reunião com os diretores de clube",
                 "local": "Local a definir",
-                "descrição": "Reunião com os diretores de clube",
-                "responsável": "Organização"
+                "responsável": "Coordenação do evento",
+                "descrição": "Reunião matinal com os diretores para atualizações importantes e checagem de ajustes no cronograma. Participação obrigatória."
             },
             {
                 "horário": "07h45",
-                "atividade": "Programação Especial da manhã",
+                "atividade": "Programação especial da manhã",
                 "local": "UNASP-EC",
-                "descrição": "Programação Especial da manhã",
-                "responsável": "Organização"
+                "responsável": "Equipe de louvor e espiritualidade",
+                "descrição": "Início das atividades do dia com uma programação inspiradora e dinâmica para motivar os participantes e fortalecer o espírito de equipe."
             },
             {
                 "horário": "12h",
-                "atividade": "Horário de Almoço",
+                "atividade": "Horário de almoço",
                 "local": "Áreas de cozinha",
-                "descrição": "Hora da pausa para o almoço",
-                "responsável": "Cozinheiras"
+                "responsável": "Equipes de alimentação dos clubes",
+                "descrição": "Intervalo para o almoço. Os clubes devem garantir um ambiente organizado e acolhedor para este momento importante do dia."
             },
             {
                 "horário": "19h30",
-                "atividade": "Investidura da Classe de lĩder",
+                "atividade": "Investidura da Classe de Líder",
                 "local": "UNASP-EC",
-                "descrição": "Investidura da Classe de lĩder.",
-                "responsável": "Organização"
+                "responsável": "Coordenação de liderança e espiritualidade",
+                "descrição": "Cerimônia solene de investidura para os desbravadores que concluíram a Classe de Líder. Um momento de reconhecimento e compromisso com a missão."
             }
         ]
     },
     {
-        "title": "Sábado, 21 de Junho",
+        "title": "Sábado | 21 de Junho",
         "date": "2025-06-21",
         "atividades": [
             {
                 "horário": "07h",
                 "atividade": "Reunião com os diretores de clube",
                 "local": "Local a definir",
-                "descrição": "Reunião com os diretores de clube",
-                "responsável": "Organização"
+                "responsável": "Coordenação do evento",
+                "descrição": "Encontro com os diretores para passar os avisos gerais do sábado, revisar o cronograma e alinhar pontos estratégicos do dia."
             },
             {
                 "horário": "07h45",
-                "atividade": "Programação Especial da manhã",
+                "atividade": "Programação especial da manhã",
                 "local": "UNASP-EC",
-                "descrição": "Programação Especial da manhã",
-                "responsável": "Organização"
+                "responsável": "Equipe de espiritualidade e louvor",
+                "descrição": "Uma programação inspiradora para começar o sábado com gratidão, reflexão e louvor. Inclui mensagens especiais, cânticos e dinâmicas."
             },
             {
                 "horário": "12h",
-                "atividade": "Horário de Almoço",
+                "atividade": "Horário de almoço",
                 "local": "Áreas de cozinha",
-                "descrição": "Hora da pausa para o almoço",
-                "responsável": "Cozinheiras"
+                "responsável": "Equipes de alimentação dos clubes",
+                "descrição": "Hora do almoço. Um momento de pausa e comunhão entre os participantes, com refeições preparadas pelas equipes de cozinha dos clubes."
             },
             {
                 "horário": "17h00",
-                "atividade": "Culto de consagração do Sábado",
+                "atividade": "Culto de consagração do sábado",
                 "local": "UNASP-EC",
-                "descrição": "Culto de consagração do Sábado",
-                "responsável": "Organização"
+                "responsável": "Equipe de espiritualidade do evento",
+                "descrição": "Celebração espiritual para encerrar o sábado de maneira especial, com músicas, oração e mensagem inspiradora de consagração."
             }
         ]
     },
     {
-        "title": "Domingo, 22 de Junho",
+        "title": "Domingo | 22 de Junho",
         "date": "2025-06-22",
         "atividades": [
             {
                 "horário": "08h",
                 "atividade": "Encerramento e premiação",
-                "descrição": "Cerimônia de encerramento e premiação do Campori.",
-                "responsável": "Organização"
+                "responsável": "Coordenação geral e equipe de cerimônias",
+                "descrição": "Momento final do Campori, com entrega de premiações, reconhecimento dos destaques e despedida oficial. Uma celebração de tudo o que foi vivido juntos."
             }
         ]
     }
