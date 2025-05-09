@@ -4,6 +4,7 @@
     overflow-x: auto;
     gap: 2rem;
     background-color: #f0f4f8;
+    color: black;
     flex-wrap: nowrap;
     height: 85vh;
     width: 100vw;
@@ -63,6 +64,10 @@
     margin-bottom: 1.5rem;
     width: 50%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .team {
@@ -73,6 +78,7 @@
     cursor: pointer;
     transition: background-color 0.2s;
     color: black;
+    width: 90%;
 }
 
 .team:hover {

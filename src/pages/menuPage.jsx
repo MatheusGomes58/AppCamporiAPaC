@@ -24,7 +24,8 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
             or(
                 where("isTorneio", "==", true),
                 where("isCorrida", "==", true),
-                where("isTrilha", "==", true),
+                where("isTrilha", "==", true)
+
             )
         );
 
@@ -107,7 +108,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                             <div key={index} className="menu-list">
                                 <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                                 <ul>
-                                    {list.title === 'Torneios e Corridas' ? (
+                                    {list.title === 'Inscritos' ? (
                                         loadingTorneios ? (
                                             <li>
                                                 <span className="menu-list-item">Carregando torneios...</span>

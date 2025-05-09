@@ -82,3 +82,24 @@ button.delete {
   color: #f44336;
   border: 3px solid #f44336;
 }
+
+/* Tabelas */
+.table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.table td {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #e5e7eb;
+}

@@ -18,18 +18,44 @@ const TournamentBracket = ({ isMaster, admin }) => {
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            const data = docSnap.data();
-            setCorridaData(data);
+            const rawData = docSnap.data();
+            const sortedEntries = Object.entries(rawData).sort(([keyA], [keyB]) => {
+              if (keyA < keyB) return -1;
+              if (keyA > keyB) return 1;
+              return 0;
+            });
+            const sortedData = Object.fromEntries(sortedEntries);
+            setCorridaData(sortedData)
           }
         } else if (tournamentName.includes("Trilha")) {
           const docRef = doc(db, "inscricoes", tournamentName);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            const data = docSnap.data();
-            setCorridaData(data);
+            const rawData = docSnap.data();
+            const sortedEntries = Object.entries(rawData).sort(([keyA], [keyB]) => {
+              if (keyA < keyB) return -1;
+              if (keyA > keyB) return 1;
+              return 0;
+            });
+            const sortedData = Object.fromEntries(sortedEntries);
+            setCorridaData(sortedData)
           }
-        } else {
+        } else if (tournamentName.includes("Especialidade")) {
+          const docRef = doc(db, "inscricoes", tournamentName);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const rawData = docSnap.data();
+            const sortedEntries = Object.entries(rawData).sort(([keyA], [keyB]) => {
+              if (keyA < keyB) return -1;
+              if (keyA > keyB) return 1;
+              return 0;
+            });
+            const sortedData = Object.fromEntries(sortedEntries);
+            setCorridaData(sortedData)
+          }
+        }else {
           const inscricoesRef = doc(collection(db, "eventos"), tournamentName);
           const docSnap = await getDoc(inscricoesRef);
 
@@ -113,59 +139,48 @@ const TournamentBracket = ({ isMaster, admin }) => {
   };
 
   // Exibição para Trilha
-  if (tournamentName.includes("Trilha") && corridaData) {
+  if ((tournamentName.includes("Trilha") || tournamentName.includes("Corrida") || tournamentName.includes("Especialidade"))) {
     let count = 0;
     return (
       <div className="bracket-container">
         <h1>{tournamentName}</h1>
         <div className="round">
-          {Object.entries(corridaData).map(([clube, participantes]) => {
-            if (!Array.isArray(participantes) || participantes.length === 0) return null;
-            return (
-              <div className="match" key={clube}>
-                <div className="clube">
-                  <h3 className="round-title">{clube}</h3>
-                  <div className="team">
-                    {participantes.map((p, i) => (
-                      <div key={i}>{++count} - {p}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <div className="match">
+            <div className="clube">
+              <table className="table">
+                <tbody>
+                  {corridaData? Object.entries(corridaData).map(([clube, participantes]) => {
+                    if (!Array.isArray(participantes) || participantes.length === 0) return null;
+                    return (
+                      <>
+                        <thead>
+                          <tr>
+                            <th colSpan="2">{clube}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>#</td>
+                            <td>Participante</td>
+                          </tr>
+                          {participantes.map((p, i) => (
+                            <tr key={i}>
+                              <td>{++count}</td>
+                              <td>{p}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </>
+                    );
+                  }): "No momento não há membros inscritos na lista de nomes"}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
-
-  // Exibição para corrida
-  if (tournamentName.includes("Corrida") && corridaData) {
-    let count = 0;
-    return (
-      <div className="bracket-container">
-        <h1>{tournamentName}</h1>
-        <div className="round">
-          {Object.entries(corridaData).map(([clube, participantes]) => {
-            if (!Array.isArray(participantes) || participantes.length === 0) return null;
-            return (
-              <div className="match" key={clube}>
-                <div className="clube">
-                  <h3 className="round-title">{clube}</h3>
-                  <div className="team">
-                    {participantes.map((p, i) => (
-                      <div key={i}>{++count} - {p}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
 
   // Exibição padrão (torneio)
   return (

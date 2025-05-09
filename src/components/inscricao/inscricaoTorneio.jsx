@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
+import { useNavigate } from 'react-router-dom';
 import {
     collection,
     doc,
@@ -8,25 +9,45 @@ import {
     getDoc,
     updateDoc,
     setDoc,
+    deleteField,
     onSnapshot,
 } from "firebase/firestore";
 import "./inscricao.css";
 
-const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
+const InscricaoForm = ({ clube, admin, ismaster }) => {
+    const navigate = useNavigate();
     const [torneios, setTorneios] = useState([]);
-    const [torneioSelecionado, setTorneioSelecionado] = useState("");
     const [nomeClube, setNomeClube] = useState("");
-    const [novosTorneios, setNovosTorneios] = useState([{ nome: "", date: "", hora: "", atividade: "", maxVagas: 60, maxClubVagas: 16 }]);
+    const [membros, setMembros] = useState({});
+    const [novoMembro, setNovoMembro] = useState("");
 
     useEffect(() => {
         const q = query(collection(db, "eventos"), where("isTorneio", "==", true));
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
+        const unsubscribe = onSnapshot(q, async (snapshot) => {
             const lista = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
             setTorneios(lista);
+
+            const map = {};
+            const membrosTemp = {};
+
+            for (const t of lista) {
+                if (t.inscritos?.includes(clube)) {
+                    map[t.id] = true;
+
+                    const inscricaoRef = doc(db, "inscricoes", t.id);
+                    const docSnap = await getDoc(inscricaoRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        membrosTemp[t.id] = data[clube] || [];
+                    }
+                }
+            }
+
+            setMembros(membrosTemp);
         });
 
         setNomeClube(clube);
@@ -44,11 +65,9 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
         return data.toLocaleDateString('pt-BR', opcoes).replace(/\b\p{L}/gu, letra => letra.toUpperCase());
     }
 
-    const handleInscricao = async (e) => {
-        e.preventDefault();
-
-        if (!torneioSelecionado || !nomeClube.trim()) {
-            alert("Selecione um torneio e informe o nome do clube.");
+    const handleInscricaoDireta = async (torneioId) => {
+        if (!nomeClube.trim()) {
+            alert("Informe o nome do clube.");
             return;
         }
 
@@ -60,7 +79,7 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
         const confirmar = window.confirm(`Deseja realmente inscrever o clube "${nomeClube}" no torneio selecionado?`);
         if (!confirmar) return;
 
-        const torneioRef = doc(db, "eventos", torneioSelecionado);
+        const torneioRef = doc(db, "eventos", torneioId);
         const torneioDoc = await getDoc(torneioRef);
 
         if (!torneioDoc.exists()) {
@@ -88,12 +107,11 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
     };
 
     const handleCancelarInscricaoIndividual = async (torneioId) => {
-        const confirmar = window.confirm("Deseja realmente cancelar sua inscrição?");
+        const confirmar = window.confirm("Deseja realmente cancelar sua inscrição e remover os membros?");
         if (!confirmar) return;
 
         const torneioRef = doc(db, "eventos", torneioId);
         const torneioDoc = await getDoc(torneioRef);
-
         if (!torneioDoc.exists()) return;
 
         const { inscritos = [] } = torneioDoc.data();
@@ -103,36 +121,66 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
             inscritos: atualizados,
         });
 
+        const inscricaoRef = doc(db, "inscricoes", torneioId);
+        await setDoc(inscricaoRef, {
+            [nomeClube]: deleteField(),
+        }, { merge: true });
+
+        setMembros((prev) => {
+            const copy = { ...prev };
+            delete copy[torneioId];
+            return copy;
+        });
+
         alert("Inscrição cancelada com sucesso.");
     };
 
-    const handleCriarTorneios = async () => {
-        const criados = [];
+    const handleAdicionarMembro = async (torneioId) => {
+        if (!novoMembro.trim()) return;
 
-        for (const torneio of novosTorneios) {
-            if (!torneio.nome.trim()) continue;
+        const inscricaoRef = doc(db, "inscricoes", torneioId);
+        const docSnap = await getDoc(inscricaoRef);
+        const dadosExistentes = docSnap.exists() ? docSnap.data() : {};
 
-            const ref = doc(db, "eventos", torneio.nome.trim());
+        const membrosAtuais = dadosExistentes[nomeClube] || [];
 
-            await setDoc(ref, {
-                ...torneio,
-                classe: "atividades",
-                title: torneio.nome.trim(),
-                timestamp: "",
-                inscritos: [],
-                isTorneio: true
-            });
+        await setDoc(
+            inscricaoRef,
+            {
+                ...dadosExistentes,
+                [nomeClube]: [...membrosAtuais, novoMembro.trim()],
+            },
+            { merge: true }
+        );
 
-            criados.push(torneio.nome.trim());
-        }
+        setMembros((prev) => ({
+            ...prev,
+            [torneioId]: [...(prev[torneioId] || []), novoMembro.trim()],
+        }));
+        setNovoMembro("");
+    };
 
-        if (criados.length > 0) {
-            alert(`Torneio(s) criado(s): ${criados.join(", ")}`);
-        } else {
-            alert("Nenhum torneio válido para criar.");
-        }
+    const handleRemoverMembro = async (torneioId, membroRemover) => {
+        const confirmar = window.confirm(`Deseja remover o membro "${membroRemover}" da corrida?`);
+        if (!confirmar) return;
 
-        setNovosTorneios([{ nome: "", maxVagas: 16 }]);
+        const inscricaoRef = doc(db, "inscricoes", torneioId);
+        const docSnap = await getDoc(inscricaoRef);
+        if (!docSnap.exists()) return;
+
+        const dados = docSnap.data();
+        const membrosAtuais = dados[nomeClube] || [];
+
+        const atualizados = membrosAtuais.filter((m) => m !== membroRemover);
+
+        await updateDoc(inscricaoRef, {
+            [nomeClube]: atualizados,
+        });
+
+        setMembros((prev) => ({
+            ...prev,
+            [torneioId]: atualizados,
+        }));
     };
 
     return (
@@ -144,15 +192,74 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
                     <div key={t.id} className={`activity-description ${t.classe}`}>
                         <div className="activity-title">{formatarDataCompleta(t.date)}</div>
                         <div className="activity-title">{t.hora} - {t.nome}</div>
-                        <p className="aviso">
-                            Olá! Administrador do clube <strong>{nomeClube}</strong>, seu clube está inscrito no torneio <strong>{t.nome}</strong>.<br />
-                            {t.inscritos?.length || 0}/{t.maxVagas} inscritos
-                        </p>
-                        {admin && !ismaster && (
-                            <button className="cancelar-btn" onClick={() => handleCancelarInscricaoIndividual(t.id)}>
+                        <div className="membros-area">
+                            <table className="table">
+                                <tbody>
+                                    <tr>
+                                        <th colSpan={2}>Detalhes</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Total de membros:</td>
+                                        <td>{t.inscritosTotal || 0} inscritos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total de Clubes:</td>
+                                        <td>{t.inscritos?.length || 0} Inscritos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total de membros do clube:</td>
+                                        <td>{membros[t.id]?.length || 0} Inscritos</td>
+                                    </tr>
+                                    <tr>
+                                        <th colSpan={2}>Membro do Clube</th>
+                                    </tr>
+                                    {membros[t.id]?.length > 0 ? (membros[t.id]).map((m, i) => (
+                                        <tr key={i}>
+                                            <td>
+                                                <span>{m}</span>
+                                            </td>
+                                            {admin && (
+                                                <td>
+                                                    <button
+                                                        className="remover-membro-btn"
+                                                        onClick={() => handleRemoverMembro(t.id, m)}
+                                                    >
+                                                        Remover
+                                                    </button>
+                                                </td>
+                                            )}
+
+                                        </tr>
+                                    )) :
+                                        <tr>
+                                            <td colSpan={2}>Nenhum membro foi inscrito ainda!</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <th colSpan={2}>Ações</th>
+                                    </tr>
+                                    {t.maxClubVagas > (membros[t.id]?.length || 0) ? <tr>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                placeholder="Nome"
+                                                className="inputLogin"
+                                                value={novoMembro}
+                                                onChange={(e) => setNovoMembro(e.target.value)}
+                                            />
+                                        </td>
+                                        <td>
+                                            <button className="confirm-btn" onClick={() => handleAdicionarMembro(t.id)}>
+                                                Adicionar membro
+                                            </button>
+                                        </td>
+                                    </tr> : ""}
+                                </tbody>
+                            </table>
+                            <button className="delete" onClick={() => handleCancelarInscricaoIndividual(t.id)}>
                                 Cancelar inscrição
                             </button>
-                        )}
+                        </div>
                     </div>
                 ))
             )}
@@ -163,29 +270,43 @@ const InscricaoForm = ({ clube, admin, ismaster, activeTab }) => {
                         {torneios.map((t) => (
                             !t.inscritos?.includes(nomeClube) && (
                                 <div key={t.id} className={`activity-description ${t.classe}`}>
-                                    <label>
-                                        {admin && !ismaster && (
-                                            <input
-                                                type="radio"
-                                                name="torneioSelecionado"
-                                                value={t.id}
-                                                checked={torneioSelecionado === t.id}
-                                                onChange={(e) => setTorneioSelecionado(e.target.value)}
-                                            />
-                                        )}
-                                        <div className="activity-title">{formatarDataCompleta(t.date)}</div>
-                                        <div className="activity-title">{t.hora} - {t.nome}</div>
-                                        <p>{t.inscritos?.length || 0}/{t.maxVagas} inscritos</p>
-                                    </label>
+                                    <div className="activity-title">{formatarDataCompleta(t.date)}</div>
+                                    <div className="activity-title">{t.hora} - {t.nome}</div>
+                                    <div>
+                                        <table className="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th colSpan={2}>Detalhes</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de Vagas:</td>
+                                                    <td>{t.maxVagas || 0} disponíveis</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de Clubes:</td>
+                                                    <td>{t.inscritos?.length || 0} Inscritos</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {admin && !ismaster && (
+                                        <button
+                                            type="button"
+                                            disabled={t.inscritos?.length >= t.maxVagas}
+                                            onClick={() => handleInscricaoDireta(t.id)}
+                                        >
+                                            Confirmar inscrição do clube <strong>{nomeClube}</strong>
+                                        </button>
+                                    )}
+                                    {ismaster && (
+                                        <button onClick={() => navigate(`/chaveamento/${t.nome}`)}>
+                                            Consultar Lista de Inscritos
+                                        </button>
+                                    )}
                                 </div>
                             )
                         ))}
                     </div>
-                    {admin && !ismaster && (
-                        <button className="cancelar-btn" type="submit" disabled={!torneioSelecionado} onClick={handleInscricao}>
-                            Confirmar inscrição do clube <strong>{nomeClube}</strong>
-                        </button>
-                    )}
                 </div>
             )}
         </div>

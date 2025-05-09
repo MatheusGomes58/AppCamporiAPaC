@@ -26,30 +26,6 @@
     margin-bottom: 1rem;
 }
 
-/* Tabelas */
-.table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-}
-
-.table th {
-    background-color: #f3f4f6;
-    color: #4b5563;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-}
-
-.table td {
-    padding: 0.5rem 1rem;
-    border-top: 1px solid #e5e7eb;
-}
-
-.table tr:hover {
-    background-color: #f9fafb;
-}
-
 .tooltip-custom {
     background-color: white;
     border: 1px solid #ccc;

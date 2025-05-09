@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
+import { useNavigate } from 'react-router-dom';
 import {
     collection,
     doc,
@@ -14,6 +15,7 @@ import {
 import "./inscricao.css";
 
 const InscricaoForm = ({ clube, admin, ismaster }) => {
+    const navigate = useNavigate();
     const [torneios, setTorneios] = useState([]);
     const [nomeClube, setNomeClube] = useState("");
     const [membros, setMembros] = useState({});
@@ -173,7 +175,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
         const inscricaoRef = doc(db, "inscricoes", torneioId);
         await setDoc(inscricaoRef, {
             [nomeClube]: deleteField(),
-        }, { merge: true }); // <- CORREÇÃO AQUI
+        }, { merge: true });
 
         setInscritosMap((prev) => {
             const copy = { ...prev };
@@ -222,56 +224,102 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                 </div>
                                 {!inscrito && (
                                     <div>
-                                        <p>Total de membros inscritos: {t.inscritosTotal || 0}</p>
-                                        <p>{t.inscritos?.length || 0} Clube(s) Inscrito(s)</p>
+                                        <table className="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th colSpan={2}>Detalhes</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de membros:</td>
+                                                    <td>{t.inscritosTotal || 0} inscritos</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de Clubes:</td>
+                                                    <td>{t.inscritos?.length || 0} Inscritos</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 )}
 
-                                {inscrito && (
+                                {inscrito && admin && (
                                     <div className="membros-area">
-                                        <p>
-                                            Olá! Administrador do clube <strong>{nomeClube}</strong>, o seu clube já está inscrito nessa corrida.
-                                        </p>
-                                        <p>Total de membros inscritos do clube: {membros[t.id]?.length || 0}</p>
-                                        <p>{t.inscritos?.length || 0} Inscritos</p>
+                                        <table className="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th colSpan={2}>Detalhes</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de membros:</td>
+                                                    <td>{t.inscritosTotal || 0} inscritos</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de Clubes:</td>
+                                                    <td>{t.inscritos?.length || 0} Inscritos</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total de membros do clube:</td>
+                                                    <td>{membros[t.id]?.length || 0} Inscritos</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colSpan={2}>Membro do Clube</th>
+                                                </tr>
+                                                {membros[t.id].length > 0 ? (membros[t.id]).map((m, i) => (
+                                                    <tr key={i}>
+                                                        <td>
+                                                            <span>{m}</span>
+                                                        </td>
+                                                        {inscrito && admin && (
+                                                            <td>
+                                                                <button
+                                                                    className="remover-membro-btn"
+                                                                    onClick={() => handleRemoverMembro(t.id, m)}
+                                                                >
+                                                                    Remover
+                                                                </button>
+                                                            </td>
+                                                        )}
 
-                                        <div>
-                                            {(membros[t.id] || []).map((m, i) => (
-                                                <div key={i} className="membro-item">
-                                                    <span>{m}</span>
-                                                    {inscrito && admin && (
-                                                        <button
-                                                            className="remover-membro-btn"
-                                                            onClick={() => handleRemoverMembro(t.id, m)}
-                                                        >
-                                                            Remover
+                                                    </tr>
+                                                )) :
+                                                    <tr>
+                                                        <td colSpan={2}>Nenhum membro foi inscrito ainda!</td>
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <th colSpan={2}>Ações</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Nome"
+                                                            className="inputLogin"
+                                                            value={novoMembro}
+                                                            onChange={(e) => setNovoMembro(e.target.value)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <button className="confirm-btn" onClick={() => handleAdicionarMembro(t.id)}>
+                                                            Adicionar membro
                                                         </button>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {inscrito && admin && (<>
-                                            <input
-                                                type="text"
-                                                placeholder="Nome do membro"
-                                                className="inputLogin"
-                                                value={novoMembro}
-                                                onChange={(e) => setNovoMembro(e.target.value)}
-                                            />
-                                            <button className="confirm-btn" onClick={() => handleAdicionarMembro(t.id)}>
-                                                Adicionar membro
-                                            </button>
-                                            <button className="remover-membro-btn" onClick={() => handleCancelarInscricao(t.id)}>
-                                                Cancelar inscrição
-                                            </button>
-                                        </>
-                                        )}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button className="delete" onClick={() => handleCancelarInscricao(t.id)}>
+                                            Cancelar inscrição
+                                        </button>
                                     </div>
                                 )}
-                                {!inscrito && admin && (
+                                {!inscrito && admin && !ismaster && (
                                     <button onClick={() => handleInscricaoDireta(t.id)}>
                                         Inscrever clube
+                                    </button>
+                                )}
+                                {ismaster && (
+                                    <button onClick={() => navigate(`/chaveamento/${t.nome}`)}>
+                                        Consultar Lista de Inscritos
                                     </button>
                                 )}
                             </div>

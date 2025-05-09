@@ -1,5 +1,6 @@
 import { db } from "../firebase/firebase";
 import React, { useState, useEffect, memo } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   collection,
   query,
@@ -10,6 +11,7 @@ import {
   getDoc,
   setDoc,
   arrayUnion,
+  deleteField
 } from "firebase/firestore";
 
 function formatarDataCompleta(dataString) {
@@ -89,9 +91,8 @@ async function cancelReserv(clube, atividade, eventoId) {
     const novosInscritos = (evento.inscritos || []).filter(c => c !== clube);
     const novosClubes = (evento.clubes || []).filter(c => c.clube !== clube);
 
-    const clubeCancelado = (evento.clubes || []).filter(c => c.clube == clube);
-    const vagasCanceladas = (clubeCancelado[0]?.valueVagas || 0)
-
+    const clubeCancelado = (evento.clubes || []).filter(c => c.clube === clube);
+    const vagasCanceladas = (clubeCancelado[0]?.valueVagas || 0);
     const novoTotal = (evento.inscritosTotal || 0) - vagasCanceladas;
 
     await updateDoc(eventoRef, {
@@ -99,6 +100,12 @@ async function cancelReserv(clube, atividade, eventoId) {
       inscritosTotal: novoTotal < 0 ? 0 : novoTotal,
       clubes: novosClubes
     });
+
+    // ❗ Remove o campo do clube na collection "inscricoes"
+    const inscricaoRef = doc(db, "inscricoes", eventoId);
+    await setDoc(inscricaoRef, {
+      [clube]: deleteField(),
+    }, { merge: true });
   }
 
   const auditSnap = await getDoc(auditRef);
@@ -121,9 +128,62 @@ async function cancelReserv(clube, atividade, eventoId) {
 }
 
 
-const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, activeTab, isClubeInscrito }) => {
+
+const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, activeTab, isClubeInscrito, membross }) => {
+  const navigate = useNavigate();
   const isSameAtividade = event.atividade === activeTab;
   const WhereClubeInscrito = (event.inscritos || []).includes(clube)
+  const [membros, setMembros] = useState(membross);
+  const [novoMembro, setNovoMembro] = useState("");
+
+  const handleAdicionarMembro = async (torneioId) => {
+    if (!novoMembro.trim()) return;
+
+    const inscricaoRef = doc(db, "inscricoes", torneioId);
+    const docSnap = await getDoc(inscricaoRef);
+    const dadosExistentes = docSnap.exists() ? docSnap.data() : {};
+
+    const membrosAtuais = dadosExistentes[clube] || [];
+
+    await setDoc(
+      inscricaoRef,
+      {
+        ...dadosExistentes,
+        [clube]: [...membrosAtuais, novoMembro.trim()],
+      },
+      { merge: true }
+    );
+
+    setMembros((prev) => ({
+      ...prev,
+      [torneioId]: [...(prev[torneioId] || []), novoMembro.trim()],
+    }));
+    setNovoMembro("");
+  };
+
+  const handleRemoverMembro = async (torneioId, membroRemover) => {
+    const confirmar = window.confirm(`Deseja remover o membro "${membroRemover}" da corrida?`);
+    if (!confirmar) return;
+
+    const inscricaoRef = doc(db, "inscricoes", torneioId);
+    const docSnap = await getDoc(inscricaoRef);
+    if (!docSnap.exists()) return;
+
+    const dados = docSnap.data();
+    const membrosAtuais = dados[clube] || [];
+
+    const atualizados = membrosAtuais.filter((m) => m !== membroRemover);
+
+    await updateDoc(inscricaoRef, {
+      [clube]: atualizados,
+    });
+
+    setMembros((prev) => ({
+      ...prev,
+      [torneioId]: atualizados,
+    }));
+
+  };
 
   return (
     <div className={`activity-description ${event.classe}`}>
@@ -131,14 +191,86 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
       <div className="activity-title">
         {event.hora} - {event.nome}
       </div>
-      <p>
-        {event.inscritosTotal || 0}/{event.maxVagas} inscritos
-      </p>
-      {event.clubes && event.clubes.map((clubes) => (
-        (isMaster || clubes.clube == clube) && <div className="membro-item" key={clubes.clube}>
-          {clubes.clube} - {clubes.valueVagas} Inscrito(s)
-        </div>
-      ))}
+      <table className="table">
+        <tbody>
+          <tr>
+            <th colSpan={2}>Detalhes</th>
+          </tr>
+          <tr>
+            <td>Total de Vagas:</td>
+            <td>{event.maxVagas || 0} disponíveis</td>
+          </tr>
+          <tr>
+            <td>Total de Vagas Ocupadas:</td>
+            <td>{event.inscritosTotal || 0} Inscritos</td>
+          </tr>
+          <tr>
+            <td>Total de Clubes:</td>
+            <td>{event.inscritos?.length || 0} Inscritos</td>
+          </tr>
+          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && <tr>
+            <td>Total de membros do clube:</td>
+            <td>{membros[event.id]?.length || 0} Inscritos</td>
+          </tr>}
+          {(isMaster || event.clubes?.some(c => c.clube === clube)) && (
+            <>
+              <tr>
+                <th colSpan={2}>Clubes Inscritos</th>
+              </tr>
+              {event.clubes.map((c, idx) => (
+                (isMaster || c.clube === clube) && (
+                  <tr key={idx}>
+                    <td>{c.clube}</td>
+                    <td>{c.valueVagas}</td>
+                  </tr>
+                )
+              ))}
+            </>
+          )}
+          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (membros[event.id] || []) && <tr>
+            <th colSpan={2}>Membos Inscritos</th>
+          </tr>}
+          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) ? ((membros[event.id]?.length) ? (membros[event.id] || []).map((m, i) => (
+            <tr key={i}>
+              <td>{m}</td>
+              <td>
+                <button className="remover-membro-btn" onClick={() => handleRemoverMembro(event.id, m)}>
+                  Remover
+                </button>
+              </td>
+            </tr>
+          )) :
+            <tr>
+              <td colSpan={2}>Ainda não hé membros inscritos nessa atividade!</td>
+            </tr>
+          ) : ""}
+          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && <tr>
+            <th colSpan={2}>Ações</th>
+          </tr>}
+
+          {((admin && !isMaster) && (WhereClubeInscrito && isSameAtividade)) &&
+            ((event.clubes?.find(c => c.clube === clube)?.valueVagas || 0) > (membros[event.id]?.length || 0)) && (
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Nome do membro"
+                    className="inputLogin"
+                    value={novoMembro}
+                    onChange={(e) => setNovoMembro(e.target.value)}
+                  />
+                </td>
+                <td>
+                  <button className="confirm-btn" onClick={() => handleAdicionarMembro(event.id)}>
+                    Adicionar membro
+                  </button>
+                </td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
+
       {(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && (
         <button className="location-button" onClick={handleClick}>
           Reservar
@@ -146,7 +278,7 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
       )}
       {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (
         <button
-          className="cancel-button"
+          className="delete"
           onClick={async () => {
             const confirm = window.confirm("Tem certeza que deseja cancelar a reserva?");
             if (confirm) {
@@ -158,12 +290,13 @@ const Event = memo(({ event, handleClick, admin, isMaster, hasReserved, clube, a
           Cancelar reserva
         </button>
       )}
-      {!WhereClubeInscrito &&
-        <div className="activity-title">
-          {!isClubeInscrito && !WhereClubeInscrito ?event.maxVagas === event.inscritosTotal ? "Não há mais vagas disponíveis neste horário" : "Ainda há vagas disponíveis neste horário":"Seu clube já esta inscrito nessa atividade em outro horário"}
-        </div>
-      }
-    </div>
+
+      {isMaster && (
+        <button onClick={() => navigate(`/chaveamento/${event.nome}`)}>
+          Consultar Lista de Inscritos
+        </button>
+      )}
+    </div >
   );
 });
 
@@ -174,52 +307,82 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
   const [hasReserved, setHasReserved] = useState(false);
   const [buttonBlocked, setButtonBlocked] = useState(false);
   const [isClubeInscrito, setIsClubeInscrito] = useState(false);
+  const [membros, setMembros] = useState({});
 
-  const editingMicroEvent =
-    editingMicroEventIndex !== null
-      ? microEvents[editingMicroEventIndex]
-      : null;
+  const editingMicroEvent = editingMicroEventIndex !== null ? microEvents[editingMicroEventIndex] : null;
 
   useEffect(() => {
-    const q1 = query(
+    if (!clube || !activeTab) return;
+  
+    const eventosQuery = query(
       collection(db, "eventos"),
       where("atividade", "==", activeTab)
     );
-
-    const unsubscribe = onSnapshot(q1, (snapshot) => {
-      const events = snapshot.docs.map((doc) => ({
+  
+    const dataId = getTodayDateId();
+    const auditRef = doc(db, "audit", dataId);
+  
+    let unsubscribeInscricoes = [];
+    let unsubscribeAudit = null;
+  
+    const unsubscribeEventos = onSnapshot(eventosQuery, async (snapshot) => {
+      const eventos = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setMicroEvents(events);
-
-      const isInscrito = events.some(
-        (event) => (event.inscritos || []).includes(clube)
-      );
-      setIsClubeInscrito(isInscrito);
+  
+      setMicroEvents(eventos);
+  
+      // Limpar escutas antigas
+      unsubscribeInscricoes.forEach((unsub) => unsub());
+      unsubscribeInscricoes = [];
+  
+      const inscritosMap = {};
+      const membrosTemp = {};
+  
+      await Promise.all(eventos.map(async (evento) => {
+        const isInscrito = evento.inscritos?.includes(clube);
+        if (!isInscrito) return;
+  
+        inscritosMap[evento.id] = true;
+  
+        const inscricaoRef = doc(db, "inscricoes", evento.id);
+        const docSnap = await getDoc(inscricaoRef);
+  
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          membrosTemp[evento.id] = data[clube] || [];
+        }
+  
+        const unsubscribe = onSnapshot(inscricaoRef, (snap) => {
+          const data = snap.exists() ? snap.data() : {};
+          setMembros((prev) => ({
+            ...prev,
+            [evento.id]: data[clube] || [],
+          }));
+        });
+  
+        unsubscribeInscricoes.push(unsubscribe);
+      }));
+  
+      setMembros(membrosTemp);
+      setIsClubeInscrito(Object.keys(inscritosMap).length > 0);
     });
-
-    return () => unsubscribe();
-  }, [activeTab]);
-
-
-  useEffect(() => {
-    const dataId = getTodayDateId();
-    const auditRef = doc(db, "audit", dataId);
-
-    const unsubscribe = onSnapshot(auditRef, (snapshot) => {
-      if (!snapshot.exists()) {
-        setHasReserved(false);
-        return;
-      }
-
+  
+    unsubscribeAudit = onSnapshot(auditRef, (snapshot) => {
       const data = snapshot.data();
-      const clubes = data.clubes || {};
-      setHasReserved(clubes?.includes(clube));
+      const clubes = data?.clubes || [];
+      setHasReserved(clubes.includes(clube));
     });
+  
+    return () => {
+      unsubscribeEventos();
+      unsubscribeInscricoes.forEach((unsub) => unsub());
+      if (unsubscribeAudit) unsubscribeAudit();
+    };
+  }, [activeTab, clube]);
+  
 
-    return () => unsubscribe();
-  }, [clube, activeTab]);
 
   const handleEditMicroEvent = (index) => {
     if (hasReserved) {
@@ -337,7 +500,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
                     <button onClick={handleUpdateMicroEvent} disabled={buttonBlocked}>
                       {buttonBlocked ? "Reservando..." : "Reservar"}
                     </button>
-                    <button  disabled={buttonBlocked} onClick={() => setEditingMicroEventIndex(null)}>
+                    <button disabled={buttonBlocked} onClick={() => setEditingMicroEventIndex(null)}>
                       Cancelar
                     </button>
                   </div>
@@ -358,6 +521,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
           clube={clube}
           activeTab={activeTab}
           isClubeInscrito={isClubeInscrito}
+          membross={membros}
         />
       ))}
     </div>
