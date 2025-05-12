@@ -29,7 +29,6 @@ const Event = memo(({ event, handleLocationClick }) => {
                     >
                         <label className='activity-title' onClick={() => toggleActivity(index)}>
                             {atividade.horário} - {atividade.atividade}
-                            <span style={{ float: 'right' }}>{isOpen ? '▲' : '▼'}</span>
                         </label>
 
                         {isOpen && (
