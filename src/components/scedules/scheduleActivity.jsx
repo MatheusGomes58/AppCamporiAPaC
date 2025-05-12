@@ -128,26 +128,27 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         inscritosMap[evento.id] = true;
 
         const inscricaoRef = doc(db, "inscricoes", evento.id);
-        const docSnap = await getDoc(inscricaoRef);
 
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          membrosTemp[evento.id] = data[clube] || [];
-          setMembros((prev) => ({
-            ...prev,
-            [evento.id]: data[clube] || [],
-          }));
-
-          // Configurar o onSnapshot APÓS a busca inicial
-          const unsubscribe = onSnapshot(inscricaoRef, (snap) => {
-            const newData = snap.exists() ? snap.data() : {};
+        const unsubscribe = onSnapshot(inscricaoRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            membrosTemp[evento.id] = data[clube] || [];
             setMembros((prev) => ({
               ...prev,
-              [evento.id]: newData[clube] || [],
+              [evento.id]: data[clube] || [],
             }));
-          });
-          unsubscribeInscricoes.push(unsubscribe);
-        }
+
+            // Configurar o onSnapshot APÓS a busca inicial
+            const unsubscribe = onSnapshot(inscricaoRef, (snap) => {
+              const newData = snap.exists() ? snap.data() : {};
+              setMembros((prev) => ({
+                ...prev,
+                [evento.id]: newData[clube] || [],
+              }));
+            });
+            unsubscribeInscricoes.push(unsubscribe);
+          }
+        });
       }));
 
       setIsClubeInscrito(Object.keys(inscritosMap).length > 0);
@@ -264,11 +265,6 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
       },
       { merge: true }
     );
-
-    setMembros((prev) => ({
-      ...prev,
-      [torneioId]: [...(prev[torneioId] || []), novoMembro.trim()],
-    }));
     setNovoMembro("");
   };
 
@@ -288,12 +284,6 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
     await updateDoc(inscricaoRef, {
       [clube]: atualizados,
     });
-
-    setMembros((prev) => ({
-      ...prev,
-      [torneioId]: atualizados,
-    }));
-
   };
 
   return (
