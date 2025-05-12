@@ -8,37 +8,56 @@ import { getFirestore, collection, query, where, getDocs } from "firebase/firest
 import { app } from '../components/firebase/firebase';
 import clubs from '../data/clubes.json';
 
-const Event = memo(({ event, handleLocationClick }) => (
-    <div>
-        {event.atividades ? event.atividades.map((atividade, activityIndex) => (
-            <div
-                key={activityIndex}
-                className={`activity-description ${atividade.classe}`}
-            >
-                <div className='activity-title'>
-                    {atividade.horário} - {atividade.atividade}
-                </div>
-                <div>
-                    {atividade.descrição && <p>{atividade.descrição}</p>}
-                    {atividade.responsável && (
-                        <p className='responsible-info'>
-                            <strong>
-                                <Icons.FaUserAlt style={{ marginRight: '8px' }} />
-                                {atividade.responsável}
-                            </strong>
-                        </p>
-                    )}
-                    {atividade.local && (
-                        <button className='location-button' onClick={() => handleLocationClick(atividade.local)}>
-                            <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} />
-                            {atividade.local}
-                        </button>
-                    )}
-                </div>
-            </div>
-        )) : ""}
-    </div>
-));
+const Event = memo(({ event, handleLocationClick }) => {
+    const [openIndexes, setOpenIndexes] = useState([]);
+
+    const toggleActivity = (index) => {
+        setOpenIndexes((prev) =>
+            prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
+        );
+    };
+
+    return (
+        <div className="event-collapse">
+            <h3 className="event-header">{event.title}</h3>
+            {event.atividades?.map((atividade, index) => {
+                const isOpen = openIndexes.includes(index);
+                return (
+                    <div
+                        key={index}
+                        className={`activity-description ${atividade.classe}`}
+                    >
+                        <label className='activity-title' onClick={() => toggleActivity(index)}>
+                            {atividade.horário} - {atividade.atividade}
+                            <span style={{ float: 'right' }}>{isOpen ? '▲' : '▼'}</span>
+                        </label>
+
+                        {isOpen && (
+                            <div className="activity-details">
+                                {atividade.descrição && <p>{atividade.descrição}</p>}
+                                {atividade.responsável && (
+                                    <p className='responsible-info'>
+                                        <strong>
+                                            <Icons.FaUserAlt style={{ marginRight: '8px' }} />
+                                            {atividade.responsável}
+                                        </strong>
+                                    </p>
+                                )}
+                                {atividade.local && (
+                                    <button className='location-button' onClick={() => handleLocationClick(atividade.local)}>
+                                        <Icons.FaMapMarkerAlt style={{ marginRight: '8px' }} />
+                                        {atividade.local}
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    );
+});
+
 
 function SchedulePage({ isAutenticated, clube, isMaster }) {
     const navigate = useNavigate();
@@ -61,7 +80,14 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
         try {
             const db = getFirestore(app);
             const microEventsRef = collection(db, "eventos");
-            const q = query(microEventsRef, where("inscritos", "array-contains", clube));
+            let q;
+
+            if (clube) {
+              q = query(microEventsRef, where("inscritos", "array-contains", clube));
+            } else {
+              q = query(microEventsRef);
+            }
+            
             const snapshot = await getDocs(q);
 
             return snapshot.docs.map(doc => {
