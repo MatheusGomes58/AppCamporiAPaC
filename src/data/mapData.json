@@ -1,34 +1,13 @@
 [
-    {
-      "id": "area1",
-      "name": "Área Central",
-      "x": 60,
-      "y": 55,
-      "locais": [
-        { "id": "palco", "name": "Palco", "x": 78, "y": 60 },
-        { "id": "shopping", "name": "Shopping", "x": 63, "y": 45 },
-        { "id": "secretaria", "name": "Secretaria", "x": 58, "y": 53 }
-      ]
-    },
-    {
-      "id": "area2",
-      "name": "Área de Cozinhas",
-      "x": 35,
-      "y": 85,
-      "locais": [
-        { "id": "cozinha1", "name": "Cozinha 1", "x": 34, "y": 83 },
-        { "id": "cozinha2", "name": "Cozinha 2", "x": 37, "y": 86 }
-      ]
-    },
-    {
-      "id": "area3",
-      "name": "Área de Atividades",
-      "x": 20,
-      "y": 40,
-      "locais": [
-        { "id": "atividade1", "name": "Tirolesa", "x": 18, "y": 38 },
-        { "id": "atividade2", "name": "Arvorismo", "x": 22, "y": 42 }
-      ]
-    }
-  ]
-  
+  { "id": "recepcao", "nome": "RECEPÇÃO", "x": 415, "y": 185, "cor": "#00b300", "icon": "building" },
+  { "id": "shopping", "nome": "SHOPPING", "x": 566, "y": 401, "cor": "#cc0000", "icon": "shopping-cart" },
+  { "id": "palco", "nome": "PALCO", "x": 677, "y": 487, "cor": "#ff6600", "icon": "microphone" },
+  { "id": "cozinhas", "nome": "COZINHAS", "x": 534, "y": 651, "cor": "#ff3399", "icon": "utensils" },
+  { "id": "chuveiros", "nome": "CHUVEIROS", "x": 450, "y": 633, "cor": "#cc66ff", "icon": "shower" },
+  { "id": "secretaria", "nome": "SECRETARIA", "x": 340, "y": 417, "cor": "#00cccc", "icon": "file-alt" },
+  { "id": "atividades_oeste", "nome": "ATIVIDADES", "x": 120, "y": 475, "cor": "#ff3300", "icon": "dumbbell" },
+  { "id": "atividades_leste", "nome": "ATIVIDADES", "x": 975, "y": 530, "cor": "#ff3300", "icon": "dumbbell" },
+  { "id": "acampamento_centro", "nome": "ACAMPAMENTO", "x": 480, "y": 430, "cor": "#ff9900", "icon": "campground" },
+  { "id": "sant_containers", "nome": "SANITÁRIOS CONTÊINER", "x": 630, "y": 455, "cor": "#9900cc", "icon": "toilet" },
+  { "id": "santarios_norte", "nome": "SANITÁRIOS", "x": 460, "y": 330, "cor": "#ff0033", "icon": "toilet" }
+]

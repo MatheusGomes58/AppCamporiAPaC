@@ -130,7 +130,7 @@ function AppContent() {
               clube={clube}
             />
           } />
-          {/*<Route path="/map" element={<MapPage />} />*/}
+          <Route path="/map" element={<MapPage />} />
           <Route path="/count" element={<CountPage />} />
           <Route path="/dashboard" element={
             <DashboarAtividade />}
