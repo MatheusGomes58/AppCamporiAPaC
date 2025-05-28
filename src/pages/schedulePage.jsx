@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback, memo } from 'react';
+import React, { useEffect, useState, useCallback, memo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
 import '../css/schedulePage.css';
 import imageSchedulePage from '../img/imageSchedulePage.jpg';
 import eventsData from '../data/scheduleData.json';
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, onSnapshot } from "firebase/firestore";
 import { app } from '../components/firebase/firebase';
 import clubs from '../data/clubes.json';
 
@@ -19,7 +19,6 @@ const Event = memo(({ event, handleLocationClick }) => {
 
     return (
         <div className="event-collapse">
-            <h3 className="event-header">{event.title}</h3>
             {event.atividades?.map((atividade, index) => {
                 const isOpen = openIndexes.includes(index);
                 return (
@@ -75,21 +74,19 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
         setActiveDate(date);
     };
 
-    const fetchMicroEvents = async (clube) => {
-        try {
-            const db = getFirestore(app);
-            const microEventsRef = collection(db, "eventos");
-            let q;
+    const fetchMicroEvents = (clube, callback) => {
+        const db = getFirestore(app);
+        const microEventsRef = collection(db, "eventos");
+        let q;
 
-            if (clube) {
-              q = query(microEventsRef, where("inscritos", "array-contains", clube));
-            } else {
-              q = query(microEventsRef);
-            }
-            
-            const snapshot = await getDocs(q);
+        if (clube) {
+            q = query(microEventsRef, where("inscritos", "array-contains", clube));
+        } else {
+            q = query(microEventsRef);
+        }
 
-            return snapshot.docs.map(doc => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const eventos = snapshot.docs.map(doc => {
                 const eventData = doc.data();
                 return {
                     title: eventData.title || "Evento sem título",
@@ -105,61 +102,76 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
                     }]
                 };
             });
-        } catch (error) {
-            console.error("Erro ao buscar microeventos:", error);
-            return [];
-        }
+
+            callback(eventos);
+        }, (error) => {
+            console.error("Erro ao escutar microeventos:", error);
+            callback([]); // envia array vazio em caso de erro
+        });
+
+        return unsubscribe; // permite cancelar a escuta
     };
 
-    const loadEvents = async () => {
+    const loadEvents = () => {
         setLoading(true);
 
-        let finalEvents = [];
-
-        if (isAutenticated) {
-            const microEvents = await fetchMicroEvents(filterClub);
-            const filteredEventsData = (eventsData || []).filter(event => {
-                const eventsOnSameDate = (eventsData || []).filter(e => e.date === event.date);
-                return eventsOnSameDate.some(e => !e.isNotEnabled);
-            });
-
-            const combinedEvents = [...filteredEventsData, ...microEvents];
-
-
-            const groupedEvents = combinedEvents.reduce((acc, event) => {
-                const key = event.date;
-                if (!acc[key]) {
-                    acc[key] = { title: event.title, date: event.date, atividades: [] };
-                }
-
-                if (event.atividades) {
-                    event.atividades.forEach(activity => {
-                        const exists = acc[key].atividades.some(a =>
-                            a.horário === activity.horário &&
-                            a.atividade === activity.atividade
-                        );
-                        if (!exists) {
-                            acc[key].atividades.push(activity);
-                        }
-                    });
-                }
-                return acc;
-            }, {});
-
-            finalEvents = Object.values(groupedEvents).sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            finalEvents.forEach(event => {
-                event.atividades.sort((a, b) => convertToMinutes(a.horário) - convertToMinutes(b.horário));
-            });
-        } else {
-            finalEvents = eventsData;
+        // Para evitar múltiplos listeners ao longo do tempo
+        if (listenerRef.current) {
+            listenerRef.current(); // remove o listener anterior
         }
 
-        setEvents(finalEvents);
-        setActiveDate(finalEvents.length > 0 ? finalEvents[0].date : null);
-        setLoading(false);
+        if (isAutenticated) {
+            listenerRef.current = fetchMicroEvents(filterClub, (microEvents) => {
+                const filteredEventsData = (eventsData || []).filter(event => {
+                    const eventsOnSameDate = (eventsData || []).filter(e => e.date === event.date);
+                    return eventsOnSameDate.some(e => !e.isNotEnabled);
+                });
+
+                const combinedEvents = [...filteredEventsData, ...microEvents];
+
+                const groupedEvents = combinedEvents.reduce((acc, event) => {
+                    const key = event.date;
+                    if (!acc[key]) {
+                        acc[key] = { title: event.title, date: event.date, atividades: [] };
+                    }
+
+                    if (event.atividades) {
+                        event.atividades.forEach(activity => {
+                            const exists = acc[key].atividades.some(a =>
+                                a.horário === activity.horário &&
+                                a.atividade === activity.atividade
+                            );
+                            if (!exists) {
+                                acc[key].atividades.push(activity);
+                            }
+                        });
+                    }
+                    return acc;
+                }, {});
+
+                const finalEvents = Object.values(groupedEvents).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                finalEvents.forEach(event => {
+                    event.atividades.sort((a, b) => convertToMinutes(a.horário) - convertToMinutes(b.horário));
+                });
+
+                setEvents(finalEvents);
+                setActiveDate(finalEvents.length > 0 ? finalEvents[0].date : null);
+                setLoading(false);
+            });
+        } else {
+            // Se não autenticado, usar apenas os dados locais
+            const finalEvents = (eventsData || []).sort((a, b) => new Date(a.date) - new Date(b.date));
+            setEvents(finalEvents);
+            setActiveDate(finalEvents.length > 0 ? finalEvents[0].date : null);
+            setLoading(false);
+        }
     };
 
+    // Ref para manter o unsubscribe do onSnapshot
+    const listenerRef = useRef(null);
+
+    // Exemplo de uso no useEffect
     useEffect(() => {
         if (isAutenticated) {
             loadEvents();
@@ -168,7 +180,13 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
             setActiveDate(getInitialActiveDate(eventsData));
             setLoading(false);
         }
-    }, [filterClub, isAutenticated]);
+
+        return () => {
+            if (listenerRef.current) {
+                listenerRef.current(); // cancela o snapshot ao desmontar
+            }
+        };
+    }, [filterClub, isAutenticated, eventsData]);
 
     const handleSelectClub = (clubeSelecionado) => {
         setFilterClub(clubeSelecionado);

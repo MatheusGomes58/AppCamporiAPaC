@@ -56,7 +56,13 @@ const ActivityItem = ({ item }) => {
     case 'title':
       return <h3 className="title">{item.content}</h3>;
     case 'details':
-      return <p className="details">{item.content}</p>;
+      return Array.isArray(item.content) ? (
+        item.content.map((text, index) => (
+          <p key={index} className="details">{text}</p>
+        ))
+      ) : (
+        <p className="details">{item.content}</p>
+      );
     case 'image':
       return <img className="image" src={imageMap[item.content]} alt={item.content} />;
     case 'slider':

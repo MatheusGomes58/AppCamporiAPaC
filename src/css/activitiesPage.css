@@ -13,7 +13,8 @@
   overflow-x: hidden;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -70,11 +71,19 @@ h1 {
   box-sizing: border-box;
 }
 
-.activityText, .details {
+.activityText {
   font-size: .8rem;
   color: black;
   text-align: start;
   margin-bottom: 10px;
+}
+
+.details {
+  width: 100%;
+  font-size: .8rem;
+  color: black;
+  text-align: start;
+  margin-bottom: 0px;
 }
 
 .title {
@@ -184,7 +193,10 @@ h1 {
     height: 100px;
   }
 
-  .activityItem, .title, .button, .image {
+  .activityItem,
+  .title,
+  .button,
+  .image {
     width: 95%;
   }
 }

@@ -1,0 +1,34 @@
+[
+    {
+      "id": "area1",
+      "name": "Área Central",
+      "x": 60,
+      "y": 55,
+      "locais": [
+        { "id": "palco", "name": "Palco", "x": 78, "y": 60 },
+        { "id": "shopping", "name": "Shopping", "x": 63, "y": 45 },
+        { "id": "secretaria", "name": "Secretaria", "x": 58, "y": 53 }
+      ]
+    },
+    {
+      "id": "area2",
+      "name": "Área de Cozinhas",
+      "x": 35,
+      "y": 85,
+      "locais": [
+        { "id": "cozinha1", "name": "Cozinha 1", "x": 34, "y": 83 },
+        { "id": "cozinha2", "name": "Cozinha 2", "x": 37, "y": 86 }
+      ]
+    },
+    {
+      "id": "area3",
+      "name": "Área de Atividades",
+      "x": 20,
+      "y": 40,
+      "locais": [
+        { "id": "atividade1", "name": "Tirolesa", "x": 18, "y": 38 },
+        { "id": "atividade2", "name": "Arvorismo", "x": 22, "y": 42 }
+      ]
+    }
+  ]
+  

@@ -268,7 +268,9 @@
         "type": "text",
         "content": [
           "O Campori 2025 também contará com emocionantes desafios esportivos! Os clubes poderão participar das corridas em duas modalidades diferentes:",
+          "- Corrida 5K a Pé: Um percurso desafiador para os desbravadores que gostam de correr.",
           "- Corrida 10K a Pé: Um percurso desafiador para os desbravadores que gostam de correr.",
+          "- Corrida 20K de Bike: Ideal para os que preferem adrenalina sobre duas rodas.",
           "- Corrida 40K de Bike: Ideal para os que preferem adrenalina sobre duas rodas.",
           "Não há limite de inscrições por modalidade. Para confirmar a inscrição, será necessário informar os nomes dos participantes.",
           "Prepare seu clube e participe dessa experiência esportiva única!"
@@ -415,6 +417,420 @@
       }
     ]
   },
+  {
+    "text": "Especialidade de Eletricidade",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Eletricidade dos Desbravadores visa introduzir os jovens aos fundamentos da eletricidade, promovendo conhecimento teórico e prático. Os participantes aprendem sobre correntes elétrica, montagem de circuitos simples, segurança elétrica e primeiros socorros relacionados a choques elétricos. Esta especialidade desenvolve habilidades úteis para a vida diária e desperta o interesse por áreas técnicas e científicas."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Eletricidade"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Explicar e ilustrar um experimento que demonstre as leis de atração e repulsão elétricas.",
+          "2. Explicar a diferença entre correntes contínua e alternada, demonstrando as utilidades de cada uma.",
+          "3. Montar um eletroímã simples ou ligar uma campainha ou lâmpada a uma bateria com interruptor.",
+          "4. Montar e operar um motor elétrico simples ou desmontar um motor e identificar suas partes.",
+          "5. Construir uma bateria elétrica.",
+          "6. Demonstrar como substituir fusíveis, rearmar disjuntores e emendar fios corretamente.",
+          "7. Mostrar como resgatar uma pessoa em contato com corrente elétrica e aplicar primeiros socorros.",
+          "8. Fazer um diagrama do sistema de iluminação de um automóvel.",
+          "9. Fazer um diagrama mostrando como lâmpadas, interruptores e tomadas são controlados por fusíveis ou disjuntores em uma casa.",
+          "10. Ler corretamente um medidor de eletricidade e calcular a conta de energia de uma residência."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Criacionismo",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Criacionismo dos Desbravadores busca aprofundar o entendimento sobre a origem do mundo e da vida sob a perspectiva bíblica. Os participantes exploram conceitos científicos e teológicos, fortalecendo a fé e a capacidade de dialogar sobre a criação com embasamento bíblico e científico."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Criacionismo"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Definir o que são modelo e teoria científica.",
+          "2. Listar três principais diferenças entre o modelo criacionista e o modelo evolucionista.",
+          "3. Escrever uma redação de, no mínimo, 500 palavras, com o tema: 'Por que ser criacionista'.",
+          "4. Participar, sob mediação do instrutor, de um debate sobre como é possível harmonizar ciência e fé.",
+          "5. Ler e responder às seguintes questões:",
+          "   a) 1 Timóteo 6:20-21. Que relação pode existir entre essa passagem e o evolucionismo?",
+          "   b) Gênesis 1 e 2. Pode alguém discordar destes textos e manter-se membro do povo remanescente? Justifique sua resposta.",
+          "6. Citar, ao menos, cinco passagens do Espírito de Profecia que mencionam a idade 'jovem' da Terra.",
+          "7. Pesquisar sobre a crença fundamental 'A Criação' da Igreja Adventista do Sétimo Dia. Demonstrar como fundamentar essa crença através da Bíblia, encontrando de memória, no mínimo, cinco passagens bíblicas que a sustentem.",
+          "8. Citar, ao menos, 15 objeções feitas por evolucionistas às crenças criacionistas. Escrever, ao menos, um parágrafo explicando de maneira bíblica e/ou científica como refutar cada uma dessas objeções.",
+          "9. Ler os capítulos 6 a 9 de Gênesis e, após a leitura, completar uma das seguintes atividades:",
+          "   a) Realizar uma pesquisa e elaborar um cronograma detalhado sobre alguma teoria aceita por cientistas criacionistas sobre como aconteceram os fatos.",
+          "   b) Fazer uma lista com, pelo menos, cinco menções bíblicas ao dilúvio e apresentar, ao menos, cinco evidências histórico-científicas de um dilúvio global.",
+          "10. Participar de um encontro criacionista promovido por sua escola, faculdade, clube, igreja, distrito, região ou campo. Com antecedência, escrever suas dúvidas para levar ao encontro e, em momento oportuno, apresentá-las a algum palestrante ou participante que possa saná-las através de embasamento bíblico e/ou científico.",
+          "11. Pesquisar e demonstrar como argumentar em favor do criacionismo, utilizando três das seguintes questões:",
+          "    a) Do ponto de vista da biologia, o que são sistemas de complexidade irredutível? Como esses sistemas contradizem a teoria evolucionista?",
+          "    b) Do ponto de vista da geologia, pesquisar e desenhar um modelo criacionista da coluna geológica e compará-la com o modelo evolucionista. Explicar como as lacunas em ambos os modelos são completadas com bases filosóficas (não comprovadas cientificamente).",
+          "    c) Do ponto de vista da oceanografia, como a sedimentação oceânica tem indicado que os oceanos são 'jovens'?",
+          "    d) Do ponto de vista da astronomia, como o afastamento progressivo da Lua em relação ao centro gravitacional da Terra (levando-se em conta o 'limite de Roche') indica uma Terra (e Lua) jovem?",
+          "    e) Do ponto de vista da arqueologia, o que são fósseis de transição? Como a ausência deles argumenta em favor do criacionismo?"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Ferreomodelismo",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Ferreomodelismo dos Desbravadores introduz os jovens ao universo das ferrovias em miniatura. Os participantes aprendem sobre a história do ferreomodelismo, diferentes tipos de tração, escalas e bitolas, além de desenvolverem habilidades práticas na construção e manutenção de maquetes ferroviárias. Esta especialidade estimula a criatividade, o planejamento e a atenção aos detalhes."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Ferreomodelismo"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Apresentar a história e desenvolvimento do ferreomodelismo.",
+          "2. Identificar a diferença no funcionamento da força motriz dos seguintes protótipos: a) Vapor, b) Diesel, c) Elétrico.",
+          "3. Saber o nome, escala e dimensão de quatro bitolas usadas no ferreomodelismo.",
+          "4. Conhecer os formatos e nomes de, pelo menos, 8 tipos de traçados de linhas em protótipos de estrada de ferro.",
+          "5. Conhecer, pelo menos, 6 pontos de verificação para a manutenção de um traçado de estrada de ferro.",
+          "6. Montar um pequeno circuito de ferreomodelismo, com locomotiva, vagões e trilhos, demonstrando seu funcionamento.",
+          "7. Visitar uma exposição ou clube de ferreomodelismo e relatar as observações feitas.",
+          "8. Explicar os cuidados necessários para a conservação e armazenamento de modelos ferroviários.",
+          "9. Demonstrar como realizar a limpeza e lubrificação básica de uma locomotiva de ferreomodelismo.",
+          "10. Apresentar um projeto de maquete ferroviária, incluindo planta baixa, lista de materiais e cronograma de execução."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Torno Mecânico",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Torno Mecânico dos Desbravadores introduz os jovens ao mundo da usinagem, proporcionando conhecimentos teóricos e práticos sobre o funcionamento e operação de tornos mecânicos. Os participantes aprendem sobre os diferentes tipos de tornos, suas aplicações, ferramentas utilizadas, medidas de segurança e desenvolvem habilidades práticas essenciais na fabricação de peças cilíndricas."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Torno Mecânico"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Definir o que é um torno mecânico.",
+          "2. Explicar o objetivo e a finalidade de um torno mecânico.",
+          "3. Descrever o que é operação de torneamento e explicar seu processo de funcionamento.",
+          "4. Listar as principais operações fundamentais que podem ser realizadas em um torno mecânico.",
+          "5. Identificar os materiais usados na fabricação das ferramentas utilizadas no torno e citar exemplos de ferramentas com esses materiais.",
+          "6. Identificar e demonstrar, através de desenhos ou fotos, os componentes básicos de um torno mecânico.",
+          "7. Citar alguns acessórios (peças) que compõem o torno e a função de cada um deles.",
+          "8. Identificar, no mínimo, duas ferramentas que podem ser usadas para medir peças feitas no torno e explicar a funcionalidade de cada uma delas.",
+          "9. Descrever a função de cada um dos seguintes tornos: Torno CNC, Torno revólver, Torno vertical, Torno horizontal universal, Torno de face, Torno copiador.",
+          "10. Explicar o que é um Desenho Técnico Industrial e como interpretá-lo de forma objetiva e de fácil compreensão.",
+          "11. Descrever os cuidados necessários ao manusear um torno e quais equipamentos de proteção individual (EPIs) devem ser utilizados.",
+          "12. Explicar a influência da velocidade de corte, do avanço e da profundidade de corte na vida útil de uma ferramenta.",
+          "13. Com a ajuda de um técnico ou especialista na área de torno, fabricar uma peça cilíndrica qualquer, aplicando os conhecimentos adquiridos nas operações básicas do torno. Elaborar um relatório de, no mínimo, 300 palavras, descrevendo como a peça foi desenvolvida."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Fósseis",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Fósseis dos Desbravadores proporciona aos jovens uma compreensão aprofundada sobre os vestígios de seres vivos preservados ao longo do tempo. Por meio desta especialidade, os participantes exploram os processos de fossilização, aprendem a identificar diferentes tipos de fósseis e compreendem sua importância para a ciência e a fé."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Fósseis"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Definir o que são fósseis.",
+          "2. Descrever, pelo menos, três processos de fossilização.",
+          "3. Explicar a diferença entre fóssil, somatofóssil e icnofóssil.",
+          "4. Definir os seguintes termos: geologia, fósseis, catastrofismo, pelecípode, graptólito, trilobita, dinossauro, mamute, mastodonte, crinoide, lingula, foraminífera, radiolário, paleozoico, mesozoico, cenozoico, pleistoceno, paleontologia, paleobotânica, braquiópode.",
+          "5. Explicar a existência de animais congelados nas regiões árticas, sua condição e época provável de vida.",
+          "6. Relacionar o dilúvio bíblico com a quantidade de fósseis encontrados no planeta.",
+          "7. Citar textos bíblicos e do Espírito de Profecia que expliquem a origem de: carvão, petróleo, fósseis e calcário.",
+          "8. Visitar um museu com fósseis em exibição e elaborar um relatório da visita.",
+          "9. Visitar um sítio paleontológico e elaborar um relatório oral ou escrito sobre a excursão.",
+          "10. Explicar como remover o esqueleto de um dinossauro ou outro fóssil de grandes proporções.",
+          "11. Justificar por que principiantes não devem retirar esses espécimes.",
+          "12. Orientar sobre o que um principiante deve fazer ao encontrar um fóssil.",
+          "13. Descrever o processo de limpeza dos espécimes após sua retirada, preparando-os para exposição em museus.",
+          "14. Explicar as diferenças entre as teorias evolucionista e criacionista em relação à presença de fósseis.",
+          "15. Pesquisar sobre a ocorrência de fósseis na região ou país e identificar o sítio paleontológico mais próximo."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Patins",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Patins dos Desbravadores visa desenvolver habilidades de equilíbrio, coordenação e segurança na prática da patinação. Os participantes aprendem sobre a história dos patins, equipamentos de segurança, diferentes tipos de patins e técnicas básicas de patinação. Esta especialidade promove a atividade física e o desenvolvimento de habilidades motoras."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Patins"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Faça um resumo da história da criação e evolução dos patins.",
+          "2. Descrever os equipamentos de segurança usados na patinação.",
+          "3. Citar, pelo menos, 3 modalidades esportivas que usam patins.",
+          "4. Descrever a diferença entre os seguintes tipos de patins:",
+          "   a) In-line",
+          "   b) Tradicional",
+          "   c) Gelo",
+          "5. Para cada um dos tipos de patins citados no requisito 4, citar:",
+          "   a) Local apropriado para uso",
+          "   b) Pelo menos 3 modalidades em que cada tipo é usado",
+          "   c) Vantagens que o modelo proporciona",
+          "   d) Desvantagens",
+          "6. Saber e explicar como deve ser feita a manutenção do patins (escolha um tipo que possa ser usado em sua região).",
+          "7. Executar o seguinte, enquanto patina:",
+          "   a) Saber aumentar velocidade",
+          "   b) Saber frear rapidamente",
+          "   c) Patinar de costas",
+          "   d) Aumentar a velocidade e deslizar, pelo menos, 5 metros agachado",
+          "   e) Mudar de direção (direita e esquerda)",
+          "   f) Pegar velocidade e pular um objeto"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Especialidade de Arco e Flecha",
+    "items": [
+      {
+        "type": "text",
+        "content": "A especialidade de Arco e Flecha dos Desbravadores introduz os jovens à prática do tiro com arco, promovendo habilidades de concentração, disciplina e coordenação motora. Os participantes aprendem sobre os equipamentos, técnicas de tiro e regras de segurança, desenvolvendo competências tanto físicas quanto mentais."
+      },
+      {
+        "type": "title",
+        "content": "Requisitos da Especialidade de Arco e Flecha"
+      },
+      {
+        "type": "details",
+        "content": [
+          "1. Ter, no mínimo, 12 anos de idade.",
+          "2. Conhecer e explicar as regras de segurança de arco e flecha.",
+          "3. Identificar as partes de uma flecha, explicando a função de cada uma.",
+          "4. Identificar e explicar as partes que compõem o arco composto e o arco recurvo.",
+          "5. Descrever e mostrar como usar os seguintes acessórios: protetor de braço (braçadeira), dedeira, aljava, sling (pulseira ou bandoleira), kisser (beijador).",
+          "6. Entender as zonas e as regras de pontuação do alvo padrão para arco e flecha.",
+          "7. Explicar a importância do posicionamento correto do Nock Point (ponto de encaixe) da flecha na corda do arco.",
+          "8. Demonstrar de forma básica as seguintes técnicas de tiro: postura, encaixe da flecha, retesar o arco, ancoragem.",
+          "9. Estabelecer uma rotina de prática de tiro com arco e flecha, no mínimo 2 horas por dia, 2 vezes por semana, durante 4 semanas seguidas, mantendo um controle de sua pontuação.",
+          "10. Usando um arco recurvo, alcançar uma das seguintes pontuações: Indoor: 30 flechas (6 séries de 5 flechas) a 18 metros de distância, marcar 50 pontos em um alvo de 60 cm; Outdoor: 30 flechas (6 séries de 5 flechas) a 25 metros de distância, marcar 150 pontos em um alvo de 122 cm."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Trilha Noturna",
+    "items": [
+      {
+        "type": "text",
+        "content": "A Trilha Noturna Guia é um momento especial preparado para os desbravadores da Classe de Guia, marcando a última fase da sua caminhada como desbravadores em um Campori da APaC. Durante essa trilha, os participantes se conectarão com o Criador, refletirão sobre decisões importantes para suas vidas espirituais e vivenciarão a técnica AVOT – Audição, Visão, Olfato e Tato."
+      },
+      {
+        "type": "title",
+        "content": "Informações da Trilha Noturna Guia"
+      },
+      {
+        "type": "details",
+        "content": [
+          "• Pontuação: 100 pontos por clube com representação e conclusão da atividade.",
+          "• Participantes: Desbravadores com 15 anos completos ou que completem até 30/06/2025, desde que estejam na Classe de Guia.",
+          "• Duração: 10 horas, com início no sábado às 22h e término no domingo às 8h.",
+          "• Formação: Unidades com até 10 desbravadores (não necessariamente do mesmo clube).",
+          "• Local de início: Ao lado do palco do evento. Os participantes devem estar com mochilas prontas para receberem a identificação antes de partirem.",
+          "• Finalização: Encerramento da trilha no palco do XXII Campori da APaC."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Itens obrigatórios na mochila"
+      },
+      {
+        "type": "details",
+        "content": [
+          "• Bíblia (funcionará como um mapa)",
+          "• Isolante térmico e saco de dormir ou manta",
+          "• Lona 5x5 m para abrigo",
+          "• 20 metros de sisal ou corda fina similar",
+          "• Roupa adequada para trilha e agasalho",
+          "• Calçado fechado (bota ou coturno)",
+          "• Cantil com água",
+          "• 1 facão com bainha por clube",
+          "• Boné ou chapéu tipo australiano",
+          "• Produtos de higiene pessoal",
+          "• Repelente",
+          "• Material para acender fogueira",
+          "• Kit de medicação pessoal"
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Refeição para o desjejum"
+      },
+      {
+        "type": "details",
+        "content": [
+          "• 1 suco de caixinha ou achocolatado",
+          "• Pão de forma (quantidade suficiente para um café da manhã)",
+          "• 1 banana e 1 maçã",
+          "• Granola",
+          "• Barrinha de cereal"
+        ]
+      },
+      {
+        "type": "text",
+        "content": "Observações: Os desbravadores dormirão em abrigos simples e apenas clubes com ao menos um representante presente durante toda a atividade receberão pontuação. Casos excepcionais serão avaliados pela direção do Campori. As inscrições para a trilha serão feitas via APP do CAMPORI."
+      }
+    ]
+  },
+  {
+    "text": "Torneios",
+    "items": [
+      {
+        "type": "text",
+        "content": "Para garantir que nossos torneios aconteçam de forma organizada, dinâmica e com o maior número possível de participantes, estabelecemos algumas diretrizes importantes. Essas regras foram cuidadosamente definidas para proporcionar uma experiência justa, acessível e envolvente para todos os clubes, independentemente do seu tamanho ou nível de experiência. Conheça agora mesmo as modalidades do nosso torneio:"
+      },
+      {
+        "type": "details",
+        "content": [
+          "- Volei de Time Feminino: Deve ser inscrito um time contendo 6 pessoas e usaremos as quadras de areia e poliesportivas",
+          "- Volei de Time Masculino: Deve ser inscrito um time contendo 6 pessoas e usaremos as quadras de areia e poliesportivas",
+          "- Futvolei Masculino: Deve ser inscrito uma dupla e usaremos as quadras de areia",
+          "- Volei Dupla Feminina: Deve ser inscrito uma dupla e usaremos as quadras de areia"
+        ]
+      },
+      {
+        "type": "text",
+        "content": "Por isso, convidamos todos os clubes a conhecerem atentamente as regras a seguir e se prepararem para participar ativamente dos torneios. Afinal, quanto mais engajamento, mais memorável será essa experiência no Campori 2025 da APaC!"
+      },
+      {
+        "type": "details",
+        "content": [
+          "- Inscrições por Torneio: Cada clube poderá se inscrever em apenas dois torneios.",
+          "- Formato das eliminatórias: As disputas seguirão o formato de eliminatória simples, ou seja, cada confronto será decisivo.",
+          "- Responsável pela inscrição: Somente usuários com acesso master do clube poderão realizar as inscrições das duplas nos torneios.",
+          "- Finais dos torneios: As finais serão realizadas no sábado à noite, durante a programação oficial do Campori."
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Corridas",
+    "items": [
+      {
+        "type": "text",
+        "content": "O Campori 2025 também contará com emocionantes desafios esportivos! Os clubes poderão participar das corridas em duas modalidades diferentes:"
+      },
+      {
+        "type": "details",
+        "content": [
+          "- Corrida 5K a Pé: Um percurso desafiador para os desbravadores que gostam de correr.",
+          "- Corrida 10K a Pé: Um percurso desafiador para os desbravadores que gostam de correr.",
+          "- Corrida 20K de Bike: Ideal para os que preferem adrenalina sobre duas rodas.",
+          "- Corrida 40K de Bike: Ideal para os que preferem adrenalina sobre duas rodas."
+        ]
+      },
+      {
+        "type": "text",
+        "content": "Não há limite de inscrições por modalidade. Para confirmar a inscrição, será necessário informar os nomes dos participantes. Prepare seu clube e participe dessa experiência esportiva única!"
+      }
+    ]
+  },
+  {
+    "text": "Visitação ao MAB",
+    "items": [
+      {
+        "type": "text",
+        "content": "O Museu de Arqueologia Bíblica (MAB) do UNASP, localizado em Engenheiro Coelho, é o primeiro museu dessa categoria na América do Sul. Com um acervo de mais de 2.400 peças, incluindo artefatos originais e réplicas, o MAB proporciona uma imersão na história e cultura dos tempos bíblicos, conectando os visitantes ao contexto histórico das Escrituras."
+      },
+      {
+        "type": "title",
+        "content": "Informações sobre a Visitação ao MAB"
+      },
+      {
+        "type": "details",
+        "content": [
+          "• A visita ao museu tem duração aproximada de 30 minutos.",
+          "• O acervo inclui artefatos originais e réplicas que ilustram a cultura e o cotidiano dos tempos bíblicos.",
+          "• A visita é guiada, proporcionando explicações detalhadas sobre as peças e seu contexto histórico.",
+          "• O museu possui uma área expositiva de 585,57 m², dividida em diversas seções temáticas.",
+          "• A experiência visa aprofundar o conhecimento sobre os relatos bíblicos por meio da arqueologia.",
+          "• A visita é adequada para todas as idades, promovendo aprendizado e reflexão espiritual.",
+          "• Os clubes devem organizar-se com antecedência para participar da atividade durante o Campori."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Mais Informações"
+      },
+      {
+        "type": "button",
+        "content": "Site oficial",
+        "url": "https://mab.unasp.edu.br/"
+      },
+      {
+        "type": "button",
+        "content": "Instagram",
+        "url": "https://www.instagram.com/mab.unasp/"
+      }
+    ]
+  },
+  {
+    "text": "Visitação ao Centro White",
+    "items": [
+      {
+        "type": "text",
+        "content": "O Centro de Pesquisas Ellen G. White, conhecido como Centro White, está localizado no campus do UNASP em Engenheiro Coelho. Este centro é dedicado à preservação e estudo do legado de Ellen G. White, uma das fundadoras da Igreja Adventista do Sétimo Dia. Com um acervo extenso, o Centro White oferece aos visitantes uma oportunidade única de aprofundar seus conhecimentos sobre a história e os escritos de Ellen G. White."
+      },
+      {
+        "type": "title",
+        "content": "Informações sobre a Visitação ao Centro White"
+      },
+      {
+        "type": "details",
+        "content": [
+          "• A visita ao Centro White tem duração aproximada de 60 minutos.",
+          "• O acervo inclui mais de 6.900 títulos e 9.000 exemplares relacionados à teologia e à história adventista.",
+          "• O espaço conta com uma sala de estudos e exposições que ilustram a vida e o ministério de Ellen G. White.",
+          "• A visita é guiada, proporcionando explicações detalhadas sobre as peças e seu contexto histórico.",
+          "• A experiência visa aprofundar o conhecimento sobre os relatos bíblicos e o desenvolvimento da Igreja Adventista.",
+          "• A visita é adequada para todas as idades, promovendo aprendizado e reflexão espiritual.",
+          "• Os clubes devem organizar-se com antecedência para participar da atividade durante o Campori."
+        ]
+      },
+      {
+        "type": "title",
+        "content": "Mais Informações"
+      },
+      {
+        "type": "button",
+        "content": "Site oficial",
+        "url": "https://centrowhite.org.br/"
+      }
+    ]
+  },  
   {
     "text": "Climas",
     "items": [

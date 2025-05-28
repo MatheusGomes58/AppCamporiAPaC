@@ -14,6 +14,7 @@ import LoginPage from './loginPage';
 import ForgotPage from './forgotPage';
 import UnknowPage from './unknowPage';
 import MenuPage from './menuPage';
+import MapPage from './mapPage';
 import NotificationPage from './noticesPage';
 import ScheduleActivity from './scheduleActivitiesPage';
 import ScoresPage from './scorePage';
@@ -129,7 +130,7 @@ function AppContent() {
               clube={clube}
             />
           } />
-          <Route path="/map" element={<UnknowPage />} />
+          {/*<Route path="/map" element={<MapPage />} />*/}
           <Route path="/count" element={<CountPage />} />
           <Route path="/dashboard" element={
             <DashboarAtividade />}

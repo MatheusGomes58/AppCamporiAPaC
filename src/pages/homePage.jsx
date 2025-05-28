@@ -152,10 +152,15 @@ const App = () => {
             size="medium"
             columns={false}
             buttonHeaders={true}
-            htmlContent={[<EventsWidgets />, <AtividadesWidgets />, <NoticeWidgets isSlider={true} />, <ContactsWidgets />]}
+            htmlContent={[
+              <EventsWidgets />,
+              <AtividadesWidgets onClick={(response) => handleClick(response?.title, response?.image)}/>,
+              <NoticeWidgets isSlider={true} />,
+              <ContactsWidgets />
+            ]}
             buttons={[
               { name: 'FaCalendarAlt', Title: 'Programações', onclick: { title: "Campori Experience Login", image: LogoCampori } },
-              { name: 'FaTasks', Title: 'Atividades'},
+              { name: 'FaTasks', Title: 'Atividades' },
               { name: 'FaBullhorn', Title: 'Anúncios' },
               { name: 'FaAddressBook', Title: 'Contatos' }
             ]}

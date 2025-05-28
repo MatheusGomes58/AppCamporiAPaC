@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import atividadesData from "../../data/atividadeEspeciaisMenu.json";
 
-const AtividadesWidget = () => {
+const AtividadesWidget = ({onClick}) => {
     const [atividades, setAtividades] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
     const porPagina = 3;
@@ -27,7 +27,7 @@ const AtividadesWidget = () => {
         <div className="widget-container">
             <div className="atividades-grid minimal">
                 {atividadesPaginadas.map((item, index) => (
-                    <div key={index} className="atividade-card minimal">
+                    <div key={index} className="atividade-card minimal" onClick={() => onClick && onClick({ title: item.atividade})}>
                         <h3 className="atividade-titulo">{item.atividade}</h3>
                         <p className="atividade-descricao">{item.descricao}</p>
                     </div>
