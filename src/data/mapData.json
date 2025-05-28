@@ -1,13 +1,13 @@
 [
-  { "id": "recepcao", "nome": "RECEPÇÃO", "x": 415, "y": 185, "cor": "#00b300", "icon": "building" },
-  { "id": "shopping", "nome": "SHOPPING", "x": 566, "y": 401, "cor": "#cc0000", "icon": "shopping-cart" },
-  { "id": "palco", "nome": "PALCO", "x": 677, "y": 487, "cor": "#ff6600", "icon": "microphone" },
-  { "id": "cozinhas", "nome": "COZINHAS", "x": 534, "y": 651, "cor": "#ff3399", "icon": "utensils" },
-  { "id": "chuveiros", "nome": "CHUVEIROS", "x": 450, "y": 633, "cor": "#cc66ff", "icon": "shower" },
-  { "id": "secretaria", "nome": "SECRETARIA", "x": 340, "y": 417, "cor": "#00cccc", "icon": "file-alt" },
-  { "id": "atividades_oeste", "nome": "ATIVIDADES", "x": 120, "y": 475, "cor": "#ff3300", "icon": "dumbbell" },
-  { "id": "atividades_leste", "nome": "ATIVIDADES", "x": 975, "y": 530, "cor": "#ff3300", "icon": "dumbbell" },
-  { "id": "acampamento_centro", "nome": "ACAMPAMENTO", "x": 480, "y": 430, "cor": "#ff9900", "icon": "campground" },
-  { "id": "sant_containers", "nome": "SANITÁRIOS CONTÊINER", "x": 630, "y": 455, "cor": "#9900cc", "icon": "toilet" },
-  { "id": "santarios_norte", "nome": "SANITÁRIOS", "x": 460, "y": 330, "cor": "#ff0033", "icon": "toilet" }
+  { "id": "recepcao", "nome": "RECEPÇÃO", "x": 415, "y": 185, "cor": "#00b300", "icon": "building", "tamanho": 0.5 },
+  { "id": "shopping", "nome": "SHOPPING", "x": 566, "y": 401, "cor": "#cc0000", "icon": "shopping-cart", "tamanho": 0.5 },
+  { "id": "palco", "nome": "PALCO", "x": 677, "y": 487, "cor": "#ff6600", "icon": "microphone" , "tamanho": 0.5 },
+  { "id": "cozinhas", "nome": "COZINHAS", "x": 534, "y": 651, "cor": "#ff3399", "icon": "utensils", "tamanho": 0.5  },
+  { "id": "chuveiros", "nome": "CHUVEIROS", "x": 450, "y": 633, "cor": "#cc66ff", "icon": "shower", "tamanho": 0.5  },
+  { "id": "secretaria", "nome": "SECRETARIA", "x": 340, "y": 417, "cor": "#00cccc", "icon": "file-alt", "tamanho": 0.5  },
+  { "id": "atividades_oeste", "nome": "ATIVIDADES", "x": 120, "y": 475, "cor": "#ff3300", "icon": "dumbbell", "tamanho": 0.5  },
+  { "id": "atividades_leste", "nome": "ATIVIDADES", "x": 975, "y": 530, "cor": "#ff3300", "icon": "dumbbell", "tamanho": 0.5  },
+  { "id": "acampamento_centro", "nome": "ACAMPAMENTO", "x": 480, "y": 430, "cor": "#ff9900", "icon": "campground", "tamanho": 0.5  },
+  { "id": "sant_containers", "nome": "SANITÁRIOS CONTÊINER", "x": 630, "y": 455, "cor": "#9900cc", "icon": "toilet", "tamanho": 0.5  },
+  { "id": "santarios_norte", "nome": "SANITÁRIOS", "x": 460, "y": 330, "cor": "#ff0033", "icon": "toilet", "tamanho": 0.5  }
 ]
