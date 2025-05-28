@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import mapa from '../img/mapaCampori.png';
 import '../css/mapPage.css';
@@ -53,24 +53,63 @@ function IconSVG({ icon, x, y, size = 24, color = 'white' }) {
   );
 }
 
+// Centro do mapa em coordenadas reais (latitude e longitude conhecidas)
+const centerLat = -22.503611;  // 22°30'13" S
+const centerLng = -47.163056;  // 47°09'47" W
+const centerX = 512;
+const centerY = 384;
+
+// Conversão de coordenadas geográficas para o mapa SVG
+function latLngToXY(lat, lng) {
+  const scale = 10000; // ajuste conforme o mapa
+  const dx = (lng - centerLng) * scale;
+  const dy = (lat - centerLat) * scale;
+
+  return {
+    x: centerX + dx,
+    y: centerY - dy
+  };
+}
+
+
+
 export default function MapaSVG() {
   const location = useLocation();
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const query = queryParams.get('localizacao') || '';
   const [zoom, setZoom] = useState(1);
-
-  // Mapeia ícones para os pontos
-  const pontos = pontosJSON.map((p) => ({
-    ...p,
-    icon: iconMap[p.icon] || faBuilding,
-  }));
+  const ranInitialQuery = useRef(false);
 
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  const [userPosition, setUserPosition] = useState(null);
 
-  // Ao carregar a página, se query existe, seta a busca e seleciona ponto
+  const pontos = useMemo(() =>
+    pontosJSON.map((p) => ({
+      ...p,
+      icon: iconMap[p.icon] || faBuilding,
+    })), []);
+
+  // Geolocalização do usuário
   useEffect(() => {
-    if (query) {
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const coords = latLngToXY(latitude, longitude);
+        setUserPosition(coords);
+      },
+      (error) => {
+        console.error("Erro ao obter localização:", error);
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
+    );
+
+    return () => navigator.geolocation.clearWatch(watchId);
+  }, []);
+
+  useEffect(() => {
+    if (!ranInitialQuery.current && query) {
+      ranInitialQuery.current = true;
       setSearch(query.toUpperCase());
       const pontoEncontrado = pontos.find(
         (p) => p.id.toLowerCase() === query.toLowerCase() || p.nome.toUpperCase() === query.toUpperCase()
@@ -78,24 +117,19 @@ export default function MapaSVG() {
       if (pontoEncontrado) {
         setSelectedId(pontoEncontrado.id);
       }
+      const url = new URL(window.location);
+      url.searchParams.delete('localizacao');
+      window.history.replaceState({}, '', url);
     }
   }, [query, pontos]);
 
-  // Quando a busca muda e não é vazia, reseta o zoom para 1
-  useEffect(() => {
-    if (search.trim() !== '') {
-      setZoom(1);
-    }
-  }, [search]);
-
-  // Filtra pontos: se busca vazia, mostra todos, senão só os filtrados
   const pontosFiltrados = search.trim() === ''
     ? pontos
     : pontos.filter(
-        (p) =>
-          p.nome.toLowerCase().includes(search.toLowerCase()) ||
-          p.id.toLowerCase().includes(search.toLowerCase())
-      );
+      (p) =>
+        p.nome.toLowerCase().includes(search.toLowerCase()) ||
+        p.id.toLowerCase().includes(search.toLowerCase())
+    );
 
   const handleMapaClick = (event) => {
     const svg = event.currentTarget;
@@ -129,16 +163,17 @@ export default function MapaSVG() {
           >
             <image href={mapa} x="0" y="0" width="1024" height="768" />
 
+            {/* Pontos do mapa */}
             {pontosFiltrados.map((p) => {
               const isSelected = selectedId === p.id;
-              const scale = (p.tamanho || 1) * (isSelected && zoom === 1 ? 2.4 : 1);
+              const scale = (p.tamanho || 1) * (isSelected ? 2.4 : 1);
               const baseRadius = 28;
               const iconSize = 24 * scale;
 
               return (
                 <g
                   key={p.id}
-                  className={`mapa-ponto ${isSelected && zoom === 1 ? 'selected' : ''}`}
+                  className={`mapa-ponto ${isSelected ? 'selected' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedId(p.id);
@@ -169,6 +204,29 @@ export default function MapaSVG() {
                 </g>
               );
             })}
+
+            {/* Posição do usuário */}
+            {userPosition && (
+              <g>
+                <circle
+                  cx={userPosition.x}
+                  cy={userPosition.y}
+                  r={12}
+                  fill="blue"
+                  stroke="white"
+                  strokeWidth={2}
+                />
+                <text
+                  x={userPosition.x}
+                  y={userPosition.y - 15}
+                  fill="white"
+                  fontSize={14}
+                  textAnchor="middle"
+                >
+                  Você
+                </text>
+              </g>
+            )}
           </svg>
         </div>
       </div>

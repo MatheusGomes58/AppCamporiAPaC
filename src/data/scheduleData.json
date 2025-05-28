@@ -45,28 +45,28 @@
             {
                 "horário": "06h",
                 "atividade": "Chegada dos clubes",
-                "local": "UNASP-EC",
+                "local": "RECEPÇÃO",
                 "responsável": "Equipes de transporte e direção dos clubes",
                 "descrição": "Início oficial da recepção dos clubes participantes no campus do UNASP, em Engenheiro Coelho. Cheguem com antecedência e organizem-se para uma entrada tranquila."
             },
             {
                 "horário": "08h",
                 "atividade": "Pré-abertura",
-                "local": "UNASP-EC",
+                "local": "RECEPÇÃO",
                 "responsável": "Equipe de programação do evento",
                 "descrição": "Atividades iniciais de integração e orientação dos clubes. Um momento para acolher todos os participantes e alinhar os primeiros passos da programação."
             },
             {
                 "horário": "11h",
                 "atividade": "Áreas de acampamento e cozinha prontas",
-                "local": "Áreas de acampamento e cozinha",
+                "local": "ACAMPAMENTO",
                 "responsável": "Clubes participantes",
                 "descrição": "Todos os clubes devem finalizar a montagem e organização das áreas de acampamento e cozinha até este horário. A organização fará visitas para verificar a estrutura."
             },
             {
                 "horário": "12h",
                 "atividade": "Horário de almoço",
-                "local": "Áreas de cozinha",
+                "local": "COZINHAS",
                 "responsável": "Equipes de alimentação dos clubes",
                 "descrição": "Momento para recarregar as energias. Cada clube se organiza para preparar e servir o almoço nas áreas designadas."
             },
@@ -80,28 +80,28 @@
             {
                 "horário": "17h",
                 "atividade": "Reunião com os diretores de clube",
-                "local": "Local a definir",
+                "local": "SECRETARIA",
                 "responsável": "Coordenação geral do evento",
                 "descrição": "Reunião com todos os diretores dos clubes para repassar orientações importantes, esclarecer dúvidas e alinhar detalhes operacionais do Campori."
             },
             {
                 "horário": "19h",
                 "atividade": "Reunião com coordenadores e regionais",
-                "local": "Local a definir",
+                "local": "SECRETARIA",
                 "responsável": "Liderança regional da organização",
                 "descrição": "Momento de alinhamento com os coordenadores regionais para tratar das responsabilidades e acompanhar os preparativos da programação."
             },
             {
                 "horário": "19h",
                 "atividade": "Reunião com pastores",
-                "local": "Local a definir",
+                "local": "SECRETARIA",
                 "responsável": "Equipe ministerial do evento",
                 "descrição": "Encontro com os pastores que atuarão no evento, com foco em planejamento das atividades espirituais e ações de apoio pastoral durante os dias do Campori."
             },
             {
                 "horário": "19h30",
                 "atividade": "Abertura oficial",
-                "local": "UNASP-EC",
+                "local": "PALCO",
                 "responsável": "Coordenação geral do Campori",
                 "descrição": "Cerimônia solene de abertura do evento, com apresentação das regiões, momento espiritual e início simbólico das atividades do Campori."
             }
@@ -114,28 +114,28 @@
             {
                 "horário": "07h",
                 "atividade": "Reunião com os diretores de clube",
-                "local": "Local a definir",
+                "local": "SECRETARIA",
                 "responsável": "Coordenação do evento",
                 "descrição": "Reunião matinal com os diretores para atualizações importantes e checagem de ajustes no cronograma. Participação obrigatória."
             },
             {
                 "horário": "07h45",
                 "atividade": "Programação especial da manhã",
-                "local": "UNASP-EC",
+                "local": "PALCO",
                 "responsável": "Equipe de louvor e espiritualidade",
                 "descrição": "Início das atividades do dia com uma programação inspiradora e dinâmica para motivar os participantes e fortalecer o espírito de equipe."
             },
             {
                 "horário": "12h",
                 "atividade": "Horário de almoço",
-                "local": "Áreas de cozinha",
+                "local": "COZINHAS",
                 "responsável": "Equipes de alimentação dos clubes",
                 "descrição": "Intervalo para o almoço. Os clubes devem garantir um ambiente organizado e acolhedor para este momento importante do dia."
             },
             {
                 "horário": "19h30",
                 "atividade": "Investidura da Classe de Líder",
-                "local": "UNASP-EC",
+                "local": "PALCO",
                 "responsável": "Coordenação de liderança e espiritualidade",
                 "descrição": "Cerimônia solene de investidura para os desbravadores que concluíram a Classe de Líder. Um momento de reconhecimento e compromisso com a missão."
             }
@@ -148,28 +148,28 @@
             {
                 "horário": "07h",
                 "atividade": "Reunião com os diretores de clube",
-                "local": "Local a definir",
+                "local": "SECRETARIA",
                 "responsável": "Coordenação do evento",
                 "descrição": "Encontro com os diretores para passar os avisos gerais do sábado, revisar o cronograma e alinhar pontos estratégicos do dia."
             },
             {
                 "horário": "07h45",
                 "atividade": "Programação especial da manhã",
-                "local": "UNASP-EC",
+                "local": "PALCO",
                 "responsável": "Equipe de espiritualidade e louvor",
                 "descrição": "Uma programação inspiradora para começar o sábado com gratidão, reflexão e louvor. Inclui mensagens especiais, cânticos e dinâmicas."
             },
             {
                 "horário": "12h",
                 "atividade": "Horário de almoço",
-                "local": "Áreas de cozinha",
+                "local": "COZINHAS",
                 "responsável": "Equipes de alimentação dos clubes",
                 "descrição": "Hora do almoço. Um momento de pausa e comunhão entre os participantes, com refeições preparadas pelas equipes de cozinha dos clubes."
             },
             {
                 "horário": "17h00",
                 "atividade": "Culto de consagração do sábado",
-                "local": "UNASP-EC",
+                "local": "PALCO",
                 "responsável": "Equipe de espiritualidade do evento",
                 "descrição": "Celebração espiritual para encerrar o sábado de maneira especial, com músicas, oração e mensagem inspiradora de consagração."
             }
@@ -182,6 +182,7 @@
             {
                 "horário": "08h",
                 "atividade": "Encerramento e premiação",
+                "local": "PALCO",
                 "responsável": "Coordenação geral e equipe de cerimônias",
                 "descrição": "Momento final do Campori, com entrega de premiações, reconhecimento dos destaques e despedida oficial. Uma celebração de tudo o que foi vivido juntos."
             }

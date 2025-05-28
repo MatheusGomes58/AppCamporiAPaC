@@ -107,6 +107,7 @@
 .mapa-ponto text {
   pointer-events: none;
   user-select: none;
+  color: black;
 }
 
 .search-bar {

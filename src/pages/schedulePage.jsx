@@ -67,7 +67,7 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
     const [search, setSearch] = useState('');
 
     const handleLocationClick = useCallback((location) => {
-        navigate(`/map?location=${encodeURIComponent(location)}`);
+        navigate(`/map?localizacao=${encodeURIComponent(location)}`);
     }, [navigate]);
 
     const handleDateClick = (date) => {
