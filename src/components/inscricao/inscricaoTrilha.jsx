@@ -307,16 +307,16 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button className="delete" onClick={() => handleCancelarInscricao(t.id)}>
+                                        {/*<button className="delete" onClick={() => handleCancelarInscricao(t.id)}>
                                             Cancelar inscrição
-                                        </button>
+                                        </button>*/}
                                     </div>
                                 )}
-                                {!inscrito && admin && !ismaster && (
+                                {/*!inscrito && admin && !ismaster && (
                                     <button onClick={() => handleInscricaoDireta(t.id)}>
                                         Inscrever clube
                                     </button>
-                                )}
+                                )*/}
                                 {ismaster && (
                                     <button onClick={() => navigate(`/chaveamento/${t.nome}`)}>
                                         Consultar Lista de Inscritos

@@ -109,10 +109,10 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
             <td>Total de Vagas:</td>
             <td>{event.maxVagas || 0} disponíveis</td>
           </tr>
-          <tr>
+          {/*<tr>
             <td>Total de Vagas Ocupadas:</td>
             <td>{event.inscritosTotal || 0} Inscritos</td>
-          </tr>
+          </tr>*/}
           <tr>
             <td>Total de Clubes:</td>
             <td>{event.inscritos?.length || 0} Inscritos</td>
@@ -180,12 +180,12 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
         </tbody>
       </table>
 
-      {(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && (
+      {/*(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && (
         <button className="location-button" onClick={handleClick}>
           Reservar
         </button>
-      )}
-      {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (
+      )*/}
+      {/*(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (
         <button
           className="delete"
           onClick={async () => {
@@ -198,7 +198,7 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
         >
           Cancelar reserva
         </button>
-      )}
+      )*/}
 
       {isMaster && (
         <button onClick={() => navigate(`/chaveamento/${event.nome}`)}>

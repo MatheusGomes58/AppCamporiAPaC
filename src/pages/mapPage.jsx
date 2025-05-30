@@ -21,6 +21,7 @@ import {
   faBed,
   faFlag,
   faUsers,
+  faLandmark
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconMap = {
@@ -39,7 +40,8 @@ const iconMap = {
   hospedagem: faBed,
   secretaria: faFileAlt,
   bandeira: faFlag,
-  grupo: faUsers
+  grupo: faUsers,
+  museu: faLandmark
 };
 
 function IconSVG({ icon, x, y, size = 24, color = 'white' }) {
@@ -53,15 +55,13 @@ function IconSVG({ icon, x, y, size = 24, color = 'white' }) {
   );
 }
 
-// Centro do mapa em coordenadas reais (latitude e longitude conhecidas)
-const centerLat = -22.503611;  // 22°30'13" S
-const centerLng = -47.163056;  // 47°09'47" W
+const centerLat = -22.503611;
+const centerLng = -47.163056;
 const centerX = 512;
 const centerY = 384;
 
-// Conversão de coordenadas geográficas para o mapa SVG
 function latLngToXY(lat, lng) {
-  const scale = 10000; // ajuste conforme o mapa
+  const scale = 10000;
   const dx = (lng - centerLng) * scale;
   const dy = (lat - centerLat) * scale;
 
@@ -71,26 +71,34 @@ function latLngToXY(lat, lng) {
   };
 }
 
-
-
 export default function MapaSVG() {
   const location = useLocation();
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const query = queryParams.get('localizacao') || '';
   const [zoom, setZoom] = useState(1);
   const ranInitialQuery = useRef(false);
-
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
 
-  const pontos = useMemo(() =>
-    pontosJSON.map((p) => ({
-      ...p,
-      icon: iconMap[p.icon] || faBuilding,
-    })), []);
+  // Correção aqui: acessar a propriedade "grupos" do JSON
+  const grupos = useMemo(() =>
+    pontosJSON.grupos.map((g) => ({
+      ...g,
+      pontos: g.itens.map((p) => ({
+        ...p,
+        icon: iconMap[p.icon] || faBuilding,
+        cor: g.cor,
+        grupo: g.nome,
+        minZoom: p.zoomMin ?? 1,
+        maxZoom: p.zoomMax ?? 20
+      }))
+    })), [pontosJSON]
+  );
 
-  // Geolocalização do usuário
+  // Flatmap para todos os pontos
+  const pontos = useMemo(() => grupos.flatMap(g => g.pontos), [grupos]);
+
   useEffect(() => {
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
@@ -123,13 +131,19 @@ export default function MapaSVG() {
     }
   }, [query, pontos]);
 
-  const pontosFiltrados = search.trim() === ''
-    ? pontos
-    : pontos.filter(
-      (p) =>
-        p.nome.toLowerCase().includes(search.toLowerCase()) ||
-        p.id.toLowerCase().includes(search.toLowerCase())
-    );
+  const pontosFiltrados = useMemo(() => {
+    if (search.trim() === "") {
+      // Filtra pelos pontos visíveis no zoom atual
+      return pontos.filter((p) => zoom >= p.minZoom && zoom <= p.maxZoom);
+    } else {
+      // Busca: ignora filtro de zoom e retorna todos que batem na busca
+      const termo = search.toLowerCase();
+      return pontos.filter(
+        (p) =>
+          p.nome.toLowerCase().includes(termo) || p.id.toLowerCase().includes(termo)
+      );
+    }
+  }, [zoom, search]);
 
   const handleMapaClick = (event) => {
     const svg = event.currentTarget;
@@ -163,7 +177,6 @@ export default function MapaSVG() {
           >
             <image href={mapa} x="0" y="0" width="1024" height="768" />
 
-            {/* Pontos do mapa */}
             {pontosFiltrados.map((p) => {
               const isSelected = selectedId === p.id;
               const scale = (p.tamanho || 1) * (isSelected ? 2.4 : 1);
@@ -176,8 +189,8 @@ export default function MapaSVG() {
                   className={`mapa-ponto ${isSelected ? 'selected' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedId(p.id);
-                    setSearch(p.nome);
+                    setSelectedId(!selectedId ? p.id : null);
+                    setSearch(!search ? p.nome : "");
                   }}
                   cursor="pointer"
                 >
@@ -205,7 +218,6 @@ export default function MapaSVG() {
               );
             })}
 
-            {/* Posição do usuário */}
             {userPosition && (
               <g>
                 <circle
