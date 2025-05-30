@@ -149,10 +149,8 @@
 
 .tooltip-box {
   background: white;
-  border: 1px solid #000;
-  border-radius: 8px;
-  padding: 8px;
-  font-size: 12px;
+  border: 1px solid #ffffff;
+  border-radius: 1vh;
   max-width: 220px;
   width: fit-content;
   height: fit-content;

@@ -181,18 +181,16 @@ export default function MapaSVG() {
 
             {pontosFiltrados.map((p) => {
               const isSelected = selectedId === p.id;
-              const baseScale = 1.4;
-              const scale = (p.tamanho || baseScale) * (isSelected ? 2 : 1);
-              const iconSize = 16 * scale;
+              const pontoBase = p.tamanho || 1.4;
 
-              // Tamanho do tooltip proporcional
+              const inverseZoom = 1.5 / (zoom != 1 ? zoom / 2 : 1); // <-- Zoom inverso: reduz com o aumento do zoom
+              const scale = pontoBase * inverseZoom;
+
+              const iconSize = 12 * scale;
               const tooltipWidth = 250 * scale;
               const tooltipHeight = 200 * scale;
-              const fontSize = 14 * (scale < 1? scale : 1);
-              const padding = 8 * scale;
-
-              // Ajuste da posição do tooltip (offsets multiplicados pelo scale)
-              // Pode ajustar os valores 40 e 100 conforme necessário para o melhor alinhamento
+              const fontSize = 5 * scale;
+              const padding = 4 * scale;
               const offsetX = 20 * scale;
               const offsetY = 50 * scale;
 
@@ -207,26 +205,24 @@ export default function MapaSVG() {
                   }}
                   cursor="pointer"
                 >
-                  {/* PIN com borda preta */}
+                  {/* PIN */}
                   <path
                     d="M0 -30 C15 -30 15 -10 0 0 C-15 -10 -15 -30 0 -30 Z"
                     transform={`translate(${p.x}, ${p.y}) scale(${scale})`}
                     fill={p.cor}
-                    stroke="black"
-                    strokeWidth={2}
                   />
 
-                  {/* Ícone com borda preta */}
-                  <g transform={`translate(${p.x - iconSize / 2}, ${p.y - iconSize / 2 - 15 * scale}) scale(${iconSize / (p.icon.icon[0] || 512)})`}>
+                  {/* Ícone */}
+                  <g
+                    transform={`translate(${p.x - iconSize / 2}, ${p.y - iconSize / 1.3 - 15 * scale}) scale(${iconSize / (p.icon.icon[0] || 512)})`}
+                  >
                     <path
                       d={p.icon.icon[4]}
                       fill="white"
-                      stroke="black"
-                      strokeWidth={20}
                     />
                   </g>
 
-                  {/* Tooltip quando selecionado */}
+                  {/* Tooltip */}
                   {isSelected && (
                     <foreignObject
                       x={p.x + offsetX}
@@ -237,7 +233,12 @@ export default function MapaSVG() {
                       <div
                         xmlns="http://www.w3.org/1999/xhtml"
                         className="tooltip-box"
-                        style={{ fontSize: `${fontSize}px`, padding: `${padding}px` }}
+                        style={{
+                          fontSize: `${fontSize}px`,
+                          padding: `${padding}px`,
+                          boxShadow: `0px 0px ${scale * 8}px ${scale * 10}px rgba(0, 0, 0, 0.06)`
+                        }}
+
                       >
                         <strong>{p.nome}</strong>
                         <p>{p.descricao || "Sem descrição"}</p>
@@ -250,6 +251,9 @@ export default function MapaSVG() {
                 </g>
               );
             })}
+
+
+
 
             {userPosition && (
               <g>
@@ -277,8 +281,8 @@ export default function MapaSVG() {
       </div>
 
       <div className="zoom-controls">
-        <button onClick={() => setZoom((z) => Math.min(z + 1, 20))}>+</button>
-        <button onClick={() => setZoom(1)}>0</button>
+        <button onClick={() => setZoom((z) => Math.min(z + 1, 40))}>+</button>
+        <button onClick={() => setZoom(1)}>{zoom < 10 ? "0" + zoom : zoom}X</button>
         <button onClick={() => setZoom((z) => Math.max(z - 1, 1))}>-</button>
       </div>
     </div>

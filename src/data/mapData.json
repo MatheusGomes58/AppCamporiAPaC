@@ -4,49 +4,299 @@
       "nome": "Atividades",
       "cor": "#ff3300",
       "itens": [
-        { "id": "atividades_norte", "nome": "ATIVIDADES", "x": 449, "y": 227, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço dinâmico para oficinas e desafios, ideal para se divertir e aprender com sua unidade do norte." },
-        { "id": "atividades_nordeste", "nome": "ATIVIDADES", "x": 653, "y": 213, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Área de atividades interativas voltada aos clubes da região nordeste do campori." },
-        { "id": "atividades_oeste", "nome": "ATIVIDADES", "x": 120, "y": 475, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Local de experiências práticas e recreativas, com foco nos desbravadores do oeste." },
-        { "id": "atividades_leste", "nome": "ATIVIDADES", "x": 975, "y": 530, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Ponto animado onde acontecem diversas atividades voltadas aos clubes do leste." },
-        { "id": "atividades_sul", "nome": "ATIVIDADES", "x": 690, "y": 557, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Área cheia de movimento com desafios e brincadeiras voltadas ao público do sul." },
-        { "id": "atividades_suldeste", "nome": "ATIVIDADES", "x": 615, "y": 493, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Local repleto de dinâmicas divertidas para os clubes da região sudeste." },
-        { "id": "atividades_central", "nome": "ATIVIDADES", "x": 669, "y": 419, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço onde os desbravadores do centro participam de gincanas e atividades educativas." },
-        { "id": "atividades_centroeste", "nome": "ATIVIDADES", "x": 234, "y": 479, "icon": "dumbbell", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Região voltada para atividades práticas dos clubes da região centro-oeste." }
+        {
+          "id": "atividades_norte",
+          "nome": "Atividades Norte",
+          "x": 449,
+          "y": 227,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Desafios empolgantes e oficinas interativas pensadas especialmente para os clubes da região norte. Diversão e aprendizado garantidos!"
+        },
+        {
+          "id": "atividades_nordeste",
+          "nome": "Atividades Nordeste",
+          "x": 653,
+          "y": 213,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Participe de atividades cheias de energia e criatividade voltadas aos clubes do nordeste. Um espaço para se conectar e explorar novas habilidades."
+        },
+        {
+          "id": "atividades_oeste",
+          "nome": "Atividades Oeste",
+          "x": 120,
+          "y": 475,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Um ambiente dinâmico para experiências práticas, recreativas e desafiadoras para os desbravadores do oeste. Aventura garantida!"
+        },
+        {
+          "id": "atividades_leste",
+          "nome": "Atividades Leste",
+          "x": 975,
+          "y": 530,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Local animado e acolhedor para vivenciar atividades emocionantes e memoráveis com os clubes do leste. Venha se divertir!"
+        },
+        {
+          "id": "atividades_sul",
+          "nome": "Atividades Sul",
+          "x": 690,
+          "y": 557,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Desafios, brincadeiras e muito movimento em um espaço acolhedor para os clubes do sul. Venha mostrar seu espírito desbravador!"
+        },
+        {
+          "id": "atividades_sudeste",
+          "nome": "Atividades Sudeste",
+          "x": 615,
+          "y": 493,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Diversão e aprendizado se encontram aqui! Uma área repleta de dinâmicas especiais para os clubes do sudeste."
+        },
+        {
+          "id": "atividades_central",
+          "nome": "Atividades Central",
+          "x": 669,
+          "y": 419,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço central de integração com gincanas educativas e momentos únicos para os clubes da região central. Participe com sua unidade!"
+        },
+        {
+          "id": "atividades_centro_oeste",
+          "nome": "Atividades Centro-Oeste",
+          "x": 234,
+          "y": 479,
+          "icon": "atividades",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Atividades práticas, envolventes e com foco em valores para os desbravadores da região centro-oeste. Uma experiência completa!"
+        }
       ]
     },
     {
       "nome": "Sanitários",
       "cor": "#ff0033",
       "itens": [
-        { "id": "sant_containers", "nome": "SANITÁRIOS CONTÊINER", "x": 532, "y": 525, "icon": "toilet", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Sanitários em contêineres com infraestrutura moderna para conforto dos participantes." },
-        { "id": "santarios_norte", "nome": "SANITÁRIOS", "x": 333, "y": 352, "icon": "toilet", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Banheiros limpos e acessíveis para a região norte do evento." },
-        { "id": "santarios_leste", "nome": "SANITÁRIOS", "x": 557, "y": 360, "icon": "toilet", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Sanitários disponíveis para os clubes do leste, com manutenção frequente." },
-        { "id": "santarios_sul", "nome": "SANITÁRIOS", "x": 368, "y": 641, "icon": "toilet", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Área de apoio sanitário destinada à região sul do campori." },
-        { "id": "santarios_suldeste", "nome": "SANITÁRIOS", "x": 449, "y": 636, "icon": "toilet", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço higiênico e organizado para os clubes da região sudeste." },
-        { "id": "chuveiros", "nome": "CHUVEIROS", "x": 294, "y": 649, "icon": "shower", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Área de chuveiros com estrutura adequada para banhos durante o evento." }
+        {
+          "id": "sanitarios_container",
+          "nome": "Sanitários Contêiner",
+          "x": 532,
+          "y": 525,
+          "icon": "toilet",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Instalações modernas em contêineres com higiene, conforto e praticidade para todos os participantes."
+        },
+        {
+          "id": "sanitarios_norte",
+          "nome": "Sanitários Norte",
+          "x": 333,
+          "y": 352,
+          "icon": "toilet",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Banheiros limpos e bem localizados para atender aos desbravadores da região norte. Comodidade sempre por perto!"
+        },
+        {
+          "id": "sanitarios_leste",
+          "nome": "Sanitários Leste",
+          "x": 557,
+          "y": 360,
+          "icon": "toilet",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço sanitário com fácil acesso para os clubes do leste. Conforto garantido com manutenção constante."
+        },
+        {
+          "id": "sanitarios_sul",
+          "nome": "Sanitários Sul",
+          "x": 368,
+          "y": 641,
+          "icon": "toilet",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Ambiente limpo e acessível para os acampamentos da região sul. Cuidados com você em todos os detalhes!"
+        },
+        {
+          "id": "sanitarios_sudeste",
+          "nome": "Sanitários Sudeste",
+          "x": 449,
+          "y": 636,
+          "icon": "toilet",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Sanitários organizados e próximos às áreas dos clubes do sudeste, sempre prontos para te atender bem."
+        },
+        {
+          "id": "chuveiros_gerais",
+          "nome": "Chuveiros Gerais",
+          "x": 294,
+          "y": 649,
+          "icon": "shower",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Área de banho com estrutura adequada e conforto para renovar as energias durante o evento."
+        }
       ]
     },
     {
       "nome": "Infraestrutura",
       "cor": "#cc66ff",
       "itens": [
-        { "id": "cozinhas", "nome": "COZINHAS", "x": 534, "y": 651, "icon": "utensils", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço destinado ao preparo das refeições dos clubes, com segurança e organização." },
-        { "id": "recepcao", "nome": "RECEPÇÃO", "x": 358, "y": 210, "icon": "building", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Ponto de boas-vindas e orientação para quem está chegando ao campori." },
-        { "id": "secretaria", "nome": "SECRETARIA", "x": 284, "y": 415, "icon": "file-alt", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Centro administrativo para dúvidas, registros e apoio aos líderes de clubes." },
-        { "id": "shopping", "nome": "SHOPPING", "x": 566, "y": 401, "icon": "shopping-cart", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço para compras, lembranças e alimentação durante o evento." },
-        { "id": "palco", "nome": "PALCO", "x": 677, "y": 487, "icon": "microphone", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Local das cerimônias, apresentações e mensagens especiais do campori." },
-        { "id": "MAB", "nome": "MAB - ARQUEOLOGIA BÍBLICA", "x": 229, "y": 218, "icon": "museu", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Museu interativo com réplicas e exposições sobre a história bíblica." },
-        { "id": "CEGW", "nome": "EGW - CENTRO WHITE", "x": 393, "y": 244, "icon": "museu", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço dedicado à vida, obra e legado de Ellen G. White, com recursos educativos." }
+        {
+          "id": "cozinhas_clubes",
+          "nome": "Cozinhas dos Clubes",
+          "x": 534,
+          "y": 651,
+          "icon": "utensils",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço organizado e seguro para o preparo das refeições dos clubes. Alimentação com cuidado e sabor!"
+        },
+        {
+          "id": "recepcao_entrada",
+          "nome": "Recepção Principal",
+          "x": 358,
+          "y": 210,
+          "icon": "bandeira",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Seja bem-vindo! Aqui você encontra apoio, orientações e as boas-vindas calorosas do nosso time."
+        },
+        {
+          "id": "secretaria_evento",
+          "nome": "Secretaria Geral",
+          "x": 284,
+          "y": 415,
+          "icon": "file",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Ponto de suporte administrativo para líderes e participantes. Estamos aqui para ajudar com o que for preciso."
+        },
+        {
+          "id": "shopping_evento",
+          "nome": "Shopping e Lembranças",
+          "x": 566,
+          "y": 401,
+          "icon": "shopping-cart",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço para compras de lembranças, alimentação e produtos diversos. Um cantinho animado e cheio de opções!"
+        },
+        {
+          "id": "palco_principal",
+          "nome": "Palco Principal",
+          "x": 677,
+          "y": 487,
+          "icon": "microphone",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "O coração do campori! Cerimônias, louvor, apresentações e mensagens inesquecíveis para todos."
+        },
+        {
+          "id": "museu_biblico",
+          "nome": "MAB - Museu Bíblico",
+          "x": 229,
+          "y": 218,
+          "icon": "museu",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Uma jornada no tempo com exposições interativas que trazem à vida histórias incríveis da Bíblia."
+        },
+        {
+          "id": "centro_white",
+          "nome": "Centro EGW",
+          "x": 393,
+          "y": 244,
+          "icon": "museu",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço educativo e inspirador dedicado à vida e legado de Ellen G. White. Uma parada que toca o coração!"
+        }
       ]
     },
     {
       "nome": "Acampamentos",
       "cor": "#ff9900",
       "itens": [
-        { "id": "acampamento_centro", "nome": "ACAMPAMENTO CENTRAL", "x": 511, "y": 441, "icon": "campground", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Área central de alojamento para clubes participantes, com fácil acesso a todos os pontos do evento." },
-        { "id": "acampamento_norte", "nome": "ACAMPAMENTO NORTE", "x": 479, "y": 338, "icon": "campground", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Região de acampamento destinada aos clubes do norte, com estrutura organizada." },
-        { "id": "acampamento_oeste", "nome": "ACAMPAMENTO OESTE", "x": 380, "y": 420, "icon": "campground", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Zona de acampamento dos clubes da região oeste, próxima às atividades." },
-        { "id": "acampamento_sul", "nome": "ACAMPAMENTO SUL", "x": 428, "y": 523, "icon": "campground", "tamanho": 1.5, "zoomMin": 1, "zoomMax": 20, "descricao": "Espaço tranquilo e seguro para os clubes do sul montarem seus acampamentos." }
+        {
+          "id": "acampamento_central",
+          "nome": "Acampamento Central",
+          "x": 511,
+          "y": 441,
+          "icon": "campground",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Área privilegiada e bem localizada para os clubes se alojarem com praticidade e proximidade das atrações."
+        },
+        {
+          "id": "acampamento_norte",
+          "nome": "Acampamento Norte",
+          "x": 479,
+          "y": 338,
+          "icon": "campground",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Espaço estruturado e acolhedor para os clubes da região norte viverem o campori com conforto e união."
+        },
+        {
+          "id": "acampamento_oeste",
+          "nome": "Acampamento Oeste",
+          "x": 380,
+          "y": 420,
+          "icon": "campground",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Alojamento próximo às atividades do oeste. Perfeito para descansar e estar pronto para o próximo desafio!"
+        },
+        {
+          "id": "acampamento_sul",
+          "nome": "Acampamento Sul",
+          "x": 428,
+          "y": 523,
+          "icon": "campground",
+          "tamanho": 1.5,
+          "zoomMin": 1,
+          "zoomMax": 40,
+          "descricao": "Região calma, segura e preparada para receber com carinho os desbravadores do sul. Um verdadeiro lar no campori."
+        }
       ]
     }
   ]
