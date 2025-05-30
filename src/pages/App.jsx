@@ -84,7 +84,7 @@ function AppContent() {
             setUsername(userDoc.name || '');
             setEmail(userDoc.email || '');
             setAutenticated(!!userDoc.name);
-            setMaster(userDoc.clube === 'APAC' || userDoc.clube === 'ORGANIZAÇÃO');
+            setMaster(userDoc.clube === 'APAC');
 
             logEvent(analytics, 'user_login', {
               user_id: storedUser,

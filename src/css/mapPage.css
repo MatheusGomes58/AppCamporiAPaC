@@ -146,3 +146,17 @@
   cursor: pointer;
   transition: background-color 0.2s;
 }
+
+.tooltip-box {
+  background: white;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+  max-width: 220px;
+  width: fit-content;
+  height: fit-content;
+  white-space: normal;
+  color: #000;
+  z-index: 100000;
+}

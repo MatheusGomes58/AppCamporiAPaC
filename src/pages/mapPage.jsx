@@ -153,6 +153,8 @@ export default function MapaSVG() {
     const x = (event.clientX - rect.left) * scaleX;
     const y = (event.clientY - rect.top) * scaleY;
     console.log(`Coordenadas no mapa:\nX: ${Math.round(x)}, Y: ${Math.round(y)}`);
+    setSearch(search ? '' : search)
+    setSelectedId(selectedId ? null : selectedId);
   };
 
   return (
@@ -179,9 +181,20 @@ export default function MapaSVG() {
 
             {pontosFiltrados.map((p) => {
               const isSelected = selectedId === p.id;
-              const scale = (p.tamanho || 1) * (isSelected ? 2.4 : 1);
-              const baseRadius = 28;
-              const iconSize = 24 * scale;
+              const baseScale = 1.4;
+              const scale = (p.tamanho || baseScale) * (isSelected ? 2 : 1);
+              const iconSize = 16 * scale;
+
+              // Tamanho do tooltip proporcional
+              const tooltipWidth = 250 * scale;
+              const tooltipHeight = 200 * scale;
+              const fontSize = 14 * (scale < 1? scale : 1);
+              const padding = 8 * scale;
+
+              // Ajuste da posição do tooltip (offsets multiplicados pelo scale)
+              // Pode ajustar os valores 40 e 100 conforme necessário para o melhor alinhamento
+              const offsetX = 20 * scale;
+              const offsetY = 50 * scale;
 
               return (
                 <g
@@ -189,31 +202,51 @@ export default function MapaSVG() {
                   className={`mapa-ponto ${isSelected ? 'selected' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedId(!selectedId ? p.id : null);
-                    setSearch(!search ? p.nome : "");
+                    setSelectedId(p.id === selectedId ? null : p.id);
+                    setSearch(search ? '' : p.nome);
                   }}
                   cursor="pointer"
                 >
-                  <circle cx={p.x} cy={p.y} r={baseRadius * scale} fill={p.cor} />
-                  <IconSVG
-                    icon={p.icon}
-                    x={p.x - iconSize / 2}
-                    y={p.y - iconSize / 2}
-                    size={iconSize}
-                    color="white"
+                  {/* PIN com borda preta */}
+                  <path
+                    d="M0 -30 C15 -30 15 -10 0 0 C-15 -10 -15 -30 0 -30 Z"
+                    transform={`translate(${p.x}, ${p.y}) scale(${scale})`}
+                    fill={p.cor}
+                    stroke="black"
+                    strokeWidth={2}
                   />
-                  <text
-                    x={p.x}
-                    y={p.y - baseRadius * scale - 5}
-                    fontSize={18 * scale}
-                    textAnchor="middle"
-                    fill="white"
-                    fontWeight="600"
-                    pointerEvents="none"
-                    style={{ userSelect: 'none', fontFamily: 'Arial, sans-serif' }}
-                  >
-                    {p.nome}
-                  </text>
+
+                  {/* Ícone com borda preta */}
+                  <g transform={`translate(${p.x - iconSize / 2}, ${p.y - iconSize / 2 - 15 * scale}) scale(${iconSize / (p.icon.icon[0] || 512)})`}>
+                    <path
+                      d={p.icon.icon[4]}
+                      fill="white"
+                      stroke="black"
+                      strokeWidth={20}
+                    />
+                  </g>
+
+                  {/* Tooltip quando selecionado */}
+                  {isSelected && (
+                    <foreignObject
+                      x={p.x + offsetX}
+                      y={p.y - offsetY}
+                      width={tooltipWidth}
+                      height={tooltipHeight}
+                    >
+                      <div
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        className="tooltip-box"
+                        style={{ fontSize: `${fontSize}px`, padding: `${padding}px` }}
+                      >
+                        <strong>{p.nome}</strong>
+                        <p>{p.descricao || "Sem descrição"}</p>
+                        <small>
+                          Coordenadas: X: {Math.round(p.x)} / Y: {Math.round(p.y)}
+                        </small>
+                      </div>
+                    </foreignObject>
+                  )}
                 </g>
               );
             })}
@@ -244,8 +277,9 @@ export default function MapaSVG() {
       </div>
 
       <div className="zoom-controls">
-        <button onClick={() => setZoom((z) => Math.min(z + 0.2, 20))}>+</button>
-        <button onClick={() => setZoom((z) => Math.max(z - 0.2, 1))}>-</button>
+        <button onClick={() => setZoom((z) => Math.min(z + 1, 20))}>+</button>
+        <button onClick={() => setZoom(1)}>0</button>
+        <button onClick={() => setZoom((z) => Math.max(z - 1, 1))}>-</button>
       </div>
     </div>
   );
