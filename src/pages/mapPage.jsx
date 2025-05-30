@@ -187,7 +187,7 @@ export default function MapaSVG() {
               const scale = pontoBase * inverseZoom;
 
               const iconSize = 12 * scale;
-              const tooltipWidth = 250 * scale;
+              const tooltipWidth = 150 * scale;
               const tooltipHeight = 200 * scale;
               const fontSize = 5 * scale;
               const padding = 4 * scale;
