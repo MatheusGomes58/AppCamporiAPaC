@@ -3,8 +3,8 @@ import {
     collection,
     addDoc,
     updateDoc,
-    onSnapshot, 
-    query, 
+    onSnapshot,
+    query,
     orderBy,
     doc,
 } from "firebase/firestore";
@@ -139,7 +139,7 @@ export default function EventosManager() {
                 </div>
             )}
 
-            <div className="activity-description">
+            <div className="event-list-section">
                 <table className="table">
                     <thead>
                         <tr>
@@ -168,16 +168,23 @@ export default function EventosManager() {
                 </table>
 
                 <div className="paginacao">
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <button
-                            key={i}
-                            className={currentPage === i + 1 ? "ativo" : ""}
-                            onClick={() => setCurrentPage(i + 1)}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
+                    <button
+                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={currentPage === 1}
+                    >
+                        Anterior
+                    </button>
+
+                    <span>{currentPage} / {totalPages}</span>
+
+                    <button
+                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                    >
+                        Próxima
+                    </button>
                 </div>
+
             </div>
         </div>
     );
