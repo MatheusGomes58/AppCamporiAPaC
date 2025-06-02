@@ -80,6 +80,7 @@ export default function MapaSVG() {
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
+  let isSelected = false;
 
   // Correção aqui: acessar a propriedade "grupos" do JSON
   const grupos = useMemo(() =>
@@ -118,12 +119,16 @@ export default function MapaSVG() {
   useEffect(() => {
     if (!ranInitialQuery.current && query) {
       ranInitialQuery.current = true;
-      setSearch(query.toUpperCase());
       const pontoEncontrado = pontos.find(
-        (p) => p.id.toLowerCase() === query.toLowerCase() || p.nome.toUpperCase() === query.toUpperCase()
+        (p) =>
+          p.nome.toLowerCase().includes(query.toLowerCase()) || p.id.toLowerCase().includes(query.toLowerCase())
       );
       if (pontoEncontrado) {
         setSelectedId(pontoEncontrado.id);
+        setSearch(search ? '' : pontoEncontrado.nome);
+        isSelected = true;
+      }else{
+        setSearch(query)
       }
       const url = new URL(window.location);
       url.searchParams.delete('localizacao');
@@ -180,7 +185,7 @@ export default function MapaSVG() {
             <image href={mapa} x="0" y="0" width="1024" height="768" />
 
             {pontosFiltrados.map((p) => {
-              const isSelected = selectedId === p.id;
+              isSelected = selectedId === p.id;
               const pontoBase = p.tamanho || 1.4;
 
               const inverseZoom = 1.5 / (zoom != 1 ? zoom / 2 : 1); // <-- Zoom inverso: reduz com o aumento do zoom

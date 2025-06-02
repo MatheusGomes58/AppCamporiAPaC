@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000000" />
   <meta name="description"
     content="
@@ -26,6 +26,35 @@
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    // Impede zoom por Ctrl + scroll do mouse
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Impede zoom com Ctrl + (+, -, =, 0)
+    window.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+        e.preventDefault();
+      }
+    });
+
+    // Impede pinch zoom em touchscreen
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('gesturechange', function (e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('gestureend', function (e) {
+      e.preventDefault();
+    });
+  </script>
+
 
 </body>
 

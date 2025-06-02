@@ -145,6 +145,10 @@
     background-color: #a38b0021;
 }
 
+.sabado{
+    background-color: #00a37221;
+}
+
 .date-panel-container {
     display: flex;
     justify-content: flex-start;

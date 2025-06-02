@@ -392,7 +392,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
                             <React.Fragment key={index}>
                                 <tr onClick={() => handlePointClick(index, score)}>
                                     <td>{score.club}</td>
-                                    <td>{score.activity}</td>
+                                    <td>{score.name}</td>
                                     <td>{score.points}</td>
                                 </tr>
                                 {selectedPointIndex === index && (

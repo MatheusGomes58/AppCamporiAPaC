@@ -82,7 +82,7 @@ function SchedulePage({ isAutenticated, clube, isMaster }) {
         if (clube) {
             q = query(microEventsRef, where("inscritos", "array-contains", clube));
         } else {
-            q = query(microEventsRef);
+            q = query(microEventsRef, where("inscritos", "array-contains", "APAC"));
         }
 
         const unsubscribe = onSnapshot(q, (snapshot) => {

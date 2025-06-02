@@ -21,6 +21,7 @@ import ScoresPage from './scorePage';
 import ChaveamentoPage from './chaveamentoPage';
 import InscricaoPage from './inscricaoPage';
 import DashboarAtividade from './activityPage';
+import CreateEvent from './eventsPage.jsx';
 
 const analytics = getAnalytics(); // Instancia global
 
@@ -217,6 +218,7 @@ function AppContent() {
               username={username}
             />
           } />
+          <Route path="/createvent" element={<CreateEvent />} />
           <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}
