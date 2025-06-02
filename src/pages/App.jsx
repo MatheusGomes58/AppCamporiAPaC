@@ -59,6 +59,8 @@ function AppContent() {
   const [uid, setUid] = useState('');
   const [isAutenticated, setAutenticated] = useState(false);
   const [isMaster, setMaster] = useState(false);
+  const [autorized, setAutorized] = useState(false);
+  const [score, setScore] = useState(false);
 
   useEffect(() => {
     setLogin(true);
@@ -86,6 +88,8 @@ function AppContent() {
             setEmail(userDoc.email || '');
             setAutenticated(!!userDoc.name);
             setMaster(userDoc.clube === 'APAC');
+            setAutorized(userDoc.autorized || false)
+            setScore(userDoc.score || false)
 
             logEvent(analytics, 'user_login', {
               user_id: storedUser,
@@ -147,9 +151,10 @@ function AppContent() {
             <ScoresPage
               isclub={clube}
               isMaster={isMaster}
-              register={true}
               admin={admin}
               uid={uid}
+              autorized={score}
+              register={isAutenticated}
             />
           } />
           <Route path="/menu" element={
@@ -159,6 +164,8 @@ function AppContent() {
               userclube={clube}
               userAutenticated={isAutenticated}
               isMaster={isMaster}
+              authorized={autorized}
+              userscore={score}
             />
           } />
           <Route path="/show" element={<SplashScreen animateStop={true} />} />

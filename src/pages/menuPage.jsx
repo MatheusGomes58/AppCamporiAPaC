@@ -11,7 +11,7 @@ import {
     onSnapshot
 } from "firebase/firestore";
 
-const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, isMaster }) => {
+const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, isMaster, authorized, userscore }) => {
     const navigate = useNavigate();
     const [torneios, setTorneios] = useState([]);
     const [loadingTorneios, setLoadingTorneios] = useState(true);
@@ -67,10 +67,16 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
     }
 
     function renderItem(list) {
+        if (list.authorized)
+            return authorized;
+        if (list.score)
+            return userscore;
         if (list.orMaster && isMaster)
             return list.orMaster && isMaster
         if (list.clube && list.admin)
-            return useradmin && isMaster
+            return useradmin && userclube == list.clube
+        if (list.clube && !list.admin)
+            return userclube == list.clube
         if (list.admin && !list.clube)
             return useradmin
         if (!list.admin && !list.clube)

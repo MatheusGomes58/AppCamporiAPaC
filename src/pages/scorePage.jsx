@@ -6,7 +6,7 @@ import "../css/ScoreDashboard.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell, Label } from "recharts";
 import clubs from '../data/clubes.json';
 
-export default function ScoreDashboard({ isMaster, isclub, register, admin, uid }) {
+export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized }) {
     const [scores, setScores] = useState([]);
     const [avaliacoes, setAvaliacoes] = useState([]);
     const [club, setClub] = useState('');
@@ -40,12 +40,17 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
 
             return unsubscribe, unsubscribeAvaliacoes;
         } else {
-            alert('Faça o login para acessar essa funcionalidade');
+            alert('Faça o login para acessar essa funcionalidade!');
             navigate('/menu');
         }
     }, []);
 
     const addScore = async () => {
+        if(!autorized){
+            alert('Você não tem permissões para registrar postuações!');
+            navigate('/menu');
+        }
+
         if (club && points && activity) {
             const existingClub = scores.find((s) => s.club === club);
 
@@ -378,7 +383,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, admin, uid 
 
             {!isInclude && <div className="cartaoTabelaPontuacao">
                 <h2 className="tituloCartao">Pontuação por Clube</h2>
-                {register && <button onClick={() => setInclude(true)}>Incluir Pontos</button>}
+                {register && autorized && <button onClick={() => setInclude(true)}>Incluir Pontos</button>}
                 <table className="tabelaPontuacao">
                     <thead>
                         <tr>
