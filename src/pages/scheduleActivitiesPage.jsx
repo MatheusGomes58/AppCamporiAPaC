@@ -3,6 +3,7 @@ import atividadesJson from '../data/atividadeMenu.json';
 import InscricaoTorneio from "../components/inscricao/inscricaoTorneio";
 import InscricaoTrilha from "../components/inscricao/inscricaoTrilha";
 import InscricaoCorrida from "../components/inscricao/inscricaoCorrida";
+import InscricaoApresentacao from "../components/inscricao/inscricaoApresentacao";
 import ScheduleForm from "../components/scedules/scheduleActivity";
 import React, { useState } from "react";
 import '../css/schedulePage.css';
@@ -27,6 +28,12 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, isEspecial
       />
     } else if (activeTab == 'Trilha Noturna') {
       return <InscricaoTrilha
+        clube={clube}
+        admin={admin}
+        ismaster={isMaster}
+      />
+    }  else if (activeTab == 'Apresentações Especiais') {
+      return <InscricaoApresentacao
         clube={clube}
         admin={admin}
         ismaster={isMaster}

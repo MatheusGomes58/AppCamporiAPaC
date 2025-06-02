@@ -125,29 +125,38 @@
     word-wrap: break-word;
 }
 
-.atividades{
-    background-color: rgba(33, 163, 0, 0.09);
+.atividades {
+    background-color: rgba(33, 163, 0, 0.09); /* verde suave */
 }
 
-.gerais{
-    background-color: #0300a317;
+.gerais {
+    background-color: #0300a317; /* azul escuro suave */
 }
 
-.torneios{
-    background-color: #a3000023;
+.torneios {
+    background-color: #a3000023; /* vermelho escuro suave */
 }
 
-.corridas{
-    background-color: #9000a321;
+.corridas {
+    background-color: #9000a321; /* roxo suave */
 }
 
-.visitacao{
-    background-color: #a38b0021;
+.visitacao {
+    background-color: #a38b0021; /* mostarda suave */
 }
 
-.sabado{
-    background-color: #00a37221;
+.sabado {
+    background-color: #00a37221; /* verde água suave */
 }
+
+.apresentacoes {
+    background-color: #a36a0031; /* laranja queimado suave */
+}
+
+.carrossel {
+    background-color: #0077a321; /* azul petróleo suave */
+}
+
 
 .date-panel-container {
     display: flex;

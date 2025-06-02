@@ -102,14 +102,14 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
       </div>
       <table className="table">
         <tbody>
-          <tr>
+          {!event.iscarroussel && <tr>
             <th colSpan={2}>Detalhes</th>
-          </tr>
+          </tr>}
           {!event.iscarroussel &&<tr>
             <td>Total de Vagas:</td>
             <td>{event.maxVagas || 0} disponíveis</td>
           </tr>}
-          {isMaster  && <tr>
+          {isMaster && !event.iscarroussel && <tr>
             <td>Total de Vagas Ocupadas:</td>
             <td>{event.inscritosTotal || 0} Inscritos</td>
           </tr>}

@@ -206,6 +206,7 @@ export default function EventosManager() {
                 <div className="event-list-section">
                     <div className="search-container" style={{ marginBottom: "1rem" }}>
                         <input
+                            className="campoEntrada"
                             type="text"
                             placeholder="Pesquisar..."
                             value={searchTerm}
@@ -213,7 +214,6 @@ export default function EventosManager() {
                                 setSearchTerm(e.target.value);
                                 setCurrentPage(1);
                             }}
-                            style={{ width: "100%", padding: "0.5rem", fontSize: "1rem" }}
                         />
                     </div>
 

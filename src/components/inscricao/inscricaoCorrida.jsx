@@ -286,7 +286,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                                         <td colSpan={2}>Nenhum membro foi inscrito ainda!</td>
                                                     </tr>
                                                 }
-                                                <tr>
+                                                {/*<tr>
                                                     <th colSpan={2}>Ações</th>
                                                 </tr>
                                                 <tr>
@@ -304,7 +304,7 @@ const InscricaoForm = ({ clube, admin, ismaster }) => {
                                                             Adicionar membro
                                                         </button>
                                                     </td>
-                                                </tr>
+                                                </tr>*/}
                                             </tbody>
                                         </table>
                                         {/*<button className="delete" onClick={() => handleCancelarInscricao(t.id)}>
