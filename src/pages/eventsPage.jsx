@@ -19,28 +19,32 @@ export default function EventosManager() {
     const [showModal, setShowModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [collections, setCollections] = useState([]);
-    const [activeCollection, setActiveCollection] = useState("");
-    const [searchTerm, setSearchTerm] = useState("");  // Estado novo para pesquisa
+    const [activeCollection, setActiveCollection] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const itemsPerPage = 10;
 
     useEffect(() => {
-        if (!activeCollection) {
+        if (!activeCollection || typeof activeCollection !== "object" || !activeCollection.nome) {
             setEventos([]);
             return;
         }
 
-        const eventosRef = collection(db, activeCollection);
+        const eventosRef = collection(db, activeCollection.nome);
         const q = query(eventosRef);
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            setEventos(data);
-            setCurrentPage(1); // Reseta para a primeira página
-        }, (error) => {
-            console.error("Erro ao escutar a coleção:", error);
-            setEventos([]);
-        });
+        const unsubscribe = onSnapshot(
+            q,
+            (snapshot) => {
+                const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                setEventos(data);
+                setCurrentPage(1);
+            },
+            (error) => {
+                console.error("Erro ao escutar a coleção:", error);
+                setEventos([]);
+            }
+        );
 
         return () => unsubscribe();
     }, [activeCollection]);
@@ -53,15 +57,12 @@ export default function EventosManager() {
 
                 if (menuSnapshot.empty) {
                     setCollections([]);
-                    setActiveCollection("");
+                    setActiveCollection(null);
                     return;
                 }
 
-                const names = menuSnapshot.docs
-                    .map(doc => doc.data().nome)
-                    .filter(nome => typeof nome === "string" && nome.length > 0);
-
-                setCollections(names);
+                const docs = menuSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setCollections(docs);
             } catch (error) {
                 console.error("Erro ao buscar menu:", error);
             }
@@ -74,7 +75,7 @@ export default function EventosManager() {
         if (collections.length > 0) {
             setActiveCollection(collections[0]);
         } else {
-            setActiveCollection("");
+            setActiveCollection(null);
         }
     }, [collections]);
 
@@ -89,23 +90,31 @@ export default function EventosManager() {
             return;
         }
 
+        if (!activeCollection || !activeCollection.nome) {
+            alert("Nenhuma coleção ativa selecionada.");
+            return;
+        }
+
         try {
             if (editId) {
-                const docRef = doc(db, activeCollection, editId);
+                const docRef = doc(db, activeCollection.nome, editId);
                 await updateDoc(docRef, parsed);
+                alert("Evento atualizado com sucesso!");
             } else {
-                const eventosRef = collection(db, activeCollection);
+                const eventosRef = collection(db, activeCollection.nome);
                 await addDoc(eventosRef, parsed);
+                alert("Novo evento criado!");
             }
 
             setFormJson("{}");
             setEditId(null);
             setShowModal(false);
         } catch (error) {
-            alert("Erro ao salvar no Firestore.");
+            alert("Erro ao salvar no Firestore: " + error.message);
             console.error(error);
         }
     };
+
 
     const handleEdit = (evento) => {
         const { id, ...rest } = evento;
@@ -115,46 +124,26 @@ export default function EventosManager() {
     };
 
     const handleCopy = (evento) => {
-        const { id, nome, ...rest } = evento;
-        const baseName = nome || "Evento";
-        const regex = new RegExp(`^${baseName} - (\\d+)$`);
-
-        const copias = eventos
-            .filter(ev => ev.nome && (ev.nome === baseName || regex.test(ev.nome)))
-            .map(ev => {
-                const match = ev.nome.match(regex);
-                return match ? parseInt(match[1], 10) : 0;
-            });
-
-        const nextSuffix = copias.length ? Math.max(...copias) + 1 : 1;
-        const newName = `${baseName} - ${nextSuffix}`;
-
-        const newData = {
-            ...rest,
-            nome: newName,
-        };
-
+        const { id, ...rest } = evento;
+        const newData = { ...rest };
         setFormJson(JSON.stringify(newData, null, 2));
         setEditId(null);
         setShowModal(true);
     };
 
     function findFirstString(obj) {
-        if (typeof obj === "string") {
-            return obj;
+        if (!activeCollection || !activeCollection.filename) return null;
+
+        const filenameKey = activeCollection.filename;
+        const value = obj?.[filenameKey];
+
+        if (typeof value === "string") {
+            return value.length > 20 ? value.substring(0, 20) + "…" : value;
         }
-        if (typeof obj === "object" && obj !== null) {
-            for (const key in obj) {
-                const value = findFirstString(obj[key]);
-                if (typeof value === "string") {
-                    return value;
-                }
-            }
-        }
+
         return null;
     }
 
-    // Filtra eventos pelo searchTerm, buscando no JSON stringificado do evento (case insensitive)
     const filteredEventos = eventos.filter(ev => {
         const jsonString = JSON.stringify(ev).toLowerCase();
         return jsonString.includes(searchTerm.toLowerCase());
@@ -171,40 +160,17 @@ export default function EventosManager() {
                 <div className="date-panel-container">
                     {collections.map((colName) => (
                         <button
-                            key={colName}
-                            className={`date-panel ${activeCollection === colName ? 'active' : ''}`}
+                            key={colName.id}
+                            className={`date-panel ${activeCollection?.nome === colName.nome ? 'active' : ''}`}
                             onClick={() => {
                                 setActiveCollection(colName);
-                                setSearchTerm(""); // limpa pesquisa ao trocar coleção
+                                setSearchTerm("");
                                 setCurrentPage(1);
                             }}
                         >
-                            {colName}
+                            {colName.nome}
                         </button>
                     ))}
-                </div>
-
-                <div className="search-container" style={{ marginBottom: "1rem" }}>
-                    <input
-                        type="text"
-                        placeholder="Pesquisar..."
-                        value={searchTerm}
-                        onChange={(e) => {
-                            setSearchTerm(e.target.value);
-                            setCurrentPage(1);
-                        }}
-                        style={{ width: "100%", padding: "0.5rem", fontSize: "1rem" }}
-                    />
-                </div>
-
-                <div className="botao-novo">
-                    <button onClick={() => {
-                        setFormJson("{}");
-                        setEditId(null);
-                        setShowModal(true);
-                    }}>
-                        Novo Evento
-                    </button>
                 </div>
 
                 {showModal && (
@@ -215,7 +181,7 @@ export default function EventosManager() {
                             </h2>
                             <form onSubmit={handleSubmit} className="formulario-evento">
                                 <div className="campo-form">
-                                    <label className="label-form">JSON do Evento</label>
+                                    <label className="label-form">JSON</label>
                                     <textarea
                                         className="input-form"
                                         rows="15"
@@ -238,6 +204,29 @@ export default function EventosManager() {
                 )}
 
                 <div className="event-list-section">
+                    <div className="search-container" style={{ marginBottom: "1rem" }}>
+                        <input
+                            type="text"
+                            placeholder="Pesquisar..."
+                            value={searchTerm}
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            style={{ width: "100%", padding: "0.5rem", fontSize: "1rem" }}
+                        />
+                    </div>
+
+                    <div className="botao-novo">
+                        <button onClick={() => {
+                            setFormJson("{}");
+                            setEditId(null);
+                            setShowModal(true);
+                        }}>
+                            Incluir
+                        </button>
+                    </div>
+
                     <table className="table">
                         <thead>
                             <tr>
@@ -279,9 +268,7 @@ export default function EventosManager() {
                         >
                             Anterior
                         </button>
-
                         <span>{currentPage} / {totalPages || 1}</span>
-
                         <button
                             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages || totalPages === 0}
