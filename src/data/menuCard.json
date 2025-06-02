@@ -63,7 +63,7 @@
           { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true, "orMaster": true },
           { "title": "Dashboard de Atividades", "link":"/dashboard", "clube": "APAC"},
           { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC"},
-          { "title": "Criar Evento", "link":"/createvent", "admin": true, "clube": "APAC"}
+          { "title": "Alterar Objetos", "link":"/createvent", "admin": true, "clube": "APAC", "authorized": true}
         ]
       },
       {
