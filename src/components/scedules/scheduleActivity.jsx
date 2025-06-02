@@ -111,8 +111,14 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         id: doc.id,
         ...doc.data(),
       }));
+      const eventosOrdenados = eventos.sort((a, b) => {
+        const dataA = new Date(`${a.date}T${a.hora.replace('h', ':')}:00`);
+        const dataB = new Date(`${b.date}T${b.hora.replace('h', ':')}:00`);
+        return dataA - dataB;
+      });
 
-      setMicroEvents(eventos);
+      setMicroEvents(eventosOrdenados);
+
 
       // Limpar escutas antigas
       unsubscribeInscricoes.forEach((unsub) => unsub());
