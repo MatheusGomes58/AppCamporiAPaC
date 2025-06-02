@@ -105,18 +105,18 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
           <tr>
             <th colSpan={2}>Detalhes</th>
           </tr>
-          <tr>
+          {!event.iscarroussel &&<tr>
             <td>Total de Vagas:</td>
             <td>{event.maxVagas || 0} disponíveis</td>
-          </tr>
+          </tr>}
           {isMaster  && <tr>
             <td>Total de Vagas Ocupadas:</td>
             <td>{event.inscritosTotal || 0} Inscritos</td>
           </tr>}
-          <tr>
+          {!event.iscarroussel && <tr>
             <td>Total de Clubes:</td>
             <td>{event.inscritos?.length || 0} Inscritos</td>
-          </tr>
+          </tr>}
           {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && <tr>
             <td>Total de membros do clube:</td>
             <td>{membros[event.id]?.length || 0} Inscritos</td>
