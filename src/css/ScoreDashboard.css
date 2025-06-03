@@ -141,3 +141,18 @@
     margin: 0 10px;
     line-height: 2;
 }
+.star-wrapper {
+  position: relative;
+  display: inline-block;
+  animation: popIn 0.3s ease;
+  transition: transform 0.2s;
+}
+
+.star-filled {
+  color: #3b82f6; /* Azul */
+}
+
+.star-empty {
+  color: #0055ff34; /* Cinza claro */
+  opacity: 0.4;
+}

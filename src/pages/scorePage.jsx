@@ -5,6 +5,10 @@ import { collection, addDoc, updateDoc, doc, onSnapshot, deleteDoc } from "fireb
 import "../css/ScoreDashboard.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell, Label } from "recharts";
 import clubs from '../data/clubes.json';
+import { Star, StarOff } from "lucide-react";
+
+const MAX_SCORE = 100;
+const MAX_STARS = 5;
 
 export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized }) {
     const [scores, setScores] = useState([]);
@@ -46,7 +50,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
     }, []);
 
     const addScore = async () => {
-        if(!autorized){
+        if (!autorized) {
             alert('Você não tem permissões para registrar postuações!');
             navigate('/menu');
         }
@@ -270,7 +274,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                                     <p>{data.title}</p>
                                     {data.points && data.points.map((point, idx) => (
                                         <label key={idx}>
-                                            <input type="radio" name={`avaliacao-${index}`} value={point.value? point.value: 0} />
+                                            <input type="radio" name={`avaliacao-${index}`} value={point.value ? point.value : 0} />
                                             {point.title}
                                         </label>
                                     ))}
@@ -367,6 +371,12 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                 </ResponsiveContainer>
             </div>}
 
+            {/* Card de pontuação total */}
+            {!isInclude && !register && <div className="cartaoPontuacaoTotal">
+                <StarProgressBar totalScore={totalScore} />
+            </div>}
+
+
             {/* Gráfico de Pontuação */}
             {!isInclude && !register && <div className="cartaoGrafico">
                 <h2 className="tituloCartao">Gráfico de Pontuação</h2>
@@ -433,4 +443,24 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
             </div>}
         </div>
     );
+}
+
+function StarProgressBar({ totalScore }) {
+  const filledStars = Math.floor((totalScore / MAX_SCORE) * MAX_STARS);
+  const emptyStars = MAX_STARS - filledStars;
+
+  return (
+    <div className="flex items-center gap-4">
+      {[...Array(filledStars)].map((_, i) => (
+        <div className="star-wrapper" key={`filled-${i}`}>
+          <Star className="star-filled" style={{ width: "64px", height: "64px" }} />
+        </div>
+      ))}
+      {[...Array(emptyStars)].map((_, i) => (
+        <div className="star-wrapper" key={`empty-${i}`}>
+          <Star className="star-empty" style={{ width: "64px", height: "64px" }} />
+        </div>
+      ))}
+    </div>
+  );
 }
