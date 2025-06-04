@@ -57,15 +57,13 @@
 }
 
 .card-container {
-  margin: 1vh;
-  padding: 5px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
   overflow: auto;
   width: 100vw;
-  height: 80vh; 
+  height: 85vh; 
   scrollbar-width: none;
 }
 

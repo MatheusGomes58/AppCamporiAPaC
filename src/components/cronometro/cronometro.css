@@ -14,12 +14,10 @@
   font-size: x-large;
   font-weight: bold;
   color: rgb(255, 255, 255);
-  padding: 15px 30px;
   border-radius: 15px;
   position: relative;
   z-index: 2;
   text-align: center;
-  letter-spacing: 8px;
   text-shadow: 0 0 8px rgb(255, 255, 255), 0 0 15px #00f;
   display: flex;
   gap: 25px;

@@ -145,9 +145,8 @@
 .card-text {
   color: black;
   font-size: 14px;
-  padding: 8px;
-  border-radius: 5px;
-  width: 100%;
+  width: 90%;
+  margin: 20px;
 }
 
 .card-button {
