@@ -9,9 +9,10 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
-  padding: 3%;
-  min-width: 80vw;
+  padding: 5px;
+  width: 90vw;
   align-items: center;
+  border-radius: 10px;
 }
 
 .card .card {
