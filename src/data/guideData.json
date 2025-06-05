@@ -1,63 +1,139 @@
 [
     {
-        "title": "XXII Campori APaC",
+        "title": "Informações Gerais",
         "description": [
-            "O XXII Campori da APaC será realizado no UNASP-EC, de 19 a 22 de junho de 2025. O tema será 'A Promessa', com o objetivo de fortalecer a fé e o compromisso com os princípios cristãos. O evento contará com momentos de louvor, reflexão e atividades práticas para promover o crescimento espiritual e a interação entre os participantes."
+            "O XXII Campori da Associação Paulista Central (APaC) será realizado no campus do UNASP-Engenheiro Coelho, de 19 a 22 de junho de 2025. Com o tema 'A Promessa', o evento tem como objetivo fortalecer a fé e o compromisso com os princípios cristãos. Os participantes viverão momentos de louvor, reflexão espiritual e atividades práticas que incentivam o crescimento pessoal e o companheirismo entre clubes.",
+            "Além disso, o evento é uma oportunidade única de confraternização entre desbravadores de toda a região, promovendo o espírito de união, disciplina e missão, que são pilares do movimento dos Desbravadores."
         ]
     },
     {
         "title": "Inscrições",
         "description": [
-            "As inscrições para o XXII Campori APaC devem ser feitas até 30 de abril no Sistema de Gerenciamento de Clubes (SGC). O valor da inscrição é de R$ 230,00 por desbravador. Diretores são isentos, e filhos de diretoria pagam R$ 103,50. O pagamento pode ser feito por boleto bancário ou cartão de crédito, com opção de parcelamento em até 6 vezes.",
-            "O XXII Campori da APaC é um pré-requisito para os Camporis da DSA em 2027 e da UCB em 2028. Para garantir a participação, os clubes devem ter pelo menos 80% de seus membros presentes e alcançar as categorias Ouro ou Prata no ranking do evento."
+            "As inscrições devem ser feitas exclusivamente pelo Sistema de Gerenciamento de Clubes (SGC) até o dia 30 de abril de 2025. O valor por desbravador é de R$ 230,00. Diretores estão isentos, e filhos da diretoria pagam apenas R$ 103,50.",
+            "O pagamento pode ser realizado via boleto bancário ou cartão de crédito, com a possibilidade de parcelamento em até 6 vezes, facilitando a organização financeira dos clubes.",
+            "O XXII Campori da APaC é considerado um evento classificatório para os Camporis da Divisão Sul-Americana (DSA) em 2027 e da União Central Brasileira (UCB) em 2028. Para garantir a participação nesses eventos, o clube precisa ter no mínimo 80% de seus membros presentes e alcançar as categorias Ouro ou Prata no ranking do Campori da APaC."
         ]
     },
     {
         "title": "Isenções",
         "description": [
-            "Pastores de distrito, agentes de saúde (um por clube, com CRM ou COREN) e cozinheiras (uma a cada 14 inscritos pagantes) são isentos da taxa de inscrição. A partir da terceira cozinheira, há um sistema de descontos progressivos."
+            "Estão isentos do pagamento da taxa de inscrição os seguintes participantes: pastores distritais, um agente de saúde por clube (devidamente registrado no CRM ou COREN), e uma cozinheira a cada 14 desbravadores inscritos pagantes.",
+            "Caso o clube leve mais de duas cozinheiras, será aplicado um sistema de descontos progressivos conforme regras específicas divulgadas posteriormente pela organização."
         ]
     },
     {
         "title": "Alterações e Desistências",
         "description": [
-            "Alterações nas inscrições podem ser feitas no SGC até 20 de maio de 2025, com trocas de nomes dentro da mesma categoria. Em caso de desistência, o valor da inscrição não será devolvido."
+            "Trocas de nomes entre participantes da mesma categoria podem ser realizadas até o dia 20 de maio de 2025 diretamente pelo SGC. Após essa data, nenhuma alteração será permitida.",
+            "Em caso de desistência, o valor da inscrição não será reembolsado, sendo necessário que os clubes se organizem com antecedência para evitar prejuízos financeiros."
         ]
     },
     {
         "title": "Documentação Obrigatória",
         "description": [
-            "Os clubes devem apresentar diversos documentos na chegada, incluindo a relação de inscritos, dados do motorista do ônibus, contratos de locação, seguros e termos de responsabilidade. Para menores de 18 anos, é necessário apresentar autorização dos pais, fichas de saúde e cadastro atualizadas, e cópias de documentos pessoais. Maiores de 18 anos devem apresentar fichas de cadastro e saúde atualizadas, além de cópias de documentos pessoais e termo de voluntariado."
+            "Todos os clubes deverão apresentar na chegada a lista completa de inscritos, os dados do motorista do ônibus, contratos de locação de transporte, seguros e os respectivos termos de responsabilidade.",
+            "Para participantes menores de 18 anos, é obrigatória a apresentação de autorização dos pais, fichas de saúde atualizadas, cadastro completo e cópias de documentos pessoais.",
+            "Participantes maiores de 18 anos devem apresentar as fichas de cadastro e saúde atualizadas, cópias de documentos pessoais e o termo de voluntariado assinado."
         ]
     },
     {
         "title": "Alimentação",
         "description": [
-            "A alimentação no XXII Campori APaC será ovolactovegetariana. Cada clube terá sua própria cozinha, com inspeção obrigatória da caixa de primeiros socorros. É permitido levar geladeira e freezer (com restrições de consumo de energia). Fogões devem estar em bom estado, com atenção especial à validade e condição da mangueira de gás. Clubes podem optar pelo restaurante do UNASP, com custo de R$ 270,00 por pessoa, incluindo 9 refeições."
+            "A alimentação durante o evento será ovolactovegetariana. Cada clube será responsável pela sua cozinha, que deverá estar equipada com caixa de primeiros socorros, fogões em bom estado e mangueiras de gás dentro da validade.",
+            "É permitido o uso de geladeiras e freezers, desde que respeitadas as normas de consumo de energia elétrica do local.",
+            "Os clubes também têm a opção de contratar o restaurante do UNASP. O pacote de alimentação inclui nove refeições pelo valor de R$ 270,00 por pessoa."
         ]
     },
     {
         "title": "Estrutura e Logística",
         "description": [
-            "O UNASP-EC oferece voltagem de 127v. Cada clube terá sua área de camping demarcada, com espaço para barracas, cozinha e atividades. A montagem de portais é permitida, com restrições de altura e necessidade de ART para estruturas acima de 3 metros. Ônibus e carros terão estacionamento exclusivo, e a circulação de veículos será restrita nas áreas de acampamento e cozinha."
+            "O UNASP-EC dispõe de rede elétrica com voltagem de 127v. Cada clube terá sua área de camping demarcada, com espaço suficiente para instalação de barracas, cozinha e áreas para execução de atividades internas.",
+            "A montagem de portais será permitida, mas estruturas com altura superior a 3 metros deverão ter ART (Anotação de Responsabilidade Técnica) apresentada.",
+            "Haverá estacionamentos específicos para ônibus e carros, e o acesso de veículos dentro do acampamento será restrito e controlado."
         ]
     },
     {
         "title": "Programação e Atividades",
         "description": [
-            "A abertura oficial do XXII Campori APaC será no dia 19 de junho, às 19h30. O encerramento, com premiação, será no dia 22 de junho, às 8h. Haverá reuniões diárias para diretores, pastores, coordenadores e regionais. A programação inclui atividades como batismos, investiduras e concursos de machadinha, crachá e portais. O uniforme oficial dos desbravadores será usado no sábado pela manhã e na investidura."
+            "A abertura oficial do XXII Campori APaC será no dia 19 de junho, às 19h30. O encerramento, com premiação, será no dia 22 de junho, às 8h.",
+            "Durante o evento, haverá reuniões diárias para diretores, pastores, coordenadores e regionais. A programação contempla investiduras, batismos, concursos de machadinha, crachá e portais.",
+            "O uniforme oficial dos desbravadores será obrigatório no sábado pela manhã e durante as investiduras. Além disso, uma programação diversificada com atividades espirituais, recreativas e de habilidades manuais será oferecida aos participantes ao longo do evento."
         ]
     },
     {
         "title": "Segurança e Saúde",
         "description": [
-            "Cada clube deve ter um profissional de saúde (CRM ou COREN) para participar dos plantões no posto de enfermagem. A caixa de primeiros socorros será inspecionada, e é necessário apresentar receitas médicas para medicamentos controlados. A segurança do evento inclui pulseiras de identificação para todos os participantes e regras para circulação e estacionamento de veículos."
+            "Cada clube deverá designar um profissional da área da saúde (com registro no CRM ou COREN) para atuar nos plantões do posto médico do evento.",
+            "A caixa de primeiros socorros será inspecionada durante o evento. Medicamentos controlados só poderão ser levados mediante apresentação de receita médica.",
+            "Todos os participantes deverão usar pulseira de identificação durante todo o evento. A organização fornecerá segurança reforçada nas áreas comuns e durante o período noturno."
         ]
     },
     {
         "title": "Sustentabilidade",
         "description": [
-            "O XXII Campori APaC adota práticas sustentáveis, com a exigência de lixeiras para coleta seletiva de lixo orgânico e reciclável nas cozinhas e áreas de camping. Materiais de bambu ou outros móveis levados para o evento devem ser recolhidos pelos clubes ao final do programa."
+            "A organização do evento reforça o compromisso com práticas sustentáveis. É obrigatório que cada clube disponibilize lixeiras para coleta seletiva em suas cozinhas e áreas comuns.",
+            "Ao final do evento, qualquer material de bambu ou móveis levados pelos clubes deverá ser retirado e levado de volta, contribuindo para a preservação do local."
+        ]
+    },
+    {
+        "title": "Trânsito",
+        "description": [
+            "A circulação de veículos no interior do acampamento será rigidamente controlada. Veículos com placa vermelha são dos participantes, enquanto veículos com placa verde pertencem à organização.",
+            "É proibido o trânsito de carros nas áreas de camping. Todos os carros devem exibir, de forma visível, o nome do condutor, o clube ao qual pertence e um número de telefone para contato.",
+            "Os clubes devem orientar seus membros a respeitar as normas de trânsito, tratando os staffs com educação e paciência mesmo diante de situações adversas."
+        ]
+    },
+    {
+        "title": "Sanitários",
+        "description": [
+            "Os sanitários estarão disponíveis nos seguintes locais: piscina, ginásio e palco. A igreja será acessível somente na sexta-feira à tarde e no sábado.",
+            "Uma equipe de 30 staffs estará responsável pela manutenção e limpeza dos banheiros. Os clubes devem orientar seus membros sobre o uso correto e a importância da higiene nesses espaços.",
+            "Após cada uso, um staff será responsável por conferir as condições dos sanitários, garantindo limpeza e organização para todos."
+        ]
+    },
+    {
+        "title": "Banhos",
+        "description": [
+            "Os banhos serão realizados em containers com água quente e pias adequadas. É proibido modificar a temperatura dos chuveiros.",
+            "O horário padrão para banho será a partir das 16h, mas, se o clube preferir, também será possível tomar banho pela manhã.",
+            "Os banheiros femininos devem conter lixeiras apropriadas para o descarte de itens específicos. Após o uso, a conferência das condições será feita por um staff responsável."
+        ]
+    },
+    {
+        "title": "Regras do UNASP",
+        "description": [
+            "Para garantir a segurança de todos e o respeito ao espaço do UNASP, é terminantemente proibido: alimentar os peixes, entrar na fazendinha, aproximar-se da caldeira e se aproximar das casas dos diretores.",
+            "A organização disponibilizará um mapa com todos os locais proibidos claramente indicados para facilitar a orientação dos participantes."
+        ]
+    },
+    {
+        "title": "Staffs",
+        "description": [
+            "Os staffs terão como local de descanso a escola básica do UNASP. No entanto, recomenda-se que levem suas próprias barracas como alternativa de alojamento.",
+            "A escola também servirá como base da Secretaria do evento, do Posto Médico e do PG Staff, centralizando os principais serviços de apoio."
+        ]
+    },
+    {
+        "title": "Segurança",
+        "description": [
+            "A segurança será coordenada em parceria com o responsável pelo trânsito, Ueliton. A entrada será monitorada para garantir agilidade e controle.",
+            "Equipes de vigilância circularão pelo local para garantir que todos os desbravadores estejam devidamente identificados com lenço e pulseira.",
+            "Durante o período noturno, a segurança será reforçada com o apoio da equipe do UNASP. Um gazebo de apoio estará disponível entre o lago e a igreja."
+        ]
+    },
+    {
+        "title": "Corrida e Ciclismo",
+        "description": [
+            "Para evitar conflitos com as atividades esportivas de corrida e ciclismo, solicita-se que os clubes limitem ao máximo a movimentação de veículos durante as provas.",
+            "As competições esportivas envolverão duas voltas completas no campo central do acampamento, com horários programados e sinalização adequada."
+        ]
+    },
+    {
+        "title": "Atividades",
+        "description": [
+            "As atividades acontecerão em torno do campo principal e serão coordenadas em horários específicos, disponíveis no aplicativo oficial do evento.",
+            "Cada prova será repetida seis vezes ao longo do evento para permitir maior participação. As equipes APV e APO estarão atuando na coordenação e apoio das atividades.",
+            "Na rua próxima à igreja, haverá atividades espontâneas como perna de pau, cubo mágico e tiro ao alvo, promovendo descontração e lazer aos participantes."
         ]
     }
 ]
