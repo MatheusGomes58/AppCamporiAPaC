@@ -60,14 +60,14 @@
         "title": "clube",
         "admin": true,
         "items": [
-          { "title": "Atividades Especiais", "link": "/schedulesclub", "admin": true, "orMaster": true },
-          { "title": "Dashboard de Atividades", "link":"/dashboard", "clube": "APAC"},
-          { "title": "Registrar Pontuação", "link":"/scores", "admin": true, "clube": "APAC", "score": true},
-          { "title": "Alterar Objetos", "link":"/createvent", "admin": true, "clube": "APAC", "authorized": true}
+          { "title": "ATIVIDADES GERAIS", "link": "/schedulesclub", "admin": true, "orMaster": true },
+          { "title": "DASHBOARD DE ATIVIDADES", "link":"/dashboard", "clube": "APAC"},
+          { "title": "REGISTRAR PONTUAÇÃO", "link":"/scores", "admin": true, "clube": "APAC", "score": true},
+          { "title": "BANCO DE DADOS", "link":"/createvent", "admin": true, "clube": "APAC", "authorized": true}
         ]
       },
       {
-        "title": "Inscritos",
+        "title": "Ranking e Atividades",
         "user": true,
         "external": true,
         "items": [

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from 'react-router-dom';
 import { db } from "../components/firebase/firebase";
 import { collection, addDoc, updateDoc, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "../css/ScoreDashboard.css";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell, Label } from "recharts";
 import clubs from '../data/clubes.json';
-import { Star, StarOff } from "lucide-react";
+import ProgressStars from '../components/scores/starProgress'
+import ScoreCircle from '../components/scores/scoreCircle'
 
-const MAX_SCORE = 100;
-const MAX_STARS = 5;
 
 export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized }) {
     const [scores, setScores] = useState([]);
@@ -25,10 +23,26 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [filterMyRecords, setFilterMyRecords] = useState(false);
     const [isInclude, setInclude] = useState(false);
+    const [expandedGroups, setExpandedGroups] = useState([]);
     const navigate = useNavigate();
     const rowsPerPage = 10;
 
     const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#d0ed57", "#a4de6c"];
+    const avaliacaoUnicas = [...new Set(avaliacoes.map((data) => data.avaliacao))];
+    const [avaliacaoSelecionada, setAvaliacaoSelecionada] = useState("");
+
+    const toggleExpanded = (atividade) => {
+        setExpandedGroups((prev) =>
+            prev.includes(atividade)
+                ? prev.filter((a) => a !== atividade)
+                : [...prev, atividade]
+        );
+    };
+
+    const avaliacoesFiltradas = avaliacaoSelecionada
+        ? avaliacoes.filter((data) => data.avaliacao === avaliacaoSelecionada)
+        : avaliacoes;
+
 
     useEffect(() => {
         if (isclub || isMaster) {
@@ -51,38 +65,30 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
 
     const addScore = async () => {
         if (!autorized) {
-            alert('Você não tem permissões para registrar postuações!');
+            alert('Você não tem permissões para registrar pontuações!');
             navigate('/menu');
+            return;
         }
 
-        if (club && points && activity) {
-            const existingClub = scores.find((s) => s.club === club);
+        const selectedAvaliacao = avaliacoesFiltradas[activity];
 
-            if (existingClub) {
-                const existingActivity = existingClub.activities.find((act) => act.name === activity);
+        if (club && selectedAvaliacao) {
+            const { avaliacao, item, pontuacao } = selectedAvaliacao;
 
-                if (existingActivity) {
-                    const updatedPoints = existingActivity.points + Number(points);
-                    await updateDoc(doc(db, "scores", existingClub.id), {
-                        activities: existingClub.activities.map(act =>
-                            act.name === activity ? { ...act, points: updatedPoints } : act
-                        )
-                    });
-                } else {
-                    await updateDoc(doc(db, "scores", existingClub.id), {
-                        activities: [...existingClub.activities, { name: activity, points: Number(points), uid }]
-                    });
-                }
-            } else {
-                await addDoc(collection(db, "scores"), {
-                    club,
-                    activities: [{ name: activity, points: Number(points), uid }]
-                });
-            }
+            await addDoc(collection(db, "scores"), {
+                club,
+                avaliacao,
+                item,
+                pontuacao: Number(pontuacao),
+                uid,
+                timestamp: new Date() // opcional: para controle de data/hora
+            });
 
             setClub("");
             setPoints("");
             setActivity("");
+            setAvaliacaoSelecionada("");
+            setSearch("");
         } else {
             alert("Preencha todos os campos para cadastrar a pontuação!");
         }
@@ -115,45 +121,55 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
     })).filter(club => club.activities.length > 0) : filteredScores
 
     const totalScore = myRecordsFilteredScores.reduce(
-        (sum, s) => sum + s.activities.reduce((actSum, act) => actSum + act.points, 0),
+        (sum, s) => sum + (s.pontuacao || 0),
         0
     );
 
-    const dataForBarChart = myRecordsFilteredScores.flatMap(s =>
-        s.activities.map((act, index) => ({
-            club: s.club,
-            activity: act.name,
-            points: act.points,
-            color: COLORS[index % COLORS.length]
-        }))
-    );
-
-    const activityScores = myRecordsFilteredScores.flatMap(s =>
-        s.activities.map(act => ({
-            name: act.name,
-            points: act.points
-        }))
-    );
+    const activityScores = myRecordsFilteredScores.map(s => ({
+        name: s.item,
+        pontuacao: s.pontuacao
+    }));
 
     const activityData = activityScores.reduce((acc, act) => {
         const existingActivity = acc.find(a => a.name === act.name);
         if (existingActivity) {
-            existingActivity.points += act.points;
+            existingActivity.pontuacao += act.pontuacao;
         } else {
-            acc.push(act);
+            acc.push({ ...act });
         }
         return acc;
     }, []);
 
-    const totalRows = myRecordsFilteredScores.reduce((sum, s) => sum + s.activities.length, 0);
+    const totalRows = myRecordsFilteredScores.length;
     const totalPages = Math.ceil(totalRows / rowsPerPage);
-    const paginatedData = myRecordsFilteredScores.flatMap(s => s.activities.map(act => ({
+
+    const paginatedData = myRecordsFilteredScores.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+    ).map(s => ({
         club: s.club,
-        activity: act.name,
-        points: act.points,
+        activity: s.item,
+        avaliation: s.avaliacao,
+        points: s.pontuacao,
         clubId: s.id,
-        uid: act.uid
-    }))).slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+        uid: s.uid
+    }));
+
+
+    const paginatedDataGrouped = useMemo(() => {
+        const grupos = {};
+
+        paginatedData.forEach((score) => {
+            const atividade = score.avaliation;
+            if (!grupos[atividade]) grupos[atividade] = [];
+            grupos[atividade].push(score);
+        });
+
+        return Object.entries(grupos).map(([atividade, entries]) => ({
+            atividade,
+            entries,
+        }));
+    }, [paginatedData]);
 
     const handleSelectClub = (clube) => {
         setFilterClub(clube);
@@ -246,42 +262,42 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                                 ))}
                         </div>
                     )}
+                    <select
+                        className="campoEntrada"
+                        value={avaliacaoSelecionada}
+                        onChange={(e) => setAvaliacaoSelecionada(e.target.value)}
+                    >
+                        <option value="">Selecione uma atividade</option>
+                        {avaliacaoUnicas.map((avaliacao, index) => (
+                            <option key={index} value={avaliacao}>
+                                {avaliacao}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select
+                        className="campoEntrada"
+                        value={activity}
+                        onChange={(e) => {
+                            setActivity(e.target.value)
+                            setAvaliacaoSelecionada(avaliacoesFiltradas[e.target.value]?.avaliacao)
+                        }}
+                    >
+                        <option value="">Selecione um item</option>
+                        {avaliacoesFiltradas.map((data, index) => (
+                            <option key={index} value={index}>
+                                {data.item}
+                            </option>
+                        ))}
+                    </select>
 
                     <input
                         className="campoEntrada"
                         placeholder="Pontos"
                         type="number"
-                        value={points}
-                        onChange={(e) => setPoints(e.target.value)}
+                        value={avaliacoesFiltradas[activity]?.pontuacao}
+                        disabled={true}
                     />
-                    <select
-                        className="campoEntrada"
-                        value={activity}
-                        onChange={(e) => setActivity(e.target.value)}
-                    >
-                        <option value="">Selecione uma atividade</option>
-                        {avaliacoes.map((data, index) => (
-                            <option key={index} value={index}>
-                                {data.avaliacao}
-                            </option>
-                        ))}
-                    </select>
-
-                    {activity !== "" && avaliacoes[activity]?.avaliations?.length > 0 && (
-                        <div className="listaSubAvaliacoes">
-                            {avaliacoes[activity].avaliations.map((data, index) => (
-                                <div key={index}>
-                                    <p>{data.title}</p>
-                                    {data.points && data.points.map((point, idx) => (
-                                        <label key={idx}>
-                                            <input type="radio" name={`avaliacao-${index}`} value={point.value ? point.value : 0} />
-                                            {point.title}
-                                        </label>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    )}
 
                     <button className="botaoSubmeter" onClick={addScore}>
                         Adicionar
@@ -340,127 +356,91 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
             {/* Card de pontuação total */}
             {!isInclude && !register && <div className="cartaoPontuacaoTotal">
                 <h1 className="tituloCartao">Pontuação Atual</h1>
-                <ResponsiveContainer width="100%" height={250}>
-                    <PieChart
-                        isAnimationActive={false}
-                        cursor="default"
-                        style={{ pointerEvents: 'none' }} // Adicionando pointer-events: none
-                    >
-                        <Pie
-                            data={activityData}
-                            dataKey="points"
-                            nameKey="name"
-                            outerRadius={100}
-                            innerRadius={70}
-                            labelLine={false}
-                            label
-                            activeShape={null}
-                        >
-                            {activityData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                            <Label
-                                value={`${totalScore} Pt`}
-                                position="center"
-                                fontSize={24}
-                                fontWeight="bold"
-                                fill="#333"
-                            />
-                        </Pie>
-                    </PieChart>
-                </ResponsiveContainer>
+                <ScoreCircle activityData={activityData} totalScore={totalScore}/>
             </div>}
 
             {/* Card de pontuação total */}
             {!isInclude && !register && <div className="cartaoPontuacaoTotal">
-                <StarProgressBar totalScore={totalScore} />
+                <ProgressStars totalScore={totalScore} />
             </div>}
 
-
-            {/* Gráfico de Pontuação */}
-            {!isInclude && !register && <div className="cartaoGrafico">
-                <h2 className="tituloCartao">Gráfico de Pontuação</h2>
-                <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={dataForBarChart}>
-                        <XAxis dataKey="activity" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="points" fill="#8884d8" />
-                    </BarChart>
-                </ResponsiveContainer>
-            </div>}
-
-            {!isInclude && <div className="cartaoTabelaPontuacao">
-                <h2 className="tituloCartao">Pontuação por Clube</h2>
-                {register && autorized && <button onClick={() => setInclude(true)}>Incluir Pontos</button>}
-                <table className="tabelaPontuacao">
-                    <thead>
-                        <tr>
-                            <th>Clube</th>
-                            <th>Atividade</th>
-                            <th>Pontos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginatedData.map((score, index) => (
-                            <React.Fragment key={index}>
-                                <tr onClick={() => handlePointClick(index, score)}>
-                                    <td>{score.club}</td>
-                                    <td>{score.name}</td>
-                                    <td>{score.points}</td>
-                                </tr>
-                                {selectedPointIndex === index && (
-                                    <tr>
-                                        <td colSpan="3" style={{ textAlign: 'center' }}>
-                                            <button onClick={() => handleEditScore(selectedPoint)}>Editar</button>
-                                            <button onClick={() => handleConfirmDelete(selectedPoint)}>Deletar</button>
-                                            <button onClick={() => setSelectedPointIndex(null)}>Cancelar</button>
+            {!isInclude && (
+                <div className="cartaoTabelaPontuacao">
+                    <h2 className="tituloCartao">Pontuação por Clube</h2>
+                    {register && autorized && (
+                        <button onClick={() => setInclude(true)}>Incluir Pontos</button>
+                    )}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Atividade</th>
+                                <th>Clube</th>
+                                <th>Pontos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginatedDataGrouped.map(({ atividade, entries }, groupIndex) => (
+                                <React.Fragment key={groupIndex}>
+                                    {/* Cabeçalho da atividade (colapsável) */}
+                                    <tr
+                                        className="linhaGrupo"
+                                        onClick={() => toggleExpanded(atividade)}
+                                        style={{ cursor: "pointer", background: "#f1f1f1" }}
+                                    >
+                                        <td colSpan={3}>
+                                            {atividade}
                                         </td>
                                     </tr>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </tbody>
-                </table>
 
-                {/* Controles de Paginação */}
-                <div className="paginacao">
-                    <button
-                        disabled={currentPage == 1}
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                    >
-                        Anterior
-                    </button>
-                    <span>Página {currentPage} de {totalPages}</span>
-                    <button
-                        disabled={currentPage == totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                    >
-                        Próxima
-                    </button>
+                                    {/* Linhas de pontuação colapsáveis */}
+                                    {expandedGroups.includes(atividade) &&
+                                        entries.map((score, index) => {
+                                            const compositeIndex = `${groupIndex}-${index}`;
+                                            return (
+                                                <React.Fragment key={compositeIndex}>
+                                                    <tr onClick={() => handlePointClick(compositeIndex, score)}>
+                                                        <td>{score.activity}</td>
+                                                        <td>{score.club}</td>
+                                                        <td>{score.points}</td>
+                                                    </tr>
+                                                    {selectedPointIndex === compositeIndex && (
+                                                        <tr>
+                                                            <td colSpan="3" style={{ textAlign: "center" }}>
+                                                                <button onClick={() => handleEditScore(score)}>Editar</button>
+                                                                <button onClick={() => handleConfirmDelete(score)}>Deletar</button>
+                                                                <button onClick={() => setSelectedPointIndex(null)}>Cancelar</button>
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                </React.Fragment>
+                                            );
+                                        })}
+                                </React.Fragment>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {/* Controles de Paginação */}
+                    <div className="paginacao">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage(currentPage - 1)}
+                        >
+                            Anterior
+                        </button>
+                        <span>
+                            Página {currentPage} de {totalPages}
+                        </span>
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage(currentPage + 1)}
+                        >
+                            Próxima
+                        </button>
+                    </div>
                 </div>
-            </div>}
+            )}
+
         </div>
     );
-}
-
-function StarProgressBar({ totalScore }) {
-  const filledStars = Math.floor((totalScore / MAX_SCORE) * MAX_STARS);
-  const emptyStars = MAX_STARS - filledStars;
-
-  return (
-    <div className="flex items-center gap-4">
-      {[...Array(filledStars)].map((_, i) => (
-        <div className="star-wrapper" key={`filled-${i}`}>
-          <Star className="star-filled" style={{ width: "64px", height: "64px" }} />
-        </div>
-      ))}
-      {[...Array(emptyStars)].map((_, i) => (
-        <div className="star-wrapper" key={`empty-${i}`}>
-          <Star className="star-empty" style={{ width: "64px", height: "64px" }} />
-        </div>
-      ))}
-    </div>
-  );
 }

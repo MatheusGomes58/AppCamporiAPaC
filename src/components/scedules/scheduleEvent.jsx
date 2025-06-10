@@ -107,17 +107,17 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
           </tr>}
           {!event.iscarroussel &&<tr>
             <td>Total de Vagas:</td>
-            <td>{event.maxVagas || 0} disponíveis</td>
+            <td>{event.maxVagas || 0} Vagas</td>
           </tr>}
-          {isMaster && !event.iscarroussel && <tr>
+          {!event.iscarroussel && isMaster && <tr>
             <td>Total de Vagas Ocupadas:</td>
             <td>{event.inscritosTotal || 0} Inscritos</td>
           </tr>}
-          {!event.iscarroussel && <tr>
+          {!event.iscarroussel && isMaster && <tr>
             <td>Total de Clubes:</td>
             <td>{event.inscritos?.length || 0} Inscritos</td>
           </tr>}
-          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && <tr>
+          {(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && !event.iscarroussel && <tr>
             <td>Total de membros do clube:</td>
             <td>{membros[event.id]?.length || 0} Inscritos</td>
           </tr>}

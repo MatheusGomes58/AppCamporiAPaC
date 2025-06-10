@@ -94,17 +94,22 @@ button.delete {
   text-align: left;
   border-collapse: collapse;
   font-size: 0.95rem;
+  table-layout: fixed; /* Força largura igual entre colunas */
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #e5e7eb;
+  word-wrap: break-word;       /* Compatível com navegadores mais antigos */
+  overflow-wrap: break-word;   /* Para navegadores modernos */
+  word-break: break-word;
+  white-space: normal;
+  text-align: center;
 }
 
 .table th {
   background-color: #f3f4f6;
   color: #4b5563;
   font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  text-align: center;
-}
-
-.table td {
-  padding: 0.5rem 1rem;
-  border-top: 1px solid #e5e7eb;
 }

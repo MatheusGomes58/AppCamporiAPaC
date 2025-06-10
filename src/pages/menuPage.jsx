@@ -114,7 +114,7 @@ const MenuComponent = ({ useradmin, userclube, userusername, userAutenticated, i
                             <div key={index} className="menu-list">
                                 <h3 className="menu-list-title">{selectTitle(list.title)}</h3>
                                 <ul>
-                                    {list.title === 'Inscritos' ? (
+                                    {list.title === 'Ranking e Atividades' ? (
                                         loadingTorneios ? (
                                             <li>
                                                 <span className="menu-list-item">Carregando torneios...</span>
