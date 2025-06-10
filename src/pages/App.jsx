@@ -144,17 +144,17 @@ function AppContent() {
             <ScoresPage
               isclub={clube}
               isMaster={isMaster}
-              uid={uid}
+              uid={email}
             />}
           />
           <Route path="/scores" element={
             <ScoresPage
               isclub={clube}
               isMaster={isMaster}
-              admin={admin}
-              uid={uid}
+              uid={email}
               autorized={score}
               register={isAutenticated}
+              admin={autorized}
             />
           } />
           <Route path="/menu" element={
@@ -225,7 +225,7 @@ function AppContent() {
               username={username}
             />
           } />
-          <Route path="/createvent" element={<CreateEvent />} />
+          <Route path="/createvent" element={<CreateEvent admin={autorized} />} />
           <Route path="*" element={<UnknowPage />} />
         </Routes>
         {!shouldHideMenu && (<MenuOptions />)}

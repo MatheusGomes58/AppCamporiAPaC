@@ -12,7 +12,7 @@ import {
 import { db } from "../components/firebase/firebase";
 import "../css/eventsPage.css";
 
-export default function EventosManager() {
+export default function EventosManager({ admin }) {
     const [eventos, setEventos] = useState([]);
     const [formJson, setFormJson] = useState("{}");
     const [editId, setEditId] = useState(null);
@@ -50,25 +50,27 @@ export default function EventosManager() {
     }, [activeCollection]);
 
     useEffect(() => {
-        const fetchMenuCollections = async () => {
-            try {
-                const firestore = getFirestore();
-                const menuSnapshot = await getDocs(collection(firestore, "menu"));
+        if (admin) {
+            const fetchMenuCollections = async () => {
+                try {
+                    const firestore = getFirestore();
+                    const menuSnapshot = await getDocs(collection(firestore, "menu"));
 
-                if (menuSnapshot.empty) {
-                    setCollections([]);
-                    setActiveCollection(null);
-                    return;
+                    if (menuSnapshot.empty) {
+                        setCollections([]);
+                        setActiveCollection(null);
+                        return;
+                    }
+
+                    const docs = menuSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    setCollections(docs);
+                } catch (error) {
+                    console.error("Erro ao buscar menu:", error);
                 }
+            };
 
-                const docs = menuSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setCollections(docs);
-            } catch (error) {
-                console.error("Erro ao buscar menu:", error);
-            }
-        };
-
-        fetchMenuCollections();
+            fetchMenuCollections();
+        }
     }, []);
 
     useEffect(() => {

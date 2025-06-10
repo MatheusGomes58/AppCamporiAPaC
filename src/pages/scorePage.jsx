@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useNavigate } from 'react-router-dom';
 import { db } from "../components/firebase/firebase";
 import { collection, updateDoc, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "../css/ScoreDashboard.css";
@@ -9,8 +8,7 @@ import ScoreCircle from '../components/scores/scoreCircle'
 import RegisterScore from '../components/scores/registerScore'
 
 
-export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized }) {
-    const [club, setClub] = useState('');
+export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized, admin }) {
     const [showModal, setShowModal] = useState(false);
     const [scores, setScores] = useState([]);
     const [avaliacoes, setAvaliacoes] = useState([]);
@@ -21,9 +19,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
     const [selectedPointIndex, setSelectedPointIndex] = useState(null);
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [filterMyRecords, setFilterMyRecords] = useState(false);
-    const [isInclude, setInclude] = useState(false);
     const [expandedGroups, setExpandedGroups] = useState([]);
-    const navigate = useNavigate();
     const rowsPerPage = 10;
 
     const toggleExpanded = (atividade) => {
@@ -36,37 +32,24 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
 
 
     useEffect(() => {
-        if (isclub || isMaster) {
-            const unsubscribe = onSnapshot(collection(db, "scores"), (querySnapshot) => {
-                const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-                setScores(data);
-            });
+        const unsubscribe = onSnapshot(collection(db, "scores"), (querySnapshot) => {
+            const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setScores(data);
+        });
 
-            const unsubscribeAvaliacoes = onSnapshot(collection(db, "pontuacao"), (querySnapshot) => {
-                const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-                setAvaliacoes(data);
-            });
+        const unsubscribeAvaliacoes = onSnapshot(collection(db, "pontuacao"), (querySnapshot) => {
+            const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setAvaliacoes(data);
+        });
 
-            return unsubscribe, unsubscribeAvaliacoes;
-        } else {
-            alert('Faça o login para acessar essa funcionalidade!');
-            navigate('/menu');
-        }
+        return unsubscribe, unsubscribeAvaliacoes;
     }, []);
 
     const deleteScore = async (clubId, activityName) => {
         if (window.confirm("Você realmente deseja excluir este registro?")) {
             const clubDoc = scores.find(s => s.id === clubId);
             if (clubDoc) {
-                if (clubDoc.activities.length === 1) {
-                    // Se for a única atividade do clube, exclui o documento inteiro
-                    await deleteDoc(doc(db, "scores", clubId));
-                } else {
-                    // Se houver mais atividades, filtra a atividade a ser excluída
-                    await updateDoc(doc(db, "scores", clubId), {
-                        activities: clubDoc.activities.filter(act => act.name !== activityName)
-                    });
-                }
+                await deleteDoc(doc(db, "scores", clubId));
             }
         }
     };
@@ -75,10 +58,10 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
         ? scores.filter((s) => s.club.toLowerCase().includes(filterClub.toLowerCase()))
         : scores;
 
-    const myRecordsFilteredScores = filterMyRecords ? filteredScores.map(club => ({
-        ...club,
-        activities: club.activities.filter(activity => activity.uid === uid)
-    })).filter(club => club.activities.length > 0) : filteredScores
+    const myRecordsFilteredScores = filterMyRecords
+        ? filteredScores.filter((s) => s.uid.toLowerCase().includes(uid))
+        : filteredScores;
+
 
     const totalScore = myRecordsFilteredScores.reduce(
         (sum, s) => sum + (s.pontuacao || 0),
@@ -89,16 +72,6 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
         name: s.item,
         pontuacao: s.pontuacao
     }));
-
-    const activityData = activityScores.reduce((acc, act) => {
-        const existingActivity = acc.find(a => a.name === act.name);
-        if (existingActivity) {
-            existingActivity.pontuacao += act.pontuacao;
-        } else {
-            acc.push({ ...act });
-        }
-        return acc;
-    }, []);
 
     const totalRows = myRecordsFilteredScores.length;
     const totalPages = Math.ceil(totalRows / rowsPerPage);
@@ -214,7 +187,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
             {/* Card de pontuação total */}
             {!register && <div className="cartaoPontuacaoTotal">
                 <h1 className="tituloCartao">Pontuação Atual</h1>
-                <ScoreCircle activityData={activityData} totalScore={totalScore} />
+                <ScoreCircle paginatedDataGrouped={paginatedDataGrouped} totalScore={totalScore} />
             </div>}
 
             {/* Card de pontuação total */}
@@ -262,11 +235,10 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                                                         <td>{score.club}</td>
                                                         <td>{score.points}</td>
                                                     </tr>
-                                                    {selectedPointIndex === compositeIndex && (
+                                                    {selectedPointIndex === compositeIndex && admin && (
                                                         <tr>
                                                             <td colSpan="3" style={{ textAlign: "center" }}>
                                                                 <button onClick={() => handleConfirmDelete(score)}>Deletar</button>
-                                                                <button onClick={() => setSelectedPointIndex(null)}>Cancelar</button>
                                                             </td>
                                                         </tr>
                                                     )}
