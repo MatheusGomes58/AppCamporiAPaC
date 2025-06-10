@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 
-const MAX_SCORE = 2450;
-const MAX_STARS = 6;
+const MAX_SCORE = 2042;
+const MAX_STARS = 5;
 
 
 export default function StarProgressBar ({ totalScore }) {

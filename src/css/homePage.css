@@ -26,8 +26,6 @@
   align-items: center;
   border: none;
   padding: 20px;
-  width: 90vw; 
-  height: 90vh;
   overflow: auto; /* permite rolagem se o conteúdo for maior que o modal */
   scrollbar-width: none;
 }
