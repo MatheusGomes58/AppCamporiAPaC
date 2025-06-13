@@ -6,22 +6,9 @@ import '../css/mapPage.css';
 import pontosJSON from '../data/mapData.json';
 
 import {
-  faBuilding,
-  faShoppingCart,
-  faMicrophone,
-  faUtensils,
-  faShower,
-  faToilet,
-  faFileAlt,
-  faDumbbell,
-  faCampground,
-  faInfoCircle,
-  faChurch,
-  faStore,
-  faBed,
-  faFlag,
-  faUsers,
-  faLandmark
+  faBuilding, faShoppingCart, faMicrophone, faUtensils, faShower,
+  faToilet, faFileAlt, faDumbbell, faCampground, faInfoCircle,
+  faChurch, faStore, faBed, faFlag, faUsers, faLandmark
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconMap = {
@@ -44,17 +31,6 @@ const iconMap = {
   museu: faLandmark
 };
 
-function IconSVG({ icon, x, y, size = 24, color = 'white' }) {
-  if (!icon) return null;
-  const svgPath = icon.icon[4];
-  const width = icon.icon[0];
-  return (
-    <g transform={`translate(${x},${y}) scale(${size / width})`} fill={color}>
-      <path d={svgPath} />
-    </g>
-  );
-}
-
 const centerLat = -22.503611;
 const centerLng = -47.163056;
 const centerX = 512;
@@ -64,11 +40,7 @@ function latLngToXY(lat, lng) {
   const scale = 10000;
   const dx = (lng - centerLng) * scale;
   const dy = (lat - centerLat) * scale;
-
-  return {
-    x: centerX + dx,
-    y: centerY - dy
-  };
+  return { x: centerX + dx, y: centerY - dy };
 }
 
 export default function MapaSVG() {
@@ -80,9 +52,8 @@ export default function MapaSVG() {
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
-  let isSelected = false;
+  const wrapperRef = useRef(null);
 
-  // Correção aqui: acessar a propriedade "grupos" do JSON
   const grupos = useMemo(() =>
     pontosJSON.grupos.map((g) => ({
       ...g,
@@ -97,22 +68,33 @@ export default function MapaSVG() {
     })), [pontosJSON]
   );
 
-  // Flatmap para todos os pontos
   const pontos = useMemo(() => grupos.flatMap(g => g.pontos), [grupos]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const handleWheel = (e) => {
+      if (e.ctrlKey || e.deltaY === 0) {
+        e.preventDefault();
+        if (e.deltaY < 0) zoomInOuOutComFoco(Math.min(zoom + 1, 30));
+        else if (e.deltaY > 0) zoomInOuOutComFoco(Math.max(zoom - 1, 1));
+      }
+    };
+
+    wrapper.addEventListener("wheel", handleWheel, { passive: false });
+    return () => wrapper.removeEventListener("wheel", handleWheel);
+  }, [zoom, pontos]);
 
   useEffect(() => {
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        const coords = latLngToXY(latitude, longitude);
-        setUserPosition(coords);
+        setUserPosition(latLngToXY(latitude, longitude));
       },
-      (error) => {
-        console.error("Erro ao obter localização:", error);
-      },
+      (error) => console.error("Erro ao obter localização:", error),
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
     );
-
     return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
@@ -121,34 +103,69 @@ export default function MapaSVG() {
       ranInitialQuery.current = true;
       const pontoEncontrado = pontos.find(
         (p) =>
-          p.nome.toLowerCase().includes(query.toLowerCase()) || p.id.toLowerCase().includes(query.toLowerCase())
+          p.nome.toLowerCase().includes(query.toLowerCase()) ||
+          p.id.toLowerCase().includes(query.toLowerCase())
       );
       if (pontoEncontrado) {
         setSelectedId(pontoEncontrado.id);
-        setSearch(search ? '' : pontoEncontrado.nome);
-        isSelected = true;
-      }else{
-        setSearch(query)
+        setSearch('');
+        const wrapper = wrapperRef.current;
+        if (wrapper) {
+          const width = wrapper.clientWidth;
+          const height = wrapper.clientHeight;
+          const novoZoom = Math.max(10, Math.min(zoom + 5, pontoEncontrado.maxZoom || 30));
+          setZoom(novoZoom);
+          setTimeout(() => {
+            wrapper.scrollLeft = pontoEncontrado.x * novoZoom - width / 2;
+            wrapper.scrollTop = pontoEncontrado.y * novoZoom - height / 2;
+          }, 0);
+        }
+      } else {
+        setSearch(query);
       }
+
       const url = new URL(window.location);
       url.searchParams.delete('localizacao');
       window.history.replaceState({}, '', url);
     }
   }, [query, pontos]);
 
-  const pontosFiltrados = useMemo(() => {
-    if (search.trim() === "") {
-      // Filtra pelos pontos visíveis no zoom atual
-      return pontos.filter((p) => zoom >= p.minZoom && zoom <= p.maxZoom);
-    } else {
-      // Busca: ignora filtro de zoom e retorna todos que batem na busca
-      const termo = search.toLowerCase();
-      return pontos.filter(
-        (p) =>
-          p.nome.toLowerCase().includes(termo) || p.id.toLowerCase().includes(termo)
-      );
+  useEffect(() => {
+    if (search.trim() === '') return;
+
+    const termo = search.toLowerCase();
+    const resultados = pontos.filter(
+      (p) =>
+        p.nome.toLowerCase().includes(termo) ||
+        p.id.toLowerCase().includes(termo)
+    );
+
+    if (resultados.length === 1) {
+      const ponto = resultados[0];
+      setSelectedId(ponto.id);
+
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        const width = wrapper.clientWidth;
+        const height = wrapper.clientHeight;
+        const novoZoom = Math.max(10, Math.min(zoom + 5, ponto.maxZoom || 30));
+        setZoom(novoZoom);
+        setTimeout(() => {
+          wrapper.scrollLeft = ponto.x * novoZoom - width / 2;
+          wrapper.scrollTop = ponto.y * novoZoom - height / 2;
+        }, 0);
+      }
     }
-  }, [zoom, search]);
+  }, [search]);
+
+  const pontosFiltrados = useMemo(() => {
+    if (selectedId) return pontos.filter((p) => p.id === selectedId);
+    if (search.trim() === '') return pontos.filter((p) => zoom >= p.minZoom && zoom <= p.maxZoom);
+    const termo = search.toLowerCase();
+    return pontos.filter((p) =>
+      p.nome.toLowerCase().includes(termo) || p.id.toLowerCase().includes(termo)
+    );
+  }, [zoom, search, selectedId, pontos]);
 
   const handleMapaClick = (event) => {
     const svg = event.currentTarget;
@@ -157,9 +174,48 @@ export default function MapaSVG() {
     const scaleY = 768 / rect.height;
     const x = (event.clientX - rect.left) * scaleX;
     const y = (event.clientY - rect.top) * scaleY;
-    console.log(`Coordenadas no mapa:\nX: ${Math.round(x)}, Y: ${Math.round(y)}`);
-    setSearch(search ? '' : search)
-    setSelectedId(selectedId ? null : selectedId);
+    console.log(`"y": ${Math.round(y)},\n"x": ${Math.round(x)},\n`)
+    setSearch('');
+    setSelectedId(null);
+  };
+
+  const zoomInOuOutComFoco = (novoZoom) => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const width = wrapper.clientWidth;
+    const height = wrapper.clientHeight;
+    const scrollLeftAntes = wrapper.scrollLeft;
+    const scrollTopAntes = wrapper.scrollTop;
+
+    const centroXAtual = (scrollLeftAntes + width / 2) / zoom;
+    const centroYAtual = (scrollTopAntes + height / 2) / zoom;
+
+    const pontosVisiveis = pontos.filter(p => novoZoom >= p.minZoom && novoZoom <= p.maxZoom);
+
+    let pontoMaisProximo = null;
+    let menorDistancia = Infinity;
+
+    for (const p of pontosVisiveis) {
+      const dx = centroXAtual - p.x;
+      const dy = centroYAtual - p.y;
+      const distancia = Math.sqrt(dx * dx + dy * dy);
+      if (distancia < menorDistancia) {
+        menorDistancia = distancia;
+        pontoMaisProximo = p;
+      }
+    }
+
+    setZoom(novoZoom);
+
+    if (!pontoMaisProximo) return;
+
+    setTimeout(() => {
+      const novoCentroX = pontoMaisProximo.x * novoZoom;
+      const novoCentroY = pontoMaisProximo.y * novoZoom;
+      wrapper.scrollLeft = novoCentroX - width / 2;
+      wrapper.scrollTop = novoCentroY - height / 2;
+    }, 0);
   };
 
   return (
@@ -175,21 +231,17 @@ export default function MapaSVG() {
         }}
       />
 
-      <div className="mapa-zoom-wrapper">
+      <div className="mapa-zoom-wrapper" ref={wrapperRef}>
         <div className="mapa-inner" style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}>
-          <svg
-            viewBox="0 0 1024 768"
-            className="mapa-svg"
-            onClick={handleMapaClick}
-          >
+          <svg viewBox="0 0 1024 768" className="mapa-svg" onClick={handleMapaClick}>
             <image href={mapa} x="0" y="0" width="1024" height="768" />
 
             {pontosFiltrados.map((p) => {
-              isSelected = selectedId === p.id;
-              const pontoBase = p.tamanho || 1.4;
+              const isSelected = selectedId === p.id;
+              const pontoBase = p.tamanho || 1.0;
 
-              const inverseZoom = 1.5 / (zoom != 1 ? zoom / 2 : 1); // <-- Zoom inverso: reduz com o aumento do zoom
-              const scale = pontoBase * inverseZoom;
+              const inverseZoom = selectedId ? 3 / zoom : 1.0 / (zoom !== 1 ? zoom / 2 : 1);
+              const scale = pontoBase * (inverseZoom);
 
               const iconSize = 12 * scale;
               const tooltipWidth = 150 * scale;
@@ -206,28 +258,27 @@ export default function MapaSVG() {
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedId(p.id === selectedId ? null : p.id);
-                    setSearch(search ? '' : p.nome);
+                    setSearch('');
                   }}
                   cursor="pointer"
                 >
-                  {/* PIN */}
-                  <path
-                    d="M0 -30 C15 -30 15 -10 0 0 C-15 -10 -15 -30 0 -30 Z"
-                    transform={`translate(${p.x}, ${p.y}) scale(${scale})`}
-                    fill={p.cor}
-                  />
-
-                  {/* Ícone */}
                   <g
-                    transform={`translate(${p.x - iconSize / 2}, ${p.y - iconSize / 1.3 - 15 * scale}) scale(${iconSize / (p.icon.icon[0] || 512)})`}
+                    transform={`translate(${p.x - iconSize / 2}, ${p.y - iconSize / 2}) scale(${iconSize / (p.icon.icon[0] || 512)})`}
                   >
-                    <path
-                      d={p.icon.icon[4]}
-                      fill="white"
-                    />
+                    <path d={p.icon.icon[4]} fill={p.cor} />
                   </g>
 
-                  {/* Tooltip */}
+                  <text
+                    x={p.x}
+                    y={p.y - 20 * scale}
+                    fill="black"
+                    fontSize={fontSize * 1.2}
+                    textAnchor="middle"
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    {p.nome}
+                  </text>
+
                   {isSelected && (
                     <foreignObject
                       x={p.x + offsetX}
@@ -243,7 +294,6 @@ export default function MapaSVG() {
                           padding: `${padding}px`,
                           boxShadow: `0px 0px ${scale * 8}px ${scale * 10}px rgba(0, 0, 0, 0.06)`
                         }}
-
                       >
                         <strong>{p.nome}</strong>
                         <p>{p.descricao || "Sem descrição"}</p>
@@ -254,11 +304,9 @@ export default function MapaSVG() {
                     </foreignObject>
                   )}
                 </g>
+
               );
             })}
-
-
-
 
             {userPosition && (
               <g>
@@ -286,9 +334,9 @@ export default function MapaSVG() {
       </div>
 
       <div className="zoom-controls">
-        <button onClick={() => setZoom((z) => Math.min(z + 1, 40))}>+</button>
-        <button onClick={() => setZoom(1)}>{zoom < 10 ? "0" + zoom : zoom}X</button>
-        <button onClick={() => setZoom((z) => Math.max(z - 1, 1))}>-</button>
+        <button onClick={() => zoomInOuOutComFoco(Math.min(zoom + 1, 30))}>+</button>
+        <button onClick={() => zoomInOuOutComFoco(1)}>{zoom < 10 ? "0" + zoom : zoom}X</button>
+        <button onClick={() => zoomInOuOutComFoco(Math.max(zoom - 1, 1))}>-</button>
       </div>
     </div>
   );
