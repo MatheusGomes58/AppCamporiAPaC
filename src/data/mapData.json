@@ -1,6 +1,5 @@
 {
   "grupos": [
-
     {
       "nome": "Atividades",
       "cor": "#ff3300",
@@ -8,8 +7,8 @@
         {
           "id": "atividades_norte",
           "nome": "Atividades Norte",
-          "x": 449,
-          "y": 227,
+          "y": 247,
+          "x": 483,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -30,8 +29,8 @@
         {
           "id": "atividades_oeste",
           "nome": "Atividades Oeste",
-          "x": 120,
-          "y": 475,
+          "y": 448,
+          "x": 168,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -41,8 +40,8 @@
         {
           "id": "atividades_leste",
           "nome": "Atividades Leste",
-          "x": 975,
-          "y": 530,
+          "y": 523,
+          "x": 855,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -52,8 +51,8 @@
         {
           "id": "atividades_sul",
           "nome": "Atividades Sul",
-          "x": 690,
-          "y": 557,
+          "y": 500,
+          "x": 673,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -63,8 +62,8 @@
         {
           "id": "atividades_sudeste",
           "nome": "Atividades Sudeste",
-          "x": 615,
-          "y": 493,
+          "y": 464,
+          "x": 625,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -85,8 +84,8 @@
         {
           "id": "atividades_centro_oeste",
           "nome": "Atividades Centro-Oeste",
-          "x": 234,
-          "y": 479,
+          "y": 465,
+          "x": 318,
           "icon": "atividades",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -102,8 +101,8 @@
         {
           "id": "sanitarios_container",
           "nome": "Sanitários Contêiner",
-          "x": 532,
-          "y": 525,
+          "y": 494,
+          "x": 566,
           "icon": "toilet",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -113,8 +112,8 @@
         {
           "id": "sanitarios_norte",
           "nome": "Sanitários Norte",
-          "x": 333,
-          "y": 352,
+          "y": 359,
+          "x": 382,
           "icon": "toilet",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -124,8 +123,8 @@
         {
           "id": "sanitarios_leste",
           "nome": "Sanitários Leste",
-          "x": 557,
-          "y": 360,
+          "y": 345,
+          "x": 563,
           "icon": "toilet",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -135,8 +134,8 @@
         {
           "id": "sanitarios_sul",
           "nome": "Sanitários Sul",
-          "x": 368,
-          "y": 641,
+          "y": 565,
+          "x": 478,
           "icon": "toilet",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -146,8 +145,8 @@
         {
           "id": "sanitarios_sudeste",
           "nome": "Sanitários Sudeste",
-          "x": 449,
-          "y": 636,
+          "y": 574,
+          "x": 417,
           "icon": "toilet",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -157,8 +156,8 @@
         {
           "id": "chuveiros_gerais",
           "nome": "Chuveiros Gerais",
-          "x": 294,
-          "y": 649,
+          "y": 576,
+          "x": 481,
           "icon": "shower",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -174,8 +173,8 @@
         {
           "id": "cozinhas_clubes",
           "nome": "Cozinhas dos Clubes",
-          "x": 534,
-          "y": 651,
+          "y": 548,
+          "x": 504,
           "icon": "utensils",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -185,8 +184,8 @@
         {
           "id": "recepcao_entrada",
           "nome": "Recepção Principal",
-          "x": 358,
-          "y": 210,
+          "y": 231,
+          "x": 396,
           "icon": "bandeira",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -196,8 +195,8 @@
         {
           "id": "secretaria_evento",
           "nome": "Secretaria Geral",
-          "x": 284,
-          "y": 415,
+          "y": 399,
+          "x": 358,
           "icon": "file",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -206,9 +205,9 @@
         },
         {
           "id": "shopping_evento",
-          "nome": "Shopping e Lembranças",
-          "x": 566,
-          "y": 401,
+          "nome": "Shopping",
+          "y": 366,
+          "x": 568,
           "icon": "shopping-cart",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -218,8 +217,8 @@
         {
           "id": "palco_principal",
           "nome": "Palco Principal",
-          "x": 677,
-          "y": 487,
+          "y": 467,
+          "x": 668,
           "icon": "microphone",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -229,8 +228,8 @@
         {
           "id": "museu_biblico",
           "nome": "MAB - Museu Bíblico",
-          "x": 229,
-          "y": 218,
+          "y": 246,
+          "x": 331,
           "icon": "museu",
           "tamanho": 1.5,
           "zoomMin": 1,
@@ -240,8 +239,8 @@
         {
           "id": "centro_white",
           "nome": "Centro EGW",
-          "x": 393,
-          "y": 244,
+          "y": 322,
+          "x": 502,
           "icon": "museu",
           "tamanho": 1.5,
           "zoomMin": 1,

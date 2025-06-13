@@ -47,10 +47,11 @@ export default function MapaSVG() {
   const location = useLocation();
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const query = queryParams.get('localizacao') || '';
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(3);
   const ranInitialQuery = useRef(false);
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  const [highlightedId, setHighlightedId] = useState(null);
   const [userPosition, setUserPosition] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -70,21 +71,33 @@ export default function MapaSVG() {
 
   const pontos = useMemo(() => grupos.flatMap(g => g.pontos), [grupos]);
 
+
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    const handleWheel = (e) => {
-      if (e.ctrlKey || e.deltaY === 0) {
-        e.preventDefault();
-        if (e.deltaY < 0) zoomInOuOutComFoco(Math.min(zoom + 1, 30));
-        else if (e.deltaY > 0) zoomInOuOutComFoco(Math.max(zoom - 1, 1));
+    // Aguardar render e aplicar scroll centralizado
+    const centralizarScroll = () => {
+      const larguraImagem = 1024 * zoom;
+      const alturaImagem = 768 * zoom;
+      const larguraWrapper = wrapper.clientWidth;
+      const alturaWrapper = wrapper.clientHeight;
+
+      // Só centraliza se os tamanhos forem válidos
+      if (larguraWrapper === 0 || alturaWrapper === 0) {
+        requestAnimationFrame(centralizarScroll);
+        return;
       }
+
+      wrapper.scrollLeft = (larguraImagem - larguraWrapper) / 2;
+      wrapper.scrollTop = (alturaImagem - alturaWrapper) / 2;
     };
 
-    wrapper.addEventListener("wheel", handleWheel, { passive: false });
-    return () => wrapper.removeEventListener("wheel", handleWheel);
-  }, [zoom, pontos]);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(centralizarScroll);
+    });
+  }, []);
+
 
   useEffect(() => {
     const watchId = navigator.geolocation.watchPosition(
@@ -98,6 +111,8 @@ export default function MapaSVG() {
     return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
+  // ... código antes igual ...
+
   useEffect(() => {
     if (!ranInitialQuery.current && query) {
       ranInitialQuery.current = true;
@@ -107,19 +122,10 @@ export default function MapaSVG() {
           p.id.toLowerCase().includes(query.toLowerCase())
       );
       if (pontoEncontrado) {
-        setSelectedId(pontoEncontrado.id);
+        setHighlightedId(pontoEncontrado.id);
+        setSelectedId(null);
         setSearch('');
-        const wrapper = wrapperRef.current;
-        if (wrapper) {
-          const width = wrapper.clientWidth;
-          const height = wrapper.clientHeight;
-          const novoZoom = Math.max(10, Math.min(zoom + 5, pontoEncontrado.maxZoom || 30));
-          setZoom(novoZoom);
-          setTimeout(() => {
-            wrapper.scrollLeft = pontoEncontrado.x * novoZoom - width / 2;
-            wrapper.scrollTop = pontoEncontrado.y * novoZoom - height / 2;
-          }, 0);
-        }
+        // REMOVIDO: centralização e zoom automático
       } else {
         setSearch(query);
       }
@@ -131,7 +137,10 @@ export default function MapaSVG() {
   }, [query, pontos]);
 
   useEffect(() => {
-    if (search.trim() === '') return;
+    if (search.trim() === '') {
+      setHighlightedId(null);
+      return;
+    }
 
     const termo = search.toLowerCase();
     const resultados = pontos.filter(
@@ -142,21 +151,13 @@ export default function MapaSVG() {
 
     if (resultados.length === 1) {
       const ponto = resultados[0];
-      setSelectedId(ponto.id);
-
-      const wrapper = wrapperRef.current;
-      if (wrapper) {
-        const width = wrapper.clientWidth;
-        const height = wrapper.clientHeight;
-        const novoZoom = Math.max(10, Math.min(zoom + 5, ponto.maxZoom || 30));
-        setZoom(novoZoom);
-        setTimeout(() => {
-          wrapper.scrollLeft = ponto.x * novoZoom - width / 2;
-          wrapper.scrollTop = ponto.y * novoZoom - height / 2;
-        }, 0);
-      }
+      setHighlightedId(ponto.id);
+      // NÃO mexer em zoom ou scroll aqui
+    } else {
+      setHighlightedId(null);
     }
   }, [search]);
+
 
   const pontosFiltrados = useMemo(() => {
     if (selectedId) return pontos.filter((p) => p.id === selectedId);
@@ -174,49 +175,65 @@ export default function MapaSVG() {
     const scaleY = 768 / rect.height;
     const x = (event.clientX - rect.left) * scaleX;
     const y = (event.clientY - rect.top) * scaleY;
-    console.log(`"y": ${Math.round(y)},\n"x": ${Math.round(x)},\n`)
+    console.log(`"y": ${Math.round(y)},\n"x": ${Math.round(x)},\n`);
     setSearch('');
     setSelectedId(null);
+    setHighlightedId(null);
   };
 
-  const zoomInOuOutComFoco = (novoZoom) => {
+  const zoomInOuOutComFoco = (novoZoom, idCentralizar = null) => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
     const width = wrapper.clientWidth;
     const height = wrapper.clientHeight;
-    const scrollLeftAntes = wrapper.scrollLeft;
-    const scrollTopAntes = wrapper.scrollTop;
 
-    const centroXAtual = (scrollLeftAntes + width / 2) / zoom;
-    const centroYAtual = (scrollTopAntes + height / 2) / zoom;
+    // Se tiver id para centralizar, busca o ponto específico
+    let pontoCentralizar = null;
+    if (idCentralizar) {
+      pontoCentralizar = pontos.find(p => p.id === idCentralizar);
+    }
 
-    const pontosVisiveis = pontos.filter(p => novoZoom >= p.minZoom && novoZoom <= p.maxZoom);
+    if (!pontoCentralizar) {
+      // Sem ponto específico, centraliza no ponto mais próximo do centro atual (comportamento original)
+      const scrollLeftAntes = wrapper.scrollLeft;
+      const scrollTopAntes = wrapper.scrollTop;
 
-    let pontoMaisProximo = null;
-    let menorDistancia = Infinity;
+      const centroXAtual = (scrollLeftAntes + width / 2) / zoom;
+      const centroYAtual = (scrollTopAntes + height / 2) / zoom;
 
-    for (const p of pontosVisiveis) {
-      const dx = centroXAtual - p.x;
-      const dy = centroYAtual - p.y;
-      const distancia = Math.sqrt(dx * dx + dy * dy);
-      if (distancia < menorDistancia) {
-        menorDistancia = distancia;
-        pontoMaisProximo = p;
+      const pontosVisiveis = pontos.filter(p => novoZoom >= p.minZoom && novoZoom <= p.maxZoom);
+
+      let pontoMaisProximo = null;
+      let menorDistancia = Infinity;
+
+      for (const p of pontosVisiveis) {
+        const dx = centroXAtual - p.x;
+        const dy = centroYAtual - p.y;
+        const distancia = Math.sqrt(dx * dx + dy * dy);
+        if (distancia < menorDistancia) {
+          menorDistancia = distancia;
+          pontoMaisProximo = p;
+        }
       }
+
+      pontoCentralizar = pontoMaisProximo;
     }
 
     setZoom(novoZoom);
 
-    if (!pontoMaisProximo) return;
+    if (!pontoCentralizar) return;
 
-    setTimeout(() => {
-      const novoCentroX = pontoMaisProximo.x * novoZoom;
-      const novoCentroY = pontoMaisProximo.y * novoZoom;
-      wrapper.scrollLeft = novoCentroX - width / 2;
-      wrapper.scrollTop = novoCentroY - height / 2;
-    }, 0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const novoCentroX = pontoCentralizar.x * novoZoom;
+        const novoCentroY = pontoCentralizar.y * novoZoom;
+        wrapper.scrollLeft = novoCentroX - width / 2;
+        wrapper.scrollTop = novoCentroY - height / 2;
+      });
+    });
   };
+
 
   return (
     <div className="mapa-container">
@@ -238,10 +255,11 @@ export default function MapaSVG() {
 
             {pontosFiltrados.map((p) => {
               const isSelected = selectedId === p.id;
-              const pontoBase = p.tamanho || 1.0;
+              const isHighlighted = highlightedId === p.id && !isSelected;
 
-              const inverseZoom = selectedId ? 3 / zoom : 1.0 / (zoom !== 1 ? zoom / 2 : 1);
-              const scale = pontoBase * (inverseZoom);
+              const pontoBase = p.tamanho || 1.0;
+              const inverseZoom = isSelected ? 2 / zoom : 1.0 / (zoom !== 1 ? zoom / 2 : 1);
+              const scale = pontoBase * (isHighlighted ? 1.5 : inverseZoom);
 
               const iconSize = 12 * scale;
               const tooltipWidth = 150 * scale;
@@ -259,6 +277,7 @@ export default function MapaSVG() {
                     e.stopPropagation();
                     setSelectedId(p.id === selectedId ? null : p.id);
                     setSearch('');
+                    setHighlightedId(null);
                   }}
                   cursor="pointer"
                 >
@@ -304,7 +323,6 @@ export default function MapaSVG() {
                     </foreignObject>
                   )}
                 </g>
-
               );
             })}
 
