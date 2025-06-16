@@ -79,6 +79,7 @@ async function createReserv(clube, atividade) {
 
 const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
   const [microEvents, setMicroEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   const [editingMicroEventIndex, setEditingMicroEventIndex] = useState(null);
   const [valueVagas, setValueVagas] = useState(1);
   const [hasReserved, setHasReserved] = useState(false);
@@ -95,8 +96,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
     }
 
     const eventosQuery = query(
-      collection(db, "eventos"),
-      where("atividade", "==", activeTab)
+      collection(db, "eventos")
     );
 
     const dataId = getTodayDateId();
@@ -111,13 +111,18 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         id: doc.id,
         ...doc.data(),
       }));
-      const eventosOrdenados = eventos.sort((a, b) => {
+
+
+      const eventsFiltered = eventos.filter((t) => t.atividade?.includes(activeTab));
+
+      const eventosOrdenados = eventsFiltered.sort((a, b) => {
         const dataA = new Date(`${a.date}T${a.hora.replace('h', ':')}:00`);
         const dataB = new Date(`${b.date}T${b.hora.replace('h', ':')}:00`);
         return dataA - dataB;
       });
 
       setMicroEvents(eventosOrdenados);
+      setEvents(eventos);
 
 
       // Limpar escutas antigas
@@ -127,7 +132,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
       const inscritosMap = {};
       const membrosTemp = {};
 
-      await Promise.all(eventos.map(async (evento) => {
+      await Promise.all(eventsFiltered.map(async (evento) => {
         const isInscrito = evento.inscritos?.includes(clube);
         if (!isInscrito) return;
 
@@ -182,6 +187,26 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
       alert("Você já fez uma reserva hoje para essa atividade!");
       return;
     }
+
+    const eventoSelecionado = microEvents[index];
+
+    if (eventoSelecionado.classe?.toLowerCase() !== "sabado") {
+      const eventoConflitante = events.find((ev, idx) => {
+        return (
+          idx !== index &&
+          ev.classe?.toLowerCase() != "sabado" &&
+          ev.inscritos?.includes(clube)
+        );
+      });
+
+      if (eventoConflitante) {
+        alert(
+          `Seu clube já está inscrito na atividade "${eventoConflitante.nome}", Não é possível se inscrever em mais de uma atividade de sábado.`
+        );
+        return;
+      }
+    }
+
     setEditingMicroEventIndex(index);
     setValueVagas(1);
   };

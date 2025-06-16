@@ -4,6 +4,7 @@ import InscricaoTorneio from "../components/inscricao/inscricaoTorneio";
 import InscricaoTrilha from "../components/inscricao/inscricaoTrilha";
 import InscricaoCorrida from "../components/inscricao/inscricaoCorrida";
 import InscricaoApresentacao from "../components/inscricao/inscricaoApresentacao";
+import InscricaoMAB from "../components/inscricao/inscricaoMab"
 import ScheduleForm from "../components/scedules/scheduleActivity";
 import React, { useState } from "react";
 import '../css/schedulePage.css';
@@ -37,8 +38,8 @@ const EventScheduler = ({ clube, admin, reserved, username, isMaster, isEspecial
         clube={clube}
         admin={admin}
         ismaster={isMaster}
-      />
-    } else {
+      /> 
+    }else {
       return <ScheduleForm
         clube={clube}
         admin={admin}

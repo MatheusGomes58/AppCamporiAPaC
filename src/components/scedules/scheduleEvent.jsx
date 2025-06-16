@@ -188,12 +188,12 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
         </tbody>
       </table>
 
-      {/*(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && (
+      {(admin && !isMaster) && (!isClubeInscrito && validateInscrition(event)) && (!hasReserved) && activeTab == 'MAB - Sábado' && (
         <button className="location-button" onClick={handleClick}>
           Reservar
         </button>
-      )*/}
-      {/*(admin && !isMaster) && (WhereClubeInscrito && isSameAtividade) && (
+      )}
+      {(admin && !isMaster) && activeTab == 'MAB - Sábado' && (WhereClubeInscrito && isSameAtividade) && (
         <button
           className="delete"
           onClick={async () => {
@@ -206,7 +206,7 @@ const Event = (({ event, handleClick, admin, isMaster, hasReserved, clube, activ
         >
           Cancelar reserva
         </button>
-      )*/}
+      )}
 
       {isMaster && !event.iscarroussel && (
         <button onClick={() => navigate(`/chaveamento/${event.nome}`)}>
