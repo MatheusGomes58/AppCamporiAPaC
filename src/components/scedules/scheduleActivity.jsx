@@ -201,7 +201,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
 
       if (eventoConflitante) {
         alert(
-          `Seu clube já está inscrito na atividade "${eventoConflitante.nome}", Não é possível se inscrever em mais de uma atividade de sábado.`
+          `Seu clube já está inscrito na atividade "${eventoConflitante.nome}", Não é possível se inscrever nessa atividade!`
         );
         return;
       }
