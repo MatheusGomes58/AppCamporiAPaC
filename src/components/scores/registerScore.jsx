@@ -7,6 +7,7 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
     const [club, setClub] = useState('');
     const [search, setSearch] = useState('');
     const [activity, setActivity] = useState("");
+    const [activityScore, setActivityScore] = useState("");
     const [avaliacaoSelecionada, setAvaliacaoSelecionada] = useState("");
     const [isDropdownSelectOpen, setIsDropdownSelectOpen] = useState(false);
     const [scoresRegistrados, setScoresRegistrados] = useState([]);
@@ -61,7 +62,7 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
 
         const selectedAvaliacao = avaliacoesFiltradas[activity];
 
-        if (!selectedAvaliacao || !club) {
+        if (!selectedAvaliacao || !club || !setActivity || !setActivityScore) {
             alert("Preencha todos os campos para cadastrar a pontuação!");
             return;
         }
@@ -79,15 +80,13 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
             club,
             avaliacao,
             item,
-            pontuacao: Number(pontuacao),
+            pontuacao: Number(activityScore),
             uid,
             timestamp: new Date()
         });
 
-        setClub("");
-        setSearch("");
         setActivity("");
-        setAvaliacaoSelecionada("");
+        setActivityScore("")
         setIsDropdownSelectOpen(false);
         alert("Pontuação registrada com sucesso!");
     };
@@ -165,11 +164,37 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
                         </div>
                     )}
 
+                    {avaliacoesFiltradas[activity]?.pontuacao?.length > 0 ? (
+                        <select
+                            className="campoEntrada"
+                            value={activityScore}
+                            onChange={(e) => setActivityScore(e.target.value)}
+                        >
+                            <option value="">Selecione uma opção</option>
+                            {avaliacoesFiltradas[activity]?.pontuacao.map((data, index) => (
+                                <option key={index} value={data.value}>
+                                    {data.title}
+                                </option>
+                            ))}
+                            <option value={0}>Não Executou</option>
+                        </select>
+                    ) : (
+                        <select
+                            className="campoEntrada"
+                            value={activityScore}
+                            onChange={(e) => setActivityScore(e.target.value)}
+                        >
+                            <option value="">Selecione uma opção</option>
+                            <option value={avaliacoesFiltradas[activity]?.pontuacao}>Executou com Sucesso</option>
+                            <option value={0}>Não Executou</option>
+                        </select>
+                    )}
+
                     <input
                         className="campoEntrada"
                         placeholder="Pontos"
                         type="number"
-                        value={avaliacoesFiltradas[activity]?.pontuacao || ''}
+                        value={activityScore}
                         disabled
                     />
 
