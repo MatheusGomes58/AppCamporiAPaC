@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { db } from "../components/firebase/firebase";
-import { collection, updateDoc, doc, onSnapshot, deleteDoc } from "firebase/firestore";
+import { collection, query, where, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import "../css/ScoreDashboard.css";
 import clubs from '../data/clubes.json';
 import ProgressStars from '../components/scores/starProgress'
@@ -8,7 +8,7 @@ import ScoreCircle from '../components/scores/scoreCircle'
 import RegisterScore from '../components/scores/registerScore'
 
 
-export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized, admin }) {
+export default function ScoreDashboard({ isMaster, isclub, register, uid, autorized, admin, present }) {
     const [showModal, setShowModal] = useState(false);
     const [scores, setScores] = useState([]);
     const [avaliacoes, setAvaliacoes] = useState([]);
@@ -32,20 +32,35 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
 
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "scores"), (querySnapshot) => {
+        const pontoRef = collection(db, "pontuacao");
+        const scoresRef = collection(db, "scores");
+
+        const q = present
+            ? query(pontoRef, where("isActivitie", "==", true))
+            : query(pontoRef);
+
+        const q2 = present
+            ? query(scoresRef, where("isActivitie", "==", true))
+            : query(scoresRef);
+
+        const unsubscribe = onSnapshot(q2, (querySnapshot) => {
             const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             setScores(data);
         });
 
-        const unsubscribeAvaliacoes = onSnapshot(collection(db, "pontuacao"), (querySnapshot) => {
+        const unsubscribeAvaliacoes = onSnapshot(q, (querySnapshot) => {
             const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             setAvaliacoes(data);
         });
 
-        return unsubscribe, unsubscribeAvaliacoes;
-    }, []);
+        return () => {
+            unsubscribe();
+            unsubscribeAvaliacoes();
+        };
+    }, [present]);
 
-    const deleteScore = async (clubId, activityName) => {
+
+    const deleteScore = async (clubId) => {
         if (window.confirm("Você realmente deseja excluir este registro?")) {
             const clubDoc = scores.find(s => s.id === clubId);
             if (clubDoc) {
@@ -67,11 +82,6 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
         (sum, s) => sum + (s.pontuacao || 0),
         0
     );
-
-    const activityScores = myRecordsFilteredScores.map(s => ({
-        name: s.item,
-        pontuacao: s.pontuacao
-    }));
 
     const totalRows = myRecordsFilteredScores.length;
     const totalPages = Math.ceil(totalRows / rowsPerPage);
@@ -133,7 +143,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
         <div className="painelPontuacao">
 
             {showModal && (
-                <RegisterScore avaliacoes={avaliacoes} autorized={autorized} clubs={clubs} closeModal={setShowModal} uid={uid} />
+                <RegisterScore present={present} avaliacoes={avaliacoes} autorized={autorized} clubs={clubs} closeModal={setShowModal} uid={uid} />
             )}
 
             {isMaster && <div className="cartaoFiltro">
@@ -180,7 +190,7 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                     <label htmlFor="filterMyRecords">Filtrar meus registros</label>
                 </div>
                 {register && autorized && (
-                    <button onClick={() => setShowModal(true)}>Incluir Pontos</button>
+                    <button onClick={() => setShowModal(true)}>{present ? "Registrar Presença" : "Incluir Pontos"}</button>
                 )}
             </div>}
 
@@ -197,13 +207,14 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
 
             {(
                 <div className="cartaoTabelaPontuacao">
-                    <h2 className="tituloCartao">Pontuação por Clube</h2>
+                    <h2 className="tituloCartao">{(present ? "Presença do " : "Pontuação por ") + "Clube"}</h2>
                     <table className="table">
                         <thead>
                             <tr>
                                 <th>Atividade</th>
                                 <th>Clube</th>
-                                <th>Pontos</th>
+                                {autorized && <td>{present ? "Fiscal" : "Avaliador"}</td>}
+                                {!present && <th>Pontos</th>}
                             </tr>
                         </thead>
                         <tbody>
@@ -215,12 +226,12 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                                         onClick={() => toggleExpanded(atividade)}
                                         style={{ cursor: "pointer", background: "#f1f1f1" }}
                                     >
-                                        <td colSpan={2}>
+                                        <td colSpan={autorized ? 3 : 2}>
                                             {atividade}
                                         </td>
-                                        <td>
+                                        {!present && <td>
                                             {entries.reduce((total, entry) => total + Number(entry.points), 0)} pts
-                                        </td>
+                                        </td>}
                                     </tr>
 
 
@@ -233,11 +244,12 @@ export default function ScoreDashboard({ isMaster, isclub, register, uid, autori
                                                     <tr onClick={() => handlePointClick(compositeIndex, score)}>
                                                         <td>{score.activity}</td>
                                                         <td>{score.club}</td>
-                                                        <td>{score.points}</td>
+                                                        {autorized && <td>{score.uid}</td>}
+                                                        {!present && <td>{score.points}</td>}
                                                     </tr>
-                                                    {selectedPointIndex === compositeIndex && admin && (
+                                                    {selectedPointIndex === compositeIndex && admin && isMaster && (
                                                         <tr>
-                                                            <td colSpan="3" style={{ textAlign: "center" }}>
+                                                            <td colSpan={autorized && !present ? 4 : 3} style={{ textAlign: "center" }}>
                                                                 <button onClick={() => handleConfirmDelete(score)}>Deletar</button>
                                                             </td>
                                                         </tr>

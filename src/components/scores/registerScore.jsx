@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from "../firebase/firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
-export default function RegisterScore({ autorized, avaliacoes, clubs, uid, closeModal }) {
+export default function RegisterScore({ autorized, avaliacoes, clubs, uid, closeModal, present }) {
     const [club, setClub] = useState('');
     const [search, setSearch] = useState('');
     const [activity, setActivity] = useState("");
@@ -74,13 +74,14 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
             return;
         }
 
-        const { avaliacao, pontuacao } = selectedAvaliacao;
+        const { avaliacao } = selectedAvaliacao;
 
         await addDoc(collection(db, "scores"), {
             club,
             avaliacao,
             item,
             pontuacao: Number(activityScore),
+            ...(present ? { isActivitie: true } : {}),
             uid,
             timestamp: new Date()
         });
@@ -94,7 +95,7 @@ export default function RegisterScore({ autorized, avaliacoes, clubs, uid, close
     return (
         <div className="modal-overlay" onClick={() => closeModal(false)}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <h2 className="tituloCartao">Registrar Pontuação</h2>
+                <h2 className="tituloCartao">Registrar {present ? "Presença" : "Pontuação"}</h2>
                 <div className="grupoEntrada">
                     {!isDropdownSelectOpen && (
                         <input

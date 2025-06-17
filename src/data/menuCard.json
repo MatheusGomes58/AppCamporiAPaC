@@ -62,7 +62,9 @@
         "items": [
           { "title": "ATIVIDADES GERAIS", "link": "/schedulesclub", "admin": true, "orMaster": true },
           { "title": "DASHBOARD DE ATIVIDADES", "link":"/dashboard", "clube": "APAC"},
-          { "title": "REGISTRAR PONTUAÇÃO", "link":"/scores", "admin": true, "clube": "APAC", "score": true},
+          { "title": "REGISTRAR PONTUAÇÃO", "link":"/scores", "score": true},
+          { "title": "REGISTRAR PRESENÇA", "link":"/present", "present": true},
+          { "title": "RANKING GERAL", "link":"/ranking", "admin": true, "clube": "APAC"},
           { "title": "BANCO DE DADOS", "link":"/createvent", "admin": true, "clube": "APAC", "authorized": true}
         ]
       },

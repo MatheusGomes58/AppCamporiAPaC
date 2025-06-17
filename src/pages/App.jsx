@@ -22,6 +22,7 @@ import ChaveamentoPage from './chaveamentoPage';
 import InscricaoPage from './inscricaoPage';
 import DashboarAtividade from './activityPage';
 import CreateEvent from './eventsPage.jsx';
+import RankingPage from './rankingPage.jsx';
 
 const analytics = getAnalytics(); // Instancia global
 
@@ -61,6 +62,7 @@ function AppContent() {
   const [isMaster, setMaster] = useState(false);
   const [autorized, setAutorized] = useState(false);
   const [score, setScore] = useState(false);
+  const [present, setPresent] = useState(false);
 
   useEffect(() => {
     setLogin(true);
@@ -90,6 +92,7 @@ function AppContent() {
             setMaster(userDoc.clube === 'APAC');
             setAutorized(userDoc.autorized || false)
             setScore(userDoc.score || false)
+            setPresent(userDoc.present || false)
 
             logEvent(analytics, 'user_login', {
               user_id: storedUser,
@@ -154,8 +157,22 @@ function AppContent() {
               uid={email}
               autorized={score}
               register={isAutenticated}
-              admin={autorized}
+              admin={admin}
             />
+          } />
+          <Route path="/present" element={
+            <ScoresPage
+              isclub={clube}
+              isMaster={true}
+              uid={email}
+              autorized={present}
+              register={isAutenticated}
+              admin={admin}
+              present={present}
+            />
+          } />
+          <Route path="/ranking" element={
+            <RankingPage/>
           } />
           <Route path="/menu" element={
             <MenuPage
@@ -166,6 +183,7 @@ function AppContent() {
               isMaster={isMaster}
               authorized={autorized}
               userscore={score}
+              userpresent={present}
             />
           } />
           <Route path="/show" element={<SplashScreen animateStop={true} />} />
