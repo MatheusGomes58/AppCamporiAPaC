@@ -195,6 +195,7 @@ const EventScheduler = ({ clube, admin, username, isMaster, activeTab }) => {
         return (
           idx !== index &&
           ev.classe?.toLowerCase() != "sabado" &&
+          ev.classe?.toLowerCase() != "carrossel" &&
           ev.inscritos?.includes(clube)
         );
       });

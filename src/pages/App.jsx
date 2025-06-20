@@ -23,6 +23,7 @@ import InscricaoPage from './inscricaoPage';
 import DashboarAtividade from './activityPage';
 import CreateEvent from './eventsPage.jsx';
 import RankingPage from './rankingPage.jsx';
+import FotosPage from './fotosPage.jsx';
 
 const analytics = getAnalytics(); // Instancia global
 
@@ -173,6 +174,9 @@ function AppContent() {
           } />
           <Route path="/ranking" element={
             <RankingPage/>
+          } />
+          <Route path="/fotos" element={
+            <FotosPage/>
           } />
           <Route path="/menu" element={
             <MenuPage

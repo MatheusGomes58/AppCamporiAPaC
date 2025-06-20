@@ -326,7 +326,7 @@ export default function MapaSVG() {
               );
             })}
 
-            {userPosition && (
+            {/*userPosition && (
               <g>
                 <circle
                   cx={userPosition.x}
@@ -346,7 +346,7 @@ export default function MapaSVG() {
                   Você
                 </text>
               </g>
-            )}
+            )*/}
           </svg>
         </div>
       </div>

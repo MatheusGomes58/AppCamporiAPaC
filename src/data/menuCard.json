@@ -44,6 +44,7 @@
           { "title": "CADASTRAR USUÁRIO", "link":"/singin"},
           { "title": "FAZER LOGIN", "link":"/login"},
           { "title": "RECUPERAR A SENHA", "link":"/forgotPassword"},
+          { "title": "MINHAS FOTOS", "link":"/fotos"},
           { "title": "AJUDA E SUPORTE", "link":"/help"}
         ]
       },
@@ -52,6 +53,7 @@
         "user": true,
         "items": [
           { "title": "ATUALIZAR DADOS", "link":"/profile"},
+          { "title": "MINHAS FOTOS", "link":"/fotos"},
           { "title": "AJUDA E SUPORTE", "link":"/help"},
           { "title": "SAIR", "link":"/logout"}
         ]
@@ -60,7 +62,8 @@
         "title": "clube",
         "admin": true,
         "items": [
-          { "title": "ATIVIDADES GERAIS", "link": "/schedulesclub", "admin": true, "orMaster": true },
+          { "title": "ATIVIDADES ESPECIAIS", "link": "/schedulesclub", "admin": true, "orMaster": true },
+          { "title": "ATIVIDADES GERAIS", "link": "/schedulesactivity", "admin": true, "orMaster": true },
           { "title": "DASHBOARD DE ATIVIDADES", "link":"/dashboard", "clube": "APAC"},
           { "title": "REGISTRAR PONTUAÇÃO", "link":"/scores", "score": true},
           { "title": "REGISTRAR PRESENÇA", "link":"/present", "present": true},

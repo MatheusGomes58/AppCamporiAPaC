@@ -6,19 +6,19 @@ const MAX_STARS = 5;
 
 export default function StarProgressBar ({ totalScore, ranking }) {
     const safeScore = Math.max(0, Number(totalScore) || 0);
-    const filledStars = Math.max(0, Math.floor((safeScore / MAX_SCORE) * MAX_STARS));
+    const filledStars = Math.min(MAX_STARS, Math.max(0, Math.floor((safeScore / MAX_SCORE) * MAX_STARS)));
     const emptyStars = Math.max(0, MAX_STARS - filledStars);
 
     return (
         <div className="star-wrapper">
             {[...Array(filledStars)].map((_, i) => (
                 <div className="star-wrapper" key={`filled-${i}`}>
-                    <Star className="star-filled" style={!ranking? { width: "10vw", height: "10vw" } : { width: "5vw", height: "5vw" }} />
+                    <Star className="star-filled" style={!ranking? { width: "10vw", height: "10vw" } : { width: "2vw", height: "2vw" }} />
                 </div>
             ))}
             {[...Array(emptyStars)].map((_, i) => (
                 <div className="star-wrapper" key={`empty-${i}`}>
-                    <Star className="star-empty" style={!ranking? { width: "10vw", height: "10vw" } : { width: "5vw", height: "5w" }} />
+                    <Star className="star-empty" style={!ranking? { width: "10vw", height: "10vw" } : { width: "2vw", height: "2w" }} />
                 </div>
             ))}
         </div>

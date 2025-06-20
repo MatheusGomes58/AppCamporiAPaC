@@ -51,10 +51,11 @@
             },
             {
                 "horário": "08h",
-                "atividade": "Pré-abertura",
-                "local": "RECEPÇÃO",
-                "responsável": "Equipe de programação do evento",
-                "descrição": "Atividades iniciais de integração e orientação dos clubes. Um momento para acolher todos os participantes e alinhar os primeiros passos da programação."
+                "atividade": "Saída dos pedreiros"
+            },
+            {
+                "horário": "09h",
+                "atividade": "Atividades/Carrossel de especialidades"
             },
             {
                 "horário": "11h",
@@ -64,11 +65,20 @@
                 "descrição": "Todos os clubes devem finalizar a montagem e organização das áreas de acampamento e cozinha até este horário. A organização fará visitas para verificar a estrutura."
             },
             {
-                "horário": "12h",
-                "atividade": "Horário de almoço",
+                "horário": "12h30",
+                "atividade": "Almoço",
                 "local": "COZINHAS",
                 "responsável": "Equipes de alimentação dos clubes",
                 "descrição": "Momento para recarregar as energias. Cada clube se organiza para preparar e servir o almoço nas áreas designadas."
+            },
+            {
+                "horário": "13h30",
+                "atividade": "Reunião de Diretores",
+                "local": "Auditório do estúdio do prédio infantil"
+            },
+            {
+                "horário": "14h30",
+                "atividade": "Atividades/Carrossel de especialidades"
             },
             {
                 "horário": "15h às 18h",
@@ -78,11 +88,19 @@
                 "descrição": "Todos os clubes devem entregar a caixa de primeiros socorros para conferência. Este é um item essencial para garantir a segurança e bem-estar dos participantes."
             },
             {
+                "horário": "16h às 18h",
+                "atividade": "Banho"
+            },
+            {
                 "horário": "17h",
                 "atividade": "Reunião com os diretores de clube",
                 "local": "SECRETARIA",
                 "responsável": "Coordenação geral do evento",
                 "descrição": "Reunião com todos os diretores dos clubes para repassar orientações importantes, esclarecer dúvidas e alinhar detalhes operacionais do Campori."
+            },
+            {
+                "horário": "18h30",
+                "atividade": "Jantar"
             },
             {
                 "horário": "19h",
@@ -104,6 +122,10 @@
                 "local": "PALCO",
                 "responsável": "Coordenação geral do Campori",
                 "descrição": "Cerimônia solene de abertura do evento, com apresentação das regiões, momento espiritual e início simbólico das atividades do Campori."
+            },
+            {
+                "horário": "23h30",
+                "atividade": "Descansar"
             }
         ]
     },
@@ -112,32 +134,56 @@
         "date": "2025-06-20",
         "atividades": [
             {
+                "horário": "06h",
+                "atividade": "Despertar"
+            },
+            {
                 "horário": "07h",
-                "atividade": "Reunião com os diretores de clube",
-                "local": "SECRETARIA",
-                "responsável": "Coordenação do evento",
-                "descrição": "Reunião matinal com os diretores para atualizações importantes e checagem de ajustes no cronograma. Participação obrigatória."
+                "atividade": "Reunião de Diretores",
+                "local": "Auditório do estúdio do prédio infantil"
             },
             {
                 "horário": "07h45",
-                "atividade": "Programação especial da manhã",
+                "atividade": "Programação de palco",
                 "local": "PALCO",
                 "responsável": "Equipe de louvor e espiritualidade",
                 "descrição": "Início das atividades do dia com uma programação inspiradora e dinâmica para motivar os participantes e fortalecer o espírito de equipe."
             },
             {
-                "horário": "12h",
-                "atividade": "Horário de almoço",
+                "horário": "09h30",
+                "atividade": "Atividades/Carrossel de especialidades"
+            },
+            {
+                "horário": "12h30",
+                "atividade": "Almoço",
                 "local": "COZINHAS",
-                "responsável": "Equipes de alimentação dos clubes",
-                "descrição": "Intervalo para o almoço. Os clubes devem garantir um ambiente organizado e acolhedor para este momento importante do dia."
+                "responsável": "Equipes de alimentação dos clubes"
+            },
+            {
+                "horário": "14h30",
+                "atividade": "Atividades/Carrossel de especialidades"
+            },
+            {
+                "horário": "16h às 18h",
+                "atividade": "Banho"
+            },
+            {
+                "horário": "18h30",
+                "atividade": "Jantar"
             },
             {
                 "horário": "19h30",
                 "atividade": "Investidura da Classe de Líder",
                 "local": "PALCO",
-                "responsável": "Coordenação de liderança e espiritualidade",
-                "descrição": "Cerimônia solene de investidura para os desbravadores que concluíram a Classe de Líder. Um momento de reconhecimento e compromisso com a missão."
+                "responsável": "Coordenação de liderança e espiritualidade"
+            },
+            {
+                "horário": "21h50",
+                "atividade": "Encontro com Diretores"
+            },
+            {
+                "horário": "23h",
+                "atividade": "Descansar"
             }
         ]
     },
@@ -146,32 +192,59 @@
         "date": "2025-06-21",
         "atividades": [
             {
+                "horário": "06h",
+                "atividade": "Despertar"
+            },
+            {
+                "horário": "06h30",
+                "atividade": "Café da manhã"
+            },
+            {
                 "horário": "07h",
-                "atividade": "Reunião com os diretores de clube",
-                "local": "SECRETARIA",
-                "responsável": "Coordenação do evento",
-                "descrição": "Encontro com os diretores para passar os avisos gerais do sábado, revisar o cronograma e alinhar pontos estratégicos do dia."
+                "atividade": "Reunião de Diretores",
+                "local": "Auditório do estúdio do prédio infantil",
+                "responsável": "Coordenação do evento"
             },
             {
                 "horário": "07h45",
                 "atividade": "Programação especial da manhã",
                 "local": "PALCO",
-                "responsável": "Equipe de espiritualidade e louvor",
-                "descrição": "Uma programação inspiradora para começar o sábado com gratidão, reflexão e louvor. Inclui mensagens especiais, cânticos e dinâmicas."
+                "responsável": "Equipe de espiritualidade e louvor"
             },
             {
-                "horário": "12h",
-                "atividade": "Horário de almoço",
-                "local": "COZINHAS",
-                "responsável": "Equipes de alimentação dos clubes",
-                "descrição": "Hora do almoço. Um momento de pausa e comunhão entre os participantes, com refeições preparadas pelas equipes de cozinha dos clubes."
+                "horário": "12h30",
+                "atividade": "Almoço",
+                "local": "COZINHAS"
             },
             {
-                "horário": "17h00",
+                "horário": "14h",
+                "atividade": "Atividades/Carrossel e Apresentações"
+            },
+            {
+                "horário": "16h45",
+                "atividade": "Programação de palco"
+            },
+            {
+                "horário": "17h",
                 "atividade": "Culto de consagração do sábado",
                 "local": "PALCO",
-                "responsável": "Equipe de espiritualidade do evento",
-                "descrição": "Celebração espiritual para encerrar o sábado de maneira especial, com músicas, oração e mensagem inspiradora de consagração."
+                "responsável": "Equipe de espiritualidade do evento"
+            },
+            {
+                "horário": "18h30",
+                "atividade": "Jantar"
+            },
+            {
+                "horário": "19h",
+                "atividade": "Atividades Recreativas"
+            },
+            {
+                "horário": "22h",
+                "atividade": "Saída Classe de Guia"
+            },
+            {
+                "horário": "23h45",
+                "atividade": "Fogo do Conselho"
             }
         ]
     },
@@ -180,11 +253,35 @@
         "date": "2025-06-22",
         "atividades": [
             {
+                "horário": "06h",
+                "atividade": "Despertar"
+            },
+            {
+                "horário": "06h30",
+                "atividade": "Café da manhã"
+            },
+            {
+                "horário": "07h",
+                "atividade": "Reunião de Diretores",
+                "local": "Auditório do estúdio do prédio infantil"
+            },
+            {
+                "horário": "07h45",
+                "atividade": "Final da Corrida Maluca"
+            },
+            {
                 "horário": "08h",
                 "atividade": "Encerramento e premiação",
                 "local": "PALCO",
-                "responsável": "Coordenação geral e equipe de cerimônias",
-                "descrição": "Momento final do Campori, com entrega de premiações, reconhecimento dos destaques e despedida oficial. Uma celebração de tudo o que foi vivido juntos."
+                "responsável": "Coordenação geral e equipe de cerimônias"
+            },
+            {
+                "horário": "08h30",
+                "atividade": "Programação de palco (Encerramento)"
+            },
+            {
+                "horário": "11h",
+                "atividade": "Saída da área de camping"
             }
         ]
     }

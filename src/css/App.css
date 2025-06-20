@@ -88,6 +88,11 @@ button.delete {
   border: 3px solid #f44336;
 }
 
+.tableScrool{
+  overflow-y: auto;
+  height: 70vh;
+}
+
 /* Tabelas */
 .table {
   width: 100%;
